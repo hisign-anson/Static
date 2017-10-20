@@ -8,8 +8,9 @@ define([
     'text!/view/fstPage/tpl/moreList/newsMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/messageMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/knowledgeMoreListTr.html',
-    'text!/view/fstPage/tpl/moreList/toolDownloadMoreListTr.html'], function (_, achieveMoreListTpl, achieveMoreListTrTpl, achievementInfoTpl, groupTaskListTpl,
-                                                                              newsMoreListTrTpl, messageMoreListTrTpl, knowledgeMoreListTrTpl, downloadMoreListTrTpl) {
+    'text!/view/fstPage/tpl/moreList/toolDownloadMoreListTr.html',
+    'text!/view/fstPage/tpl/moreList/commonMoreListTr.html'], function (_, achieveMoreListTpl, achieveMoreListTrTpl, achievementInfoTpl, groupTaskListTpl,
+                                                                              newsMoreListTrTpl, messageMoreListTrTpl, knowledgeMoreListTrTpl, downloadMoreListTrTpl,commonMoreListTrTpl) {
     return {
         showAchieveMoreList: function () {
             _self = this;
@@ -94,7 +95,7 @@ define([
         },
         showToolMoreList: function () {
             _self = this;
-            $("#achieveListTable tbody").empty().html(_.template(achieveMoreListTrTpl));
+            $("#toolListTable tbody").empty().html(_.template(commonMoreListTrTpl));
 
         }
     }

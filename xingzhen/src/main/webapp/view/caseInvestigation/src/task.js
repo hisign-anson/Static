@@ -17,6 +17,7 @@ define(['underscore',
             dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(taskListTpl, {ops: top.opsMap}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
+            selectUtils.selectTextOption("#changeConfirmStatus", "#confirmStatus");
             selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
             $("#chooseBelongGroup").on('click', function () {
                 dictOpener.openChooseDict($(this));
@@ -72,6 +73,7 @@ define(['underscore',
                     "createName": "超级管理员",
                     "createDate": "2017-07-06 18:00:16",
                     "recipient": "张三",
+                    "confirmNum": 0,
                     "taskStatus": "已反馈",
                     "recipientStatus": "未查看",
                     "submitDate": "2017-09-04 11:59:09",
@@ -86,6 +88,7 @@ define(['underscore',
                     "createName": "李四",
                     "createDate": "2017-07-05 18:00:16",
                     "recipient": "随便",
+                    "confirmNum": 1,
                     "taskStatus": "未反馈",
                     "recipientStatus": "已查看",
                     "submitDate": "2017-09-07 11:59:09",

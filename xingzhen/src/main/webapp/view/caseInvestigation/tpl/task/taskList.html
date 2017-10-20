@@ -65,7 +65,16 @@
         </div>
         <div class="collapse"  id="queryBlockRowMore">
             <div class="query-block-row">
-
+                <div class="fl qc-group-xl">
+                    <span class="qc-label-xl">反馈确认状态：</span>
+                    <span class="option" id="changeConfirmStatus">
+                        <u class="active default" val="">全部</u>
+                        <u class="" val="1">未确认</u>
+                        <u class="" val="2">已确认</u>
+                    </span>
+                </div>
+            </div>
+            <div class="query-block-row">
                 <div class="fl qc-group-xl">
                     <span class="qc-label-xl">任务状态：</span>
                     <span class="option" id="changeTaskStatus">
@@ -118,6 +127,7 @@
             <thead>
             <tr>
                 <th>序号</th>
+                <th>任务编号</th>
                 <th>任务名称</th>
                 <th>任务内容</th>
                 <th>所属专案组</th>
@@ -126,6 +136,7 @@
                 <th>接收人</th>
                 <th>任务状态</th>
                 <th>接收状态</th>
+                <th>反馈未确认数</th>
                 <th>要求反馈时间</th>
                 <th>实际反馈时间</th>
                 <th>操作</th>

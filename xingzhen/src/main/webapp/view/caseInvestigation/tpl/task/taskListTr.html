@@ -1,6 +1,7 @@
 <%_.each(data, function(item){%>
 <tr>
     <td><%=item.rownum%></td>
+    <td><%=item.id%></td>
     <td><%=item.taskName%></td>
     <td><a class="link-text"><%=item.taskContent%></a></td>
     <td><%=item.belongGroup%></td>
@@ -9,6 +10,7 @@
     <td><%=item.recipient%></td>
     <td><%=item.taskStatus%></td>
     <td><%=item.recipientStatus%></td>
+    <td><%=item.confirmNum%></td>
     <td><%=rangeUtil.formatDate(item.submitDate,'yyyy-MM-dd')%></td>
     <td><%=rangeUtil.formatDate(item.actualSubmitDate,'yyyy-MM-dd')%></td>
     <td>
