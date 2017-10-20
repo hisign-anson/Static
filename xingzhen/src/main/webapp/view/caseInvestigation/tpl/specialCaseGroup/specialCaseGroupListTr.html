@@ -1,0 +1,40 @@
+<%_.each(data, function(item){%>
+<tr>
+    <td><input type="checkbox" name="group" groupId="<%=item.groupnum%>" value="<%=item.id%>"></td>
+    <td><%=item.rownum%></td>
+    <td><a class="link-text"><%=item.groupnum%></a></td>
+    <td><%=item.groupname%></td>
+    <td><%=item.grouptype%></td>
+    <td><%=item.caseNum%></td>
+    <td><%=item.creator%></td>
+    <td><%=item.num%></td>
+    <td><%=rangeUtil.formatDate(item.createtime,'yyyy-MM-dd')%></td>
+    <td><%=item.backupStatu%></td>
+    <td><%=rangeUtil.formatDate(item.backupTime,'yyyy-MM-dd')%></td>
+    <td>
+        <a class="into-archive icon-archive" id="<%=item.id%>" title="归档"></a>
+        <a class="into-broadcast icon-broadcast" id="<%=item.id%>" title="广播"></a>
+        <a class="into-communication icon-communication" id="<%=item.id%>" title="通讯"></a>
+        <a class="into-group icon-group" id="<%=item.id%>" title="小组"></a>
+        <%if(item.status == 1 || item.status ==3){%>
+        <%if(item.status == 1){%>
+        <%if(ops && ops.get('showEdit') && ops.get('showEdit') == 1){%>
+        <a class="into-carInfo-edit icon-edit-btn" id="<%=item.id%>" title="修改"></a>
+        <%}%>
+        <%if(ops && ops.get('delCarInfo') && ops.get('delCarInfo') == 1){%>
+        <a class="delete-for-carInfo icon-remove-btn" id="<%=item.id%>" carNo="<%=item.carNo%>" title="删除"></a><br>
+        <%}%>
+        <%}%>
+        <%if(ops && ops.get('showMaintain') && ops.get('showMaintain') == 1){%>
+        <a class="into-maintain icon-maintain-btn" carId="<%=item.id%>" carType="<%=item.carType%>" carNo="<%=item.carNo%>" title="提交维修"></a>
+        <%}%>
+        <%}%>
+
+        <%if(ops && ops.get('showView') && ops.get('showView') == 1){%>
+        <a class="into-view icon-show-btn" id="<%=item.id%>" title="预览"></a>
+        <%}%>
+        <a class="view-maintain icon-viewMaintain-btn" id="<%=item.id%>" carNo="<%=item.carNo%>" title="查看维修记录"></a>
+    </td>
+</tr>
+<%})%>
+

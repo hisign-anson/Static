@@ -1,0 +1,81 @@
+<!--<div class="form-header">-->
+<!--<h5 class="form-title"><i class="left-line"></i><span>涉及案件</span></h5>-->
+<!--</div>-->
+<div class="form-body wrapper-fluid" id="relationCase">
+    <div class=""  id="queryCondition">
+        <div class="query-block-row">
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">案件编号：</span>
+                <input class="common-input" id="caseId" type="text">
+            </div>
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">案别：</span>
+                <div class="dict-opener">
+                    <input class="common-input" id="caseType" type="text">
+                    <i id="chooseCaseType" class="icon-list cur-p button steelblue" title="案别" dict-value="CFMC"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="query-block-row">
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">案件名称：</span>
+                <input class="common-input" id="caseName" type="text">
+            </div>
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">发案时间初值：</span>
+                <input class="common-input" id="occurrenceDate" type="text" value="">
+            </div>
+        </div>
+
+        <div class="query-block-row">
+            <div class="fl qc-group-xl">
+                <span class="qc-label-xl">案件状态：</span>
+                <span class="option" id="changeCaseSta">
+                    <u class="active default " val="">全部</u>
+                    <u class="  " val="0">已受理</u>
+                    <u class="  " val="1">已立案</u>
+                    <u class="  " val="0">已破案</u>
+                    <u class="  " val="1">已结案</u>
+                    <u class="  " val="1">已撤销</u>
+                </span>
+            </div>
+        </div>
+        <div class="query-widget-wrap">
+            <hr class="cm-dash ">
+            <p class="query-reset ">
+                <button id="resetBtn" class="cm-reset-btn">重 置</button>
+                <button id="queryBtn" class="cm-query-btn">查 询</button>
+            </p>
+        </div>
+    </div>
+    <div id="relationCaseResult" class="query-result mrn mln">
+        <div class="new-color-bar">
+            <i class="icon-search fs14 mr10"></i>
+            <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
+            <div class="bar-btn-div">
+                <b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>
+            </div>
+        </div>
+        <div class="div-table-wrap">
+            <table id="relationCaseTable" class="relationCaseList-table typical-tb">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>案件编号</th>
+                    <th>案件名称</th>
+                    <th>案件类型</th>
+                    <th>案件状态</th>
+                    <th>案别</th>
+                    <th>简要案情</th>
+                    <th>发案地点详址</th>
+                    <th>主要办案人</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="paging"></div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="tab-pane active">
+    <form class="query-block"  id="queryCondition">
+        <div class="query-block-row">
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">专案组名称：</span>
+                <input class="common-input" type="text" id="groupname" name="">
+            </div>
+
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">专案组编号：</span>
+                <input class="common-input" type="text" id="groupnum" name="">
+            </div>
+        </div>
+        <div class="query-block-row">
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">创建人：</span>
+                <div class="dict-opener">
+                    <input class="common-input" type="text" id="creator" name="">
+                    <i id="chooseCreatName" class="icon-list cur-p button steelblue" title="创建人" dict-value="CFMC"></i>
+                </div>
+            </div>
+            <div class="fl qc-group-xxl">
+                <span class="qc-label-xl hook-label">创建时间：</span>
+                <div class="text-time">
+                    <input class="cm-input date-range-picker" type="text" id="createtime" placeholder="请输入时间范围" readonly>
+                    <i class="icon-calendar icon-time"></i>
+                    <input type="hidden" name="startTime" id="startTime" />
+                    <input type="hidden" name="endTime" id="endTime" />
+                </div>
+                <span class="option date-select" id="changeTimeScope">
+                    <u class="default active">全部</u>
+                    <u>当天</u>
+                    <u>本周</u>
+                    <u>当月</u>
+                    <u>当季</u>
+                </span>
+            </div>
+        </div>
+        <div class="query-block-row">
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">人员名称：</span>
+                <div class="dict-opener">
+                    <input class="common-input" type="text" id="" name="">
+                    <i id="chooseStaff" class="icon-list cur-p button steelblue" title="人员名称" dict-value="CFMC"></i>
+                </div>
+            </div>
+            <div class="fl qc-group-l">
+                <span class="qc-label-xl">所属单位：</span>
+                <div class="dict-opener">
+                    <input class="common-input" type="text" id="deparmentcode" name="">
+                    <i id="chooseUnit" class="icon-list cur-p button steelblue" title="所属单位" dict-value="CFMC"></i>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="queryBlockRowMore">
+            <div class="query-block-row">
+                <div class="fl qc-group-l">
+                    <span class="qc-label-xl">关联案件：</span>
+                    <input class="common-input" type="text" id="" name="">
+                </div>
+                <div class="fl qc-group-l">
+                    <span class="qc-label-xl">是否归档：</span>
+                    <span class="option" id="changeBackupStatu">
+                        <u class="active default " val="">全部</u>
+                        <u class="  " val="0">是</u>
+                        <u class="  " val="1">否</u>
+                    </span>
+                    <input id='backupStatu' name="" type="hidden" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="query-widget-wrap">
+            <hr class="cm-dash">
+            <p class="query-reset">
+                <button id="resetBtn" class="cm-reset-btn">重 置</button>
+                <button id="queryBtn" class="cm-query-btn">查 询</button>
+            </p>
+        </div>
+    </form>
+    <div class="more-condition" data-toggle="collapse" data-target="#queryBlockRowMore">
+        <span>更多查询条件</span><!--<i class="toggle-icon icon-angle-up icon-angle-down"></i>-->
+    </div>
+    <div id="specialGroupListResult" class="query-result">
+        <div class="new-color-bar">
+            <i class="icon-search fs14 mr10"></i>
+            <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
+            <div class="bar-btn-div">
+                <b id="addSpecialCaseGroup" class="cm-add-btn cm-btn-icon h-add orange-btn">新增专案组</b>
+                <b id="addCaseGroupOfGroup" class="cm-add-btn cm-btn-icon h-request orange-btn">组内建组</b>
+            </div>
+        </div>
+        <div class="div-table-wrap">
+            <table id="specialGroupListTable" class="typical-tb">
+                <thead>
+                <tr>
+                    <th>单选</th>
+                    <th>序号</th>
+                    <th>专案组编号</th>
+                    <th>专案组名称</th>
+                    <th>专案组类别</th>
+                    <th>涉及案件数</th>
+                    <th>创建人</th>
+                    <th>成员数</th>
+                    <th>创建时间</th>
+                    <th>归档状态</th>
+                    <th>归档时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="paging"></div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="author" content="zhang meng jia" />
+    <meta name="date" content="2016-06-12 14:15:08" />
+    <title>通知公告管理</title>
+    <!--<link rel="stylesheet" href="../../css/base.css?version=0.99">-->
+    <link rel="stylesheet" href="../../css/base-plus-xz.css">
+    <link rel="stylesheet" href="../../plugin/ztree/zTreeStyle/zTreeStyle.css?version=0.99">
+    <link rel="stylesheet" href="../../plugin/wangEditor-2/css/wangEditor.css">
+    <link rel="stylesheet" href="css/chooseUnit.css">
+    <script src="../../js/base.js?version=0.99"></script>
+    <!--使用base-new.js进行表格固定时会用到-->
+    <!--<script src="../../js/base-new.js?version=0.99"></script>-->
+    <!--<script src="../../plugin/bootstrap.min.js"></script>-->
+    <script src="../../plugin/wangEditor-2/js/wangEditor.js"></script>
+    <script src="../../plugin/dict/dict.js?version=0.99"></script>
+    <script src="../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+    <script src="../../plugin/daterangepicker/moment.js?version=0.99"></script>
+    <script src="../../plugin/ztree/zTreeStyle/jquery.ztree.core.js?version=0.99"></script>
+    <script src="../../plugin/timeScope.js"></script>
+    <script src="../../plugin/upclick-min.js?version=0.99"></script>
+</head>
+<body>
+<div id="main-div" >
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"  >
+            <a href="#" id='01'>通知公告</a>
+        </li>
+        <li>
+            <a href="#" id='02'>规章制度</a>
+        </li>
+        <li>
+            <a href="#" id='03'>表格下载</a>
+        </li>
+    </ul>
+
+    <div class="tab-content"></div>
+</div>
+
+<!--发布框-->
+<div id="choose-unit-div" class="hide">
+    <form class="choose-unit-div">
+        <div class="w300px fl">
+            <div class="" id="divSelect">
+                <span>发布单位</span>
+                <select id="select-unit" multiple="multiple" size="20">
+                    <optgroup id="selected" label="已发布单位"></optgroup>
+                    <optgroup id="select" label="已选择单位"></optgroup>
+                </select>
+            </div>
+            <!--<div class="hide" id="divSelected">-->
+                <!--<span>已发布单位</span>-->
+                <!--<select id="selected-unit" multiple="multiple" size="10"></select>-->
+            <!--</div>-->
+
+        </div>
+        <div class="fl ml15 mr15">
+            <span>选择</span>
+            <div class="user-choose">
+                <a id="user-to-right" class="ui-btn" title="请选单位"><i class="icon-double-angle-right fs15"></i></a><br><br>
+                <a id="user-to-left" class="ui-btn" title="请选单位"><i class="icon-double-angle-left fs15"></i></a>
+            </div>
+        </div>
+        <div class="w300px fl">
+            <span>未发布单位</span>
+            <select id="all-unit" class="all-unit" multiple="multiple" size="20"></select>
+        </div>
+    </form>
+    <div class="tcenter">
+        <b id="save-btn" class="cm-send-btn mr15"></b>
+        <b id="cancel-btn" class="cm-close-btn"></b>
+    </div>
+</div>
+</body>
+<script data-main="news.js" src="/plugin/require.js" type="text/javascript"></script>
+</html>

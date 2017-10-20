@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>广州刑侦案件侦破指挥协作平台</title>
+    <meta name="description" content="Index 主框架页">
+    <meta name="author" content="Evan Yao">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <!--<link rel="stylesheet" type="text/css" href="../css/base.css">-->
+    <link rel="stylesheet" type="text/css" href="../css/base-plus-xz.css">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../plugin/cropper/cropper.css?version=0.99">
+    <style>
+        /* Override Cropper's styles */
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%;
+        }
+        #result img {
+            width: 100px;
+        }
+        .table-condensed > thead > tr > th, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="admin-design-main">
+    <header class="navbar navbar-fixed-top" id="root-nav">
+        <div class="navbar-branding">
+            <span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span>
+        </div>
+        <div id="head-txt-wrap">
+            <img src="../img/national-emblem.png" alt=""/>
+            <h1 id="head-txt" >广州刑侦案件侦破指挥协作平台</h1>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <!--<li title=" 消息 ">-->
+                <!--<a id="msg-count-wrap" class="btn btn-sm" href="javascript:void(0);">-->
+                    <!--<span class="fa fa-envelope fs18"></span>-->
+                    <!--<span id="msg-count" class="badge badge-danger"></span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <li title=" 全屏 ">
+                <a href="#" class=" btn btn-sm request-fullscreen" data-toggle="button">
+                    <span class="octicon octicon-screen-full fs18"></span>
+                </a>
+            </li>
+
+            <li title=" 注销 " class="of-h">
+                <a href="#" class="btn btn-sm " id="login-out">
+                    <span class="fa fa-power-off pr5 fs18"></span>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+
+    <aside id="sidebar_left">
+        <header class="sidebar-header tcenter">
+            <div class="sidebar-img"><img src="../img/touxiang.jpg" class="img-responsive" id="img-responsive"></div>
+            <div class="sidebar-widget author-widget mb10">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="media-author fs14" id="user-name" >张向阳</div>
+                        <div class="media-links">
+                            <span class="text-muted fs10" id="organ"></span>
+                            <span class="text-muted fs10" id="post"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sidebar-widget button-widget mb30 mt30">
+                <div class="media">
+                    <div class="media-body">
+                        <button class="btn btn-dark btn-sm mr5" id="user-center">
+                            <i class="fa fa-user fs14"></i>  个人中心
+                        </button>
+                        <button class="btn btn-dark btn-sm " id="modified-pwd">
+                            <i class="fa fa-lock fs14"></i>  修改密码
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <ul id="root-menu" class="nav sidebar-menu stp-hide">
+            <li sec-count="{items.length}"  default-into="{defaultInto}"  page-no="{pageNo}"   title="{name}">
+                <a class="accordion-toggle" href="#"  moduleid="{moduleId}" direct="{direct}">
+                    <span class="{name.iconClass}"></span>
+                    <span class="sidebar-title">{name}</span>
+                    <span class="caret stp-hide{items.length}"></span>
+                </a>
+                <ul class="nav sub-nav stp-hide{items.length}">
+                    {{items:#main-sidemenu-sec-tp}}
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <div id="content_wrapper">
+        <div title="当前模块:首页" data-options="closable:false">
+            <iframe id="main-frame" class="tab-content-frame" src=""></iframe>
+        </div>
+    </div>
+    <div id="top-mask" class="mask"></div>
+    <div id="left-mask" class="mask"></div>
+</div><!-- end: Main -->
+<!--个人中心 start-->
+<div id="edit-user-block" class="hide">
+    <form id="user-center-form">
+        <div class="user-info">
+            <div class="user-input">
+                <p class="mt10">
+                    <span class="common-field">用户姓名：</span>
+                    <input type="text" id="userName" name="userName" value=""
+                           class="w260px common-input user-validate" placeholder="请填写真实姓名" data-options="required:true"
+                           maxlength="5"/>
+                </p>
+
+                <p class="mt10">
+                    <span class="common-field">所属单位：</span>
+                    <input type="text" id="orgName" name="orgName" value=""
+                           class="w260px common-input user-validate" readonly tabindex="-1"/>
+                </p>
+
+                <p class="mt10">
+                    <span class="common-field">身份证号码：</span>
+                    <input type="text" id="cid" name="cid" value="" class="w260px common-input user-validate"
+                           data-options="required:true,invalidMessage:'请输入有效的15或18位身份证号码',validType:'isChineseID'" placeholder="有效的15或18位身份证号码">
+                </p>
+
+                <p class="mt10">
+                    <span class="common-field">联系电话：</span>
+                    <input type="text" id="phone" name="phone" value=""
+                           class="w260px common-input user-validate"  data-options="required:true,invalidMessage:'请输入正确的手机号码',validType:'isCellphone'" placeholder="请输入手机号码" maxlength="11"/>
+                </p>
+
+                <p class="mt10">
+                    <span class="common-field">性别：</span>
+                    <select name="sex" id="sex" class="w260px common-select">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </p>
+                <p class="mt10">
+                    <span class="common-field">出生日期：</span>
+                    <input type="text" id="birth" name="birth"
+                           value="" class="w260px common-input user-validate" readonly="readonly" tabindex="-1"/>
+                </p>
+
+                <p class="mt10">
+                    <span class="common-field">职务：</span>
+                    <dict dict-id="post" dict-name="post" dict-type="select" dict-root="FLDZWDM" class="dict"
+                          empty="false"></dict>
+                </p>
+                <p class="mt10">
+                    <span class="common-field">通讯地址：</span>
+                    <input type="text" id="address" name="address" value=""
+                           class="w260px common-input user-validate" placeholder="通讯地址">
+                </p>
+            </div>
+            <div class="user-img">
+                <form id= "avatarUploadForm"  enctype="multipart/form-data">
+                    <input type="hidden" name="avatar" id="avatar" />
+                    <!--<a class="itemPrice" id="itemPrice" href="../../img/notexists.png">-->
+                    <!--<img class="sample-img" id="sample-img" src="../../img/notexists.png">-->
+                    <!--</a>-->
+
+                    <!--<p class="avatar-wrap">-->
+                    <!--<a id="open-avatar-crop" class="open-avatar-crop" title="更换头像" >-->
+                    <!--<img src="../../img/notexists.png" alt="头像" class="avatar">-->
+                    <!--</a>-->
+                    <!--</p>-->
+                    <div class="avatar-upload">
+                        <a class="avatar-selectedImg" id="avatar-selectedImg" href="javascript:void(0);">
+                            <img class="avatar-img" id="avatar-img" src="../img/touxiang.jpg">
+                        </a>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar"
+                                 aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"
+                                 style="width: 0%;">
+                            </div>
+                        </div>
+                        <span class="cm-upload-btn" for="inputImage" title="Upload image file">
+                            <input type="file" class="sr-only" id="inputImage" name="imageUpload" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                            <span id="avatar-btn" class="upload-text">选择头像</span>
+                        </span>
+                        <!--<span  class="cm-upload-btn">-->
+                        <!--<span id="avatar-btn" class="upload-text">选择头像</span>-->
+                        <!--</span>-->
+                    </div>
+                </form>
+
+            </div>
+            <div class="user-img">
+                <div id="result"></div>
+            </div>
+        </div>
+        <div class="btn-div">
+            <b id="save-user-center" class="cm-save-btn"></b>
+            <b id="close-user-center" class="cm-close-btn ml15"></b>
+        </div>
+    </form>
+</div>
+<div id="edit-pwd-block" class="hide">
+    <div class="edit-div">
+        <span class="common-field"><span class="orangered">★ </span>原密码：</span><input id="old-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:'length[3,20]'">
+        <span class="common-field"><span class="orangered">★ </span>新密码：</span><input id="new-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:['length[3,20]','noChinese']">
+        <span class="common-field"><span class="orangered">★ </span>确认新密码：</span><input id="confirm-new-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:['length[3,20]','noChinese']">
+        <!--<div id="pwd-error"></div>-->
+        <p>注：密码长度在3~20个字符之间，不能包含中文。</p>
+    </div>
+    <div class="btn-div">
+        <b id="save-edit-pwd" class="cm-save-btn"></b>
+        <b id="close-edit-pwd" class="cm-close-btn ml15"></b>
+    </div>
+</div>
+<div id="client-update-block" class="hide">
+    <div class="edit-div">
+        <p>检测到有新版本需要更新！是否立即更新？</p>
+    </div>
+    <div class="btn-div">
+        <b id="update-now-btn" class="cm-ok-btn"></b>
+        <b id="update-cancel-btn" class="cm-cancel-btn"></b>
+    </div>
+</div>
+<div id="confirm-logout" class="hide">
+    <img id="confirm-logout-img" src="../img/touxiang.jpg"/>
+    <p class="tips">确认退出吗？</p>
+    <p class="tcenter pd10">
+        <button id="logout-ok" class="cm-ok-btn mr15"></button>
+        <button id="logout-cancel" class="cm-cancel-btn"></button>
+    </p>
+</div>
+</body>
+<script type="text/template" id="main-sidemenu-sec-tp">
+    <li class="grade2" sec-count="{items.length}"  default-into="{defaultInto}"  page-no="{pageNo}"  title="{name}">
+        <a href="#" moduleid="{moduleId}" direct="{direct}" class="accordion-toggle">
+            <span class="fa fa-dot-circle-o"></span>
+            <span class="sidebar-sub-title">{name}</span>
+            <span class="caret stp-hide{items.length}"></span>
+        </a>
+        <ul class="nav sub-nav stp-hide{items.length}">
+            {{items:#<li page-no="{pageNo}" title="{name}" class="grade3"><a href="#" direct="{direct}">{name}</a></li>#}}
+        </ul>
+    </li>
+</script>
+<script src="../js/base.js"></script>
+<script src="../js/index.js"></script>
+<script src="../plugin/upclick-min.js"></script>
+<script src="../plugin/cropper/cropper.js"></script>
+</html>

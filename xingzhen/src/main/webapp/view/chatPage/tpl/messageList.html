@@ -1,0 +1,11 @@
+<%_.each(data, function(item){%><li>
+    <div class="time"><span><%=content.create_time}</span></div>
+    <div class="main self">
+        <img class="member-avatar" src="../../img/pc-avatar.png"/>
+        <div class="text-wrap">
+            <div class="from-name"><%=content.from_id%></div>
+            <div class="text"><%=content.msg_body.text%></div>
+        </div>
+    </div>
+</li>
+<%})%>

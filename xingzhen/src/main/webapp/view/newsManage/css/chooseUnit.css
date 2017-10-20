@@ -1,0 +1,117 @@
+@charset "utf-8";
+
+/*发布框*/
+.choose-unit-div {
+    overflow: hidden;
+    margin-left: 30px;
+}
+.choose-unit-div span{
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: gray;
+}
+.choose-unit-div .half-select select[multiple],
+.choose-unit-div .half-select  select[size]{
+    height: 165px;
+}
+.choose-unit-div select[multiple],
+.choose-unit-div select[size]{
+    height: 350px;
+    width: 240px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.choose-unit-div select[multiple] optgroup,
+.choose-unit-div select[size] optgroup,
+.choose-unit-div select[multiple] option,
+.choose-unit-div select[size] option  {
+    margin: 5px;
+}
+.choose-unit-div select[multiple] optgroup:not(optgroup[disabled]) option:hover,
+.choose-unit-div select[size] optgroup:not(optgroup[disabled]) option:hover {
+    background: #ffef85;
+    color: #333;
+}
+#user-to-left,
+#user-to-right{
+    background: #F6B840;
+    color: #fff;
+    text-shadow: 0px 1px 1px rgba(5, 5, 5, 0.9);
+    font-size:14px;
+    width: 28px;
+    display: inline-block;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
+}
+#user-to-left:hover,
+#user-to-right:hover{
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+.current-module{
+    color: orangered!important;
+}
+.user-choose-div{
+    margin: 0 auto;
+    width: 560px;
+}
+.user-choose {
+    height: 200px;
+    padding-top: 120px;
+}
+#choose-unit-div .tcenter{
+    margin-top: 10px;
+}
+/* @end */
+/*接收人*/
+.chooseUnit{
+    background-color:#fff;
+    max-width:977px;
+    padding:10px;
+    border:1px solid #CCCCCC;
+    border-radius: 4px;
+    min-height:50px;
+    overflow: auto;
+}
+.chooseEmployee{
+    background-color:#fff;
+    max-width:977px;
+    padding:10px;
+    border:1px solid #CCCCCC;
+    border-radius: 4px;
+    height:85px;
+    overflow: auto;
+}
+/*通知公告浏览页样式*/
+#my_editor p {
+    font-size: 14px;
+    text-indent: 30px;
+    line-height: 30px;
+}
+#my_editor{
+    height:380px;
+    overflow-y: auto;
+    box-shadow: 1px 1px 10px #ccc;
+    border:1px dotted #ddd;
+    padding:10px;
+    border-radius: 8px;
+}
+.noticeViewBox{
+    width: 900px;
+    background-color: #fff;
+    margin: 0 auto;
+    box-shadow: 1px 1px 10px #ccc;
+    border-radius: 3px;
+}
+.noticeViewBox .noticeHeader{
+    margin:20px;
+    padding:5px;
+}
+.noticeViewBox .noticeFooter{
+    padding:15px 0 20px 0;
+    margin:0 0 30px 0;
+}

@@ -1,0 +1,14 @@
+<div class="col-panel-block my-rule">
+    <h3 class="col-panel-header"><i class="left-line"></i><span>知识库</span> <a class="more-link" href="javascript:void(0)" id="rulesMore">更多</a></h3>
+    <div class="col-panel-body rule">
+        <%_.each(data, function(item){%>
+        <div>
+            <a href="#" data-id="<%=item.id%>" class="ruleOne">
+                <span class="icon-book ml15 vam"></span>
+                <span class="text-record ml10" title="<%=item.msgTitle%>"><%=item.msgTitle%></span>
+                <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
+            </a>
+        </div>
+        <%})%>
+    </div>
+</div>

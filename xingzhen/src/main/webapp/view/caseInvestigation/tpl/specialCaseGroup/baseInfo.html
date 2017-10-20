@@ -1,0 +1,37 @@
+<!--<div class="form-header">-->
+<!--<h5 class="form-title"><i class="left-line"></i><span>专案组基本信息</span></h5>-->
+<!--</div>-->
+<div class="form-body wrapper-fluid" id="baseInfo">
+    <div class="form-row block-row">
+        <div class="equal-col-4">
+            <span class="common-field">专案组编号：</span>
+            <input class="common-input" type="text" name="" id="groupId" readonly>
+        </div>
+        <div class="equal-col-4">
+            <span class="common-field"><em class="require-star">*</em>专案组名称：</span>
+            <input class="common-input field-valid" type="text" name="" id="groupName" data-options="required:true">
+        </div>
+        <div class="equal-col-4">
+            <span class="common-field"><em class="require-star">*</em>专案组类别：</span>
+            <div class="dict-opener">
+                <input class="common-input field-valid" type="text" name="" id="groupType" data-options="required:true">
+                <i id="chooseGroupType" class="icon-list cur-p button steelblue" title="专案组类别" dict-value="CFMC"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row block-row">
+        <div class="equal-col-4">
+            <span class="common-field">创建人：</span>
+            <input class="common-input" type="text" name="" id="creatorName" readonly>
+        </div>
+        <div class="equal-col-4">
+            <span class="common-field">创建人单位：</span>
+            <input class="common-input" type="text" name="" id="creatorUnit" readonly>
+        </div>
+        <div class="equal-col-4">
+            <span class="common-field">创建时间：</span>
+            <input class="common-input" type="text" name="" value="<%=rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd')%>" id="createDate" readonly>
+        </div>
+    </div>
+</div>

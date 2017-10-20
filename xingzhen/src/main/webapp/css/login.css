@@ -1,0 +1,496 @@
+@import url("./login-source/slick.css");
+@import url("./login-source/tooltipster.bundle.min.css");
+@import url("./login-source/tooltipster-sideTip-borderless.min.css");
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #ffffff !important;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+    -webkit-font-smoothing: auto;
+}
+
+sup {
+    color: #f00;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.fa-check-square-o:before {
+    font-family: FontAwesome;
+    content: "\f046";
+}
+
+.fa-video-camera:before {
+    font-family: FontAwesome;
+    content: "\f03d";
+}
+
+#error {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    background: -webkit-linear-gradient(top, #FDEDA6, #FAE793);
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 1px 1px #fff;
+    text-align: center;
+    font-size: 15px;
+}
+
+.header {
+    padding: 20px 0;
+}
+
+.header .header-content {
+    width: 1025px;
+    margin: 0 auto;
+}
+
+.header .header-content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.header .header-content .logo {
+    float: left;
+}
+
+.header .header-content .logo:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.header .header-content .logo img {
+    float: left;
+    margin-right: 10px;
+}
+
+.header .header-content .logo .title {
+    float: left;
+    margin: 7px 0 0 20px;
+}
+
+.header .header-content .logo .title h1 {
+    font-weight: bold;
+    color: #888;
+    padding-bottom: 5px;
+}
+
+.header .header-content .logo .title h2 {
+    font-size: 14px;
+    color: #999;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 5px;
+}
+
+.header .header-content .icon {
+    float: right;
+}
+
+.header .header-content .icon span ,.header .header-content .icon .fa {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 90px;
+    background-color: #ccc;
+    font-size: 25px;
+    color: #fff;
+    margin-left: 6px;
+}
+
+.header .header-content .icon span:hover,.header .header-content .icon .fa:hover {
+    background-color: #038aca;
+    text-decoration: none;
+}
+.header .header-content .icon .tooltip{
+    background: none;
+    border: none;
+    color: #ffffff;
+}
+.footer {
+    height: 40px;
+    padding: 20px 0;
+}
+
+.footer .footer-content {
+    width: 500px;
+    margin: 0 auto;
+    color: #535353;
+}
+
+.footer .footer-content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.footer .footer-content img {
+    float: left;
+    margin-right: 25px;
+}
+
+.footer .footer-content p {
+    float: left;
+    line-height: 20px;
+    margin-top: 5px;
+}
+
+.navbar .ui-main-logo {
+    margin-top: 7px;
+}
+
+.navbar .ui-main-logo:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.navbar .ui-main-logo img {
+    float: left;
+    margin-right: 10px;
+}
+
+.navbar .ui-main-logo > div {
+    float: left;
+}
+
+.navbar .ui-main-logo > div h1,
+.navbar .ui-main-logo > div h2 {
+    margin: 0;
+}
+
+.navbar .ui-main-logo > div h1 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+    padding-bottom: 5px;
+}
+
+.navbar .ui-main-logo > div h2 {
+    font-size: 1.4rem;
+    color: #eee;
+    border-top: 1px solid;
+    border-color: rgba(255, 255, 255, 0.4);
+    padding-top: 5px;
+}
+
+.ui-pagination {
+    text-align: right;
+}
+
+.ui-btn-delete {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    background-color: #f7b07f;
+    color: #fff;
+    cursor: pointer;
+    font-style: normal;
+}
+
+.ui-filter-search {
+    margin-bottom: 40px;
+}
+
+.ui-filter-search .search-condition input[type="text"] {
+    width: 200px;
+    height: 30px;
+    padding: 0 5px;
+}
+
+.ui-filter-search .search-condition .dl-horizontal dt {
+    width: 100px;
+}
+
+.ui-filter-search .search-condition .dl-horizontal dd {
+    margin-left: 110px;
+}
+
+.ui-filter-search .search-condition .search-list {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.ui-filter-search .search-condition .search-list dd, .ui-filter-search .search-condition .search-list dt {
+    margin-bottom: 8px;
+}
+
+.ui-filter-search .search-condition .search-list dd span, .ui-filter-search .search-condition .search-list dt span {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.ui-filter-search .search-condition .search-list dd span.active, .ui-filter-search .search-condition .search-list dt span.active {
+    font-weight: bold;
+    color: #3a88d2;
+}
+
+.ui-filter-search .search-condition .active-search-list {
+    padding-bottom: 15px;
+}
+
+.ui-filter-search .search-condition .active-search-list label {
+    color: #999;
+}
+
+.ui-filter-search .search-condition .active-search-list .active-search {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 1px 1px 1px 6px;
+    border: 1px solid #f7b07f;
+    line-height: 18px;
+    color: #666;
+}
+
+.ui-filter-search .search-condition .active-search-list .active-search .ui-btn-delete {
+    margin-left: 6px;
+}
+
+.ui-filter-search .search-condition .active-search-list .btn-save {
+    cursor: pointer;
+}
+
+.ui-filter-search .search-condition .active-search-list .btn-save .fa-save {
+    font-size: 1.4rem;
+}
+
+.ui-filter-search .search-condition .active-search-list .btn-save a {
+    color: #666;
+}
+
+.ui-filter-search .saved-condition {
+    height: 190px;
+    overflow-y: auto;
+    color: #999;
+}
+
+.ui-filter-search .saved-condition li {
+    margin-bottom: 15px;
+}
+
+.ui-filter-search .saved-condition span {
+    margin-right: 10px;
+}
+
+.ui-filter-search .saved-condition span em {
+    font-style: normal;
+}
+
+.ui-filter-search .dropdown-trigger {
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    text-align: center;
+    bottom: -16px;
+    left: 0;
+}
+
+.ui-filter-search .dropdown-trigger .fa {
+    background-color: #fff;
+    width: 150px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 1.6rem;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 0px rgba(204, 204, 204, 0.5);
+}
+
+div.dataTables_wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+div.dataTables_wrapper th, div.dataTables_wrapper td {
+    white-space: nowrap;
+}
+
+body {
+    background-color: #fff;
+}
+
+body h1, body h2, body p {
+    margin: 0;
+}
+
+.login-content {
+    background-color: #045daf;
+}
+
+.login-content .slick-container {
+    width: 1343px;
+    height: 435px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+}
+
+.login-content .slick-container img {
+    height: 435px;
+    outline: none
+}
+
+.login-content .slick-container .slick-pagination {
+    position: absolute;
+    width: 104px;
+    bottom: 17px;
+    left: 631px;
+}
+
+.login-content .slick-container .slick-pagination li {
+    display: block;
+    float: left;
+    width: 12px;
+    height: 12px;
+    margin-right: 12px;
+    border-radius: 24px;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.login-content .slick-container .slick-pagination li.slick-active {
+    background-color: #fff;
+}
+
+.login-content .slick-container .slick-pagination li button {
+    display: none;
+}
+
+.login-content .slick-container .login-container {
+    position: absolute;
+    top: 62.5px;
+    left: 760px;
+}
+
+.login-content .slick-container .login-container .form-title {
+    width: 355px;
+    height: 72px;
+    line-height: 72px;
+    padding-left: 30px;
+    background: url(../img/form-title.png) no-repeat;
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+    position: relative;
+}
+
+.login-content .slick-container .login-container .form-container {
+    background-color: #fff;
+    width: 329px;
+    margin: -10px 0 0 18px;
+    padding: 25px 20px;
+}
+
+.login-content .slick-container .login-container .form-container .form-row {
+    height: 40px;
+    border: 1px solid #b7b7b7;
+    margin-bottom: 15px;
+    padding-left: 30px;
+}
+
+.login-content .slick-container .login-container .form-container .form-row.username {
+    background: url(../img/username.png) no-repeat 10px 10px;
+}
+
+.login-content .slick-container .login-container .form-container .form-row.password {
+    background: url(../img/password.png) no-repeat 10px 10px;
+}
+
+.login-content .slick-container .login-container .form-container .form-row input {
+    padding: 0 10px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+    color: #666;
+    background-color: white !important;
+    border: none;
+}
+
+.login-content .slick-container .login-container .form-container .form-row input:focus {
+    outline: none;
+}
+
+.login-content .slick-container .login-container .form-container .btn-login {
+    width: 289px;
+    height: 40px;
+    text-align: center;
+    background-color: #1f58b5;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+}
+
+.login-content .slick-container .login-container .form-container .register {
+    margin: 15px -20px 0;
+    padding: 15px 20px 0;
+    border-top: 1px dashed #e5e5e5;
+    color: #999;
+}
+
+.login-content .slick-container .login-container .form-container .register a {
+    color: #f90;
+}
+
+.login-content .slick-container .browser-download {
+    display: block;
+    width: 342px;
+    height: 255px;
+    padding: 60px 35px;
+    background: rgba(255, 255, 255, 0.6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66ffffff, endColorstr=#66ffffff);
+    border-radius: 5px;
+    position: absolute;
+    top: 70px;
+    left: 765px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.login-content .slick-container .browser-download h2 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #fff;
+    line-height: 25px;
+    color: #f00;
+}
+
+.login-content .slick-container .browser-download p {
+    color: #666;
+    font-size: 1.2rem;
+    line-height: 20px;
+    margin-top: 20px;
+}
+
+.login-content .slick-container .browser-download a {
+    color: #06c;
+    margin-left: 5px
+}
+
+.stp-hide2 {
+    background: transparent !important;
+    z-index: -99999 !important;
+}
+
+.hide {
+    display: none;
+}

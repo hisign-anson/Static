@@ -1,0 +1,34 @@
+<div class="noticeViewBox">
+    <div class="noticeHeader">
+        <h2 style="text-align: center"><%=data.subject%></h2>
+        <%if(data.type==1){%>
+        <h5 style="text-align: center;margin-bottom: 25px"><span>发布人：<%=data.rev2%></span>&nbsp;&nbsp;&nbsp;<span>发布时间：<%=data.rev3%></span></h5>
+        <%}else if(data.type==2||data.type==3){%>
+        <h5 style="text-align: center;margin-bottom: 25px"><span>创建时间：<%=data.createDate%></span></h5>
+        <%}%>
+        <%if(data.type==1||data.type==2){%>
+        <div id="my_editor">
+            <%=data.content%>
+        </div>
+        <%}else if(data.type==3){%>
+
+        <%}%>
+    </div>
+
+    <%if(data.rev1){%>
+       <p class="ml30 mt10">
+        <span class="">附件：</span>
+        <a href="<%=top.ftpServer%><%=data.rev1%>"  download="<%=data.rev1%>"><%=data.rev1%></a>
+       </p>
+    <%}%>
+
+    <div class="noticeFooter tcenter">
+        <b id="cancel-btn" class="cm-close-btn"></b>
+    </div>
+
+</div>
+
+
+
+
+

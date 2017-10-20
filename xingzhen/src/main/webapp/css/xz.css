@@ -1,0 +1,796 @@
+@charset "utf-8";
+/*时间小图标*/
+.icon-time {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+}
+
+/*首页信息提醒小图标 start*/
+.animate-up, .animate-middle, .animate-down {
+    display: inline-block;
+    position: absolute;
+    left: 28px;
+    width: 6px;
+    height: 2px;
+    background: #FF8764;
+    margin-left: 5px;
+    -webkit-animation: flash 2s infinite ease-in-out;
+    -moz-animation: flash 2s infinite ease-in-out;
+    -ms-animation: flash 2s infinite ease-in-out;
+    animation: flash 2s infinite ease-in-out;
+
+}
+
+.animate-up {
+    -ms-transform: rotate(160deg); /* IE 9 */
+    -moz-transform: rotate(160deg); /* Firefox */
+    -webkit-transform: rotate(160deg); /* Safari and Chrome */
+    -o-transform: rotate(160deg); /* Opera */
+    transform: rotate(160deg);
+    top: 3px;
+}
+
+.animate-middle {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -moz-transform: rotate(180deg); /* Firefox */
+    -webkit-transform: rotate(180deg); /* Safari and Chrome */
+    -o-transform: rotate(180deg); /* Opera */
+    transform: rotate(180deg);
+    top: 9px;
+}
+
+.animate-down {
+    -ms-transform: rotate(200deg); /* IE 9 */
+    -moz-transform: rotate(200deg); /* Firefox */
+    -webkit-transform: rotate(200deg); /* Safari and Chrome */
+    -o-transform: rotate(200deg); /* Opera */
+    transform: rotate(200deg);
+    top: 15px;
+}
+/*首页信息提醒小图标 start*/
+
+/*首页系统工具下载小图标 start*/
+.icon-file-pdf, .icon-file-word, .icon-file-excel, .icon-file-powerpoint, .icon-file-image, .icon-file-txt, .icon-notice, .icon-book {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.icon-file-pdf {
+    color: #20B7B0;
+}
+
+.icon-file-pdf:before {
+    content: "\f1c1";
+}
+
+.icon-file-word {
+    color: #FF8C00;
+}
+
+.icon-file-word:before {
+    content: "\f1c2";
+}
+
+.icon-file-excel, .icon-book {
+    color: #22a0e2;
+}
+
+.icon-file-excel:before {
+    content: "\f1c3";
+}
+
+.icon-file-powerpoint {
+    color: #a78cf1;
+}
+
+.icon-file-powerpoint:before {
+    content: "\f1c4";
+}
+
+.icon-file-image, .icon-notice {
+    color: #FF8764;
+}
+
+.icon-file-image:before {
+    content: "\f1c5";
+}
+
+.icon-file-txt {
+    color: #3bc087;
+}
+
+.icon-file-txt:before {
+    content: "\f0f6";
+}
+
+.icon-file-noType {
+    color: #ffb62c;
+}
+
+.icon-file-noType:before {
+    content: "\f016";
+}
+
+.icon-notice:before {
+    content: "\f0a1";
+}
+/*首页系统工具下载小图标 end*/
+
+/*表单上传附件 按钮*/
+.btn-file, .btn.btn-file {
+    padding: 0 6px;
+    color: #fff;
+    background-color: #22A0E2;
+    border-color: #22A0E2;
+    height: 25px;
+    line-height: 25px;
+}
+
+
+/*待办*/
+/*.task-count {*/
+    /*color: #fff;*/
+    /*font-weight: bold;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*right: -9px;*/
+    /*text-align: center;*/
+    /*display: inline-block;*/
+    /*min-width: 18px;*/
+    /*height: 18px;*/
+    /*border-radius: 18px;*/
+    /*background-color: #f16446;*/
+    /*font-size: 12px;*/
+/*}*/
+
+/*输入框只读样式*/
+input[readonly], textarea[readonly], select[readonly],
+input[disabled], textarea[disabled], select[disabled] {
+    background: #eeeeee;
+}
+
+/*数字类型靠右显示*/
+.digital-right, .typical-tb td.digital-right {
+    text-align: right !important;
+}
+
+/*提示文字*/
+.hint {
+    margin: 5px 50px;
+    font-size: 14px;
+}
+
+/*红色提示文字*/
+.red-hint {
+    color: red !important;
+    padding: 0 10px;
+    margin-left: 120px;
+}
+
+.div-table-wrap {
+    overflow-x: auto;
+    border-bottom: 1px solid #cccccc;
+}
+
+/*表格文字自动换行*/
+/*.fixed-tb thead th, .fixed-tb tbody tr,*/
+/*.fixed-tb.typical-tb:not(.tcenter) > tbody > tr > td, .fixed-tb.typical-tb:not(.tcenter) > thead > tr > th {*/
+/*text-overflow: clip;*/
+/*white-space: normal;*/
+/*word-break: break-all;*/
+/*}*/
+
+/*.query-result .typical-tb {*/
+/*!*width: 98%;*!*/
+/*margin: 0;*/
+/*}*/
+
+/*.query-result .ellipsis-tb {*/
+/*width: 98%;*/
+/*margin: 12px 12px 16px 12px;*/
+/*table-layout: fixed;*/
+/*}*/
+
+/*.ellipsis-tb:not(.tcenter) > tbody > tr > td, .ellipsis-tb:not(.tcenter) > thead > tr > th {*/
+/*overflow: hidden;*/
+/*text-overflow: ellipsis;*/
+/*white-space: nowrap;*/
+/*}*/
+
+/*系统管理列表查询条件*/
+.qc-label {
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 5px;
+    font-weight: 600;
+    text-align: right;
+}
+
+/*字典弹框取值*/
+.dict-opener {
+    display: inline-block;
+    position: relative;
+    width: calc(100% - 130px);
+    min-width: 140px;
+    vertical-align: top;
+}
+
+.dict-opener .icon-list {
+    position: absolute;
+    right: 5px;
+    top: 6px;
+    font-size: 12px;
+}
+
+.dict-container {
+    position: relative;
+}
+
+#dict-wrap {
+    margin-top: 40px;
+}
+
+#dict-wrap u {
+    display: block;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#dict-wrap u:hover {
+    background-color: #e2e2e2;
+    color: #1866ce;
+}
+
+.dict-container .bar-btn-div {
+    top: -30px;
+    position: absolute;
+    right: 0;
+
+}
+
+.query-block-row .qc-label-m + .dict-opener {
+    width: calc(100% - 140px);
+}
+.query-block-row .qc-label-xl + .dict-opener {
+    width: calc(100% - 154px);
+ }
+.query-block-row .common-field + .dict-opener{
+    width: calc(100% - 154px);
+}
+.query-block-row .dict-opener .icon-list {
+    top: 15px;
+}
+/*表单页面 样式 start*/
+.form-content {
+    margin: 15px;
+}
+
+.form-container, .form-content-block {
+    position: relative;
+    box-shadow: 0 0 10px 0 rgba(214, 222, 224, 0.6);
+    border-radius: 3px;
+    background: #ffffff;
+    margin-bottom: 25px;
+}
+
+.form-container .form-content-block {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.form-header {
+    position: relative;
+}
+
+.form-title {
+    padding: 8px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #494949;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.left-line {
+    /*display: inline-block;*/
+    /*width: 5px;*/
+    /*height: 24px;*/
+    /*background-color: #22a0e2;*/
+    /*vertical-align: middle;*/
+    /*margin-right: 10px;*/
+    position: absolute;
+    top: 6px;
+    left: 0;
+    bottom: 6px;
+    width: 4px;
+    background: #22A0E2;
+}
+
+.left-line + span {
+    margin-left: 15px;
+}
+
+.form-body {
+    padding: 15px;
+}
+
+.require-star {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-btn-block {
+    padding: 24px 0;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    /* position: fixed; */
+    /* bottom: 0; */
+    /* left: 20px; */
+    /* width: calc(100% - 40px); */
+    /*background: rgba(48, 54, 62, 0.85);*/
+    /*z-index: 100;*/
+    /*left: -1px;*/
+    /*width: 100%;*/
+}
+
+/*表单块标题*/
+.form-section-title {
+    padding: 15px;
+    margin: 15px 0;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.4;
+    border-radius: 2px;
+}
+
+/*庶务通表单页面自适应样式 start*/
+.wrapper-fluid {
+    /*padding-right: 15px;*/
+    /*padding-left: 15px;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+}
+
+.block-row {
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-bottom: 15px;
+}
+
+.block-row:before,
+.block-row:after {
+    display: table;
+    content: " ";
+}
+
+.block-row:after {
+    clear: both;
+}
+
+[class*="equal-col"] {
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.equal-col-12 {
+    width: 100%;
+}
+
+.equal-col-11 {
+    width: 91.66666667%;
+}
+
+.equal-col-10 {
+    width: 83.33333333%;
+}
+
+.equal-col-9 {
+    width: 75%;
+}
+
+.equal-col-8 {
+    width: 66.66666667%;
+}
+
+.equal-col-7 {
+    width: 58.33333333%;
+}
+
+.equal-col-6 {
+    width: 50%;
+}
+
+.equal-col-5 {
+    width: 41.66666667%;
+}
+
+.equal-col-4 {
+    width: 33.33333333%;
+}
+
+.equal-col-3 {
+    width: 25%;
+}
+
+.equal-col-2 {
+    width: 16.66666667%;
+}
+
+.equal-col-1 {
+    width: 8.33333333%;
+}
+
+[class|="equal-col"] .common-field {
+    width: 120px;
+    vertical-align: top;
+}
+.table-responsive-row .typical-tb {
+    width: 100%;
+    margin-left: 0;
+    border: 1px solid #cdcdcd;
+}
+
+.textarea-group .common-textarea {
+    width: 100%;
+}
+
+[class|="equal-col"] .radio, [class|="equal-col"] .checkbox {
+    height: 24px;
+    line-height: 24px;
+    margin: 0;
+}
+
+.input-label {
+    margin-right: 10px;
+}
+
+.input-label input[type=radio], input[type=checkbox] {
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.form-row .common-input, .form-row .common-select, .form-row .common-textarea {
+    padding-left: 8px;
+    padding-right: 12px;
+    line-height: 25px;
+    height: 25px;
+    border-radius: 3px;
+}
+
+.equal-col-12 .common-textarea {
+    height: 70px;
+}
+
+.dict-opener .common-input, .dict-opener .common-textarea {
+    width: 100%;
+}
+
+.table-responsive-row .typical-tb {
+    width: 100%;
+    margin-left: 0;
+    border: 1px solid #cdcdcd;
+}
+
+@media (max-width: 1200px) {
+    /*表单右边有表格列时*/
+    .has-table-wrapper .equal-col-4 {
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .wrapper-fluid {
+        /*padding-right: 50px;*/
+        /*padding-left: 50px;*/
+    }
+
+    .wrapper-fluid .opinion, .wrapper-fluid .describe-div {
+        margin-right: -50px;
+        margin-left: -50px;
+    }
+
+    .wrapper-fluid.opinion, .wrapper-fluid.describe-div {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .has-table-wrapper .wrapper-fluid {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .wrapper-fluid [class|="equal-col"] > .common-input,
+    .wrapper-fluid [class|="equal-col"] > .common-select,
+    .wrapper-fluid [class|="equal-col"] > .common-textarea,
+    .wrapper-fluid [class|="equal-col"] > .radio,
+    .wrapper-fluid [class|="equal-col"] > .textarea-group {
+        display: inline-block;
+        width: calc(100% - 130px);
+        min-width: 140px;
+        vertical-align: top;
+    }
+
+    .wrapper-fluid .table-responsive-row {
+        width: calc(100% - 130px);
+        overflow-x: auto;
+        margin-left: 130px;
+    }
+}
+
+@media (max-width: 895px) {
+    .wrapper-fluid .red-hint {
+        margin-left: -5px;
+    }
+}
+
+@media (max-width: 804px) {
+    .wrapper-fluid [class|="equal-col"] > .common-input,
+    .wrapper-fluid [class|="equal-col"] > .common-select,
+    .wrapper-fluid [class|="equal-col"] > .radio {
+        display: inline-block;
+        width: calc(100% - 80px);
+        min-width: 150px;
+        vertical-align: top;
+    }
+
+    .wrapper-fluid [class|="equal-col"] > .common-textarea {
+        width: calc(100% - 170px);
+        min-width: 150px;
+        vertical-align: top;
+    }
+
+    .wrapper-fluid .table-responsive-row {
+        width: calc(100% - 70px);
+        overflow-x: auto;
+        margin-left: 30px;
+        border: 1px solid #ddd;
+    }
+}
+
+/*庶务通表单页面自适应样式 end*/
+/*表单页面 样式 end*/
+
+/*图表外的标题文字*/
+.chart-title {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+/*.query-result .nav-tabs {*/
+/*padding: 10px;*/
+/*}*/
+
+/*.query-result .nav-tabs > li > a {*/
+/*margin-right: 10px;*/
+/*padding: 5px 15px;*/
+/*border-radius: 0;*/
+/*display: inline-block;*/
+/*font-size: 14px;*/
+/*text-align: center;*/
+/*white-space: nowrap;*/
+/*background-color: #eeeeee;*/
+/*border-color: #dddddd;*/
+/*color: #494949;*/
+/*}*/
+
+/*.query-result .nav-tabs > li > a:hover {*/
+/*border-color: #dddddd;*/
+/*opacity: 0.8;*/
+/*}*/
+
+/*.query-result .nav-tabs > li.active > a, .query-result .nav-tabs > li.active > a:hover, .query-result .nav-tabs > li.active > a:focus {*/
+/*cursor: pointer;*/
+/*color: #fff;*/
+/*background-color: #22a0e2;*/
+/*border-color: #22a0e2;*/
+/*}*/
+
+/*空数据和错误页面样式 start*/
+.empty-container {
+    margin: 50px auto;
+    text-align: center;
+    width: 100%;
+}
+
+.empty-img {
+    width: 148px;
+    height: 148px;
+    display: inline-block;
+    margin: 24px;
+    vertical-align: middle;
+}
+
+.text-container {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+    color: #c4c4c4;
+}
+
+.empty-text, .empty-subtext, .empty-container .btn-block {
+    margin: 24px;
+}
+
+.empty-text {
+    font-size: 30px;
+}
+
+.empty-subtext {
+    font-size: 16px;
+}
+
+.reload-btn {
+    background: #4a89dc;
+    color: #ffffff;
+}
+
+/*空数据和错误页面样式 end*/
+
+/*可点击的文字*/
+.link-text:hover, .download-text:hover {
+    text-decoration: underline;
+}
+
+/*点击可下载附件的文字*/
+.download-text {
+    color: #22A0E2;
+    cursor: pointer;
+}
+
+/*============================================================
+操作列小图标 start
+=============================================================*/
+/*删除*/
+.icon-delete:before {
+    content: "\f1f8";
+}
+
+/*归档*/
+.icon-archive:before {
+    content: "\f187";
+}
+
+/*广播*/
+.icon-broadcast:before {
+    content: "\f0a1";
+}
+
+/*通讯*/
+.icon-communication:before {
+    content: "\f0e6";
+}
+
+/*小组*/
+.icon-group:before {
+    content: "\f0c0";
+}
+
+/*移交*/
+.icon-transfer:before {
+    content: "\f0ec";
+}
+
+/*催办*/
+.icon-urge:before {
+    content: "\f071";
+}
+
+/*反馈*/
+.icon-feedback:before {
+    content: "\f112";
+}
+
+/*============================================================
+操作列小图标 end
+=============================================================*/
+
+/*============================================================
+旧版base.js 生成的弹出框样式 start
+=============================================================*/
+.window, .window .window-body {
+    border-top-width: 1px;
+    /*background: #ffffff;*/
+}
+
+.panel-body {
+    overflow: auto;
+    border-top-width: 0;
+    padding: 0;
+}
+
+.panel-header {
+    position: relative;
+}
+
+.panel-title {
+    font-weight: bold;
+    color: rgb(87, 87, 101);
+    height: 36px;
+    line-height: 36px;
+    white-space: pre;
+    text-indent: 5px;
+}
+
+.panel-icon, .panel-tool {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    margin-top: -8px;
+    height: 16px;
+    overflow: hidden;
+}
+
+.panel-tool a {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    margin: 0 0 0 2px;
+    vertical-align: top;
+}
+
+.panel-tool-close {
+    background: url(../img/eui-gray/panel_tools.png) no-repeat -16px 0px;
+}
+
+.panel .form-btn-block {
+    border: 0;
+}
+
+.panel-container {
+    margin-top: 15px;
+}
+
+/*============================================================
+旧版base.js 生成的弹出框样式 end
+=============================================================*/
+
+/*============================================================
+表格中的表格 end
+=============================================================*/
+.typical-tb > tbody tr.tr-inner-table:hover,
+.typical-tb > tbody tr.tr-inner-table .table-inner-table > tbody tr:hover,
+.typical-tb > tbody tr.tr-inner-table .table-inner-table > thead tr:hover {
+    background-color: #ffffff;
+}
+
+.table-inner-table {
+    width: 100%;
+}
+
+.typical-tb tr.tr-inner-table .table-inner-table tr {
+    border-right: none;
+}
+
+/*============================================================
+表格中的表格 end
+=============================================================*/
+
+
+
+/*上传按钮*/
+.upload-btn{
+    position: relative;
+}
+.upload-btn input[type="file"]{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0;
+}

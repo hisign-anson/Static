@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="author" content="miya" />
+    <meta name="date" content="2017-09-20 09:15:08" />
+    <title>指挥协作管理</title>
+    <link rel="stylesheet" href="../../css/base-plus-xz.css">
+    <style>
+        .group-content {
+            margin: 10px;
+        }
+        .group-list {
+            float: left;
+            width: 200px;
+            background: #ffffff;
+            height: calc(100vh - 40px);
+        }
+
+        .map-list {
+            position: relative;
+            margin-left: 210px;
+            background: #ffffff;
+            height: calc(100vh - 40px);
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+        }
+
+        .new-color-bar.head {
+            font-size: 13px;
+            border-top-width: 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            text-indent: 0;
+            border-bottom-color: #E1E7E9;
+            font-weight: 600;
+        }
+        .new-color-bar.head .bar-btn-div b {
+            margin-right: 8px;
+            font-weight: normal;
+            font-size: 12px;
+        }
+        #toggleGroup {
+            position: absolute;
+            top: 8px;
+            right: 5px;
+            cursor: pointer;
+            color: #0d8ccf;
+            font-size: 16px;
+        }
+        #toggleGroup:hover {
+            opacity: 0.5;
+        }
+        .all-group-list{
+            position: relative;
+        }
+        .choose-group {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 30px;
+            height: 30px;
+            border-bottom: 1px solid #dddddd;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        .all-group-list ul {
+            position: absolute;
+            cursor: pointer;
+            width: 100%;
+            background: #ffffff;
+        }
+        .all-group-list ul li {
+            line-height: 30px;
+            height: 30px;
+            border-bottom: 1px solid #dddddd;
+        }
+        .all-group-list ul li:hover {
+            background-color: #22a0e2;
+            color: #ffffff;
+        }
+        .common-group-tile {
+            display: block;
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 30px;
+            height: 30px;
+            border-bottom: 1px solid #dddddd;
+        }
+        .common-group-ul li {
+            display: inline-block;
+            width: 75px;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .common-group-ul li:hover,.common-group-ul li:active,
+        .common-group-ul li.active{
+            background-color: #22a0e2;
+            color: #ffffff;
+        }
+        .common-group-tile:before {
+            margin-right: 5px;
+            color: #22a0e2;
+        }
+        .group-btn-div {
+
+        }
+        .orange-btn{
+            color: #FF8C00;
+            border: 1px solid #FF8C00;
+            border-radius: 3px;
+            padding: 5px;
+            text-shadow: none;
+            display: inline-block;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .orange-btn:hover,.orange-btn:active,
+        .orange-btn.active{
+            background-color: #f07f03;
+            color: #FFFFFF;
+        }
+
+        .group-list-s .group-list {
+            width: 45px;
+        }
+        .group-list-s .map-list{
+            margin-left: 55px;
+        }
+        .group-list-s #toggleGroup {
+            right: 17px;
+        }
+        .group-list-s .group-list .left-line,
+        .group-list-s .group-list .left-line + span,
+        .group-list-s .all-group-list,
+        .group-list-s .common-group,
+        .group-list-s .title-icon {
+            display: none;
+        }
+
+        .map-condition {
+            width: 340px;
+            /*width: 0;*/
+            background: #f0f0f0;
+            position: absolute;
+            left: 0;
+            top: 150px;
+            border: 1px solid #dddddd;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+        }
+        /*.map-condition.animated {*/
+            /*display: block;*/
+            /*-webkit-animation: fadeInleft 2s infinite ease-in-out;*/
+            /*-moz-animation: fadeInleft 2s infinite ease-in-out;*/
+            /*-ms-animation: fadeInleft 2s infinite ease-in-out;*/
+            /*animation: fadeInleft 2s infinite ease-in-out;*/
+        /*}*/
+        .map-condition .form-content-block {
+            box-shadow: none;
+            border-radius: 0;
+            background: inherit;
+        }
+
+        .map-condition span.qc-label-m {
+            width: 135px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .map-condition .common-input,.map-condition .common-select {
+            width: 160px;
+        }
+
+        .map-condition .qc-group-l {
+            line-height: 40px;
+        }
+
+        .map-condition .title {
+            border-bottom: 1px solid #cccccc;
+            padding: 0 5px;
+            line-height: 35px;
+            margin-top: 0;
+        }
+
+
+        .option > u {
+            padding: 0 5px;
+            cursor: pointer;
+        }
+
+        .option > u.active {
+            font-weight: bold;
+            color: #3a88d2!important;
+        }
+
+        .map-condition .form-btn-block {
+            border: 0;
+            background: inherit;
+        }
+    </style>
+</head>
+<body>
+<div class="body-agent pd20 pr" id="mainDiv">
+
+</div>
+
+
+<div id="taskListDiv" class="hide">
+    <div class="panel-container">
+    </div>
+</div>
+</body>
+<script src="../../js/base.js?version=0.99"></script>
+<script src="../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+<script src="../../plugin/daterangepicker/moment.js?version=0.99"></script>
+<script src="../../plugin/timeScope.js"></script>
+<script src="../../script/selectUtils.js"></script>
+<script src="../../plugin/jqprint/jquery-migrate-1.2.1.min.js"></script>
+<script src="../../plugin/jqprint/jquery.jqprint-0.3.js"></script>
+<script>
+    importing('currentDate','fullscreen');
+</script>
+<script src="../../script/fullpanel.js"></script>
+<script data-main="command.js" src="/plugin/require.js" type="text/javascript"></script>
+</html>

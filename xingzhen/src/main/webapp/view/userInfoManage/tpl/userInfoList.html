@@ -1,0 +1,60 @@
+<div class="tab-pane active">
+	<form class="query-block mt0" id="query-condition">
+		<div class="query-block-row">
+			<div class="col-auto">
+				<label class="qc-label w80px">用户姓名：</label>
+				<input id="userName" name="userName" type="text" class="common-input"/>
+			</div>
+			<div class="col-auto">
+				<label class="qc-label w80px">性别：</label>
+				<select name="sex" id="sex" class="common-select" >
+					<option value=""></option>
+					<option value="1">男</option>
+					<option value="2">女</option>
+				</select>
+			</div>
+		</div>
+		<div class="query-block-row">
+			<div class="col-auto">
+				<label class="qc-label w80px">联系电话：</label>
+				<input id="phone" name="phone" type="text" class="common-input"/>
+			</div>
+			<div class="col-auto">
+				<label class="qc-label w80px">职务：</label>
+				<dict dict-id="post" dict-name="post"  dict-type="select" dict-root="FLDZWDM" class="dict" empty="true"></dict>
+			</div>
+		</div>
+		<hr class="cm-dash"/>
+		<p class="query-reset-block">
+			<b id="query-btn" class="cm-query-btn"></b>
+			<b id="reset-btn" class="cm-reset-btn"></b>
+		</p>
+	</form>
+	<div id="query-result" >
+	    <div class="new-color-bar">
+	        <span class="title">用户信息列表（共找到<span class="total-count"></span>条数据）</span>
+	        <div class="bar-btn-div">
+	            <b orgId="" id="importExcel" orgName="导入Excel" class="cm-del-btn">导入Excel</b>
+	            <b id="add-btn" orgId="" orgName="" class="cm-add-btn"></b>
+	        </div>
+	    </div>
+	    <table id="userInfoList-table" class="typical-tb" >
+	       <thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 12%;">用户姓名</th>
+					<th style="width: 5%;">性别</th>
+					<th style="width: 17%;">身份证号</th>
+					<th style="width: 17%;">联系电话</th>
+					<th style="width: 15%;">职务</th>
+					<th style="width: 23%;">单位</th>
+					<th style="width: 15%;">操作</th>
+				</tr>
+	        </thead>
+	        <tbody>
+		         
+	        </tbody>
+	    </table>
+	    <div class="paging"></div>
+	</div>
+  </div>

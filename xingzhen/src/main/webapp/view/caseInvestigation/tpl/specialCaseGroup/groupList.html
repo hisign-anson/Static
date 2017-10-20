@@ -1,0 +1,37 @@
+<table id="groupListTable" class="table-inner-table">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>专案组编号</th>
+        <th>专案组名称</th>
+        <th>专案组类别</th>
+        <th>涉及案件数</th>
+        <th>创建人</th>
+        <th>成员数</th>
+        <th>创建时间</th>
+        <th>归档状态</th>
+        <th>归档时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%_.each(data, function(item){%>
+    <tr>
+        <td><%=item.rownum%></td>
+        <td><a class="link-text"><%=item.groupId%></a></td>
+        <td><%=item.groupName%></td>
+        <td><%=item.groupType%></td>
+        <td><%=item.caseNum%></td>
+        <td><%=item.createName%></td>
+        <td><%=item.staffNum%></td>
+        <td><%=rangeUtil.formatDate(item.createTime,'yyyy-MM-dd')%></td>
+        <td><%=item.fileStatus%></td>
+        <td><%=rangeUtil.formatDate(item.fileTime,'yyyy-MM-dd')%></td>
+        <td>
+            <a class="into-broadcast icon-broadcast" id="<%=item.id%>" title="广播"></a>
+            <a class="into-view icon-view" id="<%=item.id%>" title="浏览"></a>
+        </td>
+    </tr>
+    <%})%>
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+<div class="col-panel-block zuixin">
+    <h3 class="col-panel-header">
+        <i class="left-line"></i><span>通知公告</span>
+        <a class="more-link" href="javascript:void(0)" id="newsMore">更多</a>
+    </h3>
+    <div class="col-panel-body news" >
+        <%_.each(data, function(item,i){%>
+            <%if(i < 5){%>
+            <div>
+                <a href="#" data-id="<%=item.id%>" class="new-column">
+                    <span class="dot-decoration"></span>
+                    <span class="text-record ml15" title="<%=item.msgTitle%>"><%=item.msgTitle%></span>
+                    <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
+                </a>
+            </div>
+            <%}%>
+        <%})%>
+
+    </div>
+</div>
+

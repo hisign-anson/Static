@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通知公告</title>
+    <link rel="stylesheet" href="../../../css/base.css?version=0.99">
+    <link rel="stylesheet" href="../../../css/message.css?version=0.99">
+</head>
+<body>
+
+<div class="query-block">
+    <div class="query-condition-p">
+        <span class="qc-label w80px">状态：</span><dict dict-id="msg-receive-xxzt" dict-name="receiveXxzt" dict-type="select" dict-root="XXZTDM" class="dict w120px"></dict>
+        <span class="qc-label w80px">标题：</span><input id="subject" type="text" class="query-input"/>
+        <span class="qc-label w80px">时间：</span>
+        <span class="text-time">
+            <input id="query-date" readonly="readonly" class="common-input w190px" placeholder="请输入时间范围" tabindex="-1">
+            <input type="hidden" name="startTime" id="queryDateBegin" />
+            <input type="hidden" name="endTime" id="queryDateEnd" />
+        </span>
+        <!--<input id="startTime" type="text" class="query-date"/>~<input id="endTime" type="text" class="query-date mr15"/>-->
+        <p class="query-reset">
+            <b id="msg-receive-query" class="cm-query-btn"></b>
+            <b id="msg-receive-reset" class="cm-reset-btn"></b>
+        </p>
+    </div>
+</div>
+<div id="msg-main-box">
+    <div class="new-color-bar">
+        <span class="title">通知公告（共 <span class="total-count"></span> 条消息）</span>
+        <div class="bar-btn-div">
+            <b id="receive-edit-btn" class="cm-edit-btn"></b>
+            <b id="receive-remove-btn" class="cm-remove-btn"></b>
+        </div>
+    </div>
+    <div id="msg-content">
+        <div id="msg-left">
+            <div class="msg-left-title">
+                <div class="d1"><input id="msg-check-all" name="checkAll" type="checkbox"/></div>
+                <div class="d2">标题</div>
+                <div class="d3" sort-name="createDate">时间</div>
+            </div>
+            <div id="msg-left-content" tpsource="#msg-left-list"></div>
+            <div class="paging"></div>
+        </div>
+        <div id="msg-right">
+            <div class="un-selected-detail-div">
+                <h2>未选定查看任何消息</h2>
+                <div>单击任何消息即可在阅读窗格中进行查看</div>
+            </div>
+            <div class="selected-detail-div" tpsource="#msg-right-detail"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/template" id="msg-left-list">
+    <div class="li {readLi}" rownum="{rownum}">
+        <table class="typical-tb" cellpadding="3">
+            <tbody>
+            <tr>
+                <td class="cx">
+                    <input id="{id}" name="checkList" type="checkbox" {_checked} class="check-msg" value="{id}" rownum="{rownum}"/>
+                </td>
+                <td class="ci">
+                    <div class="cir"></div>
+                </td>
+                <td class="cc" paramId="{id}" rownum="{rownum}" data-read="{msgState}">
+                    <div class="c-title"><div class="sender-name ellipsis" title="{rev1}">{rev1}</div><div class="msg-time">{msgDateTxt}</div></div>
+                </td>
+                <td><div param="{id}" class="c-remove hideplus" title="删除"><i class="icon-remove"></i></div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
+<script type="text/template" id="msg-right-detail">
+    <div class="read-info">
+        <h2>{rev1}</h2>
+        <div><span>发件人：</span><span class="tcolor" id="receiverName"></span></div>
+        <div><span>时间：{msgDetailDate}</span></div>
+        <div><span>附件：<a href="#" id="attachment"></a></span></div>
+    </div>
+    <div class="read-content has-table-wrapper">
+
+    </div>
+</script>
+<script src="../../../../js/base.js?version=0.99"></script>
+<script src="../../../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+<script src="../../../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
+<script src="../../../../plugin/daterangepicker/moment.js?version=0.99"></script>
+<script src="../../../../js/sys.js?version=0.99"></script>
+<script>typeof noticeMessageFn=='function' && noticeMessageFn();</script>
+</html>

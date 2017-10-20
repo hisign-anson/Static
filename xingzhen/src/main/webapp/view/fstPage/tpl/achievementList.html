@@ -1,0 +1,14 @@
+<div class="col-panel-block daiban achievementDiv">
+    <h3 class="col-panel-header"><i class="left-line"></i><span>平台成果展示</span> <a class="more-link" href="javascript:void(0)" id="rulesMore">更多</a></h3>
+    <div class="col-panel-body news">
+        <%_.each(data, function(item){%>
+        <div>
+            <a href="#" data-id="<%=item.id%>" class="noticeOne">
+                <span class="dot-decoration ml15 vam"></span>
+                <span class="text-record ml15" title="<%=item.msgTitle%>"><%=item.msgTitle%></span>
+                <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
+            </a>
+        </div>
+        <%})%>
+    </div>
+</div>

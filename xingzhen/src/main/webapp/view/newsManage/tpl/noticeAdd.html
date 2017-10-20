@@ -1,0 +1,84 @@
+<form id="notice-add-form" >
+    <input type="hidden" name="type" id="type" value="<%=type%>"/>
+    <h4 class="form-section-title">
+        <%if(type==1){%>
+        <span>新增通知/公告</span>
+        <%}else if(type==2){%>
+        <span>新增规章制度</span>
+        <%}else if(type==3){%>
+        <span>新增下载表格</span>
+        <%}%>
+    </h4>
+    <div class="query-block-row">
+        <label class="common-field">标题：</label>
+        <input id='subject' name="subject" type="text" class="common-input field-valid" data-options="required:true" style="width:305px;">
+    </div>
+    <%if(type==1){%>
+
+        <div class="query-block-row">
+            <label class="common-field">等级：</label>
+            <input id='msgLevel' name="msgLevel" type="hidden" value="1">
+            <span class="option date-select" id="changeGrade">
+                <u val="1" class="active default">普通</u>
+                <u val="2">加急</u>
+                <u val="3">特急</u>
+            </span>
+        </div>
+
+        <div class="query-block-row">
+            <label class="common-field">接收人：</label>
+            <input id='tslb' name="tslb" type="hidden" value="2">
+            <span class="option date-select" id="changeReceiver">
+                <u val="2" class="active" >本单位</u>
+                <u val="1">所有单位</u>
+                <u val="3">指定单位</u>
+                <u val="4">本单位人员</u>
+            </span>
+        </div>
+        <div class="query-block-row" id="chooseUnitBox">
+            
+            <div id="chooseUnit" class="ml130 hide chooseUnit">
+            </div>
+            <div id="chooseEmployee" class="ml130 hide chooseEmployee">
+            </div>
+        </div>
+    <%}%>
+    
+    <%if(type==1||type==2){%>
+    <div class="query-block-row">
+       <label class="common-field">内容：</label>
+        <div style="margin:10px 0px;display: inline-block">
+            <div id="my_editor" style="height:400px">
+
+            </div>
+        </div>
+    </div>
+    <%}%>
+
+    <div class="progress" style="height: 5px;margin:8px 0 -2px 130px;width:305px;" >
+         <span class="progress-bar progress-bar-success " role="progressbar"
+               aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"
+               style="width: 0%;height:5px">
+        </span>
+    </div>
+    <div class="query-block-row">
+        <label class="common-field">附件：</label>
+        <button id="upload-btn" class="btn btn-file icon-paper-clip">上传附件</button>
+        <%if(type==1||type==2){%>
+        <input type="hidden" id="rev1" name="rev1" value=""/>
+        <input type="text" class="common-input" readonly="readonly" name="file" id="file"/>
+        <%}else if(type==3){%>
+        <input type="hidden" id="rev1" name="rev1" value=""/>
+        <input type="text" class="common-input field-valid" readonly="readonly" name="file" id="file" data-options="required:true"/>
+        <%}%>
+        <a class="delete-for icon-remove-btn" id="del_file" applyNo="" title="删除"></a>
+    </div>
+
+</form>
+<p class="tcenter mt40">
+    <b id="save-btn" class="cm-save-btn mr15" rev4="0"></b>
+    <%if(type==1){%>
+       <b id="save-push-btn" class="cm-save-no-content-btn mr15" rev4="1" > 保存并发布</b>
+    <%}%>
+    <b id="cancel-btn" class="cm-close-btn"></b>
+</p>

@@ -1,0 +1,97 @@
+
+<form id="add-form">
+    <input name="orgId" id="orgId" value="" type="hidden" />
+    <input name="orgName" id="orgName" value="<%=orgName%>" type="hidden" />
+    <div id="main-rights">
+        <div class="new-color-bar">
+            <span class="title">新增用户信息
+            </span>
+            <div class="bar-btn-div">
+                <b class="cm-save-btn" id="save-save-btn"></b>
+                <b class="cm-close-btn" id="save-return-btn"></b>
+            </div>
+        </div>
+        <table id="sys-userInfo-table" class="typical-tb sys-table" >
+            <tr>
+                <td>用户姓名：</td>
+                <td>
+                    <input id="userName" name="userName"  type="text" class="common-input w260px validate" placeholder="请填写真实姓名" data-options="required:true" maxlength="10" onkeyup="var pattern = /^[A-Za-z\u4E00-\u9FA5-]+$/;if(!pattern.test(this.value)){this.value='';this.value=this.value.replace(/^[A-Za-z\u4E00-\u9FA5-]+$/,'')};"/>
+                </td>
+                <td colspan="2" rowspan="4" style="width: 50%" >
+                   <div id="person-photo" style="margin-right: 219px;">
+                        <!--<div id="gallery">-->
+                            <!--<a>-->
+                                <!--<img id="img-avatar-add" name="fileChecker" src="" class="person-picture  picshow" alt="">-->
+                            <!--</a>-->
+                        <!--</div>-->
+                        <!--<a class="cm-ok-btn pretender">-->
+                            <!--<input name="upLoadFile" accept="image/*" type="file" id="p-file" class="p-file common-input mr">-->
+                        <!--</a>-->
+                        <!--<input type="hidden" name="avatar" id="add-avatar" value="">-->
+                       <form id= "avatarUploadForm"  enctype="multipart/form-data">
+                           <input type="hidden" name="avatar" id="avatar" value=""/>
+                           <div class="avatar-upload">
+                               <a class="avatar-selectedImg" id="avatar-selectedImg" href="javascript:void(0);">
+                                   <img class="avatar-img" id="avatar-img" src="../../img/touxiang.jpg">
+                               </a>
+                               <div class="progress" style="height: 6px;margin-bottom:3px" >
+                                   <div class="progress-bar progress-bar-success" role="progressbar"
+                                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"
+                                        style="width: 0%;">
+                                   </div>
+                               </div>
+                               <label class="cm-upload-btn" for="inputImage" title="Upload image file">
+                                   <input type="file" class="sr-only" id="inputImage" name="imageUpload" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                                   <span id="avatar-btn" class="upload-text">选择头像</span>
+                               </label>
+                           </div>
+                       </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>所属单位：</td>
+                <td>
+                   <%=orgName%>
+                </td>
+            </tr>
+            <tr>
+                <td>身份证号码：</td>
+                <td>
+
+                    <input id="cid" name="cid" class="common-input w260px validate" type="text" data-options="required:true,invalidMessage:'请输入有效的15或18位身份证号码',validType:'isChineseID'"  placeholder="有效的15或18位身份证号码" minlength="15" maxlength="18" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\W/g,'')}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>联系电话：</td>
+                <td>
+                    <input id="phone" name="phone" class="common-input w260px validate"  data-options="required:true,invalidMessage:'请输入正确的手机号码',validType:'isCellphone'" type="text" placeholder="请输入手机号码" maxlength="11" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>性别：</td>
+                <td>
+                    <select name="sex" id="sex" class="common-select" >
+			          <option value="1">男</option>
+			          <option value="2">女</option>
+			        </select>
+                </td>
+                <td>出生日期：</td>
+                <td>
+                    <input class="w260px common-input validate" name="birth" data-options="required:true"   value="" type="text" readonly="readonly" tabindex="-1" />
+                </td>
+            </tr>
+            <tr>
+                <td>职务：</td>
+                <td>
+                   <dict dict-id="post" dict-name="post"  dict-type="select" dict-root="FLDZWDM" class="dict" empty="false"></dict>
+                </td>
+                <td>通讯地址：</td>
+                <td>
+                    <input class="w260px common-input" name="address"  value="" type="text"  />
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+</form>

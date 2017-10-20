@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统模块管理</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/sys.css">
+</head>
+<body>
+    <ul id="module-tree" class="ztree query-block"></ul>
+    <div id="module-tip">
+        <div class="module-default">
+        </div>
+        <p>该模块暂无数据</p>
+    </div>
+    <div id="module-content" class="module-content hide">
+        <form id="add-form" style="margin: 0 15px;">
+            <div id="main-rights">
+                <div class="new-color-bar">
+                    <span class="title"><span class="add-module hide">新增</span><span class="edit-module hide">修改</span>系统模块信息</span>
+                    <div class="load-module bar-btn-div">
+                        <b class="cm-add-btn hide0 inline-block{parentId}" id="add-same-btn"></b>
+                        <b class="cm-add-btn" id="add-lower-btn"></b>
+                        <b class="cm-edit-btn" id="edit-btn"></b>
+                        <b class="cm-remove-btn" id="delete-btn"></b>
+                    </div>
+                    <div class="add-module edit-module bar-btn-div hide">
+                        <b class="cm-save-btn" id="save-add-btn"></b>
+                        <b class="cm-save-btn" id="save-save-btn"></b>
+                        <b class="cm-close-btn" id="save-return-btn"></b>
+                    </div>
+                </div>
+                <table id="sys-module-table" class="typical-tb" cellpadding="3">
+                    <tr>
+                        <td><span class="add-module edit-module orangered">★ </span><u class="p-mod">模块</u><u class="c-mod">页面</u>标题：</td><td><input id="title" name="title" value="{title}" type="text" class="common-input w260px validate" placeholder="请输入中文" data-options="required:true"/></td>
+                        <td>启用标志：</td>
+                        <td>
+                            <dict dict-type="select" dict-root="sfdm" id="open-flag" dict-name="openFlag" empty="false"></dict>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="add-module edit-module orangered">★ </span><u class="p-mod">模块</u><u class="c-mod">页面</u>描述：</td>
+                        <td colspan="3">
+                            <input name="description" value="{description}" class="common-input w260px mol-des validate" placeholder="请输入中文" data-options="required:true"/>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><span class="add-module edit-module orangered">★ </span><u class="p-mod">模块</u><u class="c-mod">页面</u>代号：</td><td><input id="moduleNo" name="moduleNo" class="p-mod common-input w260px validate" type="text" value="{moduleNo}" placeholder="只能输入字母、数字、中划线及下划线" data-options="required:true,validType:'letter'"/><input id="resourceStr" name="resourceStr" value="{operateNo}" type="text" class="c-mod common-input validate" placeholder="只能输入字母、数字、中划线及下划线" data-options="required:true,validType:'letter'"></td>
+                        <td>顺序：</td><td><input name="sort" value="{sort}" type="text" class="common-input w260px"></td>
+                    </tr>
+                    <tr>
+                        <td>超链接：</td><td id="url-col"><input name="url" value="{url}" type="text" class="common-input w260px"></td>
+                        <td class="default-into"></span>默认进入：</td>
+                        <td class="default-into"><input name="defaultInto" type="text" class="common-input w260px" value="{defaultInto}"></td>
+                    </tr>
+                    <tr class="hide" >
+                        <td>父模块主键ID：</td><td colspan="3"><input name="parentId" value="{moduleId}" type="text" class="common-input w260px" id="parent-id"></td>
+                    </tr>
+                    <tr class="hide">
+                        <td>ID</td><td colspan="3"><input name="permissionId" value="{permissionId}" type="text" class="common-input w260px"></td>
+                        <td>ID</td><td colspan="3"><input name="permisResId" value="{permisResId}" type="text" class="common-input w260px"></td>
+                        <td>ID</td><td colspan="3"><input name="rootId" value="{rootId}" type="text" class="common-input w260px"></td>
+                        <td>ID</td><td colspan="3"><input name="resourceId" value="{resourceId}" type="text" class="common-input w260px"></td>
+                        <td>ID</td><td colspan="3"><input name="moduleId" value="{moduleId}" type="text" class="common-input w260px"></td>
+                    </tr>
+                </table>
+            </div>
+            <table id="sub-rights-table" class="typical-tb hide" cellpadding="3">
+                <thead>
+                <tr>
+                    <td colspan="4"><span class="load-module">子权限：</span><span class="add-module edit-module hide">添加子权限<i id="sub-rights-plus" class="icon-plus"></i></span></td>
+                </tr>
+                </thead>
+                <tbody tpsource="#sub-rights"></tbody>
+            </table>
+        </form>
+    </div>
+</body>
+<script type="text/template" id="sub-rights">
+    <tr>
+        <td><span class="add-module edit-module orangered">★ </span>子权限描述：</td><td><input type="text" class="common-input w260px" value="{permissionDescription}" name="descriptionArray"></td><td><span class="add-module edit-module orangered">★ </span>子权限代号：</td><td><input type="text" class="common-input" value="{operateNo}" name="resourceArray"><i class="add-module edit-module icon-remove sub-rights-remove"></i></td>
+    </tr>
+</script>
+<script src="../../js/base.js"></script>
+<script src="../../js/sys.js"></script>
+<script>typeof sysXtmkglHtml=='function' && sysXtmkglHtml()</script>
+</html>

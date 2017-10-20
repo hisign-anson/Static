@@ -1,0 +1,60 @@
+<form class="query-block"  id="query-condition">
+    <div class="query-block-row">
+        <div class="fl qc-group-l">
+            <span class="qc-label-xl">警号：</span>
+            <input class="common-input" id="repayAmount" type="text">
+        </div>
+        <div class="fl qc-group-l">
+            <span class="qc-label-xl">姓名：</span>
+            <input class="common-input" id="name" type="text">
+        </div>
+    </div>
+    <div class="query-block-row">
+        <div class="fl qc-group-l">
+            <span class="qc-label-xl">单位：</span>
+            <div class="dict-opener">
+                <input class="common-input" id="unit" type="text">
+                <i id="chooseUint" class="icon-list cur-p button steelblue" title="单位" dict-value="CFMC"></i>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="query-widget-wrap">
+        <hr class="cm-dash ">
+        <p class="query-reset ">
+            <button id="resetBtn" class="cm-reset-btn">重 置</button>
+            <button id="queryBtn" class="cm-query-btn">查 询</button>
+        </p>
+    </div>
+</form>
+<div id="userTableResult" class="query-result">
+    <div class="new-color-bar">
+        <i class="icon-search fs14 mr10"></i>
+        <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
+        <!--<div class="bar-btn-div">-->
+        <!--<b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>-->
+        <!--</div>-->
+    </div>
+    <div class="div-table-wrap">
+        <table id="userTable" class="userList-table typical-tb">
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll"></th>
+                <th>序号</th>
+                <th>成员姓名</th>
+                <th>警号</th>
+                <th>联系方式</th>
+                <th>所在单位</th>
+                <th>职位</th>
+                <th>用户状态</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="paging"></div>
+</div>
+<div class="form-btn-block">
+    <button id="cancelBtn" class="cm-cancel-btn">取 消</button>
+    <button id="saveStaffBtn" class="cm-save-btn">添 加</button>
+</div>

@@ -1,0 +1,16 @@
+<%_.each(data, function(item){%>
+<tr>
+    <td><%=item.rownum%></td>
+    <td><a class="link-text"><%=item.caseId%></a></td>
+    <td><%=item.caseName%></td>
+    <td><%=item.caseType%></td>
+    <td><%=item.caseStatus%></td>
+    <td><%=item.caseKindle%></td>
+    <td><%=item.caseContent%></td>
+    <td><%=item.casePlace%></td>
+    <td><%=item.caseStaff%></td>
+    <td>
+        <a class="into-delete icon-delete" id="<%=item.id%>" title="移除案件"></a>
+    </td>
+</tr>
+<%})%>

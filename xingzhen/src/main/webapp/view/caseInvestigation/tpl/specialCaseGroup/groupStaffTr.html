@@ -1,0 +1,16 @@
+<%_.each(data, function(item){%>
+<tr>
+    <!--<td><input type="radio"></td>-->
+    <td><%=item.rownum%></td>
+    <td><%=item.userName%></td>
+    <td><%=item.userId%></td>
+    <td><%=item.userPhone%></td>
+    <td><%=item.userUnit%></td>
+    <td><%=item.userPost%></td>
+    <td><%=item.userStatus%></td>
+    <td>
+        <a class="into-delete icon-delete" id="<%=item.id%>" title="移除成员"></a>
+
+    </td>
+</tr>
+<%})%>

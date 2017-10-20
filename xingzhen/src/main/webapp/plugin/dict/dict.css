@@ -1,0 +1,204 @@
+@charset "utf-8";
+.treeButton {
+    margin-left: 2px;
+    cursor: pointer;
+    background-image: url("./img/dictselect.gif");
+    background-repeat: no-repeat;
+}
+
+#dictTreeDiv{
+    display: inline-block;
+    width: 50%;
+}
+#commonDict{
+    float: right;
+    width: 50%;
+    /*padding: 20px!important;*/
+}
+#dictFrame > div {
+    padding: 10px 10px 5px 10px;
+}
+#dictFrame > div button {
+    margin-right: 5px;
+    padding: 1px 5px;
+    font-size: 13px;
+}
+#dictFrame .commonDictPos{
+    width:300px;
+    position:absolute;
+    right:20px;
+    top:70px;
+    overflow:auto;
+    overflow-x: hidden;
+}
+
+#dictFrame .dictOk{
+    width:60px;
+    position:absolute;
+    right:90px;
+}
+
+#dictFrame .dictEmpty{
+    width:60px;
+    position:absolute;
+    right:20px;
+}
+
+#dictFrame .dictQueryHeader {
+    height: 25px;
+    font-weight: normal;
+    display: none;
+    background-color: #dcf0ff;
+    font-size: 15px!important;
+}
+
+#dictFrame .dictButton{
+    margin-top:5px;
+    padding-top:2px;
+    border:1px solid #8e9fb0;
+    /*background:url(../webapp/scripts/dict/img/input_button.gif) no-repeat!important;*/
+    background: #f0f0f0;
+    height: 20px;
+    width:60px;
+    border-radius: 3px;
+}
+#dictFrame .borderLine{
+    border-bottom: 1px dashed #8e9fb0;
+}
+div#rMenu {
+    position:absolute;
+    visibility:hidden;
+    top:0;
+    background-color: #EEEEEE;
+    text-align: left;
+    padding: 2px;
+}
+div#rMenu ul li{
+    margin: 1px;
+    cursor: pointer;
+    list-style: none outside none;
+    background-color: #ffffff;
+    height: 20px;
+    padding: 2px 4px;
+    width: 70px;
+}
+#intoMgn,
+#outMgn{
+    margin-left: 10px;
+}
+#opertionSpan{
+    display: none;
+    text-align: left;
+    margin-top: 5px;
+    padding-left: 5px;
+    height: 20px;
+    line-height: 20px;
+    background-color: rgb(238, 238, 238);
+}
+.dict-title {
+    position: absolute;
+    top: 26px;
+    left: 4px;
+    right: 8px;
+    z-index: 1;
+    background: #ffffff;
+    border-bottom: 1px dashed #ccc;
+    box-shadow: 0px 1px 4px #ccc;
+}
+.dict-title .dict-style {
+    padding-left: 5px;
+    border-left: 3px solid steelblue;
+    margin-right: 15px;
+    font-size: 13px;
+}
+.dict-title .dict-opt{
+    display: inline-block;
+    /*margin-left: 125px;*/
+    text-align: right;
+    background: #ffffff;
+}
+.dict-title .dict-opt>b{
+    height: 25px;
+    line-height: 25px;
+}
+.dict-title .cm-save-btn:before{
+    content: '';
+}
+.dict-title .cm-save-btn:after{
+    content: '确 定';
+}
+.dict-title .cm-cancel-btn:before{
+    content: '';
+}
+.dict-title .cm-cancel-btn:after{
+    content: '选择空值';
+}
+.dict-title .dict-select {
+    height: 25px;
+    border-radius: 3px;
+}
+#selectedValues{
+    margin: 0;
+    width: 410px;
+    height: 27px;
+    vertical-align: middle;
+    border-radius: 3px;
+}
+#multipleDiv .clean-selected-dict{
+    margin-left: 5px;
+    color: #4682b4;
+    font-weight: bold;
+}
+#dictList{
+    text-align: left;
+    padding-top: 5px;
+}
+#commonDict .dict-mng{
+    margin-left: 10px;
+    font-size:12px;
+    color:gray;
+    cursor:pointer;
+}
+.steelblue{
+    color: steelblue;
+}
+.dict-add-group:hover,
+.dict-add-common:hover{
+    color: red;
+}
+#m_rename:hover,
+#m_del:hover{
+    background: #D1E7F6;
+}
+#dictQueryDiv table{
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+#dictQueryDiv .icon-share-alt{
+    transform: rotate(180deg);
+    color: #79A8D0;
+}
+#dictQueryDiv table th{
+    text-align: center;
+}
+#dictQueryDiv table td{
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+}
+/* 用到ztree的模块自定义了ztree的样式，会影响字典的ztree样式，故重新设置*/
+#dictFrame .ztree *{
+    font-size: 13px!important;
+    font-family: "微软雅黑"!important;
+}
+#dictFrame .ztree li,
+#dictFrame .ztree li a.curSelectedNode,
+#dictFrame .ztree li span{
+    line-height: 14px!important;
+}
+#dictFrame .ztree li a.curSelectedNode{
+    height: 16px!important;
+}
+.dict-title b:hover{
+    transform: none;
+}

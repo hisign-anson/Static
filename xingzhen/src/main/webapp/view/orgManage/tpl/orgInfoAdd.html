@@ -1,0 +1,40 @@
+<form id="add-form">
+    <input name="superId" id="superId" value="<%=superId%>" type="hidden" />
+    <div id="main-rights">
+        <div class="new-color-bar">
+            <span class="title">新增单位信息
+            </span>
+            <div class="bar-btn-div">
+                <b class="cm-save-btn" id="save-save-btn"></b>
+                <b class="cm-close-btn" id="save-return-btn"></b>
+            </div>
+        </div>
+        <table id="sys-org-table" class="typical-tb sys-table" >
+            <tr>
+                <td>单位名称：</td>
+                <td>
+                    <input id="orgName" name="orgName"  type="text" class="common-input w260px validate" placeholder="请输入中文" data-options="required:true" maxlength="20"/>
+                </td>
+                <td>启用标志：</td>
+                <td>
+                    <select name="status" id="status" class="common-select" >
+			          <option value="0">正常</option>
+			          <option value="1">删除</option>
+			        </select>
+                </td>
+            </tr>
+            <tr>
+                <td>单位简称：</td>
+                <td colspan="3">
+                    <input name="shortenedName"  class="common-input w260px mol-des" placeholder="请输入中文" maxlength="20" />
+                </td>
+            </tr>
+            <tr>
+                <td>单位编号：</td>
+                <td colspan="3">
+                    <input id="orgCode" name="orgCode" class="common-input w260px" type="text"  placeholder="只能输入字母、数字、中划线及下划线" maxlength="20" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

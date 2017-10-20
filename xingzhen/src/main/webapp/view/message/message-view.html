@@ -1,0 +1,142 @@
+<div id="msg-view-div">
+    <ul class="msg-tab">
+        <li paramTab="znxx" class="znxxNum znxx hide">站内消息<em></em></li>
+        <li paramTab="dx" class="dxNum dx hide">短信<em></em></li>
+    </ul>
+    <div id="znxx" class="msg-view-res-div znxx hide">
+        <table id="msg-view-table" class="typical-tb" cellpadding="3">
+            <thead>
+            <th width="5%">序号</th>
+            <th width="50%">内容</th>
+            <th width="15%">发送时间</th>
+            <th width="10%">发送人</th>
+            <th width="10%">接收人</th>
+            <th width="10%">状态</th>
+            <!--<th width="5%">反馈</th>-->
+            </thead>
+            <tbody tpsource="#msg-view-list"></tbody>
+        </table>
+    </div>
+    <div id="dx" class="msg-view-res-div hide dx">
+        <table id="dx-msg-view-table" class="typical-tb" cellpadding="3">
+            <thead>
+            <th width="5%">序号</th>
+            <th width="35%">内容</th>
+            <th width="20%">发送时间</th>
+            <th width="15%">发送人</th>
+            <th width="25%">接收人</th>
+            </thead>
+            <tbody tpsource="#dx-msg-view-list"></tbody>
+        </table>
+    </div>
+    <div class="tcenter mt20">
+        <b class="cm-close-btn"></b>
+    </div>
+</div>
+<script type="text/template" id="msg-view-list">
+    <tr>
+        <td rowspan="{rowspan}">{$rownum}</td>
+        <td rowspan="{rowspan}" class="tleft">{content}</td>
+        <td rowspan="{rowspan}">{msgDateStrTxt}</td>
+        <td rowspan="{rowspan}">{senderName}</td>
+        {{receiverListFirst:#receiverListFirst}}
+    </tr>
+    {{receiverListSurplus:#receiverListSurplus}}
+</script>
+<script type="text/template" id="receiverListFirst">
+    <td>{receiverName}</td>
+    <td>{msgStateTxt}</td>
+    <!--<td>{fk}</td>-->
+</script>
+<script type="text/template" id="receiverListSurplus">
+    <tr>
+        <td>{receiverName}</td>
+        <td>{msgStateTxt}</td>
+        <!--<td>{fk}</td>-->
+    </tr>
+</script>
+<script type="text/template" id="dx-msg-view-list">
+    <tr>
+        <td>{rownum}</td>
+        <td class="tleft">{content}</td>
+        <td>{sendDateTxt}</td>
+        <td>{senderName}</td>
+        <td>
+            <!--{{receiverList:#{name}<br>#}}-->
+            {receiverName}（{receiverPhoneNo}）
+        </td>
+    </tr>
+</script>
+<script>
+    $style(top.path+'/dist/css/message.css');
+    var 
+            dxSearchAction = top.path + '/api/0/jsgl/note/note_list'; //短信查询action
+
+        //进入页面
+        function intoMessageView(win, attId, tslb, dxNum, znxxNum){
+            if(dxNum != ''){
+                $('.msg-tab li').removeClass('current');
+                $('li.dx').addClass('current');
+                $('.dxNum em').text(dxNum);
+                queryDxList(attId, tslb);
+                $('.dx').removeClass('hide');
+            }
+
+            if(znxxNum != ''){
+                $('.msg-tab li').removeClass('current');
+                $('li.znxx').addClass('current');
+                $('.znxxNum em').text(znxxNum);
+                queryZnxxList(attId, tslb);
+                $('.znxx').removeClass('hide');
+                if(dxNum != ''){
+                    $('div.dx').addClass('hide');
+                }
+            }
+
+
+            //查询站内消息
+            function queryZnxxList(attId, tslb){
+                $get(top.path + '/system/message/getZnxx', {attId:attId, tslb:tslb}, function(res){
+                    $('#msg-view-table tbody').template(res.data, function(item, i){
+                        item.receiverList.forEach(function(e){
+                            e.msgStateTxt = e.msgState == '1' ? '未读' : '已读';
+                        });
+                        item.receiverListFirst = item.receiverList[0];
+                        item.rowspan = item.receiverList.length;
+                        if(item.receiverList.length > 1){
+                            item.receiverListSurplus = item.receiverList.splice(1);
+                        }
+                        item.msgDateStrTxt = (new Date(item.msgDateStr)).format('YYYY年M月D日 hh:mm');
+                    });
+                }, false);
+            }
+            //查询短信消息
+            function queryDxList(attId, tslb){
+                $post(dxSearchAction, {attId:attId, tslb:tslb}, function(res){
+                    $('#dx-msg-view-table tbody').template(res.data, function(item){
+                        item.sendDateTxt = (new Date(item.sendDate)).format('YYYY年M月D日 hh:mm');
+                    });
+                }, true);
+            }
+
+            //tab点击切换
+            $('ul.msg-tab>li').on('click', function(){
+                var li = $('ul.msg-tab>li');
+                var tab = this.getAttribute('paramTab');
+                li.removeClass('current');
+                $(this).addClass('current');
+                $('.msg-view-res-div').addClass('hide');
+                $('div#'+tab).removeClass('hide');
+                if(tab == 'znxx'){
+                    queryZnxxList(attId, tslb);
+                }else{
+                    queryDxList(attId, tslb);
+                }
+            });
+
+            //关闭窗口
+            $('.cm-close-btn').on('click', function(){
+                win.$close();
+            });
+        }
+</script>

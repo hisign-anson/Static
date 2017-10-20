@@ -1,0 +1,54 @@
+<form class="form-container">
+    <div class="form-content-block">
+        <div class="form-body wrapper-fluid">
+            <div class="form-row block-row">
+                <!--<div class="equal-col-4">-->
+                <!--<span class="common-field">归档状态：</span>-->
+                <!--<div class="radio">-->
+                <!--<label class="input-label">-->
+                <!--<input type="radio" name="blankRadio" id="blankRadio0" value="option0">是-->
+                <!--</label>-->
+                <!--<label class="input-label">-->
+                <!--<input type="radio" name="blankRadio" id="blankRadio1" value="option1">否-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="equal-col-6">
+                    <span class="common-field">归档人姓名：</span>
+                    <input class="common-input" id="archiveName" type="text">
+                </div>
+                <div class="equal-col-6">
+                    <span class="common-field">警号：</span>
+                    <input class="common-input" id="policeId" type="text">
+                </div>
+            </div>
+            <div class="form-row block-row">
+                <div class="equal-col-6">
+                    <span class="common-field">单位：</span>
+                    <select class="common-select" id="policeUint">
+                        <option value="">单位1</option>
+                        <option value="">单位2</option>
+                    </select>
+                </div>
+                <div class="equal-col-6">
+                    <span class="common-field">归档时间：</span>
+                    <input class="common-input" id="archiveDate" type="text">
+                </div>
+            </div>
+            <div class="form-row block-row">
+                <div class="equal-col-6">
+                    <span class="common-field">归档原因：</span>
+                    <select class="common-select" id="archiveReason">
+                        <option value="">归档原因1</option>
+                        <option value="">归档原因2</option>
+                        <option value="">归档原因3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="form-btn-block">
+    <button id="cancelBtn" class="cm-cancel-btn">取消</button>
+    <button id="saveBtn" class="cm-save-btn">保 存</button>
+</div>

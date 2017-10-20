@@ -1,0 +1,150 @@
+<div class="group-list">
+    <div class="new-color-bar head">
+        <i class="left-line"></i><span>专案组列表</span>
+        <span id="toggleGroup" class="glyphicons glyphicons-show_lines"></span>
+    </div>
+    <div class="group-content">
+        <div class="all-group-list">
+            <h5 class="choose-group">请选择专案组</h5>
+            <ul class="hide">
+                <li>专案组A</li>
+                <li>专案组B</li>
+                <li>专案组C</li>
+                <li>专案组D</li>
+                <li>专案组E</li>
+                <li>专案组F</li>
+                <li>专案组G</li>
+                <li>专案组H</li>
+            </ul>
+        </div>
+        <div class="common-group">
+            <h5 class="common-group-tile icon-star">常用专案组</h5>
+            <ul class="common-group-ul">
+                <li>专案组A</li>
+                <li>专案组B</li>
+                <li>专案组C</li>
+                <li>专案组D</li>
+                <li>专案组E</li>
+                <li>专案组F</li>
+            </ul>
+        </div>
+        <div class="group-btn-div hide">
+            <b class="into-communication orange-btn">
+                <span class="icon-communication"></span>
+                <span class="title-icon">进入专案组讨论</span>
+            </b>
+            <b class="into-print orange-btn">
+                <span class="icon-print"></span>
+                <span class="title-icon">打印</span>
+            </b>
+            <!--<b class="into-report orange-btn">-->
+                <!--<span class="icon-file"></span>-->
+                <!--<span class="title-icon">生成案件侦办过程报告</span>-->
+            <!--</b>-->
+            <b class="into-taskList orange-btn">
+                <span class="icon-list-alt"></span>
+                <span class="title-icon">任务清单</span>
+            </b>
+            <b class="into-relationCase orange-btn">
+                <span class="icon-link"></span>
+                <span class="title-icon">涉及案件</span>
+            </b>
+        </div>
+    </div>
+</div>
+<div class="map-list">
+    <div class="new-color-bar head">
+        <i class="left-line"></i><span>线索脉路图</span>
+        <div class="bar-btn-div">
+            <b id="fullscreenBtn" class="octicon octicon-screen-full orange-btn"></b>
+            <b id="searchBtn" class="icon-search orange-btn"> 查询条件</b>
+
+        </div>
+    </div>
+    <div class="map-content">
+        <!--<div class="map-btn-div">-->
+        <!--<span title="全屏">-->
+        <!--<a href="#" class=" btn btn-sm request-fullscreen" data-toggle="button"  id="fullscreenBtn">-->
+        <!--<span class="octicon octicon-screen-full fs18"></span>-->
+        <!--</a>-->
+        <!--</span>-->
+        <!--<span>-->
+        <!--<a href="#" class="btn btn-sm" data-toggle="button">-->
+        <!--<span class="icon-show-btn fs18"></span>-->
+        <!--</a>-->
+        <!--</span>-->
+        <!--</div>-->
+        <div class="map-svg" id="mapSvg">
+            <iframe id="mapSvgFrame" class="tab-content-frame" src=""></iframe>
+        </div>
+
+        <div class="map-condition hide" id="mapConditionWrap">
+            <h5 class="title">
+                《白三入室盗窃谋杀案》
+            </h5>
+            <form class="form-content-block">
+                <div class="qc-group-l">
+                    <span class="qc-label-m">根据专案组小组过滤：</span>
+                    <select class="common-select">
+                        <option>专案组A1</option>
+                        <option>专案组B1</option>
+                        <option>专案组C1</option>
+                        <option>专案组D1</option>
+                        <option>专案组E1</option>
+                        <option>专案组F1</option>
+                        <option>专案组G1</option>
+                        <option>专案组H1</option>
+                    </select>
+                </div>
+                <div class="qc-group-l">
+                    <span class="qc-label-m">根据下发人过滤：</span>
+                    <select class="common-select">
+                        <option value="老王">老王</option>
+                        <option value="李四">李四</option>
+                        <option value="张三">张三</option>
+                        <option value="王五">王五</option>
+                        <option value="李狗蛋">李狗蛋</option>
+                        <option value="李二狗">李二狗</option>
+                    </select>
+                </div>
+                <div class="qc-group-l">
+                    <span class="qc-label-m">根据反馈人过滤：</span>
+                    <select class="common-select">
+                        <option value="老王">老王</option>
+                        <option value="李四">李四</option>
+                        <option value="张三">张三</option>
+                        <option value="王五">王五</option>
+                        <option value="李狗蛋">李狗蛋</option>
+                        <option value="李二狗">李二狗</option>
+                    </select>
+                </div>
+                <div class="qc-group-l">
+                    <span class="qc-label-m">是否隐藏：</span>
+                    <span class="option" id="changeYesOrNo">
+                        <u class="default active" val="0">是</u>
+                        <u class="" val="1">否</u>
+                    </span>
+                </div>
+                <div class="qc-group-l">
+                    <span class="qc-label-m">根据时间段过滤：</span>
+                    <input class="common-input" type="text" id="dateRange">
+                    <input type="hidden" name="startTime" id="startTime">
+                    <input type="hidden" name="endTime" id="endTime">
+                </div>
+                <div class="qc-group-l">
+                    <span class="qc-label-m">任务状态：</span>
+                    <span class="option" id="changeTaskStatus">
+                        <u class="active default " val="">全部</u>
+                        <u class="" val="0">已反馈</u>
+                        <u class="" val="1">未反馈</u>
+                        <u class="" val="2">超期</u>
+                    </span>
+                </div>
+            </form>
+            <div class="form-btn-block">
+                <button id="closeBtn" class="cm-close-btn">关 闭</button>
+                <button id="okBtn" class="cm-ok-btn">确 定</button>
+            </div>
+        </div>
+    </div>
+</div>

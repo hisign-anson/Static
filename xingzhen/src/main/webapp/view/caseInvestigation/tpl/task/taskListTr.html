@@ -1,0 +1,22 @@
+<%_.each(data, function(item){%>
+<tr>
+    <td><%=item.rownum%></td>
+    <td><%=item.taskName%></td>
+    <td><a class="link-text"><%=item.taskContent%></a></td>
+    <td><%=item.belongGroup%></td>
+    <td><%=item.createName%></td>
+    <td><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd')%></td>
+    <td><%=item.recipient%></td>
+    <td><%=item.taskStatus%></td>
+    <td><%=item.recipientStatus%></td>
+    <td><%=rangeUtil.formatDate(item.submitDate,'yyyy-MM-dd')%></td>
+    <td><%=rangeUtil.formatDate(item.actualSubmitDate,'yyyy-MM-dd')%></td>
+    <td>
+        <a class="into-urge icon-urge" id="<%=item.id%>" title="催办"></a>
+        <a class="into-delete icon-delete" id="<%=item.id%>" title="删除"></a>
+        <a class="into-feedback icon-feedback" id="<%=item.id%>" title="反馈"></a>
+        <a class="into-transfer icon-transfer" id="<%=item.id%>" title="移交"></a>
+    </td>
+</tr>
+<%})%>
+

@@ -1,0 +1,58 @@
+<form id="add-form">
+    <input name="parentKey" id="parentKey" value="<%=parentKey%>" type="hidden" />
+    <input name="dictLevel" id="dictLevel" value="<%=dictLevel%>" type="hidden" />
+    <div id="main-rights">
+        <div class="new-color-bar">
+            <span class="title">新增字典
+            </span>
+            <div class="bar-btn-div">
+                <b class="cm-save-btn" id="save-save-btn"></b>
+                <b class="cm-close-btn" id="save-return-btn"></b>
+            </div>
+        </div>
+        <table id="sys-dict-table" class="typical-tb sys-table" >
+            <tr>
+                <td>字典名称：</td>
+                <td>
+                    <input id="value" name="value"  type="text" class="common-input w260px validate" placeholder="请输入字典名称" data-options="required:true" maxlength="20"/>
+                </td>
+                <td>字典值：</td>
+                <td>
+                    <input id="key" name="key"  type="text" class="common-input w260px validate" placeholder="请输入字典值" data-options="required:true" maxlength="5"/>
+                </td>
+                <td>上级节点：</td>
+                <td>
+                 <%if(pName && pName !=''){%>
+                   <%=pName%>
+                 <%}else{%>
+                                                 根节点
+                 <%}%>
+                </td>
+            </tr>
+            <tr>
+                
+                <td>字典类型：</td>
+                <td>
+                    <input  id="root" name="root" value="<%=rootKey%>" type="text" class="common-input w260px validate" maxlength="10"/>
+                </td>
+                
+                <td>启用标志：</td>
+                <td>
+                    <select name="openFlag" id="openFlag" class="common-select" >
+                      <option value="1">启用</option>
+			          <option value="0">禁用</option>
+			        </select>
+                </td>
+                <td>顺序：</td>
+                <td>
+                    <input id="sort" name="sort" value="0" type="text" class="common-input w260px" maxlength="5"/>
+                </td>
+                
+            </tr>
+            <tr>
+                <td>备注：</td>
+                <td colspan="5"><textarea name="remark" id="remark"  class="w708px common-textarea"></textarea></td>
+            </tr>
+        </table>
+    </div>
+</form>

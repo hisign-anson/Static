@@ -1,0 +1,50 @@
+<%_.each(data, function(item){%>
+<tr>
+       <td><%=item.rownum%></td>
+       <td><%=item.subject%></td>
+        <%if(item.type==3){%>
+        <td><%=item.content%></td>
+        <%}%>
+        <%if(item.type==1){%>
+        <td>
+            <%if(item.msgLevel==1){%>
+            普通
+            <%}else if (item.msgLevel==2){%>
+            加急
+            <%}else if (item.msgLevel==3){%>
+            特急
+            <%}%>
+        </td>
+        <%}%>
+        <%if(item.type==1){%>
+        <td><%=item.rev3%></td>
+        <%}else{%>
+        <td><%=item.createDate%></td>
+        <%}%>
+        <%if(item.type==1){%>
+        <td><%=item.rev2%></td>
+        <%}else{%>
+        <%}%>
+        <%if(item.type==1){%>
+        <td>
+          <%if(item.rev4==0){%>
+                       未发布
+          <%}else if (item.rev4==1){%>
+                        已发布
+         <%}%>
+        </td>
+        <%}%>
+       <td>
+
+           <%if(item.rev4==0){%>
+             <a class="into-edit icon-edit-btn" id="<%=item.id%>" title="修改"></a>&nbsp;
+             <a class="delete-for icon-remove-btn" id="<%=item.id%>" noticeNo="<%=item.id%>" data-subject="<%=item.subject%>" title="删除"></a>
+           <%}else{%>
+              <a class="into-view icon-show-btn" id="<%=item.id%>" title="预览"></a>&nbsp;
+           <%}%>
+
+       </td>
+ </tr>
+
+<%})%>
+

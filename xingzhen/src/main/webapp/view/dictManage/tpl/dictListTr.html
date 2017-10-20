@@ -1,0 +1,22 @@
+<%_.each(data, function(item){%>
+<tr>
+       <td><%=item.rownum%></td>
+       <td><%=item.value%></td>
+       <td><%=item.key%></td>
+       <td><%=data.pName%></td>
+       <td><%=item.py%></td>
+       <td><%=item.sort%></td>
+       <td>
+       <%if(item.openFlag ==1){%>
+                         启用
+       <%}else{%>
+                         禁用
+       <%}%>
+       </td>
+       <td><%=item.remark%></td>
+       <td>
+           <a class="into-edit icon-edit-btn" id="<%=item.id%>"  dictValue="<%=item.value%>" dictkey="<%=item.key%>"  parentKey="<%=item.parentKey%>" title="修改"></a>
+           <a class="delete-for icon-remove-btn" id="<%=item.id%>" dictValue="<%=item.value%>"  dictkey="<%=item.key%>" parentKey="<%=item.parentKey%>" title="删除"></a><br>
+       </td>
+ </tr>
+<%})%>

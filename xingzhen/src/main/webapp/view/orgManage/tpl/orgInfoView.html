@@ -1,0 +1,41 @@
+<form id="add-form">
+    <input name="orgId" id="orgId" value="<%=data.orgId%>" type="hidden" />
+    <input name="pinyin" value="<%=data.pinyin%>" type="hidden" />
+    <input name="firstLetter" value="<%=data.firstLetter%>" type="hidden" />
+    <input name="superId" id="superId" value="<%=data.superId%>" type="hidden" />
+    <input name="orgName" id="orgName" value="<%=data.orgName%>" type="hidden" />
+    <div id="main-rights">
+        <div class="new-color-bar">
+            <span class="title"><%=data.orgName%>单位信息
+            </span>
+            <div class="load-module bar-btn-div">
+                <b class="cm-add-btn hide0 inline-block<%=data.superId%>" id="add-same-btn"></b>
+                <b class="cm-add-btn" id="add-lower-btn"></b>
+                <b class="cm-edit-btn" id="edit-btn"></b>
+                <b class="cm-remove-btn" id="delete-btn"></b>
+            </div>
+        </div>
+        <table id="sys-org-table" class="typical-tb sys-table" >
+            <tr>
+                <td>组织机构名称：</td>
+                <td><%=data.orgName%></td>
+                <td>启用标志：</td>
+                <td>
+                    <%if(data.status==0){%>
+                                                        正常
+                    <%}else{%>
+                                                       删除
+                    <%}%>
+                </td>
+            </tr>
+            <tr>
+                <td>单位简称：</td>
+                <td colspan="3"><%=data.shortenedName%></td>
+            </tr>
+            <tr>
+                <td>单位编号：</td>
+                <td colspan="3"><%=data.orgCode%></td>
+            </tr>
+        </table>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+<%_.each(data, function(item){%>
+<tr>
+       <td><%=item.rownum%></td>
+       <td><%=item.userName%></td>
+       <td>
+       <%if(item.sex == 1){%>
+                      男
+       <%}else{%>
+                          女
+       <%}%>
+       </td>
+       <td><%=item.cid%></td>
+       <td><%=item.phone%></td>
+       <td> 
+       <%=item.post%>
+       <!-- <%if(item.post == "01"){%>
+                       科长
+       <%}else if(item.post == "02"){%>
+                       处长 
+       <%}else{%>
+                       局长
+       <%}%> -->
+       </td>
+       <td><%=item.orgName%></td>
+       <td>
+           <a class="into-edit icon-edit-btn" id="<%=item.userId%>" orgId="<%=item.orgId%>" orgName="<%=item.orgName%>" title="修改"></a>
+           <a class="delete-for icon-remove-btn" id="<%=item.userId%>" userName="<%=item.userName%>"  orgId="<%=item.orgId%>" orgName="<%=item.orgName%>" title="删除"></a><br>
+       </td>
+ </tr>
+<%})%>

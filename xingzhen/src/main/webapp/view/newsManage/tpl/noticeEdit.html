@@ -1,0 +1,114 @@
+<form id="notice-editor-form" >
+	<input type="hidden" name="id" value="<%=data.id%>">
+	<input type="hidden" name="type" id="type" value="<%=data.type%>"/>
+    <h4 class="form-section-title">
+        <%if(data.type==1){%>
+        <span>修改通知/公告</span>
+        <%}else if(data.type==2){%>
+        <span>修改规章制度</span>
+        <%}else if(data.type==3){%>
+        <span>修改下载表格</span>
+        <%}%>
+    </h4>
+    <div class="query-block-row">
+        <label class="common-field">标题：</label>
+        <input id='subject' name="subject" type="text" class="common-input field-valid" data-options="required:true" value="<%=data.subject%>" style="width:305px;">
+    </div>
+    <%if(data.type==1){%>
+
+        <div class="query-block-row">
+            <label class="common-field">等级：</label>
+            <input id='msgLevel' name="msgLevel" type="hidden" value="<%=data.msgLevel%>">
+            <span class="option date-select" id="changeGrade">
+                <%if(data.msgLevel==1){%>
+	                <u val="1" class="active default">普通</u>
+	            <%}else{%>
+	                <u val="1">普通</u>
+	            <%}%>
+	            <%if(data.msgLevel==2){%>
+	                <u val="2" class="active default">加急</u>
+	            <%}else{%>
+	                <u val="2">加急</u>
+	            <%}%>
+	            <%if(data.msgLevel==3){%>
+	                <u val="3" class="active default">特急</u>
+	            <%}else{%>
+	                <u val="3">特急</u>
+	            <%}%>
+            </span>
+        </div>
+
+        <div class="query-block-row">
+            <label class="common-field">接收人：</label>
+            <input id='tslb' name="tslb" type="hidden" value="<%=data.tslb%>">
+            <span class="option date-select" id="changeReceiver" >
+                <%if(data.tslb==2){%>
+	                <u val="2" class="active" >本单位</u>
+	            <%}else{%>
+	                <u val="2" >本单位</u>
+	            <%}%>
+	            
+	            <%if(data.tslb==1){%>
+	                <u val="1" class="active" >所有单位</u>
+	            <%}else{%>
+	                <u val="1">所有单位</u>
+	            <%}%>
+	            
+	            <%if(data.tslb==3){%>
+	                <u val="3" class="active" msgVest='<%=data.msgVest%>'>指定单位</u>
+	            <%}else{%>
+	                <u val="3">指定单位</u>
+	            <%}%>
+	            
+	            <%if(data.tslb==4){%>
+	                <u val="4" class="active" msgVest='<%=data.msgVest%>'>本单位人员</u>
+	            <%}else{%>
+	                <u val="4">本单位人员</u>
+	            <%}%>
+               
+            </span>
+        </div>
+        <div class="query-block-row" id="chooseUnitBox">
+            <div id="chooseUnit" class="ml130 hide chooseUnit">
+            </div>
+            <div id="chooseEmployee" class="ml130 hide chooseEmployee">
+            </div>
+        </div>
+    <%}%>
+    
+    <%if(data.type==1||data.type==2){%>
+    <div class="query-block-row">
+        <label class="common-field">内容：</label>
+        <div style="margin:10px 0px;display: inline-block">
+            <div id="my_editor" style="height:400px">
+                <%=data.content%>
+            </div>
+        </div>
+    </div>
+    <%}%>
+    <div class="progress" style="height: 5px;margin:8px 0 -2px 130px;width:305px;" >
+         <span class="progress-bar progress-bar-success " role="progressbar"
+               aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"
+               style="width: 0%;height:5px">
+        </span>
+    </div>
+    <div class="query-block-row">
+        <label class="common-field">附件：</label>
+        <button id="upload-btn" class="btn  btn-file icon-paper-clip">上传附件</button>
+        <%if(data.type==1||data.type==2){%>
+        <input type="hidden" id="rev1" name="rev1" value=""/>
+        <input type="text" class="common-input" readonly="readonly" name="file" id="file" value="<%=data.rev1%>"/>
+        <%}else if(data.type==3){%>
+        <input type="hidden" id="rev1" name="rev1" value=""/>
+        <input type="text" class="common-input field-valid" readonly="readonly" name="file" id="file" value="<%=data.content%>" data-options="required:true"/>
+        <%}%>
+        <a class="delete-for icon-remove-btn" id="del_file" applyNo="" title="删除"></a>
+    </div>
+</form>
+<p class="tcenter mt40">
+    <b id="save-btn" class="cm-save-btn mr15" rev4="0" ></b>
+    <%if(data.type==1){%>
+       <b id="save-push-btn" class="cm-save-no-content-btn mr15" rev4="1"> 保存并发布</b>
+    <%}%>
+    <b id="cancel-btn" class="cm-close-btn"></b>
+</p>

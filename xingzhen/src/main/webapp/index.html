@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <title>广州刑侦案件侦破指挥协作平台</title>
+    <link rel="stylesheet" href="font/hisign-font/hisignfont.css">
+    <link rel="stylesheet" href="plugin/bootstrap/bootstrap.3.31.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="plugin/jquery-2.2.0.js"></script>
+    <script src="plugin/bootstrap/bootstrap.3.31.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/login.js"></script>
+</head>
+<body>
+<div id="header" class="header">
+    <div class="header-content">
+        <div class="logo">
+            <img src="img/national-emblem.png" />
+            <div class="title stp-hide2">
+                <h1 style="">刑侦案件侦破指挥协作平台</h1>
+            </div>
+        </div>
+        <div class="icon">
+
+        </div>
+    </div>
+</div>
+
+<div id="login_content" class="login-content">
+    <div class="slick-container">
+        <div class="slider">
+            <div><img src="img/pic_01.jpg" /></div>
+        </div>
+
+        <div id="login_container" class="login-container" style="display: none">
+            <h1 class="form-title">用户登录</h1>
+            <div class="form-container">
+                <form id="login-form">
+                    <div class="form-row username">
+                        <input id="username" name="userName" type="text" placeholder="请输入用户名" required="required" autocomplete="on" autofocus="autofocus"/>
+                    </div>
+                    <div class="form-row password">
+                        <input id="password" name="userPwd" type="password" placeholder="请输入密码" required="required"/>
+                    </div>
+                    <input type="button" class="btn-login" value="立即登录">
+                </form>
+                <!--<p class="register">还没有账号? <a href="register.html#register">立即注册</a></p>-->
+            </div>
+        </div>
+
+        <div id="browser_download" class="browser-download" style="display: none">
+            <h2> 平台不支持IE及其它浏览器，请先下载、安装Google浏览器并使用Google浏览器登录平台。</h2>
+            <p>平台仅支持Google版本浏览器，为了达到最佳的使用效果，<a id="download-link" href="resource/ChromeStandaloneSetup44_20150831.exe">点击下载Google浏览器</a> </p>
+        </div>
+    </div>
+</div>
+
+<div id="footer" class="footer">
+    <div class="footer-content">
+        <img src="img/hisign.png" />
+        <p>北京海鑫科金高科技股份有限公司<br />版权所有 &copy; 海鑫科金 2016-2020 All rights reserved.</p>
+    </div>
+</div>
+<p id="error"><i class="icon-warning-sign"></i> <span></span></p>
+</body>
+
+</html>

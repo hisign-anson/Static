@@ -1,0 +1,639 @@
+@font-face {
+  font-family: 'hisignfont';
+  src:  url('hisignfont.eot?vtlpvi');
+  src:  url('hisignfont.eot?vtlpvi#iefix') format('embedded-opentype'),
+  url('hisignfont.ttf?vtlpvi') format('truetype'),
+  url('hisignfont.woff?vtlpvi') format('woff'),
+  url('hisignfont.svg?vtlpvi#hisignfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="h-"], [class*=" h-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'hisignfont' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.h-accepted:before {
+  content: "\e900";
+}
+.h-add:before {
+  content: "\e901";
+}
+.h-alarm:before {
+  content: "\e902";
+}
+.h-all:before {
+  content: "\e903";
+}
+.h-all-scene:before {
+  content: "\e904";
+}
+.h-appoint-surveyor:before {
+  content: "\e905";
+}
+.h-arrows-down:before {
+  content: "\e906";
+}
+.h-arrows-left:before {
+  content: "\e907";
+}
+.h-arrows-right:before {
+  content: "\e908";
+}
+.h-arrows-up:before {
+  content: "\e909";
+}
+.h-authorize:before {
+  content: "\e90a";
+}
+.h-building-requisition:before {
+  content: "\e90b";
+}
+.h-calendar:before {
+  content: "\e90c";
+}
+.h-camera:before {
+  content: "\e90d";
+}
+.h-cancel:before {
+  content: "\e90e";
+}
+.h-cartridge:before {
+  content: "\e90f";
+}
+.h-circulation-registration:before {
+  content: "\e910";
+}
+.h-collapse:before {
+  content: "\e911";
+}
+.h-config:before {
+  content: "\e912";
+}
+.h-confirm:before {
+  content: "\e913";
+}
+.h-copy:before {
+  content: "\e914";
+}
+.h-custom-columns:before {
+  content: "\e915";
+}
+.h-defective-scene:before {
+  content: "\e916";
+}
+.h-delete:before {
+  content: "\e917";
+}
+.h-detail:before {
+  content: "\e918";
+}
+.h-display:before {
+  content: "\e919";
+}
+.h-dna:before {
+  content: "\e91a";
+}
+.h-document:before {
+  content: "\e91b";
+}
+.h-documentation:before {
+  content: "\e91c";
+}
+.h-download:before {
+  content: "\e91d";
+}
+.h-draw:before {
+  content: "\e91e";
+}
+.h-edit:before {
+  content: "\e91f";
+}
+.h-electronic:before {
+  content: "\e920";
+}
+.h-evidence-scene:before {
+  content: "\e921";
+}
+.h-exit:before {
+  content: "\e922";
+}
+.h-expand:before {
+  content: "\e923";
+}
+.h-export:before {
+  content: "\e924";
+}
+.h-failure:before {
+  content: "\e925";
+}
+.h-favorites:before {
+  content: "\e926";
+}
+.h-favorites-o:before {
+  content: "\e927";
+}
+.h-file:before {
+  content: "\e928";
+}
+.h-file-excel:before {
+  content: "\e929";
+}
+.h-file-text:before {
+  content: "\e92a";
+}
+.h-file-word:before {
+  content: "\e92b";
+}
+.h-fingerprint:before {
+  content: "\e92c";
+}
+.h-fingerprint-edit:before {
+  content: "\e92d";
+}
+.h-flag:before {
+  content: "\e92e";
+}
+.h-flag-o:before {
+  content: "\e92f";
+}
+.h-focus-scene:before {
+  content: "\e930";
+}
+.h-folder-close:before {
+  content: "\e931";
+}
+.h-folder-open:before {
+  content: "\e932";
+}
+.h-footprint:before {
+  content: "\e933";
+}
+.h-goto:before {
+  content: "\e934";
+}
+.h-handprint:before {
+  content: "\e935";
+}
+.h-home:before {
+  content: "\e936";
+}
+.h-identification-center:before {
+  content: "\e937";
+}
+.h-image:before {
+  content: "\e938";
+}
+.h-import:before {
+  content: "\e939";
+}
+.h-import-batch:before {
+  content: "\e93a";
+}
+.h-information:before {
+  content: "\e93b";
+}
+.h-inspection-record:before {
+  content: "\e93c";
+}
+.h-inspection-record-edit:before {
+  content: "\e93d";
+}
+.h-issued:before {
+  content: "\e93e";
+}
+.h-link:before {
+  content: "\e93f";
+}
+.h-location:before {
+  content: "\e940";
+}
+.h-location-map:before {
+  content: "\e941";
+}
+.h-log:before {
+  content: "\e942";
+}
+.h-mark-scene:before {
+  content: "\e943";
+}
+.h-means:before {
+  content: "\e944";
+}
+.h-menu:before {
+  content: "\e945";
+}
+.h-message:before {
+  content: "\e946";
+}
+.h-move-down:before {
+  content: "\e947";
+}
+.h-move-up:before {
+  content: "\e948";
+}
+.h-no-accept:before {
+  content: "\e949";
+}
+.h-no-witness:before {
+  content: "\e94a";
+}
+.h-not-accepted:before {
+  content: "\e94b";
+}
+.h-not-associated-event:before {
+  content: "\e94c";
+}
+.h-not-associated-scene:before {
+  content: "\e94d";
+}
+.h-notes-scene:before {
+  content: "\e94e";
+}
+.h-panel-color:before {
+  content: "\e94f";
+}
+.h-panel-max:before {
+  content: "\e950";
+}
+.h-panel-min:before {
+  content: "\e951";
+}
+.h-panel-restore:before {
+  content: "\e952";
+}
+.h-pending:before {
+  content: "\e953";
+}
+.h-personal-center:before {
+  content: "\e954";
+}
+.h-personnel-info:before {
+  content: "\e955";
+}
+.h-photo:before {
+  content: "\e956";
+}
+.h-physics-and-chemistry:before {
+  content: "\e957";
+}
+.h-play:before {
+  content: "\e958";
+}
+.h-poison:before {
+  content: "\e959";
+}
+.h-pre-acceptance:before {
+  content: "\e95a";
+}
+.h-print:before {
+  content: "\e95b";
+}
+.h-proxy:before {
+  content: "\e95c";
+}
+.h-re-registration:before {
+  content: "\e95d";
+}
+.h-register:before {
+  content: "\e95e";
+}
+.h-registration-form:before {
+  content: "\e95f";
+}
+.h-reject:before {
+  content: "\e960";
+}
+.h-release:before {
+  content: "\e961";
+}
+.h-request:before {
+  content: "\e962";
+}
+.h-reset:before {
+  content: "\e963";
+}
+.h-result:before {
+  content: "\e964";
+}
+.h-sample:before {
+  content: "\e965";
+}
+.h-sample-identification-result:before {
+  content: "\e966";
+}
+.h-sample-save:before {
+  content: "\e967";
+}
+.h-save:before {
+  content: "\e968";
+}
+.h-scene-info:before {
+  content: "\e969";
+}
+.h-search:before {
+  content: "\e96a";
+}
+.h-search-list:before {
+  content: "\e96b";
+}
+.h-selected-all:before {
+  content: "\e96c";
+}
+.h-setting:before {
+  content: "\e96d";
+}
+.h-sign:before {
+  content: "\e96e";
+}
+.h-skin:before {
+  content: "\e96f";
+}
+.h-statistics:before {
+  content: "\e970";
+}
+.h-stock-in-acceptance:before {
+  content: "\e971";
+}
+.h-stock-in-requisition:before {
+  content: "\e972";
+}
+.h-stock-in-verify:before {
+  content: "\e973";
+}
+.h-stock-out-acceptance:before {
+  content: "\e974";
+}
+.h-stock-out-requisition:before {
+  content: "\e975";
+}
+.h-stock-out-verify:before {
+  content: "\e976";
+}
+.h-submitted-scene:before {
+  content: "\e977";
+}
+.h-subsequent:before {
+  content: "\e978";
+}
+.h-task:before {
+  content: "\e979";
+}
+.h-tel:before {
+  content: "\e97a";
+}
+.h-temp-scene:before {
+  content: "\e97b";
+}
+.h-templet:before {
+  content: "\e97c";
+}
+.h-time-point:before {
+  content: "\e97d";
+}
+.h-timeline:before {
+  content: "\e97e";
+}
+.h-tools:before {
+  content: "\e97f";
+}
+.h-tower:before {
+  content: "\e980";
+}
+.h-unqualified-scene:before {
+  content: "\e981";
+}
+.h-upload:before {
+  content: "\e982";
+}
+.h-upload-attachment:before {
+  content: "\e983";
+}
+.h-users:before {
+  content: "\e984";
+}
+.h-verify:before {
+  content: "\e985";
+}
+.h-video:before {
+  content: "\e986";
+}
+.h-wifi:before {
+  content: "\e987";
+}
+.h-witness:before {
+  content: "\e988";
+}
+.h-work:before {
+  content: "\e989";
+}
+.h-workplace:before {
+  content: "\e98a";
+}
+.h-lifecycle:before {
+  content: "\e98b";
+}
+.h-sketch:before {
+  content: "\e98c";
+}
+.h-filter:before {
+  content: "\e98d";
+}
+.h-screenshot:before {
+  content: "\e98e";
+}
+.h-face-recognition:before {
+  content: "\e98f";
+}
+.h-iris-recognition:before {
+  content: "\e990";
+}
+.h-id-card:before {
+  content: "\e991";
+}
+.h-scan:before {
+  content: "\e992";
+}
+.h-sort-asc:before {
+  content: "\e993";
+}
+.h-sort-desc:before {
+  content: "\e994";
+}
+.h-deposit:before {
+  content: "\e995";
+}
+.h-create-db:before {
+  content: "\e996";
+}
+.h-voice:before {
+  content: "\e997";
+}
+.h-bar-code:before {
+  content: "\e998";
+}
+.h-heart:before {
+  content: "\e999";
+}
+.h-workload:before {
+  content: "\e99a";
+}
+.h-ranking:before {
+  content: "\e99b";
+}
+.h-steps:before {
+  content: "\e99c";
+}
+.h-distance:before {
+  content: "\e99d";
+}
+.h-calories:before {
+  content: "\e99e";
+}
+.h-help:before {
+  content: "\e99f";
+}
+.h-keyboard:before {
+  content: "\e9a0";
+}
+.h-backspace:before {
+  content: "\e9a1";
+}
+.h-more:before {
+  content: "\e9a2";
+}
+.h-qrcode:before {
+  content: "\e9a3";
+}
+.h-loading:before {
+  content: "\e9a4";
+}
+.h-loading2:before {
+  content: "\e9a5";
+}
+.h-loading3:before {
+  content: "\e9a6";
+}
+.h-key:before {
+  content: "\e9a7";
+}
+.h-lock:before {
+  content: "\e9a8";
+}
+.h-unlocked:before {
+  content: "\e9a9";
+}
+.h-sun:before {
+  content: "\e9aa";
+}
+.h-contrast:before {
+  content: "\e9ab";
+}
+.h-brightness-contrast:before {
+  content: "\e9ac";
+}
+.h-credit-card:before {
+  content: "\e9ad";
+}
+.h-tree:before {
+  content: "\e9ae";
+}
+.h-building:before {
+  content: "\e9af";
+}
+.h-badge:before {
+  content: "\e9b0";
+}
+.h-heartbeat:before {
+  content: "\e9b1";
+}
+.h-zip:before {
+  content: "\e9b2";
+}
+.h-pdf:before {
+  content: "\e9b3";
+}
+.h-audio:before {
+  content: "\e9b4";
+}
+.h-picture:before {
+  content: "\e9b5";
+}
+.h-pie:before {
+  content: "\e9b6";
+}
+.h-cubes:before {
+  content: "\e9b7";
+}
+.h-whitelist:before {
+  content: "\e9b8";
+}
+.h-blacklist:before {
+  content: "\e9b9";
+}
+.h-revert:before {
+  content: "\e9ba";
+}
+.h-warning:before {
+  content: "\e9bb";
+}
+.h-approve:before {
+  content: "\e9bc";
+}
+.h-plug-ins:before {
+  content: "\e9bd";
+}
+.h-layout:before {
+  content: "\e9be";
+}
+.h-close:before {
+  content: "\e9bf";
+}
+.h-info:before {
+  content: "\e9c0";
+}
+.h-list:before {
+  content: "\e9c1";
+}
+.h-redo:before {
+  content: "\e9c2";
+}
+.h-laptop:before {
+  content: "\e9c3";
+}
+.h-tablet:before {
+  content: "\e9c4";
+}
+.h-flag-checkered:before {
+  content: "\e9c5";
+}
+.h-rectangle:before {
+  content: "\e9c6";
+}
+.h-ellipse:before {
+  content: "\e9c7";
+}
+.h-arrowhead:before {
+  content: "\e9c8";
+}
+.h-characters:before {
+  content: "\e9c9";
+}
+.h-angle:before {
+  content: "\e9ca";
+}
+.h-mobile:before {
+  content: "\e9cb";
+}
+
