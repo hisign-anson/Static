@@ -50,7 +50,7 @@ define(['underscore',
             $(".choose-group").empty().text(thisValue);
 
             $(".group-btn-div").removeClass("hide");
-            $("#mapSvgFrame").attr("src", "/view/commandCooperationManage/graph/d3graphView.html");
+            $("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html");
             $("#mapSvgFrame").css({
                 "width": "100%",
                 "height": "calc(100vh - 75px)"

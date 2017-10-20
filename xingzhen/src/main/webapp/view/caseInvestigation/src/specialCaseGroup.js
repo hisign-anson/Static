@@ -151,7 +151,7 @@ define(['underscore',
                 // $("#mainDiv").empty().html(_.template(chatPageTpl));
                 $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
                 // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
-                var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="510px"></iframe>';
+                var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
                 $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
             });
             //嵌套表格的实现--------------------------------------------------------------------------------------------

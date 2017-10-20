@@ -5,16 +5,16 @@ require(['src/fstPage-MoreClick.js'],function(fstPageMoreClick){
             fstPageMoreClick.showAchieveMoreList();
             break;
         case "通知公告":
-            fstPageMoreClick.showAchieveMoreList();
+            fstPageMoreClick.showNewsMoreList();
             break;
         case "信息提醒":
-            fstPageMoreClick.showAchieveMoreList();
+            fstPageMoreClick.showMessageMoreList();
             break;
         case "知识库":
-            fstPageMoreClick.showAchieveMoreList();
+            fstPageMoreClick.showKnowledgeMoreList();
             break;
         case "系统工具下载":
-            fstPageMoreClick.showAchieveMoreList();
+            fstPageMoreClick.showToolMoreList();
             break;
 
     }
