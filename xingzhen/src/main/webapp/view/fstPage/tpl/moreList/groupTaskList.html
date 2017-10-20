@@ -1,0 +1,35 @@
+<div id="taskListResult" class="query-result">
+    <!--<div class="new-color-bar">-->
+        <!--<i class="icon-search fs14 mr10"></i>-->
+        <!--<span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>-->
+    <!--</div>-->
+    <div class="div-table-wrap">
+        <table id="taskListTable" class="taskList-table typical-tb">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>任务编号</th>
+                <th>任务内容</th>
+                <th>任务名称</th>
+                <th>下发人</th>
+                <th>下发时间</th>
+                <th>接收人</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%_.each(data, function(item){%>
+            <tr>
+                <td><%=item.rownum%></td>
+                <td><%=item.taskId%></td>
+                <td><a class="link-text into-feedback"><%=item.taskContent%></a></td>
+                <td><%=item.taskName%></td>
+                <td><%=item.creator%></td>
+                <td><%=item.time%></td>
+                <td><%=item.receiver%></td>
+            </tr>
+            <%})%>
+            </tbody>
+        </table>
+    </div>
+    <div class="paging"></div>
+</div>
