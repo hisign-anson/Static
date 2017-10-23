@@ -8,6 +8,8 @@ var fullPanelUtils = {
                 the.siblings().add(the.siblings()).addClass('hidden');
 
                 topBody.animate({opacity: 0}, 10, function () {
+                    $(".full-actived").addClass("hide");
+
                     //避免引发重绘
                     window._cancelGlobalReFixTbTime = new Date().getTime();
                     $('body').removeClass('full-mode-ovh');
@@ -26,6 +28,9 @@ var fullPanelUtils = {
             } else {
                 the.siblings().add(the.siblings()).addClass('hidden');
                 topBody.animate({opacity: 0}, 10, function () {
+                    //显示脉络图小图标
+                    $(".full-actived").removeClass("hide");
+
                     //避免引发重绘
                     window._cancelGlobalReFixTbTime = new Date().getTime();
                     $('body').addClass('full-mode-ovh');

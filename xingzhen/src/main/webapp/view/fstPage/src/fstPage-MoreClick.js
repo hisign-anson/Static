@@ -81,7 +81,7 @@ define([
 
         showNewsMoreList: function () {
             _self = this;
-            $("#achieveListTable tbody").empty().html(_.template(achieveMoreListTrTpl));
+            $("#newsListTable tbody").empty().html(_.template(commonMoreListTrTpl));
 
         },
         showMessageMoreList: function () {
@@ -90,7 +90,7 @@ define([
         },
         showKnowledgeMoreList: function () {
             _self = this;
-            $("#achieveListTable tbody").empty().html(_.template(achieveMoreListTrTpl));
+            $("#knowledgeListTable tbody").empty().html(_.template(commonMoreListTrTpl));
 
         },
         showToolMoreList: function () {

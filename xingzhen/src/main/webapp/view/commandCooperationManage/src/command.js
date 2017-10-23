@@ -48,7 +48,6 @@ define(['underscore',
             console.info(obj.index());
             var thisValue = obj.text();
             $(".choose-group").empty().text(thisValue);
-
             $(".group-btn-div").removeClass("hide");
             $("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html");
             $("#mapSvgFrame").css({
@@ -82,35 +81,42 @@ define(['underscore',
             var conditionDiv = $("#mapConditionWrap");
             conditionDiv.add(conditionDiv.children()).addClass("hide");
             $("#searchBtn").on("click", function () {
-                conditionDiv.add(conditionDiv.children()).removeClass("hide");
-                conditionDiv.removeClass("hide")
-                //     .animate({
-                //     width:"340px"
-                // },"fast");
-                $("#dateRange").daterangepicker({
-                    separator: ' 至 ',
-                    showWeekNumbers: true,
-                    pickTime: true
-                }, function (start, end, label) {
-                    $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
-                    $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
-                });
-                selectUtils.selectTextOption("#changeYesOrNo", "#taskType");
-                selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
-                $("#closeBtn").on("click", function () {
+                if(conditionDiv.is(":visible")){
                     conditionDiv.add(conditionDiv.children()).addClass("hide");
                     conditionDiv.addClass("hide")
+
+                } else {
+                    conditionDiv.add(conditionDiv.children()).removeClass("hide");
+                    conditionDiv.removeClass("hide");
                     //     .animate({
-                    //     width:"0"
+                    //     width:"340px"
                     // },"fast");
-                });
+                    $("#dateRange").daterangepicker({
+                        separator: ' 至 ',
+                        showWeekNumbers: true,
+                        pickTime: true
+                    }, function (start, end, label) {
+                        $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
+                        $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
+                    });
+                    selectUtils.selectTextOption("#changeYesOrNo", "#taskType");
+                    selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
+                    $("#closeBtn").on("click", function () {
+                        conditionDiv.add(conditionDiv.children()).addClass("hide");
+                        conditionDiv.addClass("hide")
+                        //     .animate({
+                        //     width:"0"
+                        // },"fast");
+                    });
+                }
             });
         },
         intoCommunication:function () {
             _self = this;
-            $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-            var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-            $("#taskListDiv .panel-container").css("margin","0px").empty().html(_.template(iframe));
+            // $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+            // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
+            // $("#taskListDiv .panel-container").css("margin","0px").empty().html(_.template(iframe));
+            window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
         },
         intoTaskList:function () {
             _self = this;
