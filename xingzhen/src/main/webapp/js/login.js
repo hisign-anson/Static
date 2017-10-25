@@ -71,7 +71,10 @@ $(document).ready(function () {
 
     function login() {
         localData.set('login-username', $('#username').val());
-        $post(window.servicePath + '/sys/login', $('#login-form').serializeObject(), function (res) {
+        // var param = {
+        //     ""
+        // }
+        $post(window.servicePath + '/sys/login', $('#login-form').serialize(), function (res) {
             var errorMsg = res.msg;
             if (errorMsg) {
                 $('#error span').text(errorMsg);
