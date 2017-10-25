@@ -71,40 +71,41 @@ $(document).ready(function () {
 
     function login() {
         localData.set('login-username', $('#username').val());
-        // var param = {
-        //     ""
-        // }
-        $post(window.servicePath + '/sys/login', $('#login-form').serialize(), function (res) {
-            var errorMsg = res.msg;
-            if (errorMsg) {
-                $('#error span').text(errorMsg);
-                $('#error').fadeIn();
-                setTimeout(function () {
-                    $('#error').fadeOut();
-                }, 5000);
-            } else {
-                localData.set('username', $('#username').val());
-                localData.set('password', $('#password').val());
-                localData.set('localDataDate', new Date().getTime());
-                localData.set('path', window.path);
-                // localData.set('servicePath', "");
-                localData.set('servicePath', window.servicePath);
-                localData.set('servicePath_xz', window.servicePath_xz);
-                localData.set('token', res.data.token);
-                localData.set('limits', res.data.limits);
-                localData.set('currentUser', res.data.currentUser);
-                localData.set('roles', res.data.roles);
-                localData.set('ftpServer', res.data.ftpServer);
-                var isGeneralRole = 0;
-                if (res.data.roles.length == 1) {
-                    if (res.data.roles[0].ROLE_NO == '099') { //是单位普通权限
-                        isGeneralRole = 1
+        $.ajax({
+            url: window.servicePath + '/sys/login',
+            type:"post",
+            contentType:"application/x-www-form-urlencoded",
+            data:$('#login-form').serialize(),
+            success: function (res) {
+                var errorMsg = res.msg;
+                if (errorMsg) {
+                    $('#error span').text(errorMsg);
+                    $('#error').fadeIn();
+                    setTimeout(function () {
+                        $('#error').fadeOut();
+                    }, 5000);
+                } else {
+                    localData.set('username', $('#username').val());
+                    localData.set('password', $('#password').val());
+                    localData.set('localDataDate', new Date().getTime());
+                    localData.set('path', window.path);
+                    localData.set('servicePath', window.servicePath);
+                    localData.set('servicePath_xz', window.servicePath_xz);
+                    localData.set('token', res.data.token);
+                    localData.set('limits', res.data.limits);
+                    localData.set('currentUser', res.data.currentUser);
+                    localData.set('roles', res.data.roles);
+                    localData.set('ftpServer', res.data.ftpServer);
+                    var isGeneralRole = 0;
+                    if (res.data.roles.length == 1) {
+                        if (res.data.roles[0].ROLE_NO == '099') { //是单位普通权限
+                            isGeneralRole = 1
+                        }
                     }
-                }
-                localData.set('isGeneralRole', isGeneralRole);
-                location.replace(window.path + '/view/home.html?version=' + config.version);
-            }
-        }, true);
+                    localData.set('isGeneralRole', isGeneralRole);
+                    location.replace(window.path + '/view/home.html?version=' + config.version);
+                }            }
+        });
     }
 
     checkBrowser();

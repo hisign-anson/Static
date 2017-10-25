@@ -18,8 +18,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            <state relative-caret-position="285">
+              <caret line="43" column="80" lean-forward="false" selection-start-line="43" selection-start-column="80" selection-end-line="43" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -28,8 +28,8 @@
       <file leaf-file-name="login.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-58">
-              <caret line="76" column="70" lean-forward="false" selection-start-line="76" selection-start-column="70" selection-end-line="76" selection-end-column="70" />
+            <state relative-caret-position="1023">
+              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -111,7 +111,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>attr</find>
       <find>taskid7</find>
       <find>nodes</find>
       <find>nodetext</find>
@@ -141,6 +140,7 @@
       <find>serializa</find>
       <find>serializab</find>
       <find>serialize</find>
+      <find>$ajax</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -176,7 +176,6 @@
         <option value="$PROJECT_DIR$/view/fstPage/toolDownloadMoreList.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskEdit.html" />
         <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/commonMoreListTr.html" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/view/fstPage/knowledgeMoreList.html" />
         <option value="$PROJECT_DIR$/view/fstPage/newsMoreList.html" />
         <option value="$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js" />
@@ -204,6 +203,7 @@
         <option value="$PROJECT_DIR$/view/fstPage/tpl/todoList.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/task.js" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/login.js" />
       </list>
     </option>
@@ -526,12 +526,12 @@
       <workItem from="1508467076101" duration="19960000" />
       <workItem from="1508722386875" duration="17960000" />
       <workItem from="1508807889289" duration="24085000" />
-      <workItem from="1508894332684" duration="1260000" />
+      <workItem from="1508894332684" duration="3475000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88720000" />
+    <option name="totallyTimeSpent" value="90935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -920,14 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/utility.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
@@ -936,10 +928,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="43" column="80" lean-forward="false" selection-start-line="43" selection-start-column="80" selection-end-line="43" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="76" column="70" lean-forward="false" selection-start-line="76" selection-start-column="70" selection-end-line="76" selection-end-column="70" />
+        <state relative-caret-position="1023">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding />
         </state>
       </provider>
