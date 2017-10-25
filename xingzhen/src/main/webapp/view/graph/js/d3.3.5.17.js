@@ -800,7 +800,7 @@
   d3_selectionPrototype.append = function(name) {
     name = d3_selection_creator(name);
     return this.select(function() {
-      return this.appendChild(name.apply(this, arguments));
+        return this.appendChild(name.apply(this, arguments));
     });
   };
   function d3_selection_creator(name) {

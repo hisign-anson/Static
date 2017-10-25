@@ -2153,6 +2153,7 @@ require.config({
     paths: {
         "text": "/plugin/text",
         "underscore": "/plugin/underscore",
-        "echarts": "/plugin/echarts/echarts3110"
+        "echarts": "/plugin/echarts/echarts3110",
+        "d3": "/plugin/d3/d3.3.5.17"
     }
 });

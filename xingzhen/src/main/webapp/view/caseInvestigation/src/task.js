@@ -14,8 +14,8 @@ define(['underscore',
     return {
         showList: function () {
             _self = this;
-            //关闭没有关闭的弹框
-            dictOpener.closeOpenerDiv();
+            // //关闭没有关闭的弹框
+            // dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(taskListTpl, {ops: top.opsMap, status: status}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#confirmStatus");
@@ -27,13 +27,16 @@ define(['underscore',
                 dictOpener.openChooseDict($(this));
             });
             $("#chooseCreateName").on('click', function () {
-                dictOpener.openChooseDict($(this));
+                // dictOpener.openChooseDict($(this));
+                dictOpener.openUserChoosePort($(this));
             });
             $("#chooseRecipient").on('click', function () {
-                dictOpener.openChooseDict($(this));
+                // dictOpener.openChooseDict($(this));
+                dictOpener.openUserChoosePort($(this));
             });
             $("#chooseBelongUnit").on('click', function () {
-                dictOpener.openChooseDict($(this));
+                // dictOpener.openChooseDict($(this));
+                dictOpener.openUnitChoosePort($(this));
             });
             $("#createDate").daterangepicker({
                 separator: ' 至 ',
@@ -63,9 +66,11 @@ define(['underscore',
 
             $("#resetBtn").on("click",function () {
                 selectUtils.clearQueryValue();
+                return false;
             });
             $("#queryBtn").on("click",function () {
                 _self.queryList();
+                return false;
             });
             _self.queryList();
         },
@@ -120,15 +125,40 @@ define(['underscore',
                 fkstartTime:$.trim($("#fkstartTime").val()),
                 fkendTime:$.trim($("#fkendTime").val())
             });
-
             $('#taskListResult').pagingList({
                 action:top.servicePath_xz+'/task/getTaskPage',
                 jsonObj:param,
                 callback:function(data){
                     $("#taskListTable tbody").empty().html(_.template(taskListTrTpl, {data: data, ops: top.opsMap }));
                     $(".link-text").on("click",function () {
+                        _self.handleDetail($(this).attr('id'));
+                    });
+                    $(".into-urge").on("click",function () {
+                        _self.handleUrge();
+                    });
+                    $(".into-delete").on("click",function () {
+                        _self.handleDelete($(this).attr('id'),$(this).attr('taskNo'));
+                    });
+                    $(".into-feedback").on("click",function () {
+                        _self.handleFeedback();
+                    });
+                    $(".into-transfer").on("click", function () {
+                        var id=$(this).attr('id');
+                        var createname=$(this).attr('createname');
+                        var creator=$(this).attr('creator');
+                        var deparmentcode=$(this).attr('deparmentcode');
+                        _self.handleTransfer(id,createname,creator,deparmentcode);
+                    });
+                }
+            });
+        },
+        handleDetail:function (id) {
+            _self = this;
+            if (id) {
+                taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
+                    if (r.flag == 1) {
                         //判断是否任务是否反馈
-                        $("#mainDiv").empty().html(_.template(taskEditTpl));
+                        $("#mainDiv").empty().html(_.template(taskEditTpl,r));
                         //在反馈上追加任务
                         $(".into-appendTaskBtn").on("click",function () {
                             _self.showAdd();
@@ -144,21 +174,9 @@ define(['underscore',
                         $("#replenishTaskBtn").on("click",function () {
                             _self.showAdd();
                         });
-                    });
-                    $(".into-urge").on("click",function () {
-                        _self.handleUrge();
-                    });
-                    $(".into-delete").on("click",function () {
-
-                    });
-                    $(".into-feedback").on("click",function () {
-                        _self.handleFeedback();
-                    });
-                    $(".into-transfer").on("click", function () {
-                        _self.handleTransfer();
-                    });
-                }
-            });
+                    }
+                });
+            }
         },
         handleUrge:function () {
             _self = this;
@@ -179,6 +197,37 @@ define(['underscore',
                 }
             });
         },
+        handleDelete:function (id,taskNo) {
+            _self = this;
+            $confirm('确定删除任务【'+taskNo+'】吗？',function(bol){
+                if(bol){
+                    // $.ajax({
+                    //     url: top.servicePath_xz + '/task/deleteTaskById',
+                    //     type: "DELETE",
+                    //     contentType: "application/x-www-form-urlencoded",
+                    //     data: {id: id, userId: top.userId},
+                    //     success: function (r) {
+                    //         if(r.flag==1){
+                    //             toast('删除成功！',600,function(){
+                    //                 _self.showList();
+                    //             }).ok()
+                    //         }else{
+                    //             toast('删除失败！',600).err()
+                    //         }
+                    //     }
+                    // });
+                    taskAjax.deleteTaskById({id:id,userId:top.userId},function(r){
+                        if(r.flag==1){
+                            toast('删除成功！',600,function(){
+                                _self.showList();
+                            }).ok()
+                        }else{
+                            toast('删除失败！',600).err()
+                        }
+                    })
+                }
+            });
+        },
         handleFeedback:function () {
             _self = this;
             $("#mainDiv").empty().html(_.template(taskFeedbackTpl));
@@ -189,7 +238,7 @@ define(['underscore',
                 _self.showList();
             });
         },
-        handleTransfer:function () {
+        handleTransfer:function (id,createname,creator,deparmentcode) {
             _self = this;
             $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
             $("#userListDiv").on("click","#cancelBtn",function () {
@@ -208,8 +257,22 @@ define(['underscore',
                     checkbox.push($(e).val());
                 });
                 if (checkbox.length > 0) {
-                    //do something
-                    $("#userListDiv").$close();
+                    var param = {
+                        createname: createname,
+                        creator: creator,
+                        deparmentcode: deparmentcode,
+                        id: id,
+                        jsr: checkbox[0]
+                    };
+                    taskAjax.moveTask(param,function(r){
+                        if(r.flag==1){
+                            toast('移交成功！',600,function(){
+                                $("#userListDiv").$close();
+                            }).ok()
+                        }else{
+                            toast('移交失败！',600).err()
+                        }
+                    });
                 } else {
                     toast("请选择一个用户！", 600).warn()
                 }
@@ -225,7 +288,8 @@ define(['underscore',
                 dictOpener.openChooseDict($(this));
             });
             $("#chooseReceive").on('click', function () {
-                dictOpener.openChooseDict($(this));
+                // dictOpener.openChooseDict($(this));
+                dictOpener.openUserChoosePort($(this));
             });
             //绑定返回事件
             $("#cancelBtn").on("click",function () {
@@ -237,6 +301,7 @@ define(['underscore',
                     return false;
                 }
                 var param = $("#taskAddForm").serializeObject();
+                var jsr = $.trim($("#jsr").val()).split(",");
                 $.extend(param, {
                     creator: top.userId,
                     createname:top.trueName,
@@ -246,7 +311,9 @@ define(['underscore',
                     fkid: $.trim($("#fkid").val()),
                     taskName: $.trim($("#taskName").val()),
                     groupid: $.trim($("#groupid").val()),
-                    jsr: $.trim($("#jsr").val()),
+                    jsr: $("#jsr").attr("id"),
+                    jsrname: jsr[0],
+                    fqrLxfs: top.phone,
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
                     fkjzTime: $.trim($("#fkjzTime").val()),

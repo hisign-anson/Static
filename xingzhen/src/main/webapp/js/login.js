@@ -17,14 +17,6 @@ $(document).ready(function () {
         xmlReq.send(null);
     }
 
-    // function replaceLink(text) {
-    //     var uploadPath = '';
-    //     if(/uploadServer"?:"?([^",]+)/.test(text)){
-    //         uploadPath = RegExp['$1'];
-    //     }
-    //     document.getElementById('download-link').href = 'ChromeStandaloneSetup44_20150831.exe';
-    // }
-
     var slickColorAry = ['#045daf', '#1f837b'],
         docH = 600;
 
@@ -73,9 +65,9 @@ $(document).ready(function () {
         localData.set('login-username', $('#username').val());
         $.ajax({
             url: window.servicePath + '/sys/login',
-            type:"post",
-            contentType:"application/x-www-form-urlencoded",
-            data:$('#login-form').serialize(),
+            type: "post",
+            contentType: "application/x-www-form-urlencoded",
+            data: $('#login-form').serialize(),
             success: function (res) {
                 var errorMsg = res.msg;
                 if (errorMsg) {
@@ -104,7 +96,8 @@ $(document).ready(function () {
                     }
                     localData.set('isGeneralRole', isGeneralRole);
                     location.replace(window.path + '/view/home.html?version=' + config.version);
-                }            }
+                }
+            }
         });
     }
 

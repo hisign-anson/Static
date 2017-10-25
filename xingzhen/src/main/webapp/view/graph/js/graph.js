@@ -5,7 +5,6 @@ var img_w = 50,
     img_h = 60;
 var jsonContext, edges_line, edges_text, node_img, node_text;
 var jsonInitUrl = "huangshijinTest.json";
-// var jsonInitUrl = "http://192.168.1.142:8089/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=groupid1&startNodeType=groupid";
 
 var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
@@ -382,24 +381,77 @@ function addNode(nodeArrays, linkArrays) {
 updateGraphURL(jsonInitUrl);
 //根据链接更新
 function updateGraphURL(jsonUrl) {
+    d3.json(jsonUrl, function (error, json) {
+        if (error) {
+            return console.log(error);
+        }
+        updateGraphJSON(json);
+    });
+    // var param1 ={
+    //     limitLevel:20,
+    //     maxNode:50,
+    //     detail:false,
+    //     startNodeValue:"5BBD1241B23CDB7DE050A8C0520139C0",
+    //     startNodeType:"groupid"
+    // };
     // $.ajax({
-    //     async: false,
+    //     url: "/graph/getGraph",
     //     type: "GET",
-    //     dataType: 'jsonp',
-    //     jsonp: 'callback',
-    //     jsonpCallback: 'callbackfunction',
-    //     url: jsonUrl,
-    //     data: "",
+    //     async: false,
+    //     data: param1,
     //     timeout: 3000,
-    //     contentType: "application/json;utf-8",
     //     success: function(msg) {
     //         debugger
-            d3.json(jsonUrl, function (error, json) {
-                if (error) {
-                    return console.log(error);
-                }
-                updateGraphJSON(json);
-            });
+    //     },
+    //     error:function (msg) {
+    //         debugger
+    //
+    //     }
+    // });
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: '/sys/org/getOrgTreeListBySuperId',
+    //     dataType: "json",
+    //     contentType:"application/json; charset=utf-8",
+    //     headers: {
+    //         Accept: "*/*",
+    //         token: top.token
+    //     },
+    //     data: {superId: top.orgId},
+    //     success: function (data) {
+    //         debugger
+    //         callback(data)
+    //     },
+    //     error: function (msg) {
+    //         debugger
+    //
+    //     }
+    // });
+    // $.ajax({
+    //     url: "http://192.168.1.85:8089/getGraph",
+    //     type: "GET",
+    //     async: false,
+    //     // dataType: 'jsonp',
+    //     dataJson:"",
+    //     // jsonp: 'callback',
+    //     // jsonpCallback: 'callbackfunction',
+    //     crossDomain: true,
+    //     data: param,
+    //     timeout: 3000,
+    //     // contentType: "application/x-www-form-urlencoded",
+    //     success: function(msg) {
+    //         debugger
+    //         d3.json(msg, function (error, json) {
+    //             if (error) {
+    //                 return console.log(error);
+    //             }
+    //             updateGraphJSON(json);
+    //         });
+    //     },
+    //     error:function (msg) {
+    //         debugger
+    //
     //     }
     // });
 }
