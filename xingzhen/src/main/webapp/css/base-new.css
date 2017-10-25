@@ -3915,7 +3915,7 @@ body.sb-l-o .epanel.window.messager-window {
   width: 260px;
   height: 25px;
   border: 1px solid #ccc;
-  border-radius: 0px;
+  border-radius: 3px;
   padding-left: 5px;
   box-sizing: border-box;
 }
@@ -5119,7 +5119,7 @@ th.sort-desc {
   width: 260px;
   height: 25px;
   border: 1px solid #ccc;
-  border-radius: 0px;
+  border-radius: 3px;
   padding-left: 5px;
   box-sizing: border-box;
   width: 174px;

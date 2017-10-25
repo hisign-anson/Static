@@ -6,23 +6,24 @@
                 <span class="option" id="changeTaskType">
                     <u class="active default" val="">全部</u>
                     <u class="" val="1">本人接收</u>
-                    <u class="" val="0">本人下发</u>
+                    <u class="" val="2">本人下发</u>
                 </span>
+                <input type="hidden" id="taskType" />
             </div>
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">任务名称：</span>
-                <input class="common-input" type="text" id="taskName" name="">
+                <input class="common-input" type="text" id="taskName" name="" placeholder="请输入任务名称">
             </div>
         </div>
         <div class="query-block-row">
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">任务编号：</span>
-                <input class="common-input" type="text" id="taskId" name="">
+                <input class="common-input" type="text" id="taskNo" name="" placeholder="请输入任务编号">
             </div>
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">所属专案组：</span>
                 <div class="dict-opener">
-                    <input class="common-input" type="text" id="belongGroup" name="">
+                    <input class="common-input" type="text" id="groupid" name="" placeholder="请输入专案组名称">
                     <i id="chooseBelongGroup" class="icon-list cur-p button steelblue" title="所属专案组" dict-value="CFMC"></i>
                 </div>
             </div>
@@ -32,14 +33,14 @@
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">创建人：</span>
                 <div class="dict-opener">
-                    <input class="common-input" type="text" id="createName" name="">
+                    <input class="common-input" type="text" id="creator" name="" placeholder="请输入创建人姓名">
                     <i id="chooseCreateName" class="icon-list cur-p button steelblue" title="创建人" dict-value="CFMC"></i>
                 </div>
             </div>
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">接收人：</span>
                 <div class="dict-opener">
-                    <input class="common-input" type="text" id="recipient" name="">
+                    <input class="common-input" type="text" id="jsr" name="" placeholder="请输入接收人姓名">
                     <i id="chooseRecipient" class="icon-list cur-p button steelblue" title="接收人" dict-value="CFMC"></i>
                 </div>
             </div>
@@ -72,6 +73,7 @@
                         <u class="" val="1">未确认</u>
                         <u class="" val="2">已确认</u>
                     </span>
+                    <input type="hidden" id="fkqrzt" />
                 </div>
             </div>
             <div class="query-block-row">
@@ -80,26 +82,38 @@
                     <span class="option" id="changeTaskStatus">
                         <u class="active default" val="">全部</u>
                         <u class="" val="1">已反馈</u>
-                        <u class="" val="2">未反馈</u>
-                        <u class="" val="3">被移交</u>
-                        <u class="" val="4">超期</u>
+                        <u class="" val="0">未反馈</u>
+                        <u class="" val="1">被移交</u>
+                        <u class="" val="1">超期</u>
                     </span>
+                    <input type="hidden" id="overdue" />
+                    <input type="hidden" id="fkzt" />
+                    <input type="hidden" id="yjzt" />
                 </div>
             </div>
             <div class="query-block-row">
                 <div class="fl qc-group-l">
                     <span class="qc-label-xl">所属单位：</span>
                     <div class="dict-opener">
-                        <input class="common-input" type="text" id="belongUnit" name="">
+                        <input class="common-input" type="text" id="deparmentcode" name="" placeholder="请输入所属单位">
                         <i id="chooseBelongUnit" class="icon-list cur-p button steelblue" title="所属单位" dict-value="CFMC"></i>
                     </div>
                 </div>
-                <div class="fl qc-group-l">
+                <div class="fl qc-group-xxl">
                     <span class="qc-label-xl">要求反馈时间：</span>
                     <div class="text-time">
-                        <input class="common-input" type="text" id="submitDate" name="">
+                        <input class="cm-input date-range-picker" type="text" id="submitDate" placeholder="请输入要求反馈时间" readonly>
                         <i class="icon-calendar icon-time"></i>
+                        <input type="hidden" name="startTime" id="fkstartTime" />
+                        <input type="hidden" name="endTime" id="fkendTime" />
                     </div>
+                    <span class="option date-select" id="changeSubmitDate">
+                        <u class="default active">全部</u>
+                        <u>当天</u>
+                        <u>本周</u>
+                        <u>当月</u>
+                        <u>当季</u>
+                    </span>
                 </div>
             </div>
         </div>

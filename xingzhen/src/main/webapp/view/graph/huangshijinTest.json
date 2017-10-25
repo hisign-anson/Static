@@ -1,186 +1,144 @@
 {
-  "nodes": [
-    {
-      "id":"001",
-      "name": "某某持枪杀人案",
-      "image": "images/case.png",
-      "type": "1",
-      "desc": "",
-      "depth": 0
-    },
-    {
-      "id":"002",
-      "name": "916特大杀人案专案组",
-      "image": "images/case.png",
-      "type": "1",
-      "depth": 0
-    },
-    {
-      "id":"003",
-      "name": "案件地走访调查",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"004",
-      "name": "案件材料获取",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"005",
-      "name": "受害人家庭背景了解",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"006",
-      "name": "基站话单分析",
-      "image": "images/xkfinger.jpg",
-      "depth": 1
-    },
-    {
-      "id":"007",
-      "name": "案件地基站话单获取",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"008",
-      "name": "核实电话号码",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"009",
-      "name": "受害人家庭背景了解",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"010",
-      "name": "案发地监控调取",
-      "image": "images/xkfinger.jpg",
-      "type": "2",
-      "depth": 1
-    },
-    {
-      "id":"011",
-      "name": "反馈线索1",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
-    },
-    {
-      "id":"012",
-      "name": "反馈线索2",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
-    },
-    {
-      "id":"013",
-      "name": "反馈线索3",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
-    },
-    {
-      "id":"014",
-      "name": "反馈线索4",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
-    },
-    {
-      "id":"015",
-      "name": "反馈线索5",
-      "image": "images/xkdna.jpg",
-      "type": "3",
-      "depth": 0
-    }
-  ],
   "edges": [
     {
-      "source": 0,
-      "target": 1,
-      "relation": "串并案"
-    },
-    {
-      "source": 1,
+      "relation": "T_TASK4fk2task",
       "target": 0,
-      "relation": "串并案"
+      "source": 2
     },
     {
-      "source": 0,
+      "relation": "T_TASK4fk2task",
       "target": 4,
-      "relation": ""
+      "source": 3
     },
     {
-      "source": 1,
-      "target": 2,
-      "relation": ""
-    },
-    {
-      "source": 2,
-      "target": 10,
-      "relation": ""
-    },
-    {
-      "source": 10,
+      "relation": "T_TASK1group2task",
       "target": 9,
-      "relation": ""
+      "source": 6
     },
     {
-      "source": 2,
-      "target": 3,
-      "relation": ""
+      "relation": "T_AJGROUP1group2aj",
+      "target": 10,
+      "source": 6
     },
     {
-      "source": 3,
+      "relation": "T_TASK1group2task",
       "target": 11,
-      "relation": ""
+      "source": 6
     },
     {
-      "source": 1,
-      "target": 8,
-      "relation": ""
-    },
-    {
-      "source": 1,
+      "relation": "T_TASK1group2task",
       "target": 12,
-      "relation": ""
+      "source": 6
     },
     {
-      "source": 1,
+      "relation": "T_TASK_FK1task2fk",
+      "target": 1,
+      "source": 7
+    },
+    {
+      "relation": "T_TASK_FK1task2fk",
       "target": 5,
-      "relation": ""
+      "source": 8
     },
     {
-      "source": 5,
-      "target": 13,
-      "relation": ""
+      "relation": "T_TASK_FK1task2fk",
+      "target": 3,
+      "source": 9
     },
     {
-      "source": 13,
+      "relation": "T_TASK3task2task",
+      "target": 8,
+      "source": 9
+    },
+    {
+      "relation": "T_TASK_FK1task2fk",
+      "target": 2,
+      "source": 12
+    },
+    {
+      "relation": "T_TASK3task2task",
       "target": 7,
-      "relation": ""
+      "source": 12
+    }
+  ],
+  "nodes": [
+    {
+      "id": "taskid6",
+      "type": "taskid",
+      "name": "taskid6",
+      "image": "images/xkfinger.jpg"
     },
     {
-      "source": 5,
-      "target": 6,
-      "relation": ""
+      "id": "fkid3",
+      "type": "fkid",
+      "name": "fkid3",
+      "image": "images/xkdna.jpg"
     },
     {
-      "source": 6,
-      "target": 14,
-      "relation": ""
+      "id": "fkid1",
+      "type": "fkid",
+      "name": "fkid1",
+      "image": "images/xkdna.jpg"
+    },
+    {
+      "id": "fkid2",
+      "type": "fkid",
+      "name": "fkid2",
+      "image": "images/xkdna.jpg"
+    },
+    {
+      "id": "taskid7",
+      "type": "taskid",
+      "name": "十五个字啊十五个字啊十五个字啊",
+      "image": "images/xkfinger.jpg"
+    },
+    {
+      "id": "fkid4",
+      "type": "fkid",
+      "name": "fkid4",
+      "image": "images/xkdna.jpg"
+    },
+    {
+      "id": "2",
+      "type": "groupid",
+      "name": "groupid1",
+      "image": "images/case.png"
+    },
+    {
+      "id": "taskid4",
+      "type": "taskid",
+      "name": "taskid4",
+      "image": "images/xkfinger.jpg"
+    },
+    {
+      "id": "taskid5",
+      "type": "taskid",
+      "name": "taskid5",
+      "image": "images/xkfinger.jpg"
+    },
+    {
+      "id": "taskid3",
+      "type": "taskid",
+      "name": "taskid3",
+      "image": "images/xkfinger.jpg"
+    },
+    {
+      "id": "2",
+      "type": "ajid",
+      "name": "ajid1",
+      "image": "images/case.jpg"
+    },
+    {
+      "id": "taskid1",
+      "type": "taskid",
+      "name": "taskid1",
+      "image": "images/xkfinger.jpg"
+    },
+    {
+      "id": "taskid2",
+      "type": "taskid",
+      "name": "taskid2",
+      "image": "images/xkfinger.jpg"
     }
   ]
 }

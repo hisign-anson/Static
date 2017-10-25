@@ -23,6 +23,7 @@ var selectUtils = {
             setValue = arrValue;
         });
     },
+    /***参数：（被点击的div包裹层，显示的时间输入框，传入后台的开始时间，传入后台的结束时间）***/
     selectTimeRangeOption:function(clickDiv,setValueDiv,startTimeDiv,endTimeDiv){
         $(clickDiv).on("click","u",function(){
             $(this).addClass("active").siblings(".active").removeClass("active");
@@ -48,6 +49,14 @@ var selectUtils = {
                 $(startTimeDiv).val(yearStartDate);
                 $(endTimeDiv).val(yearEndDate);
             }
+        });
+    },
+    clearQueryValue:function () {
+        $("input").each(function () {
+            $(this).val("");
+        });
+        $("span.option").each(function () {
+            $(this).children("u").removeClass("active").eq(0).addClass("active");
         });
     }
 };

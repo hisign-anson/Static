@@ -5,6 +5,8 @@ var img_w = 50,
     img_h = 60;
 var jsonContext, edges_line, edges_text, node_img, node_text;
 var jsonInitUrl = "huangshijinTest.json";
+// var jsonInitUrl = "http://192.168.1.142:8089/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=groupid1&startNodeType=groupid";
+
 var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 var setting = {
@@ -380,12 +382,26 @@ function addNode(nodeArrays, linkArrays) {
 updateGraphURL(jsonInitUrl);
 //根据链接更新
 function updateGraphURL(jsonUrl) {
-    d3.json(jsonUrl, function (error, json) {
-        if (error) {
-            return console.log(error);
-        }
-        updateGraphJSON(json);
-    });
+    // $.ajax({
+    //     async: false,
+    //     type: "GET",
+    //     dataType: 'jsonp',
+    //     jsonp: 'callback',
+    //     jsonpCallback: 'callbackfunction',
+    //     url: jsonUrl,
+    //     data: "",
+    //     timeout: 3000,
+    //     contentType: "application/json;utf-8",
+    //     success: function(msg) {
+    //         debugger
+            d3.json(jsonUrl, function (error, json) {
+                if (error) {
+                    return console.log(error);
+                }
+                updateGraphJSON(json);
+            });
+    //     }
+    // });
 }
 
 //根据json更新
@@ -568,7 +584,8 @@ function updateGraphJSON(json) {
         .attr("dx", node_dx)
         .attr("dy", node_dy)
         .text(function (d) {
-            return d.name
+            // return d.name.substring(0,9) + "...";
+            return d.name;
         });
     node_textSVG.exit().remove();
 

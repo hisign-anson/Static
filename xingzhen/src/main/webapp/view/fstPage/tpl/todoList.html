@@ -1,30 +1,184 @@
-<div class="col-fix-4">
-    <!--反馈-->
-    <div class="list-todo" id="feedback">
-        <div class="todo-title feedback">反馈</div>
-        <div class="todo-content">
-            <div class="todo-num"><%=data.feedback.number%>条</div>
-            <div class="todo-text">待确认</div>
+<style>
+
+    .list-todo {
+        height: 140px;
+        /* background-color: #ffffff; */
+         border: none;
+         box-shadow: none;
+        border-radius: 3px;
+        margin: 5px 10px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .todo-title {
+        width: 45px;
+        text-align: center;
+        display: inline-block;
+        height: 100%;
+        line-height: 47px;
+        color: #ffffff;
+        padding: 0 10px;
+        font-size: 14px;
+        vertical-align: middle;
+        word-wrap: break-word;
+    }
+
+    .feedback {
+        background: #22a0e2;
+    }
+
+    .received {
+        /*background: #efbc63;*/
+        background: #5ac8ad
+    }
+
+    .delay {
+        background: #cf5748;
+    }
+
+    .todo-content {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+        height: 100%;
+        padding-left: 20px;
+        vertical-align: middle;
+        color: #ffffff;
+        font-family: "Microsoft YaHei";
+    }
+
+    .todo-num {
+        font-size: 60px;
+        color: #ffffff;
+        font-family: "Microsoft YaHei";
+        padding-top: 15px;
+        line-height: normal;
+        padding-bottom: 0;
+        font-weight: 300;
+    }
+
+    .todo-text {
+        font-size: 14px;
+        font-weight: 300;
+        color: #ffffff;
+    }
+
+    .todoList ,.daiban, .zuixin {
+        margin-top: 0px;
+    }
+    @media screen and (max-width: 992px){
+        .todoList ,.daiban, .zuixin {
+            margin-top: 15px;
+        }
+    }
+    .more-link {
+        float: right;
+        margin-right: 10px;
+        margin-top: 3px;
+        font-size: 13px;
+        color: #9e9e9e;
+        font-weight: 300;
+    }
+
+    /*待办任务 start*/
+    .daiban > .col-panel-body, .zuixin > .col-panel-body {
+        height: 300px;
+    }
+
+    .num-info-ul {
+        height: 50px;
+        margin-bottom: 5px;
+        margin-top: 8px;
+    }
+
+    .daiban > .col-panel-body > .num-info {
+        border: 1px solid #e1e7e9;
+        margin: 10px 20px;
+        border-radius: 3px;
+    }
+
+    .daiban h6 {
+        color: #494949;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 0 10px 8px;
+        border-bottom: 1px solid #e1e7e9;
+        margin-bottom: 4px;
+    }
+
+    .col-fix-todo {
+        /* position: relative; */
+        float: left;
+        width: 50%;
+    }
+
+    div#feedback {
+        background: #1c97d1;
+    }
+
+    div#received {
+        background: #cf5748;
+    }
+
+    div#delay {
+        background: #ed945e;
+    }
+
+    .todoList > .col-panel-body {
+        height: 300px;
+    }
+
+    .icon-tab {
+        /* font-family: "hisignfont"; */
+        position: absolute;
+        bottom: -15px;
+        right: -15px;
+        font-size: 96px;
+        color: rgba(255, 255, 255, 0.27);
+    }
+    .h-alarm,.h-warning{
+        font-family: "hisignfont";
+    }
+    .new-column .text-record {
+        width: 60%;
+    }
+</style>
+<div class="col-panel-block todoList achievementDiv">
+    <h3 class="col-panel-header"><i class="left-line"></i><span>待办任务</span> </h3>
+    <div class="col-panel-body todo">
+        <div class="col-fix-todo">
+            <!--反馈-->
+            <div class="list-todo" id="feedback"  modelNo="A0102" en="1" status="0" fkqrzt="0">
+                <div class="todo-content">
+                    <div class="todo-num"><%=data.feedback.number%></div>
+                    <div class="todo-text">待确认</div>
+                </div>
+                <i class="icon-tab icon-file-alt"></i>
+            </div>
         </div>
+        <div class="col-fix-todo">
+            <!--接收-->
+            <div class="list-todo" id="received" modelNo="A0102" en="2" status="0" taskType="0">
+                <div class="todo-content">
+                    <div class="todo-num"><%=data.received.number%></div>
+                    <div class="todo-text">待接收</div>
+                </div>
+                <i class="icon-tab h-alarm icon-file-alt"></i>
+            </div>
+        </div>
+        <div class="col-fix-todo">
+            <!--超期-->
+            <div class="list-todo" id="delay" modelNo="A0102" en="3" status="1" overdue="1">
+                <div class="todo-content">
+                    <div class="todo-num"><%=data.delay.number%></div>
+                    <div class="todo-text">未处理</div>
+                </div>
+                <i class="icon-tab h-warning icon-file-alt"></i>
+            </div>
+        </div>
+
     </div>
 </div>
-<div class="col-fix-4 clearPadding">
-    <!--接收-->
-    <div class="list-todo" id="received">
-        <div class="todo-title received">接收</div>
-        <div class="todo-content">
-            <div class="todo-num"><%=data.received.number%>条</div>
-            <div class="todo-text">待接收</div>
-        </div>
-    </div>
-</div>
-<div class="col-fix-4 clearPadding">
-    <!--超期-->
-    <div class="list-todo" id="delay">
-        <div class="todo-title delay">超期</div>
-        <div class="todo-content">
-            <div class="todo-num"><%=data.delay.number%>条</div>
-            <div class="todo-text">未处理</div>
-        </div>
-    </div>
-</div>
+
+

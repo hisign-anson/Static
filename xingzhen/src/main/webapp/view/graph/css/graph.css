@@ -136,6 +136,10 @@ body {
 /*tooltip的样式 end*/
 .nodetext {
     fill: #ff3451;
+
+    /*display: inline-block;*/
+    /*width: 20px;*/
+    /*color: #dddddd;*/
 }
 
 .linetext {

@@ -8,17 +8,21 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/task/taskAdd.html',
     'text!/view/caseInvestigation/tpl/task/taskEdit.html',
     'text!/view/caseInvestigation/tpl/task/taskFeedback.html',
+    '../dat/task.js',
     '../../dictManage/src/dictOpener.js'], function (_, taskListTpl,taskListTrTpl,taskAddTpl,taskEditTpl,taskFeedbackTpl,
-                                                     dictOpener) {
+                                                     taskAjax, dictOpener) {
     return {
         showList: function () {
             _self = this;
             //关闭没有关闭的弹框
             dictOpener.closeOpenerDiv();
-            $("#mainDiv").empty().html(_.template(taskListTpl, {ops: top.opsMap}));
+            $("#mainDiv").empty().html(_.template(taskListTpl, {ops: top.opsMap, status: status}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#confirmStatus");
-            selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
+            // selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
+            //选择任务状态
+            _self.selectTaskStaOption();
+
             $("#chooseBelongGroup").on('click', function () {
                 dictOpener.openChooseDict($(this));
             });
@@ -39,93 +43,121 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
-            $("#submitDate").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
             //点击选择时间范围（当天当月当季当年）
-            /***参数：（被点击的div包裹层，显示的时间输入框，传入后台的开始时间，传入后台的结束时间）***/
             selectUtils.selectTimeRangeOption("#changeCreateDate", "#createDate", "#startTime", "#endTime");
+
+            $("#submitDate").daterangepicker({
+                separator: ' 至 ',
+                showWeekNumbers: true,
+                pickTime: true
+            }, function (start, end, label) {
+                $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
+                $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
+            });
+            //点击选择时间范围（当天当月当季当年）
+            selectUtils.selectTimeRangeOption("#changeSubmitDate", "#submitDate", "#fkstartTime", "#fkendTime");
 
             $("#addTask").on("click",function () {
                 _self.showAdd();
             });
 
             $("#resetBtn").on("click",function () {
-
+                selectUtils.clearQueryValue();
             });
             $("#queryBtn").on("click",function () {
                 _self.queryList();
             });
             _self.queryList();
         },
+        selectTaskStaOption:function () {
+            _self = this;
+            $("#changeTaskStatus").on("click","u",function(){
+                $(this).addClass("active").siblings(".active").removeClass("active");
+                var text = $(this).hasClass("active") ? $(this).text() : "";
+                if(text == "被移交"){
+                    $("#yjzt").val($(this).attr("val"));
+                }else if(text == "超期"){
+                    $("#overdue").val($(this).attr("val"));
+                } else if (text == "已反馈"){
+                    $("#fkzt").val($(this).attr("val"));
+                } else if (text == "未反馈"){
+                    $("#fkzt").val($(this).attr("val"));
+                }
+            });
+        },
         //查询功能
         queryList:function(){
             _self = this;
-            var param = $("#queryCondition").serializeObject();
+            var param = {};
+            // var myStatus;
+            // var myOverdue;
+            // if (status) {
+            //     myStatus = status;
+            //     $("#main-frame", parent.document).removeAttr("status");
+            //     $("#main-frame", parent.document).removeAttr("en");
+            //     $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+            //         $($(item).find("a")[0]).removeAttr('en');
+            //         $($(item).find("a")[0]).removeAttr('status');
+            //     });
+            // } else {
+            //     myStatus = $("#fkqrzt").val();
+            // }
             $.extend(param, {
-
+                userId:top.userId,
+                taskType:$.trim($("#taskType").val()),
+                taskName:$.trim($("#taskName").val()),
+                taskNo:$.trim($("#taskNo").val()),
+                groupid:$.trim($("#groupid").val()),
+                creator:$.trim($("#creator").val()),
+                jsr:$.trim($("#jsr").val()),
+                startTime:$.trim($("#startTime").val()),
+                endTime:$.trim($("#endTime").val()),
+                fkqrzt:$.trim($("#fkqrzt").val()),
+                fkzt:$.trim($("#fkzt").val()),
+                yjzt:$.trim($("#yjzt").val()),
+                overdue:$.trim($("#overdue").val()),
+                deparmentcode:$.trim($("#deparmentcode").val()),
+                fkstartTime:$.trim($("#fkstartTime").val()),
+                fkendTime:$.trim($("#fkendTime").val())
             });
-            var taskData = [
-                {
-                    "rownum": 0,
-                    "id": "BD54F18C24874DBE934472CD21EBC6BB",
-                    "taskName": "快递费就能发",
-                    "taskContent": "发货人挺好挺好太容易",
-                    "belongGroup": "情报科",
-                    "createName": "超级管理员",
-                    "createDate": "2017-07-06 18:00:16",
-                    "recipient": "张三",
-                    "confirmNum": 0,
-                    "taskStatus": "已反馈",
-                    "recipientStatus": "未查看",
-                    "submitDate": "2017-09-04 11:59:09",
-                    "actualSubmitDate": "2017-09-04 11:59:09"
-                },
-                {
-                    "rownum": 1,
-                    "id": "E3E47DAB3F1F44C7BD02ED9E91C6D951",
-                    "taskName": "发给后台",
-                    "taskContent": "v凤于九天洒多少份",
-                    "belongGroup": "市公安局",
-                    "createName": "李四",
-                    "createDate": "2017-07-05 18:00:16",
-                    "recipient": "随便",
-                    "confirmNum": 1,
-                    "taskStatus": "未反馈",
-                    "recipientStatus": "已查看",
-                    "submitDate": "2017-09-07 11:59:09",
-                    "actualSubmitDate": "2017-09-06 19:59:09"
+
+            $('#taskListResult').pagingList({
+                action:top.servicePath_xz+'/task/getTaskPage',
+                jsonObj:param,
+                callback:function(data){
+                    $("#taskListTable tbody").empty().html(_.template(taskListTrTpl, {data: data, ops: top.opsMap }));
+                    $(".link-text").on("click",function () {
+                        //判断是否任务是否反馈
+                        $("#mainDiv").empty().html(_.template(taskEditTpl));
+                        //在反馈上追加任务
+                        $(".into-appendTaskBtn").on("click",function () {
+                            _self.showAdd();
+                        });
+                        $("#cancelBtn").on("click",function () {
+                            _self.showList();
+                        });
+                        // $("#appendTaskBtn").on("click",function () {
+                        //     _self.showList();
+                        // });
+
+                        //在任务上补充任务
+                        $("#replenishTaskBtn").on("click",function () {
+                            _self.showAdd();
+                        });
+                    });
+                    $(".into-urge").on("click",function () {
+                        _self.handleUrge();
+                    });
+                    $(".into-delete").on("click",function () {
+
+                    });
+                    $(".into-feedback").on("click",function () {
+                        _self.handleFeedback();
+                    });
+                    $(".into-transfer").on("click", function () {
+                        _self.handleTransfer();
+                    });
                 }
-            ];
-            $("#taskListTable tbody").empty().html(_.template(taskListTrTpl, {data: taskData}));
-            $(".link-text").on("click",function () {
-                //判断是否任务是否反馈
-                $("#mainDiv").empty().html(_.template(taskEditTpl));
-                //在反馈上追加任务
-                $(".into-appendTaskBtn").on("click",function () {
-                    _self.showAdd();
-                });
-                $("#cancelBtn").on("click",function () {
-                    _self.showList();
-                });
-                // $("#appendTaskBtn").on("click",function () {
-                //     _self.showList();
-                // });
-
-                //在任务上补充任务
-                $("#replenishTaskBtn").on("click",function () {
-                    _self.showAdd();
-                });
-            });
-            $(".into-urge").on("click",function () {
-                _self.handleUrge();
-            });
-            $(".into-delete").on("click",function () {
-
-            });
-            $(".into-feedback").on("click",function () {
-                _self.handleFeedback();
-            });
-            $(".into-transfer").on("click", function () {
-                _self.handleTransfer();
             });
         },
         handleUrge:function () {
@@ -186,8 +218,8 @@ define(['underscore',
         showAdd:function () {
             _self = this;
             $("#mainDiv").empty().html(_.template(taskAddTpl));
-            $("#dateDue").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
-            $("#createDate").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
+            $("#fkjzTime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
+            $("#createtime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
 
             $("#chooseGroup").on('click', function () {
                 dictOpener.openChooseDict($(this));
@@ -195,12 +227,40 @@ define(['underscore',
             $("#chooseReceive").on('click', function () {
                 dictOpener.openChooseDict($(this));
             });
+            //绑定返回事件
             $("#cancelBtn").on("click",function () {
                 _self.showList();
-
             });
             $("#saveBtn").on("click",function () {
-                _self.showList();
+                $('.task-valid').validatebox();
+                if ($('.validatebox-invalid').length > 0) {
+                    return false;
+                }
+                var param = $("#taskAddForm").serializeObject();
+                $.extend(param, {
+                    creator: top.userId,
+                    createname:top.trueName,
+                    deparmentcode:top.orgCode,
+                    deparmentname:top.orgName,
+                    bcrwid: $.trim($("#bcrwid").val()),
+                    fkid: $.trim($("#fkid").val()),
+                    taskName: $.trim($("#taskName").val()),
+                    groupid: $.trim($("#groupid").val()),
+                    jsr: $.trim($("#jsr").val()),
+                    jsrLxfs: $.trim($("#jsrLxfs").val()),
+                    taskContent: $.trim($("#taskContent").val()),
+                    fkjzTime: $.trim($("#fkjzTime").val()),
+                    createtime: $.trim($("#createtime").val())
+                });
+                taskAjax.addTask(param, function (r) {
+                    if (r.flag == 1) {
+                        toast('保存成功！', 600, function () {
+                            _self.showList();
+                        }).ok();
+                    } else {
+                        toast(r.msg, 600).err()
+                    }
+                });
             });
         }
     }

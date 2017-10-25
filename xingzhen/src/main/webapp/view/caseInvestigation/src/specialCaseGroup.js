@@ -14,7 +14,6 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/userList.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/userListTr.html',
-    'text!/view/chatPage/chatPage.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/relationCaseTr.html',
@@ -22,7 +21,7 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html',
     '../dat/specialCaseGroup.js',
     '../../dictManage/src/dictOpener.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl,broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl,caseInfoTpl,
-                                                     userListTpl, userListTrTpl, chatPageTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl,
+                                                     userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl,
                                                      specialCaseGroupAjax,dictOpener) {
     return {
         showList: function () {
@@ -88,6 +87,7 @@ define(['underscore',
             //     action:top.servicePath_xz+'/group/getGroupPage',
             //     jsonObj:param,
             //     callback:function(data){
+            //         debugger
             //
             //     }
             // });

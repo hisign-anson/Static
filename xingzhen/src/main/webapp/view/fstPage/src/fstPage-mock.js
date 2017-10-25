@@ -83,6 +83,55 @@ define([
                 }
             };
             $("#todoDiv").empty().html(_.template(todoListTpl, {data: todoData}));
+
+            //点击切换 反馈待确认
+            $(".list-todo#feedback").on("click", function () {
+                var modelNo = $(this).attr("modelNo");
+                var en = $(this).attr("en");
+                var status = $(this).attr("status");
+                var fkqrzt = $(this).attr("fkqrzt");
+                $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                    if (modelNo == $(item).attr("page-no")) {
+                        $($(item).find("a")[0]).attr('en', en);
+                        $($(item).find("a")[0]).attr('status', status);
+                        $($(item).find("a")[0]).attr('fkqrzt', fkqrzt);
+                        $(item).parent().parent().find('a')[0].click();
+                        $(item).find("a")[0].click();
+                    }
+                });
+            });
+            //点击切换 待接收
+            $(".list-todo#feedback").on("click", function () {
+                var modelNo = $(this).attr("modelNo");
+                var en = $(this).attr("en");
+                var status = $(this).attr("status");
+                var taskType = $(this).attr("taskType");
+                $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                    if (modelNo == $(item).attr("page-no")) {
+                        $($(item).find("a")[0]).attr('en', en);
+                        $($(item).find("a")[0]).attr('status', status);
+                        $($(item).find("a")[0]).attr('taskType', taskType);
+                        $(item).parent().parent().find('a')[0].click();
+                        $(item).find("a")[0].click();
+                    }
+                });
+            });
+            //点击切换 超期未处理
+            $(".list-todo#feedback").on("click", function () {
+                var modelNo = $(this).attr("modelNo");
+                var en = $(this).attr("en");
+                var status = $(this).attr("status");
+                var overdue = $(this).attr("overdue");
+                $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                    if (modelNo == $(item).attr("page-no")) {
+                        $($(item).find("a")[0]).attr('en', en);
+                        $($(item).find("a")[0]).attr('status', status);
+                        $($(item).find("a")[0]).attr('overdue', overdue);
+                        $(item).parent().parent().find('a')[0].click();
+                        $(item).find("a")[0].click();
+                    }
+                });
+            });
         },
         showAchievementsList:function () {
             _self = this;
