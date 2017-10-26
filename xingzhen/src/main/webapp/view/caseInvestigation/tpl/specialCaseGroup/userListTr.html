@@ -1,12 +1,47 @@
 <%_.each(data, function(item){%>
+<%if(item.userId != top.userId){%>
 <tr>
+    <%if(checkboxMulti == false){%>
+    <td><input class="choseOneUser" type="checkbox" jsr="<%=item.userId%>" jsrname="<%=item.userName%>" jsrLxfs="<%=item.phone%>"></td>
+    <%}else{%>
     <td><input type="checkbox"></td>
+    <%}%>
+
     <td><%=item.rownum%></td>
     <td><%=item.userName%></td>
     <td><%=item.userId%></td>
-    <td><%=item.userPhone%></td>
-    <td><%=item.userUnit%></td>
-    <td><%=item.userPost%></td>
-    <td><%=item.userStatus%></td>
+    <td><%=item.phone%></td>
+    <td><%=item.orgName%></td>
+    <td><%=item.post%></td>
+    <td>
+        <%if(item.status==0){%>
+        有效
+        <%}else if(item.status==1){%>
+        无效
+        <%}%>
+    </td>
 </tr>
+<%}else{%>
+<tr style="background-color: #e8e8e8;cursor: not-allowed;">
+    <%if(checkboxMulti == false){%>
+    <td><input class="choseOneUser" type="checkbox" jsr="<%=item.userId%>" jsrname="<%=item.userName%>" jsrLxfs="<%=item.phone%>" disabled></td>
+    <%}else{%>
+    <td><input type="checkbox" disabled></td>
+    <%}%>
+
+    <td><%=item.rownum%></td>
+    <td><%=item.userName%></td>
+    <td><%=item.userId%></td>
+    <td><%=item.phone%></td>
+    <td><%=item.orgName%></td>
+    <td><%=item.post%></td>
+    <td>
+        <%if(item.status==0){%>
+        有效
+        <%}else if(item.status==1){%>
+        无效
+        <%}%>
+    </td>
+</tr>
+<%}%>
 <%})%>

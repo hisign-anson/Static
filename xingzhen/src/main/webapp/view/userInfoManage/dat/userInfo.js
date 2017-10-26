@@ -6,9 +6,9 @@ define(function(){
 			},true)
 		},
 		getUserInfoListByOrgId:function(param,callback){
-			$get(top.servicePath+'/sys/user/getUserInfoListByOrgId',param,function(response) {
+			$post(top.servicePath+'/sys/user/getUserInfoListByOrgId',param,function(response) {
 				callback(response);
-			})
+			},true)
 		},
 		addUserInfo:function(param,callback){
 			$post(top.servicePath+'/sys/user/addUserInfo',param,function(response) {

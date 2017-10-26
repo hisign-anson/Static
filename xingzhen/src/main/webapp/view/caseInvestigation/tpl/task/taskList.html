@@ -22,8 +22,9 @@
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">所属专案组：</span>
                 <div class="dict-opener">
-                    <input class="common-input" type="text" id="groupid" name="" placeholder="请输入专案组名称">
-                    <i id="chooseBelongGroup" class="icon-list cur-p button steelblue" title="所属专案组" dict-value="CFMC"></i>
+                    <input class="common-input" type="text" id="groupname" name="" placeholder="请输入专案组名称" readonly>
+                    <input type="hidden" id="groupid">
+                    <i id="chooseBelongGroup" class="icon-list cur-p button steelblue" title="所属专案组"></i>
                 </div>
             </div>
         </div>
@@ -32,15 +33,17 @@
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">创建人：</span>
                 <div class="dict-opener">
-                    <input class="common-input" type="text" id="creator" name="" placeholder="请输入创建人姓名">
-                    <i id="chooseCreateName" class="icon-list cur-p button steelblue" title="创建人" dict-value="CFMC"></i>
+                    <input type="hidden" id="creator">
+                    <input class="common-input" type="text" id="creatname" name="" placeholder="请输入创建人姓名" readonly>
+                    <i id="chooseCreateName" class="icon-list cur-p button steelblue" title="创建人"></i>
                 </div>
             </div>
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">接收人：</span>
                 <div class="dict-opener">
-                    <input class="common-input" type="text" id="jsr" name="" placeholder="请输入接收人姓名">
-                    <i id="chooseRecipient" class="icon-list cur-p button steelblue" title="接收人" dict-value="CFMC"></i>
+                    <input type="hidden" id="jsr">
+                    <input class="common-input" type="text" id="jsrname" name="" placeholder="请输入接收人姓名" readonly>
+                    <i id="chooseRecipient" class="icon-list cur-p button steelblue" title="接收人"></i>
                 </div>
             </div>
 
@@ -69,8 +72,8 @@
                     <span class="qc-label-xl">反馈确认状态：</span>
                     <span class="option" id="changeConfirmStatus">
                         <u class="active default" val="">全部</u>
-                        <u class="" val="1">未确认</u>
-                        <u class="" val="2">已确认</u>
+                        <u class="" val="0">未确认</u>
+                        <u class="" val="1">已确认</u>
                     </span>
                     <input type="hidden" id="fkqrzt" />
                 </div>
@@ -94,8 +97,9 @@
                 <div class="fl qc-group-l">
                     <span class="qc-label-xl">所属单位：</span>
                     <div class="dict-opener">
-                        <input class="common-input" type="text" id="deparmentcode" name="" placeholder="请输入所属单位">
-                        <i id="chooseBelongUnit" class="icon-list cur-p button steelblue" title="所属单位" dict-value="CFMC"></i>
+                        <input type="hidden" id="deparmentcode">
+                        <input class="common-input" type="text" id="deparmentname" name="" placeholder="请输入所属单位" readonly>
+                        <i id="chooseBelongUnit" class="icon-list cur-p button steelblue" title="所属单位"></i>
                     </div>
                 </div>
                 <div class="fl qc-group-xxl">

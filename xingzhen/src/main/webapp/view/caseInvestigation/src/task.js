@@ -8,9 +8,12 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/task/taskAdd.html',
     'text!/view/caseInvestigation/tpl/task/taskEdit.html',
     'text!/view/caseInvestigation/tpl/task/taskFeedback.html',
+    'text!/view/caseInvestigation/tpl/specialCaseGroup/userList.html',
+    'text!/view/caseInvestigation/tpl/specialCaseGroup/userListTr.html',
     '../dat/task.js',
-    '../../dictManage/src/dictOpener.js'], function (_, taskListTpl,taskListTrTpl,taskAddTpl,taskEditTpl,taskFeedbackTpl,
-                                                     taskAjax, dictOpener) {
+    '../../dictManage/src/dictOpener.js',
+    '../../userInfoManage/dat/userInfo.js'], function (_, taskListTpl,taskListTrTpl,taskAddTpl,taskEditTpl,taskFeedbackTpl,userListTpl,userListTrTpl,
+                                                     taskAjax, dictOpener,userInfoAjax) {
     return {
         showList: function () {
             _self = this;
@@ -18,24 +21,22 @@ define(['underscore',
             // dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(taskListTpl, {ops: top.opsMap, status: status}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
-            selectUtils.selectTextOption("#changeConfirmStatus", "#confirmStatus");
+            selectUtils.selectTextOption("#changeConfirmStatus", "#fkqrzt");
             // selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
             //选择任务状态
             _self.selectTaskStaOption();
 
             $("#chooseBelongGroup").on('click', function () {
-                dictOpener.openChooseDict($(this));
+                // dictOpener.openChooseDict($(this));
+                dictOpener.openChoosePort($(this),$post,"/group/getGroupPage",{},"groupname","groupnum");
             });
             $("#chooseCreateName").on('click', function () {
-                // dictOpener.openChooseDict($(this));
                 dictOpener.openUserChoosePort($(this));
             });
             $("#chooseRecipient").on('click', function () {
-                // dictOpener.openChooseDict($(this));
                 dictOpener.openUserChoosePort($(this));
             });
             $("#chooseBelongUnit").on('click', function () {
-                // dictOpener.openChooseDict($(this));
                 dictOpener.openUnitChoosePort($(this));
             });
             $("#createDate").daterangepicker({
@@ -64,8 +65,23 @@ define(['underscore',
                 _self.showAdd();
             });
 
+            // var creatorParam= str2obj($("#creatname").attr("paramattr"));
+            // if(creatorParam){
+            //     $("#creator").val(creatorParam.userId);
+            // }
+            // var jsrParam = str2obj($("#jsrname").attr("paramattr"));
+            // if(jsrParam){
+            //     $("#jsr").val(jsrParam.userId);
+            // }
+            // var deparmentParam = str2obj($("#deparmentname").attr("paramattr"));
+            // if(deparmentParam){
+            //     $("#deparmentcode").val(deparmentParam.orgCode);
+            // }
             $("#resetBtn").on("click",function () {
                 selectUtils.clearQueryValue();
+                // $("#creator").val("");
+                // $("#jsr").val("");
+                // $("#deparmentcode").val("");
                 return false;
             });
             $("#queryBtn").on("click",function () {
@@ -134,13 +150,13 @@ define(['underscore',
                         _self.handleDetail($(this).attr('id'));
                     });
                     $(".into-urge").on("click",function () {
-                        _self.handleUrge();
+                        _self.handleUrge($(this).attr('id'));
                     });
                     $(".into-delete").on("click",function () {
                         _self.handleDelete($(this).attr('id'),$(this).attr('taskNo'));
                     });
                     $(".into-feedback").on("click",function () {
-                        _self.handleFeedback();
+                        _self.handleFeedback($(this).attr('id'));
                     });
                     $(".into-transfer").on("click", function () {
                         var id=$(this).attr('id');
@@ -161,39 +177,39 @@ define(['underscore',
                         $("#mainDiv").empty().html(_.template(taskEditTpl,r));
                         //在反馈上追加任务
                         $(".into-appendTaskBtn").on("click",function () {
-                            _self.showAdd();
+                            _self.showAdd(null,$(this).attr("fkid"));
                         });
                         $("#cancelBtn").on("click",function () {
                             _self.showList();
                         });
-                        // $("#appendTaskBtn").on("click",function () {
-                        //     _self.showList();
-                        // });
 
                         //在任务上补充任务
                         $("#replenishTaskBtn").on("click",function () {
-                            _self.showAdd();
+                            _self.showAdd($(this).attr("bcrwid"));
                         });
                     }
                 });
             }
         },
-        handleUrge:function () {
+        handleUrge:function (id) {
             _self = this;
             $confirm('催办任务？', function (bol) {
                 if (bol) {
-                    toast('催办成功！', 600, function () {
-                        _self.showList();
-                    }).ok()
-                    // expenseApplyAjax.goBackApply({id: id}, function (r) {
-                    //     if (r.flag == 1) {
-                    //         toast('撤回成功！', 600, function () {
-                    //             _self.showList();
-                    //         }).ok()
-                    //     } else {
-                    //         toast(r.msg, 600).err()
-                    //     }
-                    // })
+                    var param = {
+                        id: id,
+                        userId: top.userId,
+                        deparmentcode: top.orgCode
+                    };
+                    taskAjax.addCb(param,function(r){
+                        if(r.flag==1){
+                            toast('催办成功！', 600, function () {
+                                _self.showList();
+                            }).ok()
+                        }else{
+                            // toast('催办失败！',600).err();
+                            toast(r.msg, 600).err()
+                        }
+                    })
                 }
             });
         },
@@ -201,84 +217,97 @@ define(['underscore',
             _self = this;
             $confirm('确定删除任务【'+taskNo+'】吗？',function(bol){
                 if(bol){
-                    // $.ajax({
-                    //     url: top.servicePath_xz + '/task/deleteTaskById',
-                    //     type: "DELETE",
-                    //     contentType: "application/x-www-form-urlencoded",
-                    //     data: {id: id, userId: top.userId},
-                    //     success: function (r) {
-                    //         if(r.flag==1){
-                    //             toast('删除成功！',600,function(){
-                    //                 _self.showList();
-                    //             }).ok()
-                    //         }else{
-                    //             toast('删除失败！',600).err()
-                    //         }
-                    //     }
-                    // });
                     taskAjax.deleteTaskById({id:id,userId:top.userId},function(r){
                         if(r.flag==1){
                             toast('删除成功！',600,function(){
                                 _self.showList();
                             }).ok()
                         }else{
-                            toast('删除失败！',600).err()
+                            // toast('删除失败！',600).err();
+                            toast(r.msg, 600).err()
                         }
                     })
                 }
             });
         },
-        handleFeedback:function () {
+        handleFeedback:function (taskId) {
             _self = this;
-            $("#mainDiv").empty().html(_.template(taskFeedbackTpl));
-            $("#cancelBtn").on("click",function () {
-                _self.showList();
-            });
-            $("#feedbackBtn").on("click",function () {
-                _self.showList();
-            });
-        },
-        handleTransfer:function (id,createname,creator,deparmentcode) {
-            _self = this;
-            $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
-            $("#userListDiv").on("click","#cancelBtn",function () {
-                $("#userListDiv").$close();
-            });
-            $("#userListDiv").on("click","#transferBtn",function () {
-                $('.choseOneUser input:checkbox').on("click",function(){
-                    if($(this).is(':checked')){
-                        $(this).attr('checked', true).parent().parent().siblings().find("input:checkbox").attr('checked', false);
-                    } else {
-                        $(this).prop("checked",false);
+            if (id) {
+                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
+                    if (r.flag == 1) {
+                        $("#mainDiv").empty().html(_.template(taskEditTpl,r));
+                        // $("#mainDiv").empty().html(_.template(taskFeedbackTpl,r));
+                        //反馈任务
+                        $("#feedbackBtn").on("click",function () {
+                            // $('.feedback-valid').validatebox();
+                            // if ($('.validatebox-invalid').length > 0) {
+                            //     return false;
+                            // }
+
+                            var taskfkFileModels = [];
+                            var detail ={
+                                // fileName: "string",
+                                // fileOldName: "string",
+                                // filePath: "string",
+                                // fileSize: 0,
+                                // fileType: "string",
+                                // taskfkId: "string"
+                            };
+                            taskfkFileModels.push(detail);
+                            var param = {
+                                bz: $.trim($("#bz").val()),
+                                createname: top.trueName,
+                                // createtime: "2017-10-26T06:05:06.124Z",
+                                creator: top.userId,
+                                deparmentcode: top.orgCode,
+                                fkTime: $("#fkTime").val(),
+                                fkr: top.userId,
+                                fkrname: top.trueName,
+                                fkxs: $("#fkxs").val(),
+                                // groupid: "string",
+                                // pgroupid: "string",
+                                // qrTime: "2017-10-26T06:05:06.124Z",
+                                // qrzt: "string",
+                                taskfkFileModels: taskfkFileModels,
+                                taskid: taskId
+                            };
+                            taskAjax.addTaskFk(param, function (r) {
+                                if (r.flag == 1) {
+                                    toast('反馈成功！', 600, function () {
+                                        _self.showList();
+                                    }).ok();
+                                } else {
+                                    toast(r.msg, 600).err()
+                                }
+                            });
+                        });
+                        $("#cancelBtn").on("click",function () {
+                            _self.showList();
+                        });
                     }
                 });
-                var checkbox = [];
-                $('#userInfoTable').find('tbody input:checkbox:checked').each(function (i, e) {
-                    checkbox.push($(e).val());
-                });
-                if (checkbox.length > 0) {
-                    var param = {
-                        createname: createname,
-                        creator: creator,
-                        deparmentcode: deparmentcode,
-                        id: id,
-                        jsr: checkbox[0]
-                    };
-                    taskAjax.moveTask(param,function(r){
-                        if(r.flag==1){
-                            toast('移交成功！',600,function(){
-                                $("#userListDiv").$close();
-                            }).ok()
-                        }else{
-                            toast('移交失败！',600).err()
-                        }
-                    });
-                } else {
-                    toast("请选择一个用户！", 600).warn()
-                }
-            });
+            }
+
         },
-        showAdd:function () {
+        handleTransfer:function (taskId,createname,creator,deparmentcode) {
+            _self = this;
+            $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
+            $("#userListDiv .panel-container").empty().html(_.template(userListTpl,{checkboxMulti:false}));
+            $("#userListDiv").on('click',"#chooseUint", function () {
+                dictOpener.openChooseDict($(this));
+            });
+            $("#userListDiv").on("click", "#resetBtn", function () {
+                console.info("用户重置按钮");
+            });
+            $("#userListDiv").on("click", "#queryBtn", function () {
+                console.info("用户查询按钮");
+                _self.queryUserList(false,taskId);
+            });
+
+            //加载用户列表
+            _self.queryUserList(false,taskId);
+            },
+        showAdd:function (bcrwid,fkid) {
             _self = this;
             $("#mainDiv").empty().html(_.template(taskAddTpl));
             $("#fkjzTime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
@@ -301,18 +330,19 @@ define(['underscore',
                     return false;
                 }
                 var param = $("#taskAddForm").serializeObject();
+                var jsrParam = str2obj($("#jsr").attr("paramattr"));
                 var jsr = $.trim($("#jsr").val()).split(",");
                 $.extend(param, {
                     creator: top.userId,
-                    createname:top.trueName,
-                    deparmentcode:top.orgCode,
-                    deparmentname:top.orgName,
-                    bcrwid: $.trim($("#bcrwid").val()),
-                    fkid: $.trim($("#fkid").val()),
+                    createname: top.trueName,
+                    deparmentcode: top.orgCode,
+                    deparmentname: top.orgName,
+                    bcrwid: bcrwid ? bcrwid : "",
+                    fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
                     groupid: $.trim($("#groupid").val()),
-                    jsr: $("#jsr").attr("id"),
-                    jsrname: jsr[0],
+                    jsr: jsrParam.userId,
+                    jsrname: jsrParam.userName,
                     fqrLxfs: top.phone,
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
@@ -328,6 +358,133 @@ define(['underscore',
                         toast(r.msg, 600).err()
                     }
                 });
+            });
+        },
+        queryUserList: function (isCheckboxMulti,taskId) {
+            _self = this;
+            ////分页
+            // $("#userTableResult").pagingList({
+            //     action:top.servicePath+'/sys/user/getUserInfoListByOrgId',
+            //     pageOnce:5,
+            //     jsonObj:{orgId: top.orgId},
+            //     callback:function(data,t, n, i, o, a, r){
+            //         $("#userTable tbody").empty().html(_.template(userListTrTpl, {
+            //             data: data,
+            //             ops: top.opsMap,
+            //             checkboxMulti:isCheckboxMulti
+            //         }));
+            //         if(isCheckboxMulti == false){
+            //             //任务移交给用户
+            //             _self.saveTransfer(taskId);
+            //         }else{
+            //             //专案组添加成员
+            //             _self.saveStaff();
+            //         }
+            //
+            //         $("#userListDiv").on('click', "#cancelBtn", function () {
+            //             $('#userListDiv').$close();
+            //         });
+            //     }
+            // });
+            //不分页
+            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId},function (r) {
+                if (r.flag == 1) {
+                    $("#userTable tbody").empty().html(_.template(userListTrTpl, {
+                        data: r.data,
+                        ops: top.opsMap,
+                        checkboxMulti:isCheckboxMulti
+                    }));
+                    if(isCheckboxMulti == false){
+                        //任务移交给用户
+                        _self.saveTransfer(taskId);
+                    }else{
+                        //专案组添加成员
+                        _self.saveStaff();
+                    }
+
+                    $("#userListDiv").on('click', "#cancelBtn", function () {
+                        $('#userListDiv').$close();
+                    });
+                }
+            });
+        },
+        saveTransfer:function (taskId) {
+            _self = this;
+            $("#userListDiv").on("click",".choseOneUser:checkbox",function(){
+                if($(this).is(':checked')){
+                    $(this).attr('checked', true).parent().parent().siblings().find("input:checkbox").attr('checked', false);
+                } else {
+                    $(this).prop("checked",false);
+                }
+            });
+            $("#userListDiv").on("click","#transferBtn",function () {
+                var checkbox = [];
+                $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
+                    var jsrInfo = {
+                        jsr:$(e).attr('jsr'),
+                        jsrLxfs:$(e).attr('jsrLxfs'),
+                        jsrname:$(e).attr('jsrname')
+                    };
+                    checkbox.push(jsrInfo);
+                });
+
+                if (checkbox.length > 0) {
+                    var param = {
+                        jsr: checkbox[0].jsr,
+                        jsrLxfs: checkbox[0].jsrLxfs,
+                        jsrname: checkbox[0].jsrname
+                    };
+                    $.extend(param, {
+                        createname: top.trueName,
+                        creator: top.userId,
+                        deparmentcode: top.orgCode,
+                        id: taskId
+                    });
+                    taskAjax.moveTask(param,function(r){
+                        if(r.flag==1){
+                            toast('移交成功！',600,function(){
+                                $("#userListDiv").$close();
+                                _self.showList();
+                            }).ok()
+                        }else{
+                            // toast('移交失败！',600).err()
+                            toast(r.msg, 600).err();
+                        }
+                    });
+                } else {
+                    toast("请选择一个用户！", 600).warn()
+                }
+            });
+        },
+        saveStaff:function () {
+            _self = this;
+
+            //专案组添加成员
+            $("#userTable #selectAll").on('click', function () {
+                $('#userTable').find('tbody input:checkbox').prop('checked', this.checked);
+            });
+            $("#userListDiv").on("click","#saveStaffBtn",function () {
+                console.info("添加成员保存按钮");
+                var checkbox = [];
+                $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
+                    checkbox.push($(e).val());
+                });
+                if (checkbox.length > 0) {
+                    // var ids = checkbox.join(",");
+                    // var orgName = $("#myProjectUnit u.active").attr("val");
+                    //
+                    // $("#applySum-form").html("");
+                    // $("#applySum-form").attr("action", top.servicePath + '/sw/report/exesApplySum');
+                    // $("#applySum-form").append("<input type='hidden' name='ids' value='" + ids + "'/>");
+                    // $("#applySum-form").append("<input type='hidden' name='orgName' value='" + orgName + "'/>");
+                    // $("#applySum-form").attr("target", "winExesApplySum");//打开新窗口
+                    // $("#applySum-form").attr("onsubmit", function openwin(){window.open('about:blank', 'winExesApplySum', 'width=800,height=600');});
+                    // $("#applySum-form").submit();
+
+                    $('#userListDiv').$close();
+                } else {
+                    toast("请至少选择一个用户！", 600).warn()
+                }
             });
         }
     }
