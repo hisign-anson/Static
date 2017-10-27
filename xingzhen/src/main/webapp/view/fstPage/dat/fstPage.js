@@ -48,5 +48,30 @@
 		//		callback(response);
 		//	})
 		//}
+		//各区域专案组破案情况
+		getSolveCaseInfo:function(param,callback){
+			$get(top.servicePath+'/xz/index/getSolveCaseInfo',param,function(response) {
+				callback(response);
+			})
+		},
+		//各区域专案组创建情况
+		getCreateInfo:function(param,callback){
+			$get(top.servicePath+'/xz/index/getCreateInfo',param,function(response) {
+				callback(response);
+			})
+		},
+		//平台成果展示
+		getAchievement:function(param,callback){
+			$get(top.servicePath+'/xz/index/getAchievement',param,function(response) {
+				callback(response);
+			})
+		},
+		//待办任务
+		getTaskCountInfo:function(param,callback){
+			$get(top.servicePath+'/xz/index/getTaskCountInfo',param,function(response) {
+				callback(response);
+			})
+		}
+
 	}
 })
