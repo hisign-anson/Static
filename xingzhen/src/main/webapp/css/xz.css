@@ -172,7 +172,9 @@ input[disabled], textarea[disabled], select[disabled] {
     overflow-x: auto;
     border-bottom: 1px solid #cccccc;
 }
-
+.paging div .prev, .paging div .next {
+    width: auto;
+}
 /*表格文字自动换行*/
 /*.fixed-tb thead th, .fixed-tb tbody tr,*/
 /*.fixed-tb.typical-tb:not(.tcenter) > tbody > tr > td, .fixed-tb.typical-tb:not(.tcenter) > thead > tr > th {*/
@@ -227,7 +229,7 @@ input[disabled], textarea[disabled], select[disabled] {
     position: relative;
 }
 
-#dict-wrap {
+.add-bar + #dict-wrap {
     margin-top: 40px;
 }
 

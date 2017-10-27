@@ -20,15 +20,23 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/groupStaff.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html',
     '../dat/specialCaseGroup.js',
-    '../../dictManage/src/dictOpener.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl,broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl,caseInfoTpl,
+    '../../dictManage/src/dictOpener.js',
+    '../../caseInvestigation/src/task.js',
+    '../../userInfoManage/dat/userInfo.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl,broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl,caseInfoTpl,
                                                      userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl,
-                                                     specialCaseGroupAjax,dictOpener) {
+                                                     specialCaseGroupAjax,dictOpener,task,userInfoAjax) {
     return {
         showList: function () {
             _self = this;
-            //关闭没有关闭的弹框
-            dictOpener.closeOpenerDiv();
+            // //关闭没有关闭的弹框
+            // dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(specialCaseGroupListTpl, {ops: top.opsMap}));
+
+            $("#chooseCreateName").on('click', function () {
+                dictOpener.openUserChoosePort($(this));
+            });
+            //点击选择时间范围（当天当月当季当年）
+            selectUtils.selectTimeRangeOption("#changeTimeScope", "#createtime", "#startTime", "#endTime");
             $("#createtime").daterangepicker({
                 separator: ' 至 ',
                 showWeekNumbers: true,
@@ -37,30 +45,24 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
-            //点击选择时间范围（当天当月当季当年）
-            /***参数：（被点击的div包裹层，显示的时间输入框，传入后台的开始时间，传入后台的结束时间）***/
-            selectUtils.selectTimeRangeOption("#changeTimeScope", "#createDate", "#startTime", "#endTime");
-
-            //点击选择是否
-            /***参数：（被点击的div包裹层，传入后台的参数）***/
+            $("#chooseStaff").on('click', function () {
+                dictOpener.openChoosePort($(this),$post,"/group/getGroupPage",{},"groupname","groupnum");
+            });
+            $("#chooseBelongUnit").on('click', function () {
+                dictOpener.openUnitChoosePort($(this));
+            });
             selectUtils.selectTextOption("#changeBackupStatu", "#backupStatu");
 
-            $("#chooseCreatName").on('click', function () {
-                dictOpener.openChooseDict($(this));
-            });
-            $("#chooseStaff").on('click', function () {
-                dictOpener.openChooseDict($(this));
-            });
-            $("#chooseUnit").on('click', function () {
-                dictOpener.openChooseDict($(this));
-            });
 
             $("#resetBtn").on("click", function () {
                 console.info("专案组管理重置按钮");
+                selectUtils.clearQueryValue();
+                return false;
             });
             $("#queryBtn").on("click", function () {
                 console.info("专案组管理查询按钮");
                 _self.queryList();
+                return false;
             });
             $("#addSpecialCaseGroup").on("click", function () {
                 console.info("专案组新增按钮");
@@ -617,8 +619,7 @@ define(['underscore',
                     // $("#applySum-form").attr("onsubmit", function openwin(){window.open('about:blank', 'winExesApplySum', 'width=800,height=600');});
                     // $("#applySum-form").submit();
 
-                    $('#userListDiv' +
-                    '').$close();
+                    $('#userListDiv').$close();
                 } else {
                     toast("请至少选择一个用户！", 600).warn()
                 }

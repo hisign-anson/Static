@@ -28,18 +28,19 @@
     </div>
 </form>
 <div id="userTableResult" class="query-result">
-    <div class="new-color-bar">
-        <i class="icon-search fs14 mr10"></i>
-        <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
-        <!--<div class="bar-btn-div">-->
-        <!--<b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>-->
-        <!--</div>-->
-    </div>
+    <!--<div class="new-color-bar">-->
+        <!--<i class="icon-search fs14 mr10"></i>-->
+        <!--<span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>-->
+    <!--</div>-->
     <div class="div-table-wrap">
         <table id="userTable" class="userList-table typical-tb">
             <thead>
             <tr>
+                <%if(checkboxMulti == false){%>
+                <th>单选</th>
+                <%}else{%>
                 <th><input type="checkbox" id="selectAll"></th>
+                <%}%>
                 <th>序号</th>
                 <th>成员姓名</th>
                 <th>警号</th>
@@ -56,5 +57,11 @@
 </div>
 <div class="form-btn-block">
     <button id="cancelBtn" class="cm-cancel-btn">取 消</button>
+
+    <%if(checkboxMulti == false){%>
+    <button id="transferBtn" class="cm-save-btn">移 交</button>
+    <%}else{%>
     <button id="saveStaffBtn" class="cm-save-btn">添 加</button>
+    <%}%>
+
 </div>

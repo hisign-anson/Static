@@ -3,7 +3,8 @@
  */
 define(['underscore',
     'text!/view/dictManage/tpl/dictOpenerAdd.html',
-    '../dat/dictManage.js'],function(_,dictOpenerAddTpl,dictManageAjax){
+    '../dat/dictManage.js',
+    '../../userInfoManage/dat/userInfo.js'],function(_,dictOpenerAddTpl,dictManageAjax,userInfoAjax){
     return {
         openChooseDict:function (obj,dictVal,title) {
             _selfDict = this;
@@ -95,6 +96,117 @@ define(['underscore',
                 	});
                 }
             });
+        },
+        openUserChoosePort:function (obj) {
+            _selfDict = this;
+            var title = obj.attr("title");
+            window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+            _selfDict.getUserPortList();
+            var opener = $(".panel #dict-block");
+            opener.find("#dict-wrap").off("click").on("click",".item-value",function(){
+                // var input = obj.prev();//页面上需要填入的input
+                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                input.val($(this).find("span").text());
+                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                inputHidden.val($(this).find("span").attr("val"));
+
+                var paramAttr = $(this).find("span").attr("paramattr");
+                input.attr("paramattr",paramAttr);
+                if($("#jsrLxfs").length > 0){
+                    $("#jsrLxfs").val($(this).find("span").attr("phone"));
+                }
+                opener.$close();
+            });
+
+        },
+        getUserPortList:function () {
+            _selfDict = this;
+            var tpl='';
+            var target = $("#dict-wrap");
+            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId},function (r) {
+                if (r.flag == 1) {
+                    $.each(r.data, function (i, o) {
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                    });
+                    target.html(tpl);
+                }
+            });
+        },
+
+        openUnitChoosePort:function (obj) {
+            _selfDict = this;
+            var title = obj.attr("title");
+            window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+            _selfDict.getUnitPortList();
+            var opener = $(".panel #dict-block");
+            opener.find("#dict-wrap").off("click").on("click",".item-value",function(){
+                // var input = obj.prev();//页面上需要填入的input
+                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                input.val($(this).find("span").text());
+                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                inputHidden.val($(this).find("span").attr("val"));
+
+                var paramAttr = $(this).find("span").attr("paramattr");
+                input.attr("paramattr",paramAttr);
+                opener.$close();
+            });
+
+        },
+        getUnitPortList:function () {
+            _selfDict = this;
+            userInfoAjax.getOrgTreeList({},function(r) {
+                if (r.flag == 1) {
+                    var target = $("#dict-wrap");
+                    var tpl='';
+                    $.each(r.data, function (i, o) {
+                        // tpl+='<div class="item-value"><u><span val="'+o.orgId+'">'+o.orgName+'</span></div></u>';
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgCode+"'>"+o.orgName+"</span></div></u>";
+                    });
+                    target.html(tpl);
+                }
+            });
+        },
+        openChoosePort:function (obj,portType,portAddress,param,paramRes1,paramRes2) {
+            _selfDict = this;
+            var title = obj.attr("title");
+            window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+            _selfDict.getPortList(portType,portAddress,param,paramRes1,paramRes2);
+            var opener = $(".panel #dict-block");
+            opener.find("#dict-wrap").off("click").on("click","div",function(){
+                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                input.val($(this).find("span").text());
+                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                inputHidden.val($(this).find("span").attr("val"));
+
+                var paramAttr = $(this).find("span").attr("paramattr");
+                input.attr("paramattr",paramAttr);
+                if($("#jsrLxfs").length > 0){
+                    $("#jsrLxfs").val($(this).find("span").attr("phone"));
+                }
+                opener.$close();
+            });
+
+        },
+        getPortList:function (portType,portAddress,param,paramRes1,paramRes2) {
+            _selfDict = this;
+            debugger
+            var flag;
+            if(portType == $post){
+                flag = true;
+            } else if(portType == $get){
+                flag = false;
+            }
+            portType(portAddress,param,function(r) {
+                if (r.flag == 1) {
+                    debugger
+                    var target = $("#dict-wrap");
+                    var tpl='';
+                    $.each(r.data, function (i, o) {
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.paramRes1+"'>"+o.paramRes2+"</span></div></u>";
+                    });
+                    target.html(tpl);
+                }
+            },flag);
         },
         closeOpenerDiv: function () {
             _selfDict = this;

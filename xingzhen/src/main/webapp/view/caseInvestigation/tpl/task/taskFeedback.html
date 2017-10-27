@@ -8,43 +8,43 @@
                 <div class="form-row block-row">
                     <div class="equal-col-6">
                         <span class="common-field">任务状态：</span>
-                        <input class="common-input" type="text" name="" id="taskStatus" value="" readonly/>
+                        <input class="common-input" type="text" name="" id="fkzt" value="<%=data.fkzt%>" readonly/>
                     </div>
                     <div class="equal-col-6">
                         <span class="common-field">接收状态：</span>
-                        <input class="common-input" type="text"  name="" id="receiveStatus" value="" readonly/>
+                        <input class="common-input" type="text"  name="" id="qszt" value="<%=data.qszt%>" readonly/>
                     </div>
                 </div>
                 <div class="form-row block-row">
                     <div class="equal-col-6">
                         <span class="common-field">专案组：</span>
-                        <input class="common-input" type="text"  name="" id="belongGroup" value="" readonly/>
+                        <input class="common-input" type="text"  name="" id="groupid" value="<%=data.groupid%>" readonly/>
                     </div>
                 </div>
                 <div class="form-row block-row">
                     <div class="equal-col-12">
                         <span class="common-field">任务内容：</span>
-                        <textarea class="common-textarea" name="" id="taskContact" readonly></textarea>
+                        <textarea class="common-textarea" name="" id="taskContent" readonly><%=data.taskContent%></textarea>
                     </div>
                 </div>
                 <div class="form-row block-row">
                     <div class="equal-col-6">
                         <span class="common-field">下发人：</span>
-                        <input class="common-input" type="text"  name="" id="distributeName" value="" readonly/>
+                        <input class="common-input" type="text"  name="" id="createname" value="<%=data.createname%>" readonly/>
                     </div>
                     <div class="equal-col-6">
                         <span class="common-field">下发时间：</span>
-                        <input class="common-input" type="text"  name="" id="distributeDate" value="" readonly/>
+                        <input class="common-input" type="text"  name="" id="createtime" value="<%=rangeUtil.formatDate(data.createtime,'yyyy-MM-dd')%>" readonly/>
                     </div>
                 </div>
                 <div class="form-row block-row">
                     <div class="equal-col-6">
                         <span class="common-field">下发人联系方式：</span>
-                        <input class="common-input" type="text"  name="" id="distributeContact" value="" readonly/>
+                        <input class="common-input" type="text"  name="" id="distributeContact" value="<%=data.fqrLxfs%>" readonly/>
                     </div>
                     <div class="equal-col-6">
                         <span class="common-field">反馈截止时间：</span>
-                        <input class="common-input" type="text"  name="" id="dateDue" value="" readonly/>
+                        <input class="common-input" type="text"  name="" id="fkjzTime" value="<%=rangeUtil.formatDate(data.fkjzTime,'yyyy-MM-dd')%>" readonly/>
                     </div>
                 </div>
                 <div class="form-row block-row">

@@ -17,7 +17,8 @@ top.superId = top.currentUser ? top.currentUser.orgInfo.superId:'';
 top.superName = top.currentUser ? top.currentUser.orgInfo.superName:'';
 top.orgName = top.currentUser ? top.currentUser.orgInfo.orgName:'';
 top.orgLevel = top.currentUser ? top.currentUser.orgInfo.orgLevel:'';
-top.userId = top.currentUser ? top.currentUser.id:'';
+top.userId = top.currentUser ? top.currentUser.userId:'';
+top.phone = top.currentUser ? top.currentUser.userInfo.phone:'';
 top.serverIp = location.hostname;
 top.serverPort = location.port;
 top.clientKey = localData.get('clientKey');
@@ -141,6 +142,17 @@ function initDictForGXS(){
     $get(initDictForGXS,null,function(res){
         top.GXSDM =res.data;
     });
+    // $.ajax({
+    //     url: initDictForGXS,
+    //     type: "get",
+    //     contentType: "application/x-www-form-urlencoded",
+    //     // data: "",
+    //     success: function (res) {
+    //         debugger
+    //         top.GXSDM =res.data;
+    //
+    //     }
+    // });
 }
 
 function gotoLogin(){

@@ -3,11 +3,11 @@
     <td><%=i+1%></td>
     <td><%=item.taskNo%></td>
     <td><%=item.taskName%></td>
-    <td><a class="link-text"><%=item.taskContent%></a></td>
+    <td><a class="link-text" id="<%=item.id%>"><%=item.taskContent%></a></td>
     <td><%=item.groupName%></td>
     <td><%=item.createname%></td>
     <td><%=rangeUtil.formatDate(item.createtime,'yyyy-MM-dd')%></td>
-    <td><%=item.jsr%></td>
+    <td><%=item.jsrname%></td>
     <td>
         <%if(item.fkzt==0){%>
         未反馈
@@ -26,20 +26,21 @@
     <td><%=rangeUtil.formatDate(item.fkjzTime,'yyyy-MM-dd')%></td>
     <td><%=rangeUtil.formatDate(item.fqTime,'yyyy-MM-dd')%></td>
     <td>
-        <% if(item.cbzt==0 &&item.creator == top.userId){%>
+        <% if(item.creator == top.userId){%>
         <a class="into-urge icon-urge" id="<%=item.id%>" title="催办"></a>
         <%}%>
 
-        <%if(ops && ops.get('delCarApply') && ops.get('delCarApply') == 1 && item.qszt == 0 && item.fkzt==0){%>
+        <%if(item.creator == top.userId && item.qszt == 0 && item.fkzt==0){%>
         <a class="into-delete icon-delete" id="<%=item.id%>" taskNo="<%=item.taskNo%>" title="删除"></a>
         <%}%>
 
         <%if(item.jsr == top.userId){%>
         <a class="into-feedback icon-feedback" id="<%=item.id%>" title="反馈"></a>
         <%}%>
-        <%if(item.jsr == top.userId && item.yjzt == 0){%>
-        <a class="into-transfer icon-transfer" id="<%=item.id%>" title="移交"></a>
+        <%if(item.jsr == top.userId && item.fkzt == 0){%>
+        <a class="into-transfer icon-transfer" id="<%=item.id%>" createname="<%=item.createname%>" creator="<%=item.creator%>" deparmentcode="<%=item.deparmentcode%>" title="移交"></a>
         <%}%>
+
     </td>
 </tr>
 <%})%>
