@@ -23,7 +23,7 @@ top.serverIp = location.hostname;
 top.serverPort = location.port;
 top.clientKey = localData.get('clientKey');
 top.opsMap = new HashMap();
-initDictForGXS();
+// initDictForGXS();
 
 function HashMap() {     
     this.elements = new Array();     
@@ -143,14 +143,12 @@ function initDictForGXS(){
         top.GXSDM =res.data;
     });
     // $.ajax({
-    //     url: initDictForGXS,
+    //     url: top.servicePath + '/sys/dict/GXSDM',
     //     type: "get",
     //     contentType: "application/x-www-form-urlencoded",
-    //     // data: "",
+    //     data: {userUnit:top.userUnit},
     //     success: function (res) {
-    //         debugger
     //         top.GXSDM =res.data;
-    //
     //     }
     // });
 }

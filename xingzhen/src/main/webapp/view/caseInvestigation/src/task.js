@@ -64,24 +64,8 @@ define(['underscore',
             $("#addTask").on("click",function () {
                 _self.showAdd();
             });
-
-            // var creatorParam= str2obj($("#creatname").attr("paramattr"));
-            // if(creatorParam){
-            //     $("#creator").val(creatorParam.userId);
-            // }
-            // var jsrParam = str2obj($("#jsrname").attr("paramattr"));
-            // if(jsrParam){
-            //     $("#jsr").val(jsrParam.userId);
-            // }
-            // var deparmentParam = str2obj($("#deparmentname").attr("paramattr"));
-            // if(deparmentParam){
-            //     $("#deparmentcode").val(deparmentParam.orgCode);
-            // }
             $("#resetBtn").on("click",function () {
                 selectUtils.clearQueryValue();
-                // $("#creator").val("");
-                // $("#jsr").val("");
-                // $("#deparmentcode").val("");
                 return false;
             });
             $("#queryBtn").on("click",function () {
@@ -230,30 +214,70 @@ define(['underscore',
                 }
             });
         },
+        getFile: function (element) {
+            _self = this;
+            var fd = new FormData();
+            var file = $(element)[0];
+            if (!file.files[0]) {
+                alert('error:' + '获取文件失败');
+                throw new Error('获取文件失败');
+            }
+            fd.append(file.files[0].name, file.files[0]);
+            return fd;
+        },
+        getFileInfo: function (element) {
+            _self = this;
+            // var fileDiv = $(element)[0];
+            // var fileDetail;
+            // if (!fileDiv.files[0]) {
+            //     alert('error:' + '获取文件失败');
+            //     throw new Error('获取文件失败');
+            // }
+            // fileDetail = fileDiv.files[0];
+            // return fileDetail;
+
+            var fd;
+            var file = $(element)[0];
+            if (!file.files[0]) {
+                alert('error:' + '获取文件失败');
+                throw new Error('获取文件失败');
+            }
+            fd = new FormData(file.files[0]);
+            return fd;
+        },
         handleFeedback:function (taskId) {
             _self = this;
-            if (id) {
+            if (taskId) {
                 taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl,r));
                         // $("#mainDiv").empty().html(_.template(taskFeedbackTpl,r));
+                        var videoFileInfo = {},picFileInfo = {};
+                        $("#addVideo input[type='file']").val("");
+                        $("#addVideo input[type='file']").off("change").on("change", function () {
+                            // videoFile = _self.getFile("#addVideo input[type='file']");
+                            videoFileInfo = _self.getFileInfo("#addVideo input[type='file']");
+                        });
+
+                        $("#addPic input[type='file']").val("");
+                        $("#addPic input[type='file']").off("change").on("change", function () {
+                            // picFile = _self.getFile("#addPic input[type='file']");
+                            picFileInfo = _self.getFileInfo("#addPic input[type='file']");
+                        });
                         //反馈任务
                         $("#feedbackBtn").on("click",function () {
                             // $('.feedback-valid').validatebox();
                             // if ($('.validatebox-invalid').length > 0) {
                             //     return false;
                             // }
-
                             var taskfkFileModels = [];
-                            var detail ={
-                                // fileName: "string",
-                                // fileOldName: "string",
-                                // filePath: "string",
-                                // fileSize: 0,
-                                // fileType: "string",
-                                // taskfkId: "string"
-                            };
-                            taskfkFileModels.push(detail);
+                            if(videoFileInfo){
+                                taskfkFileModels.push(videoFileInfo);
+                            }
+                            if(picFileInfo) {
+                                taskfkFileModels.push(picFileInfo);
+                            }
+                            console.info(taskfkFileModels);
                             var param = {
                                 bz: $.trim($("#bz").val()),
                                 createname: top.trueName,

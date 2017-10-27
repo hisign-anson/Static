@@ -77,140 +77,117 @@ define(['underscore',
         },
         //查询功能
         queryList: function () {
-            var param = $("#queryCondition").serializeObject();
-            $.extend(param, {
-                // startTime:$("#startTime").val(),
-                // endTime:$("#endTime").val(),
-                // name:$.trim($("#name").val()),
-                // regName:$.trim($("#regName").val()),
-                // totalFund:parseFloat($.trim($("#totalFund").val()))*10000
-            });
-            // $('#specialGroupListResult').pagingList({
-            //     action:top.servicePath_xz+'/group/getGroupPage',
-            //     jsonObj:param,
-            //     callback:function(data){
-            //         debugger
-            //
-            //     }
-            // });
-            var data = [
-                {
-                    "rownum": 0,
-                    "id": "BD54F18C24874DBE934472CD21EBC6BB",
-                    "groupnum": "ABCDEFGHABCDEFGHABCDEFGH12346157",
-                    "groupname": "测试项目1",
-                    "grouptype": "0",
-                    "caseNum": 4,
-                    "creator": "张三",
-                    "num": "10",
-                    "createtime": "2017-07-06 18:00:16",
-                    "backupStatu": 0,
-                    "backupTime": "2017-09-04 11:59:09"
-                },
-                {
-                    "rownum": 1,
-                    "id": "06FB300E23AB4630B1153637D7C655E6",
-                    "groupnum": "E3E47DAB3F1F44C7BD02ED9E91C6D951",
-                    "groupname": "一长四必项目",
-                    "grouptype": "1",
-                    "caseNum": 1,
-                    "creator": "超级管理员",
-                    "num": "5",
-                    "createtime": "2017-07-05 18:00:16",
-                    "backupStatu": 1,
-                    "backupTime": "2017-09-07 11:59:09"
-                }
-            ];
-            $("#specialGroupListTable tbody").empty().html(_.template(specialCaseGroupListTrTpl, { data: data, ops: top.opsMap }));
-            $(".link-text").on("click", function () {
-                console.info("专案组详情按钮");
-                _self.showEdit();
-            });
-            $(".into-archive").on("click", function () {
-                $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组归档'});
-                $("#archiveBlock .panel-container").empty().html(_.template(archivePageTpl));
-                $("#archiveBlock").on("click","#cancelBtn",function () {
+            var param = {
+                ajbh: "",
+                backupStatu: "",
+                creator: "",
+                deparmentcode: "",
+                endTime: "",
+                groupname: "",
+                groupnum: "",
+                memberId: "",
+                startTime: "",
+                userId: top.userId
 
-                    $("#archiveBlock").$close();
-                });
-                $("#archiveBlock").on("click","#saveBtn",function () {
-                    $("#archiveBlock").$close();
-                });
-            });
-            $(".into-broadcast").on("click", function () {
-                $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
-                $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
-                $("#archiveBlock").on("click","#cancelBtn",function () {
+            };//$("#queryCondition").serializeObject();
+            $('#specialGroupListResult').pagingList({
+                action:top.servicePath_xz+'/group/getGroupPage',
+                jsonObj:param,
+                callback:function(data){
+                    debugger
+                    // $("#specialGroupListTable tbody").empty().html(_.template(specialCaseGroupListTrTpl, { data: data, ops: top.opsMap }));
+                    // $(".link-text").on("click", function () {
+                    //     console.info("专案组详情按钮");
+                    //     _self.showEdit();
+                    // });
+                    // $(".into-archive").on("click", function () {
+                    //     $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组归档'});
+                    //     $("#archiveBlock .panel-container").empty().html(_.template(archivePageTpl));
+                    //     $("#archiveBlock").on("click","#cancelBtn",function () {
+                    //
+                    //         $("#archiveBlock").$close();
+                    //     });
+                    //     $("#archiveBlock").on("click","#saveBtn",function () {
+                    //         $("#archiveBlock").$close();
+                    //     });
+                    // });
+                    // $(".into-broadcast").on("click", function () {
+                    //     $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
+                    //     $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
+                    //     $("#archiveBlock").on("click","#cancelBtn",function () {
+                    //
+                    //         $("#archiveBlock").$close();
+                    //     });
+                    //     $("#archiveBlock").on("click","#saveBtn",function () {
+                    //         $("#archiveBlock").$close();
+                    //     });
+                    // });
+                    // $(".into-communication").on("click", function () {
+                    //     console.info("进入聊天界面！");
+                    //     // // $("#mainDiv").empty().html(_.template(chatPageTpl));
+                    //     // $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+                    //     // // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
+                    //     // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
+                    //     // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
+                    //     window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
+                    // });
+                    // //嵌套表格的实现--------------------------------------------------------------------------------------------
+                    // $(".into-group").on('click', function () {
+                    //     var isOpen = $(this).hasClass("clicked-open");
+                    //     var data1 = [
+                    //         {
+                    //             "rownum": 0,
+                    //             "id": "BD54F18C24874DBE934472CD21EBC6BB",
+                    //             "groupId": "ABCDEFGHABCDEFGHABCDEFGH12346157",
+                    //             "groupName": "测试项目1",
+                    //             "groupType": "0",
+                    //             "caseNum": 4,
+                    //             "createName": "张三",
+                    //             "staffNum": "10",
+                    //             "createTime": "2017-07-06 18:00:16",
+                    //             "fileStatus": 0,
+                    //             "fileTime": "2017-09-04 11:59:09"
+                    //         },
+                    //         {
+                    //             "rownum": 1,
+                    //             "id": "06FB300E23AB4630B1153637D7C655E6",
+                    //             "groupId": "E3E47DAB3F1F44C7BD02ED9E91C6D951",
+                    //             "groupName": "一长四必项目",
+                    //             "groupType": "1",
+                    //             "caseNum": 1,
+                    //             "createName": "超级管理员",
+                    //             "staffNum": "5",
+                    //             "createTime": "2017-07-05 18:00:16",
+                    //             "fileStatus": 1,
+                    //             "fileTime": "2017-09-07 11:59:09"
+                    //         }
+                    //     ];
+                    //     var currentTr = $(this).parents("tr");
+                    //     if (isOpen) {
+                    //         $(this).removeClass("clicked-open");
+                    //         currentTr.next().remove();
+                    //     } else {
+                    //         $(this).addClass("clicked-open");
+                    //         var tableHtml = _.template(groupListTpl, {data: data1});
+                    //         console.info(tableHtml);
+                    //         console.info($(tableHtml));
+                    //         //嵌套内容渲染
+                    //         var appendTr = currentTr.after('<tr class="tr-inner-table"><td colspan="12"></td></tr>');
+                    //         currentTr.next().find("td").empty().html(tableHtml);
+                    //         $(".into-broadcast").on("click", function () {
+                    //             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
+                    //             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
+                    //             $("#archiveBlock").on("click","#cancelBtn",function () {
+                    //
+                    //                 $("#archiveBlock").$close();
+                    //             });
+                    //             $("#archiveBlock").on("click","#saveBtn",function () {
+                    //                 $("#archiveBlock").$close();
+                    //             });
+                    //         });
+                    //     }
+                    // });
 
-                    $("#archiveBlock").$close();
-                });
-                $("#archiveBlock").on("click","#saveBtn",function () {
-                    $("#archiveBlock").$close();
-                });
-            });
-            $(".into-communication").on("click", function () {
-                console.info("进入聊天界面！");
-                // // $("#mainDiv").empty().html(_.template(chatPageTpl));
-                // $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                // // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
-                // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-                // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
-                window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
-            });
-            //嵌套表格的实现--------------------------------------------------------------------------------------------
-            $(".into-group").on('click', function () {
-                var isOpen = $(this).hasClass("clicked-open");
-                var data1 = [
-                    {
-                        "rownum": 0,
-                        "id": "BD54F18C24874DBE934472CD21EBC6BB",
-                        "groupId": "ABCDEFGHABCDEFGHABCDEFGH12346157",
-                        "groupName": "测试项目1",
-                        "groupType": "0",
-                        "caseNum": 4,
-                        "createName": "张三",
-                        "staffNum": "10",
-                        "createTime": "2017-07-06 18:00:16",
-                        "fileStatus": 0,
-                        "fileTime": "2017-09-04 11:59:09"
-                    },
-                    {
-                        "rownum": 1,
-                        "id": "06FB300E23AB4630B1153637D7C655E6",
-                        "groupId": "E3E47DAB3F1F44C7BD02ED9E91C6D951",
-                        "groupName": "一长四必项目",
-                        "groupType": "1",
-                        "caseNum": 1,
-                        "createName": "超级管理员",
-                        "staffNum": "5",
-                        "createTime": "2017-07-05 18:00:16",
-                        "fileStatus": 1,
-                        "fileTime": "2017-09-07 11:59:09"
-                    }
-                ];
-                var currentTr = $(this).parents("tr");
-                if (isOpen) {
-                    $(this).removeClass("clicked-open");
-                    currentTr.next().remove();
-                } else {
-                    $(this).addClass("clicked-open");
-                    var tableHtml = _.template(groupListTpl, {data: data1});
-                    console.info(tableHtml);
-                    console.info($(tableHtml));
-                    //嵌套内容渲染
-                    var appendTr = currentTr.after('<tr class="tr-inner-table"><td colspan="12"></td></tr>');
-                    currentTr.next().find("td").empty().html(tableHtml);
-                    $(".into-broadcast").on("click", function () {
-                        $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
-                        $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
-                        $("#archiveBlock").on("click","#cancelBtn",function () {
-
-                            $("#archiveBlock").$close();
-                        });
-                        $("#archiveBlock").on("click","#saveBtn",function () {
-                            $("#archiveBlock").$close();
-                        });
-                    });
                 }
             });
         },
@@ -306,19 +283,50 @@ define(['underscore',
                     dictOpener.openChooseDict($(this));
                 });
                 $("#btnBaseInfo #saveBtn").on("click", function () {
-                    toast("保存专案组基本信息").ok();
-                    $('#addGroupTab a#navRelationCase').trigger("click");
-                    $('#addGroupTab a#navRelationCase').on("click", function () {
-                        $('#baseInfo .field-valid').validatebox();
-                        if ($('.validatebox-invalid').length > 0) {
-                            toast("请先保存专案组基本信息！").warn();
-                            return false;
-                        } else {
-                            //保存专案组基本信息
+                    $('.field-valid').validatebox();
+                    if ($('.validatebox-invalid').length > 0) {
+                        return false;
+                    }
+                    var param = $("#taskAddForm").serializeObject();
+                    var jsrParam = str2obj($("#jsr").attr("paramattr"));
+                    var jsr = $.trim($("#jsr").val()).split(",");
+                    $.extend(param, {
+                        creator: top.userId,
+                        createname: top.trueName,
+                        deparmentcode: top.orgCode,
+                        deparmentname: top.orgName,
+                        bcrwid: bcrwid ? bcrwid : "",
+                        fkid: fkid ? fkid : "",
+                        taskName: $.trim($("#taskName").val()),
+                        groupid: $.trim($("#groupid").val()),
+                        jsr: jsrParam.userId,
+                        jsrname: jsrParam.userName,
+                        fqrLxfs: top.phone,
+                        jsrLxfs: $.trim($("#jsrLxfs").val()),
+                        taskContent: $.trim($("#taskContent").val()),
+                        fkjzTime: $.trim($("#fkjzTime").val()),
+                        createtime: $.trim($("#createtime").val())
+                    });
+                    specialCaseGroupAjax.addGroup(param, function (r) {
+                        if (r.flag == 1) {
+                            toast('保存成功！', 600, function () {
+                                $('#addGroupTab a#navRelationCase').trigger("click");
+                                $('#addGroupTab a#navRelationCase').on("click", function () {
+                                    $('#baseInfo .field-valid').validatebox();
+                                    if ($('.validatebox-invalid').length > 0) {
+                                        toast("请先保存专案组基本信息！").warn();
+                                        return false;
+                                    } else {
+                                        //保存专案组基本信息
 
-                            $(this).tab('show');
-                            flag = true;
-                            _self.handleRelationCase();
+                                        $(this).tab('show');
+                                        flag = true;
+                                        _self.handleRelationCase();
+                                    }
+                                });
+                            }).ok();
+                        } else {
+                            toast(r.msg, 600).err()
                         }
                     });
                 });

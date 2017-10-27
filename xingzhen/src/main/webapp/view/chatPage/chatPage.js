@@ -271,6 +271,98 @@ var chatHandle = {
         });
     },
 
+    createGroup: function () {
+        JIM.createGroup({
+            'group_name' : '<groupName>',
+            'group_description' : '<groupDescription>'
+        }).onSuccess(function(data) {
+            //data.code 返回码
+            //data.message 描述
+            //data.gid 群组id
+            //data.group_name 群名
+            //data.group_descriptin 群描述
+        }).onFail(function(data) {
+            //data.code 返回码
+            //data.message 描述
+        });
+    },
+    addGroupMembers:function () {
+        JIM.addGroupMembers({
+            'gid' : '<gid>',
+            'member_usernames' : [{'username':'name1'},{'username':'name2','appkey':'appkey2'}]
+        }).onSuccess(function(data) {
+            //data.code 返回码
+            //data.message 描述
+        }).onFail(function(data) {
+            //同上
+        });
+    },
+    delGroupMembers:function () {
+        JIM.delGroupMembers({
+            'gid' : '<gid>',
+            'member_usernames' : [{'username':'name1'},{'username':'name2','appkey':'appkey2'}]
+        }).onSuccess(function(data) {
+            //data.code 返回码
+            //data.message 描述
+        }).onFail(function(data) {
+            // 同上
+        });
+    },
+    getGroups:function () {
+        JIM.getGroups().onSuccess(function(data) {
+            //data.code 返回码
+            //data.message 描述
+            //data.group_list[] 群组列表，如下示例
+            //data.group_list[0].gid 群id
+            //data.group_list[0].name 群名
+            //data.group_list[0].desc 群描述
+            //data.group_list[0].appkey 群所属appkey
+            //data.group_list[0].ctime 群创建时间
+            //data.group_list[0].mtime 最近一次群信息修改时间
+            //data.group_list[0].avatar 群头像
+        }).onFail(function(data) {
+            //data.code 返回码
+            //data.message 描述
+        });
+    },
+    groupShieldList:function () {
+        JIM.groupShieldList().onSuccess(function(data) {
+            //data.code 返回码
+            //data.message 描述
+            //data.group_list[] 群组列表，如下示例
+            //data.group_list[0].gid 群id
+            //data.group_list[0].name 群名
+            //data.group_list[0].desc 群描述
+            //data.group_list[0].appkey 群所属appkey
+            //data.group_list[0].ctime 群创建时间
+            //data.group_list[0].mtime 最近一次群信息修改时间
+        }).onFail(function(data) {
+            // 同上
+        });
+    },
+    onMsgReceiptChange:function () {
+        JIM.onMsgReceiptChange(function(data) {
+            // data.type
+            // data.gid
+            // data.appkey
+            // data.username
+            // data.receipt_msgs[].msg_id
+            // data.receipt_msgs[].unread_count
+        });
+    },
+    onSyncMsgReceipt:function () {
+        JIM.onSyncMsgReceipt(function(data) {
+            // data 为已读数变更事件数组 [receiptChange1,...]
+        });
+    },
+    onMutiUnreadMsgUpdate:function () {
+        JIM.onMutiUnreadMsgUpdate(function(data) {
+            // data.type 会话类型
+            // data.gid 群 id
+            // data.appkey 所属 appkey
+            // data.username 会话 username
+        });
+    },
     sendGroupMsg: function (textContent) {
         JIM.sendGroupMsg({
             'target_gid': gid,
