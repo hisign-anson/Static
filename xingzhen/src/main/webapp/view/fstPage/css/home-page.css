@@ -230,13 +230,13 @@ img {
 /*待办任务 end*/
 
 /*最新发布*/
-.news {
+.contentDiv {
     border: 0;
     height: 210px;
     overflow: scroll;
 }
 
-.news > div {
+.contentDiv > div {
     margin-bottom: 10px;
     padding-bottom: 10px;
     position: relative;
@@ -247,7 +247,7 @@ img {
 /*.news>div:nth-child(even){*/
 /*background:#eee;*/
 /*}*/
-.news > div:last-child {
+.contentDiv > div:last-child {
     margin-bottom: 0;
 }
 
@@ -350,7 +350,7 @@ img {
     color: #9e9e9e;
 }
 
-.news .span-time {
+.contentDiv .span-time {
     /*display: inline-block;*/
     /*position: absolute;*/
     /*top: 25px;*/
@@ -421,8 +421,8 @@ img {
     margin: 3px auto 15px;
 }
 
-/*加载个人经费开支情况图表*/
-#kaizhiqkT, #wupinqkT, #yongcheqkT {
+/*加载情况图表*/
+.chartH {
     width: auto;
     height: 343px;
 }

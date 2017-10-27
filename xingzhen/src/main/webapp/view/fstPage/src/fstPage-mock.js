@@ -69,124 +69,141 @@ define([
             //显示各区域专案组创建情况
             _self.showAreaCreateCaseList();
         },
-        showTodoList:function () {
+        showTodoList:function () {//待办任务
             _self = this;
-            var todoData = {
-                "feedback":{
-                    "number":1
-                },
-                "received":{
-                    "number":3
-                },
-                "delay":{
-                    "number":1
+            fstPageAjax.getTaskCountInfo({userId:top.userId},function(r){
+                if(r.flag==1){
+                    $("#todoDiv").empty().html(_.template(todoListTpl, {data: r.data}));
+                    //点击切换 反馈待确认
+                    $(".list-todo#feedback").on("click", function () {
+                        var modelNo = $(this).attr("modelNo");
+                        var en = $(this).attr("en");
+                        var status = $(this).attr("status");
+                        var fkqrzt = $(this).attr("fkqrzt");
+                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                            if (modelNo == $(item).attr("page-no")) {
+                                $($(item).find("a")[0]).attr('en', en);
+                                $($(item).find("a")[0]).attr('status', status);
+                                $($(item).find("a")[0]).attr('fkqrzt', fkqrzt);
+                                $(item).parent().parent().find('a')[0].click();
+                                $(item).find("a")[0].click();
+                            }
+                        });
+                    });
+                    //点击切换 待接收
+                    $(".list-todo#feedback").on("click", function () {
+                        var modelNo = $(this).attr("modelNo");
+                        var en = $(this).attr("en");
+                        var status = $(this).attr("status");
+                        var taskType = $(this).attr("taskType");
+                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                            if (modelNo == $(item).attr("page-no")) {
+                                $($(item).find("a")[0]).attr('en', en);
+                                $($(item).find("a")[0]).attr('status', status);
+                                $($(item).find("a")[0]).attr('taskType', taskType);
+                                $(item).parent().parent().find('a')[0].click();
+                                $(item).find("a")[0].click();
+                            }
+                        });
+                    });
+                    //点击切换 超期未处理
+                    $(".list-todo#feedback").on("click", function () {
+                        var modelNo = $(this).attr("modelNo");
+                        var en = $(this).attr("en");
+                        var status = $(this).attr("status");
+                        var overdue = $(this).attr("overdue");
+                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                            if (modelNo == $(item).attr("page-no")) {
+                                $($(item).find("a")[0]).attr('en', en);
+                                $($(item).find("a")[0]).attr('status', status);
+                                $($(item).find("a")[0]).attr('overdue', overdue);
+                                $(item).parent().parent().find('a')[0].click();
+                                $(item).find("a")[0].click();
+                            }
+                        });
+                    });
+                }else{
+                    toast(r.msg,600).err();
                 }
-            };
-            $("#todoDiv").empty().html(_.template(todoListTpl, {data: todoData}));
+            });
+            //var todoData = {
+            //    "feedback":{
+            //        "number":1
+            //    },
+            //    "received":{
+            //        "number":3
+            //    },
+            //    "delay":{
+            //        "number":1
+            //    }
+            //};
 
-            //点击切换 反馈待确认
-            $(".list-todo#feedback").on("click", function () {
-                var modelNo = $(this).attr("modelNo");
-                var en = $(this).attr("en");
-                var status = $(this).attr("status");
-                var fkqrzt = $(this).attr("fkqrzt");
-                $('#root-menu', window.parent.document).find('li').each(function (i, item) {
-                    if (modelNo == $(item).attr("page-no")) {
-                        $($(item).find("a")[0]).attr('en', en);
-                        $($(item).find("a")[0]).attr('status', status);
-                        $($(item).find("a")[0]).attr('fkqrzt', fkqrzt);
-                        $(item).parent().parent().find('a')[0].click();
-                        $(item).find("a")[0].click();
-                    }
-                });
-            });
-            //点击切换 待接收
-            $(".list-todo#feedback").on("click", function () {
-                var modelNo = $(this).attr("modelNo");
-                var en = $(this).attr("en");
-                var status = $(this).attr("status");
-                var taskType = $(this).attr("taskType");
-                $('#root-menu', window.parent.document).find('li').each(function (i, item) {
-                    if (modelNo == $(item).attr("page-no")) {
-                        $($(item).find("a")[0]).attr('en', en);
-                        $($(item).find("a")[0]).attr('status', status);
-                        $($(item).find("a")[0]).attr('taskType', taskType);
-                        $(item).parent().parent().find('a')[0].click();
-                        $(item).find("a")[0].click();
-                    }
-                });
-            });
-            //点击切换 超期未处理
-            $(".list-todo#feedback").on("click", function () {
-                var modelNo = $(this).attr("modelNo");
-                var en = $(this).attr("en");
-                var status = $(this).attr("status");
-                var overdue = $(this).attr("overdue");
-                $('#root-menu', window.parent.document).find('li').each(function (i, item) {
-                    if (modelNo == $(item).attr("page-no")) {
-                        $($(item).find("a")[0]).attr('en', en);
-                        $($(item).find("a")[0]).attr('status', status);
-                        $($(item).find("a")[0]).attr('overdue', overdue);
-                        $(item).parent().parent().find('a')[0].click();
-                        $(item).find("a")[0].click();
-                    }
-                });
-            });
         },
-        showAchievementsList:function () {
+        showAchievementsList:function () {//平台成果展示
             _self = this;
-            var achievementData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"58A65CB316DFA592E050007F01003F1B",
-                        "msgContent":"谢斌杀人系列案告破",
-                        "msgTitle":"谢斌杀人系列案告破",
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"58A5F3833C5EB497E050007F01005030",
-                        "msgContent":"某某被入室盗窃系列案",
-                        "msgTitle":"某某被入室盗窃系列案",
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"7E102EB13BCB4103B7748F819F7DBA17",
-                        "msgContent":"李四杀人案告破",
-                        "msgTitle":"李四杀人案告破",
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:42:28",
-                        "id":"B1EEE28663F742EC8F106DDAB57ED578",
-                        "msgContent":"王五被绑架案告破",
-                        "msgTitle":"王五被绑架案告破",
-                        "rownum":"4"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:05:30",
-                        "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-                        "msgContent":"广州某某公司被入室盗窃案告破",
-                        "msgTitle":"广州某某公司被入室盗窃案告破",
-                        "rownum":"5"
-                    },
-                    {
-                        "createDate":"2017-09-07 10:43:02",
-                        "id":"9D5632A8E72E459B80879033DC9BC53A",
-                        "msgContent":"广州某某小孩被拐案件告破",
-                        "msgTitle":"广州某某小孩被拐案件告破",
-                        "rownum":"6"
+            //var achievementData = {
+            //    "code":0,
+            //    "data":[
+            //        {
+            //            "createDate":"2017-09-08 11:42:11",
+            //            "id":"58A65CB316DFA592E050007F01003F1B",
+            //            "msgContent":"谢斌杀人系列案告破",
+            //            "msgTitle":"谢斌杀人系列案告破",
+            //            "rownum":"1"
+            //        },
+            //        {
+            //            "createDate":"2017-09-08 11:30:39",
+            //            "id":"58A5F3833C5EB497E050007F01005030",
+            //            "msgContent":"某某被入室盗窃系列案",
+            //            "msgTitle":"某某被入室盗窃系列案",
+            //            "rownum":"2"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:58:30",
+            //            "id":"7E102EB13BCB4103B7748F819F7DBA17",
+            //            "msgContent":"李四杀人案告破",
+            //            "msgTitle":"李四杀人案告破",
+            //            "rownum":"3"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:42:28",
+            //            "id":"B1EEE28663F742EC8F106DDAB57ED578",
+            //            "msgContent":"王五被绑架案告破",
+            //            "msgTitle":"王五被绑架案告破",
+            //            "rownum":"4"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:05:30",
+            //            "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
+            //            "msgContent":"广州某某公司被入室盗窃案告破",
+            //            "msgTitle":"广州某某公司被入室盗窃案告破",
+            //            "rownum":"5"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 10:43:02",
+            //            "id":"9D5632A8E72E459B80879033DC9BC53A",
+            //            "msgContent":"广州某某小孩被拐案件告破",
+            //            "msgTitle":"广州某某小孩被拐案件告破",
+            //            "rownum":"6"
+            //        }
+            //    ],
+            //    "flag":1,
+            //    "totalCount":6
+            //};
+            fstPageAjax.getAchievement({},function(r){
+                if(r.flag==1){
+                    debugger
+                    $("#achievementDiv").empty().html(_.template(achievementListTpl, {data: r.data}));
+                    if(r.data && r.data.length<=0){
+                        $("#achieveContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
-                ],
-                "flag":1,
-                "totalCount":6
-            };
-            $("#achievementDiv").empty().html(_.template(achievementListTpl, {data: achievementData.data}));
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+
         },
-        showNewsList:function () {
+        showNewsList:function () {//通知公告
             _self = this;
             var newsData = {
                 "code":0,
@@ -374,60 +391,59 @@ define([
             };
             $("#toolDownloadDiv").empty().html(_.template(toolDownloadListTpl, {data: toolDownloadData.data}));
         },
-        showAreaSolveCaseList:function () {
+        showAreaSolveCaseList:function () {//各区域专案组创建情况
             _self = this;
             $("#areaSolveCaseDiv").empty().html(_.template(areaSolveCaseListTpl));
-
-            var areaSolveCaseData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"C11607D4E132424B80ACD5F83BA8458B",
-                        "area":"天河区",
-                        "caseNum":10,
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"3AD948322B064223AD70169F4F1CFF7E",
-                        "area":"荔湾区",
-                        "caseNum":12,
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "area":"番禺区",
-                        "caseNum":4,
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:42:28",
-                        "id":"FC7114D4977044539129A4C34716EBDB",
-                        "area":"海珠区",
-                        "caseNum":12,
-                        "rownum":"4"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:05:30",
-                        "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-                        "area":"萝岗区",
-                        "caseNum":3,
-                        "rownum":"5"
-                    },
-                    {
-                        "createDate":"2017-09-07 10:43:02",
-                        "id":"9D5632A8E72E459B80879033DC9BC53A",
-                        "area":"白云区",
-                        "caseNum":5,
-                        "rownum":"6"
-                    }
-                ],
-                "flag":1,
-                "totalCount":6
-            };
-            var myChart = ec.init(byid('kaizhiqkT'));
+            //var areaSolveCaseData = {
+            //    "code":0,
+            //    "data":[
+            //        {
+            //            "createDate":"2017-09-08 11:42:11",
+            //            "id":"C11607D4E132424B80ACD5F83BA8458B",
+            //            "area":"天河区",
+            //            "caseNum":10,
+            //            "rownum":"1"
+            //        },
+            //        {
+            //            "createDate":"2017-09-08 11:30:39",
+            //            "id":"3AD948322B064223AD70169F4F1CFF7E",
+            //            "area":"荔湾区",
+            //            "caseNum":12,
+            //            "rownum":"2"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:58:30",
+            //            "id":"9D263D9CB95E4482B96166F50995C779",
+            //            "area":"番禺区",
+            //            "caseNum":4,
+            //            "rownum":"3"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:42:28",
+            //            "id":"FC7114D4977044539129A4C34716EBDB",
+            //            "area":"海珠区",
+            //            "caseNum":12,
+            //            "rownum":"4"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:05:30",
+            //            "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
+            //            "area":"萝岗区",
+            //            "caseNum":3,
+            //            "rownum":"5"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 10:43:02",
+            //            "id":"9D5632A8E72E459B80879033DC9BC53A",
+            //            "area":"白云区",
+            //            "caseNum":5,
+            //            "rownum":"6"
+            //        }
+            //    ],
+            //    "flag":1,
+            //    "totalCount":6
+            //};
+            var myChart = ec.init(byid('getSolveCaseInfo'));
             var colors = ['#22A0E2', '#3BC087', '#FFA700', '#20B7B0','#EB6854', '#A78CF1', '#289358','#FF9016','#CF5748', '#5AC7AD', '#F88764', '#578ABE'];
             var option = {
                 color: colors,
@@ -478,99 +494,144 @@ define([
                 ]
             };
             // 为echarts对象加载数据
-            var name = [];
-            var value = [];
-            for (var i = 0, len = areaSolveCaseData.data.length; i < len; i++) {
-                name[i] = areaSolveCaseData.data[i].area;
-                value[i] = areaSolveCaseData.data[i].caseNum;
+            if (!dateType) {
+                var dateType = 0;
             }
-            option.xAxis[0].data = name;
-            option.series[0].data = value;
-            myChart.clear();
-            myChart.hideLoading();
-            myChart.setOption(option);
+
 
             //切换月度，季度，年度
-            $("#expenseQuest").on("click", "li", function () {
+            $("#getSolveCaseInfoQuest").on("click", "li", function () {
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
-                    option.color = [colors[0]];
-                    option.xAxis[0].data = name;
-                    option.series[0].data = value;
-                    myChart.clear();
-                    myChart.hideLoading();
-                    myChart.setOption(option);
+                    fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
+                        debugger
+                        if(r.flag==1){
+                            var name = [];
+                            var value = [];
+                            for (var i = 0, len = r.data.length; i < len; i++) {
+                                name[i] = r.data[i].NAME;
+                                value[i] = r.data[i].NUM;
+                            }
+                            option.color = [colors[0]];
+                            option.xAxis[0].data = name;
+                            option.series[0].data = value;
+                            myChart.clear();
+                            myChart.hideLoading();
+                            if(name.length>0||value.length>0){
+                                myChart.setOption(option);
+                            }else{
+                                $("#getSolveCaseInfo").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+                            }
+                        }else{
+                            toast(r.msg,600).err();
+                        }
+                    });
                 } else if ($(this).index() == 1) {
-                    option.color = [colors[6]];
-                    option.xAxis[0].data = name;
-                    option.series[0].data = value;
-                    myChart.clear();
-                    myChart.hideLoading();
-                    myChart.setOption(option);
+                    fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
+                        debugger
+                        if(r.flag==1){
+                            var name = [];
+                            var value = [];
+                            for (var i = 0, len = r.data.length; i < len; i++) {
+                                name[i] = r.data[i].NAME;
+                                value[i] = r.data[i].NUM;
+                            }
+                            option.color = [colors[6]];
+                            option.xAxis[0].data = name;
+                            option.series[0].data = value;
+                            myChart.clear();
+                            myChart.hideLoading();
+                            if(name.length>0||value.length>0){
+                                myChart.setOption(option);
+                            }else{
+                                $("#getSolveCaseInfo").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+                            }
+                        }else{
+                            toast(r.msg,600).err();
+                        }
+                    });
                 } else {
-                    option.color = [colors[8]];
-                    option.xAxis[0].data = name;
-                    option.series[0].data = value;
-                    myChart.clear();
-                    myChart.hideLoading();
-                    myChart.setOption(option);
+                    fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
+                        debugger
+                        if(r.flag==1){
+                            var name = [];
+                            var value = [];
+                            for (var i = 0, len = r.data.length; i < len; i++) {
+                                name[i] = r.data[i].NAME;
+                                value[i] = r.data[i].NUM;
+                            }
+                            option.color = [colors[8]];
+                            option.xAxis[0].data = name;
+                            option.series[0].data = value;
+                            myChart.clear();
+                            myChart.hideLoading();
+                            if(name.length>0||value.length>0){
+                                myChart.setOption(option);
+                            }else{
+                                $("#getSolveCaseInfo").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+                            }
+                        }else{
+                            toast(r.msg,600).err();
+                        }
+                    });
                 }
             });
+            $("#getSolveCaseInfoQuest li").eq(0).click();
         },
         showAreaCreateCaseList:function () {
             _self = this;
             $("#areaCreateCaseDiv").empty().html(_.template(areaCreateCaseListTpl));
-            var areaCreateCaseData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"C11607D4E132424B80ACD5F83BA8458B",
-                        "area":"天河区",
-                        "caseNum":3,
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"3AD948322B064223AD70169F4F1CFF7E",
-                        "area":"荔湾区",
-                        "caseNum":8,
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "area":"番禺区",
-                        "caseNum":4,
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:42:28",
-                        "id":"FC7114D4977044539129A4C34716EBDB",
-                        "area":"海珠区",
-                        "caseNum":12,
-                        "rownum":"4"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:05:30",
-                        "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-                        "area":"萝岗区",
-                        "caseNum":6,
-                        "rownum":"5"
-                    },
-                    {
-                        "createDate":"2017-09-07 10:43:02",
-                        "id":"9D5632A8E72E459B80879033DC9BC53A",
-                        "area":"白云区",
-                        "caseNum":5,
-                        "rownum":"6"
-                    }
-                ],
-                "flag":1,
-                "totalCount":6
-            };
+            //var areaCreateCaseData = {
+            //    "code":0,
+            //    "data":[
+            //        {
+            //            "createDate":"2017-09-08 11:42:11",
+            //            "id":"C11607D4E132424B80ACD5F83BA8458B",
+            //            "area":"天河区",
+            //            "caseNum":3,
+            //            "rownum":"1"
+            //        },
+            //        {
+            //            "createDate":"2017-09-08 11:30:39",
+            //            "id":"3AD948322B064223AD70169F4F1CFF7E",
+            //            "area":"荔湾区",
+            //            "caseNum":8,
+            //            "rownum":"2"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:58:30",
+            //            "id":"9D263D9CB95E4482B96166F50995C779",
+            //            "area":"番禺区",
+            //            "caseNum":4,
+            //            "rownum":"3"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:42:28",
+            //            "id":"FC7114D4977044539129A4C34716EBDB",
+            //            "area":"海珠区",
+            //            "caseNum":12,
+            //            "rownum":"4"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:05:30",
+            //            "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
+            //            "area":"萝岗区",
+            //            "caseNum":6,
+            //            "rownum":"5"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 10:43:02",
+            //            "id":"9D5632A8E72E459B80879033DC9BC53A",
+            //            "area":"白云区",
+            //            "caseNum":5,
+            //            "rownum":"6"
+            //        }
+            //    ],
+            //    "flag":1,
+            //    "totalCount":6
+            //};
 
-            var myChart = ec.init(byid('wupinqkT'));
+            var myChart = ec.init(byid('getCreateInfo'));
             var colors = ['#22A0E2', '#3BC087', '#FFA700', '#20B7B0','#EB6854', '#A78CF1', '#289358','#FF9016','#CF5748', '#5AC7AD', '#F88764', '#578ABE'];
             var option = {
                 color: [colors[7]],
@@ -619,44 +680,93 @@ define([
                 ]
             };
             // 为echarts对象加载数据
-            var name = [];
-            var value = [];
-            for (var i = 0, len = areaCreateCaseData.data.length; i < len; i++) {
-                name[i] = areaCreateCaseData.data[i].area;
-                value[i] = areaCreateCaseData.data[i].caseNum;
+            // 为echarts对象加载数据
+            if (!dateType) {
+                var dateType = 0;
             }
-            option.xAxis[0].data = name;
-            option.series[0].data = value;
-            myChart.clear();
-            myChart.hideLoading();
-            myChart.setOption(option);
 
             //切换月度，季度，年度
-            $("#goodsQuest").on("click", "li", function () {
+            $("#getCreateInfoQuest").on("click", "li", function () {
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
-                    option.color = [colors[7]];
-                    option.xAxis[0].data = name;
-                    option.series[0].data = value;
-                    myChart.clear();
-                    myChart.hideLoading();
-                    myChart.setOption(option);
+                    fstPageAjax.getCreateInfo({dateType:dateType},function(r){
+                        debugger
+                        if(r.flag==1){
+                            var name = [];
+                            var value = [];
+                            for (var i = 0, len = r.data.length; i < len; i++) {
+                                name[i] = r.data[i].NAME;
+                                value[i] = r.data[i].NUM;
+                            }
+                            option.color = [colors[7]];
+                            option.xAxis[0].data = name;
+                            option.series[0].data = value;
+                            myChart.clear();
+                            myChart.hideLoading();
+                            if(name.length>0||value.length>0){
+                                myChart.setOption(option);
+                            }else{
+                                $("#getCreateInfo").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+                            }
+                        }else{
+                            toast(r.msg,600).err();
+                        }
+
+                    });
+
                 } else if ($(this).index() == 1) {
-                    option.color = [colors[5]];
-                    option.xAxis[0].data = name;
-                    option.series[0].data = value;
-                    myChart.clear();
-                    myChart.hideLoading();
-                    myChart.setOption(option);
+                    fstPageAjax.getCreateInfo({dateType:dateType},function(r){
+                        debugger
+                        if(r.flag==1){
+                            var name = [];
+                            var value = [];
+                            for (var i = 0, len = r.data.length; i < len; i++) {
+                                name[i] = r.data[i].NAME;
+                                value[i] = r.data[i].NUM;
+                            }
+                            option.color = [colors[5]];
+                            option.xAxis[0].data = name;
+                            option.series[0].data = value;
+                            myChart.clear();
+                            myChart.hideLoading();
+                            if(name.length>0||value.length>0){
+                                myChart.setOption(option);
+                            }else{
+                                $("#getCreateInfo").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+                            }
+                        }else{
+                            toast(r.msg,600).err();
+                        }
+
+                    });
                 } else {
-                    option.color = [colors[9]];
-                    option.xAxis[0].data = name;
-                    option.series[0].data = value;
-                    myChart.clear();
-                    myChart.hideLoading();
-                    myChart.setOption(option);
+                    fstPageAjax.getCreateInfo({dateType:dateType},function(r){
+                        debugger
+                        if(r.flag==1){
+                            var name = [];
+                            var value = [];
+                            for (var i = 0, len = r.data.length; i < len; i++) {
+                                name[i] = r.data[i].NAME;
+                                value[i] = r.data[i].NUM;
+                            }
+                            option.color = [colors[9]];
+                            option.xAxis[0].data = name;
+                            option.series[0].data = value;
+                            myChart.clear();
+                            myChart.hideLoading();
+                            if(name.length>0||value.length>0){
+                                myChart.setOption(option);
+                            }else{
+                                $("#getCreateInfo").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+                            }
+                        }else{
+                            toast(r.msg,600).err();
+                        }
+
+                    });
                 }
             });
+            $("#getCreateInfoQuest li").eq(0).click();
         },
 
         clcikMore: function (element,htmlPage) {
