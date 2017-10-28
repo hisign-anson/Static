@@ -809,7 +809,7 @@
       return namespace === d3_nsXhtml && document.documentElement.namespaceURI === d3_nsXhtml ? document.createElement(name) : document.createElementNS(namespace, name);
     }
     function createNS() {
-
+console.log(document.createElementNS,this.ownerDocument)
         debugger
       return this.ownerDocument.createElementNS(name.space, name.local);
     }

@@ -2154,6 +2154,7 @@ require.config({
         "text": "/plugin/text",
         "underscore": "/plugin/underscore",
         "echarts": "/plugin/echarts/echarts3110",
-        "d3": "/plugin/d3/d3.3.5.17"
+        "d3": "/plugin/d3/d3.3.5.17",
+        "d3v": "/plugin/d3/d3.v3.min"
     }
 });

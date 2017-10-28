@@ -4,29 +4,67 @@ define([
     'text!/view/fstPage/achievementMoreList.html',
     'text!/view/fstPage/tpl/moreList/achievementMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/achievementInfo.html',
+    'text!/view/fstPage/tpl/moreList/achievementInfoAjTr.html',
+    'text!/view/fstPage/tpl/moreList/achievementInfoGroupMemberTr.html',
     'text!/view/fstPage/tpl/moreList/groupTaskList.html',
     'text!/view/fstPage/tpl/moreList/newsMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/messageMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/knowledgeMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/toolDownloadMoreListTr.html',
-    'text!/view/fstPage/tpl/moreList/commonMoreListTr.html'], function (_, achieveMoreListTpl, achieveMoreListTrTpl, achievementInfoTpl, groupTaskListTpl,
-                                                                              newsMoreListTrTpl, messageMoreListTrTpl, knowledgeMoreListTrTpl, downloadMoreListTrTpl,commonMoreListTrTpl) {
+    'text!/view/fstPage/tpl/moreList/commonMoreListTr.html',
+    '../dat/fstPage.js'], function (_, achieveMoreListTpl, achieveMoreListTrTpl, achievementInfoTpl,achievementInfoAjTrTpl,achievementInfoGroupMemberTrTpl, groupTaskListTpl,
+                                                                              newsMoreListTrTpl, messageMoreListTrTpl, knowledgeMoreListTrTpl, downloadMoreListTrTpl,commonMoreListTrTpl,fstPageAjax) {
     return {
         showAchieveMoreList: function () {
             _self = this;
-            $("#achieveListTable tbody").empty().html(_.template(achieveMoreListTrTpl));
-            $("#achieveListTable").on("click", ".link-text", function () {
-                $("#mainDiv").empty().html(_.template(achievementInfoTpl));
-                $("#myTabMinor a").on("click", function () {
-                    $(this).tab('show');
-                    if ($(this).attr("id") == "01") {
-                        // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
-                        _self.showChart();
-                    } else {
-                        _self.showTable();
-                    }
-                });
-                $('#myTabMinor a:first').click();
+            fstPageAjax.getAchievement({},function(r) {
+                if (r.flag == 1) {
+                    debugger
+                    $("#achieveListTable tbody").empty().html(_.template(achieveMoreListTrTpl, {data: r.data}));
+                    $("#achieveListResult span.total-count").empty().text(r.totalCount);
+                    $("#achieveListTable").on("click", ".link-text", function () {
+                        $("#mainDiv").empty().html(_.template(achievementInfoTpl));
+                        if(r.data.groupId){
+                            _self.getGroupMemberList(r.data.groupId);//平台成果展示(点击更多--获取所有组内成员)
+                        }
+                        _self.getAjGroupPage();//平台成果展示(点击更多--涉及案件)
+                        $("#myTabMinor a").on("click", function () {
+                            $(this).tab('show');
+                            if ($(this).attr("id") == "01") {
+                                // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
+                                _self.showChart();
+                            } else {
+                                _self.showTable();
+                            }
+                        });
+                        $('#myTabMinor a:first').click();
+                    });
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+
+        },
+        getAjGroupPage:function(){//平台成果展示(点击更多--涉及案件)
+            _self=this;
+            fstPageAjax.getAjGroupPage({},function(r){
+                debugger
+                if(r.flag==1){
+                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+        },
+        getGroupMemberList:function(groupId){//平台成果展示(点击更多--获取所有组内成员)
+            _self=this;
+            fstPageAjax.getGroupMemberList({groupId:groupId},function(r){
+                debugger
+                if(r.flag==1){
+                    $("#staffTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                }else{
+                    toast(r.msg,600).err();
+                }
             });
         },
         showChart: function () {

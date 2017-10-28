@@ -25,19 +25,9 @@ define([
 
             //显示平台成果
             _self.showAchievementsList();
-            //平台成果点击更多
-            $('#achievementDiv .more-link').on('click', function () {
-                var htmlPage = 'fstPage/achievementMoreList.html';
-                _self.clcikMore(this,htmlPage);
-            });
-
             //显示通知公告
             _self.showNewsList();
-            //通知公告点击更多
-            $('#newsDiv .more-link').on('click', function () {
-                var htmlPage = 'fstPage/newsMoreList.html';
-                _self.clcikMore(this,htmlPage);
-            });
+
 
             //显示信息提醒
             _self.showMessageList();
@@ -53,6 +43,7 @@ define([
             $('#knowledgeDiv .more-link').on('click', function () {
                 var htmlPage = 'fstPage/knowledgeMoreList.html';
                 _self.clcikMore(this,htmlPage);
+                _self.achievementMore();
             });
 
             //显示系统工具下载
@@ -69,6 +60,7 @@ define([
             //显示各区域专案组创建情况
             _self.showAreaCreateCaseList();
         },
+
         showTodoList:function () {//待办任务
             _self = this;
             fstPageAjax.getTaskCountInfo({userId:top.userId},function(r){
@@ -193,15 +185,20 @@ define([
             fstPageAjax.getAchievement({},function(r){
                 if(r.flag==1){
                     debugger
-                    $("#achievementDiv").empty().html(_.template(achievementListTpl, {data: r.data}));
+                    $("#achieveDiv").empty().html(_.template(achievementListTpl, {data: r.data}));
                     if(r.data && r.data.length<=0){
                         $("#achieveContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
+                    //平台成果点击更多
+                    $('#achieveDiv .more-link').on('click', function () {
+                        var htmlPage = 'fstPage/achievementMoreList.html';
+                        _self.clcikMore(this,htmlPage);
+
+                    });
                 }else{
                     toast(r.msg,600).err();
                 }
             });
-
         },
         showNewsList:function () {//通知公告
             _self = this;
@@ -255,6 +252,22 @@ define([
                 "totalCount":6
             };
             $("#newsDiv").empty().html(_.template(newsListTpl, {data: newsData.data}));
+            //fstPageAjax.getAchievement({},function(r){
+            //    if(r.flag==1){
+            //        debugger
+            //        $("#newsDiv").empty().html(_.template(newsListTpl, {data: r.data}));
+            //        if(r.data && r.data.length<=0){
+            //            $("#newsContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
+            //        }
+            //        //通知公告点击更多
+            //        $('#newsDiv .more-link').on('click', function () {
+            //            var htmlPage = 'fstPage/newsMoreList.html';
+            //            _self.clcikMore(this,htmlPage);
+            //        });
+            //    }else{
+            //        toast(r.msg,600).err();
+            //    }
+            //});
         },
         showMessageList:function () {
             _self = this;
