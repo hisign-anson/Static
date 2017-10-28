@@ -1,16 +1,18 @@
-<%_.each(data, function(item){%>
+<%_.each(data, function(item,i){%>
 <tr>
-    <td><%=item.rownum%></td>
-    <td><a class="link-text"><%=item.caseId%></a></td>
-    <td><%=item.caseName%></td>
-    <td><%=item.caseType%></td>
-    <td><%=item.caseStatus%></td>
-    <td><%=item.caseKindle%></td>
-    <td><%=item.caseContent%></td>
-    <td><%=item.casePlace%></td>
-    <td><%=item.caseStaff%></td>
+    <td><%=i+1%></td>
+    <td><a class="link-text" ajbh="<%=item.ajbh%>"><%=item.ajbh%></a></td>
+    <td><%=item.ajmc%></td>
+    <td><span class="span" dict-root="44"  return-value="<%=item.ajlx%>"></span></td>
+    <td><span class="span" dict-root="56"  return-value="<%=item.ajstate%>"></span></td>
+    <td><span class="span" dict-root="24"  return-value="<%=item.ab%>"></span></td>
+    <td><%=item.zyaq%></td>
+    <td><%=item.fadd%></td>
+    <td><%=item.ajzbry%></td>
     <td>
-        <a class="into-delete icon-delete" id="<%=item.id%>" title="移除案件"></a>
+        <%if(top.userId == groupcreator){%>
+        <a class="into-delete icon-delete" id="<%=item.id%>" ajbh="<%=item.ajbh%>" title="移除案件"></a>
+        <%}%>
     </td>
 </tr>
 <%})%>

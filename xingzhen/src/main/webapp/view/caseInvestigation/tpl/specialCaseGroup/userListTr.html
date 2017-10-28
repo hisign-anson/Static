@@ -4,12 +4,12 @@
     <%if(checkboxMulti == false){%>
     <td><input class="choseOneUser" type="checkbox" jsr="<%=item.userId%>" jsrname="<%=item.userName%>" jsrLxfs="<%=item.phone%>"></td>
     <%}else{%>
-    <td><input type="checkbox"></td>
+    <td><input type="checkbox" jh="<%=item.policeId%>" userid="<%=item.userId%>" username="<%=item.userName%>" ></td>
     <%}%>
 
     <td><%=item.rownum%></td>
     <td><%=item.userName%></td>
-    <td><%=item.userId%></td>
+    <td><%=item.policeId%></td>
     <td><%=item.phone%></td>
     <td><%=item.orgName%></td>
     <td><%=item.post%></td>
@@ -26,12 +26,12 @@
     <%if(checkboxMulti == false){%>
     <td><input class="choseOneUser" type="checkbox" jsr="<%=item.userId%>" jsrname="<%=item.userName%>" jsrLxfs="<%=item.phone%>" disabled></td>
     <%}else{%>
-    <td><input type="checkbox" disabled></td>
+    <td><input type="checkbox" jh="<%=item.policeId%>" userid="<%=item.userId%>" username="<%=item.userName%>" disabled></td>
     <%}%>
 
     <td><%=item.rownum%></td>
     <td><%=item.userName%></td>
-    <td><%=item.userId%></td>
+    <td><%=item.policeId%></td>
     <td><%=item.phone%></td>
     <td><%=item.orgName%></td>
     <td><%=item.post%></td>

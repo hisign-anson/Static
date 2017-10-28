@@ -79,7 +79,7 @@ $.fn.dictInLineSelect = function(){
 	    return _target;
 };
 function initDictInLineSelect(target,data){
-	 var name = target.attr(_dictConfig.dictName); 
+	 var name = target.attr(_dictConfig.dictName);
 	 var id = target.attr(_dictConfig.dictId);
     var isShowAll = "true";
     if(target.attr("isShowAll") && target.attr("isShowAll") == "false"){

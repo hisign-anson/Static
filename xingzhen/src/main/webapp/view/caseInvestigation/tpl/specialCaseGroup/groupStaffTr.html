@@ -1,16 +1,22 @@
 <%_.each(data, function(item){%>
 <tr>
-    <!--<td><input type="radio"></td>-->
     <td><%=item.rownum%></td>
     <td><%=item.userName%></td>
-    <td><%=item.userId%></td>
-    <td><%=item.userPhone%></td>
-    <td><%=item.userUnit%></td>
-    <td><%=item.userPost%></td>
-    <td><%=item.userStatus%></td>
+    <td><%=item.policeId%></td>
+    <td><%=item.phone%></td>
+    <td><%=item.orgName%></td>
+    <td><span class="span" dict-root="LDZWDM"  return-value="<%=item.post%>"></span></td>
     <td>
-        <a class="into-delete icon-delete" id="<%=item.id%>" title="移除成员"></a>
-
+        <%if(item.status==0){%>
+        有效
+        <%}else if(item.status==1){%>
+        无效
+        <%}%>
+    </td>
+    <td>
+        <%if(top.userId == groupcreator && item.userId != groupcreator){%>
+        <a class="into-delete icon-delete" id="<%=item.id%>" username="<%=item.userName%>" title="移除成员"></a>
+        <%}%>
     </td>
 </tr>
 <%})%>

@@ -7,33 +7,32 @@
         <div class="query-block-row">
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">警号：</span>
-                <input class="common-input" id="repayAmount" type="text">
+                <input class="common-input" id="policeId" type="text" placeholder="请输入警号">
             </div>
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">姓名：</span>
-                <input class="common-input" id="name" type="text">
+                <input class="common-input" id="userName" type="text" placeholder="请输入姓名">
             </div>
         </div>
-
-
         <div class="query-block-row">
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">单位：</span>
                 <div class="dict-opener">
-                    <input class="common-input" id="unit" type="text">
-                    <i id="chooseUint" class="icon-list cur-p button steelblue" title="单位" dict-value="CFMC"></i>
+                    <input type="hidden" id="ogrId">
+                    <input class="common-input" id="orgName" type="text" placeholder="请输入单位">
+                    <i id="chooseUint" class="icon-list cur-p button steelblue" title="单位"></i>
                 </div>
             </div>
         </div>
         <div class="query-widget-wrap">
-            <hr class="cm-dash ">
-            <p class="query-reset ">
+            <hr class="cm-dash">
+            <p class="query-reset">
                 <button id="resetBtn" class="cm-reset-btn">重 置</button>
                 <button id="queryBtn" class="cm-query-btn">查 询</button>
             </p>
         </div>
     </div>
-    <div id="" class="query-result mrn mln">
+    <div id="groupStaffResult" class="query-result mrn mln">
         <div class="new-color-bar">
             <i class="icon-search fs14 mr10"></i>
             <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>

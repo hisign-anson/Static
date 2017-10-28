@@ -1,64 +1,92 @@
-<form class="query-block"  id="queryCondition">
+<form class="query-block" id="queryCondition">
     <div class="query-block-row">
         <div class="fl qc-group-l">
             <span class="qc-label-xl">案件编号：</span>
-            <input class="common-input" id="caseId" type="text">
+            <input class="common-input" id="ajbh" type="text" placeholder="请输入案件编号">
         </div>
         <div class="fl qc-group-l">
             <span class="qc-label-xl">案件名称：</span>
-            <input class="common-input" id="caseName" type="text">
+            <input class="common-input" id="ajmc" type="text" placeholder="请输入案件名称">
         </div>
     </div>
-
     <div class="query-block-row">
         <div class="fl qc-group-l">
             <span class="qc-label-xl">案发地点：</span>
-            <input class="common-input" id="occurrencePlace" type="text">
+            <input class="common-input" id="fadd" type="text" placeholder="请输入案发地点">
         </div>
-        <div class="fl qc-group-l">
+        <div class="fl qc-group-xxl">
             <span class="qc-label-xl">发案时间初值：</span>
-            <input class="common-input" id="occurrenceDate" type="text">
+            <div class="text-time">
+                <input class="cm-input date-range-picker" type="text" id="occurrenceDate" placeholder="请输入发案时间初值"
+                       readonly>
+                <i class="icon-calendar icon-time"></i>
+                <input type="hidden" name="startTime" id="startTime"/>
+                <input type="hidden" name="endTime" id="endTime"/>
+            </div>
+            <span class="option date-select" id="changeTimeScope">
+                    <u class="default active">全部</u>
+                    <u>当天</u>
+                    <u>本周</u>
+                    <u>当月</u>
+                    <u>当季</u>
+                </span>
         </div>
     </div>
     <div class="query-block-row">
-    <div class="fl qc-group-l">
-        <span class="qc-label-xl">受理单位：</span>
-        <div class="dict-opener">
-            <input class="common-input" id="acceptUint" type="text">
-            <i id="chooseAcceptUint" class="icon-list cur-p button steelblue" title="受理单位" dict-value="CFMC"></i>
+        <div class="fl qc-group-l">
+            <span class="qc-label-xl">受理单位：</span>
+            <div class="dict-opener">
+                <input class="common-input" id="sljsdw" type="text" placeholder="请输入受理单位">
+                <i id="chooseAcceptUint" class="icon-list cur-p button steelblue" title="受理单位"></i>
+            </div>
+        </div>
+        <div class="fl qc-group-xxl">
+            <span class="qc-label-xl">受理时间：</span>
+            <div class="text-time">
+                <input class="cm-input date-range-picker" type="text" id="acceptDate" placeholder="请输入受理时间" readonly>
+                <i class="icon-calendar icon-time"></i>
+                <input type="hidden" name="startTime" id="slStartTime"/>
+                <input type="hidden" name="endTime" id="slEndTime"/>
+            </div>
+            <span class="option date-select" id="changeTimeSL">
+                    <u class="default active">全部</u>
+                    <u>当天</u>
+                    <u>本周</u>
+                    <u>当月</u>
+                    <u>当季</u>
+                </span>
         </div>
     </div>
-    <div class="fl qc-group-l">
-        <span class="qc-label-xl">受理时间：</span>
-        <input class="common-input" id="acceptDate" type="text">
-    </div>
-</div>
-
     <div class="query-block-row">
         <div class="fl qc-group-xl">
             <span class="qc-label-xl">案件状态：</span>
-            <span class="option" id="changeCaseSta">
-                <u class="active default " val="">全部</u>
-                <u class="  " val="0">已受理</u>
-                <u class="  " val="1">已立案</u>
-                <u class="  " val="0">已破案</u>
-                <u class="  " val="1">已结案</u>
-                <u class="  " val="1">已撤销</u>
-            </span>
+            <dict dict-id="ajstate" dict-name="ajstate" dict-type="radio" dict-root="56" class="dictInLineSelect"></dict>
+            <!--<span class="option" id="changeCaseSta">-->
+            <!--<u class="active default " val="">全部</u>-->
+            <!--<u class="  " val="0">已受理</u>-->
+            <!--<u class="  " val="1">已立案</u>-->
+            <!--<u class="  " val="0">已破案</u>-->
+            <!--<u class="  " val="1">已结案</u>-->
+            <!--<u class="  " val="1">已撤销</u>-->
+            <!--</span>-->
         </div>
-        <div class="fl qc-group-xxl">
+        <div class="fl qc-group-l">
             <span class="qc-label-xl">案别：</span>
-            <span class="option" id="changeCaseType">
-                <u class="active default " val="">请选择</u>
-                <u class="  " val="1">抢劫</u>
-                <u class="  " val="2">杀人</u>
-                <u class="  " val="3">盗窃</u>
-                <u class="  " val="4">强奸</u>
-                <u class="  " val="5">电信诈骗</u>
-                <u class="  " val="6">纵火</u>
-                <u class="  " val="7">间谍</u>
-                <u class="  " val="9">寻衅滋事</u>
-            </span>
+            <div class="dict-opener">
+                <input class="common-input" id="ab" type="text" placeholder="请输入案别" readonly>
+                <i id="chooseCaseType" class="icon-list cur-p button steelblue" title="案别" dict-value="24"></i>
+            </div>
+            <!--<span class="option" id="changeCaseType">-->
+            <!--<u class="active default " val="">请选择</u>-->
+            <!--<u class="  " val="1">抢劫</u>-->
+            <!--<u class="  " val="2">杀人</u>-->
+            <!--<u class="  " val="3">盗窃</u>-->
+            <!--<u class="  " val="4">强奸</u>-->
+            <!--<u class="  " val="5">电信诈骗</u>-->
+            <!--<u class="  " val="6">纵火</u>-->
+            <!--<u class="  " val="7">间谍</u>-->
+            <!--<u class="  " val="9">寻衅滋事</u>-->
+            <!--</span>-->
         </div>
     </div>
     <div class="query-widget-wrap">
@@ -69,15 +97,26 @@
         </p>
     </div>
 </form>
-<div id="" class="query-result">
+<div id="caseListResult" class="query-result">
     <div class="new-color-bar">
         <i class="icon-search fs14 mr10"></i>
         <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
         <!--<div class="bar-btn-div">-->
-            <!--<b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>-->
+        <!--<b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>-->
         <!--</div>-->
     </div>
     <div class="div-table-wrap">
+        <style>
+            table#caseTable {
+                table-layout: fixed;
+            }
+
+            .caseList-table th, .caseList-table td {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        </style>
         <table id="caseTable" class="caseList-table typical-tb">
             <thead>
             <tr>
