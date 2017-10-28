@@ -6,6 +6,12 @@ define(function(){
                 callback(response);
             },true)
         },
+        //查询子专案组列表
+        getChildGroupList:function(param,callback){
+            $post(top.servicePath_xz+'/group/getChildGroupList',param,function(response) {
+                callback(response);
+            },true)
+        },
         //新增
         addGroup: function (param, callback) {
             $post(top.servicePath_xz + '/group/addGroup', param, function (response) {

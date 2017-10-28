@@ -15,21 +15,32 @@
     </tr>
     </thead>
     <tbody>
-    <%_.each(data, function(item){%>
+    <%_.each(data, function(item,i){%>
     <tr>
-        <td><%=item.rownum%></td>
-        <td><a class="link-text"><%=item.groupId%></a></td>
-        <td><%=item.groupName%></td>
-        <td><%=item.groupType%></td>
+        <td><%=i+1%></td>
+        <td><a class="link-text" groupid="<%=item.id%>"><%=item.groupnum%></a></td>
+        <td><%=item.groupname%></td>
+        <td><%=item.grouptype%></td>
         <td><%=item.caseNum%></td>
-        <td><%=item.createName%></td>
-        <td><%=item.staffNum%></td>
-        <td><%=rangeUtil.formatDate(item.createTime,'yyyy-MM-dd')%></td>
-        <td><%=item.fileStatus%></td>
-        <td><%=rangeUtil.formatDate(item.fileTime,'yyyy-MM-dd')%></td>
+        <td><%=item.createname%></td>
+        <td><%=item.memberNum%></td>
+        <td><%=rangeUtil.formatDate(item.createtime,'yyyy-MM-dd')%></td>
         <td>
-            <a class="into-broadcast icon-broadcast" id="<%=item.id%>" title="广播"></a>
-            <a class="into-view icon-view" id="<%=item.id%>" title="浏览"></a>
+            <%if(item.backupStatu == 0){%>
+            未归档
+            <%}else if(item.backupStatu == 1){%>
+            已归档
+            <%}%>
+        </td>
+        <td><%=rangeUtil.formatDate(item.backupTime,'yyyy-MM-dd')%></td>
+        <td>
+            <%if(item.backupStatu == 0 && item.creator == top.userId){%>
+            <a class="into-archive icon-archive" groupid="<%=item.id%>" title="归档"></a>
+            <%}%>
+            <%if(item.creator == top.userId){%>
+            <a class="into-broadcast icon-broadcast" groupid="<%=item.id%>" jmgid="<%=item.jmgid%>" title="广播"></a>
+            <%}%>
+            <a class="into-communication icon-communication" groupid="<%=item.id%>" jmgid="<%=item.jmgid%>" title="通讯"></a>
         </td>
     </tr>
     <%})%>
