@@ -170,7 +170,11 @@ define(['underscore',
             _selfDict = this;
             var title = obj.attr("title");
             window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
-            _selfDict.getPortList(portType,portAddress,param,paramRes1,paramRes2);
+            if(portAddress){
+                _selfDict.getPortList(portType,portAddress,param,paramRes1,paramRes2);
+            }else {
+                _selfDict.getGroupByIdPortList(param);
+            }
             var opener = $(".panel #dict-block");
             opener.find("#dict-wrap").off("click").on("click","div",function(){
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
@@ -187,14 +191,33 @@ define(['underscore',
             });
 
         },
+        getGroupByIdPortList:function (param){
+            _selfDict = this;
+            $.ajax({
+                url: top.servicePath_xz+'/group/getAllGroupByUserId',
+                type: "post",
+                contentType: "application/x-www-form-urlencoded",
+                data: param,
+                success: function (r) {
+                    if (r.flag == 1) {
+                        var target = $("#dict-wrap");
+                        var tpl='';
+                        $.each(r.data, function (i, o) {
+                            tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.id+"'>"+o.groupname+"</span></div></u>";
+                        });
+                        target.html(tpl);
+                    }
+                }
+            });
+
+        },
         getPortList:function (portType,portAddress,param,paramRes1,paramRes2) {
             _selfDict = this;
-            debugger
-            var flag;
+            var flagThis;
             if(portType == $post){
-                flag = true;
+                flagThis = true;
             } else if(portType == $get){
-                flag = false;
+                flagThis = false;
             }
             portType(portAddress,param,function(r) {
                 if (r.flag == 1) {
@@ -206,7 +229,7 @@ define(['underscore',
                     });
                     target.html(tpl);
                 }
-            },flag);
+            },flagThis);
         },
         closeOpenerDiv: function () {
             _selfDict = this;

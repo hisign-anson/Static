@@ -1,9 +1,10 @@
 $(document).ready(function () {
 
     window.path = '';
-    // window.servicePath = '/xingji';
     window.servicePath = '';
     window.servicePath_xz = '/xz';
+    // window.servicePath_xz = '/xz_23';
+
     window.version = '0.99';
     $("[data-toggle='tooltip']").tooltip();
     function getUploadPath(url, cb) {

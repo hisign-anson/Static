@@ -504,7 +504,7 @@ define([
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        debugger
+                        // debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -528,7 +528,7 @@ define([
                     });
                 } else if ($(this).index() == 1) {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        debugger
+                        // debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];

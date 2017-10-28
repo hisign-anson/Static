@@ -1,14 +1,14 @@
-<%_.each(data, function(item){%>
+<%_.each(data, function(item,i){%>
 <tr>
-    <td><input type="checkbox" id=""></td>
-    <td><%=item.rownum%></td>
-    <td><a class="link-text"><%=item.caseId%></a></td>
-    <td><%=item.caseName%></td>
-    <td><%=item.caseType%></td>
-    <td><%=item.caseStatus%></td>
-    <td><%=item.caseKindle%></td>
-    <td><%=item.caseContent%></td>
-    <td><%=item.casePlace%></td>
-    <td><%=item.caseStaff%></td>
+    <td><input type="checkbox" ajbh="<%=item.ajbh%>" ajid="<%=item.id%>"></td>
+    <td><%=i+1%></td>
+    <td title="<%=item.ajbh%>"><a class="link-text" ajbh="<%=item.ajbh%>"><%=item.ajbh%></a></td>
+    <td title="<%=item.ajmc%>"><%=item.ajmc%></td>
+    <td><span class="span" dict-root="44"  return-value="<%=item.ajlx%>"></span></td>
+    <td><span class="span" dict-root="56"  return-value="<%=item.ajstate%>"></span></td>
+    <td><span class="span" dict-root="24"  return-value="<%=item.ab%>"></span></td>
+    <td title="<%=item.zyaq%>"><%=item.zyaq%></td>
+    <td title="<%=item.fadd%>"><%=item.fadd%></td>
+    <td title="<%=item.ajzbry%>"><%=item.ajzbry%></td>
 </tr>
 <%})%>

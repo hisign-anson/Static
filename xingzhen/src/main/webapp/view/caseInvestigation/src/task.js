@@ -7,13 +7,12 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/task/taskListTr.html',
     'text!/view/caseInvestigation/tpl/task/taskAdd.html',
     'text!/view/caseInvestigation/tpl/task/taskEdit.html',
-    'text!/view/caseInvestigation/tpl/task/taskFeedback.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/userList.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/userListTr.html',
     '../dat/task.js',
     '../../dictManage/src/dictOpener.js',
-    '../../userInfoManage/dat/userInfo.js'], function (_, taskListTpl,taskListTrTpl,taskAddTpl,taskEditTpl,taskFeedbackTpl,userListTpl,userListTrTpl,
-                                                     taskAjax, dictOpener,userInfoAjax) {
+    '../../userInfoManage/dat/userInfo.js'], function (_, taskListTpl,taskListTrTpl,taskAddTpl,taskEditTpl,userListTpl,userListTrTpl,
+                                                     taskAjax,dictOpener,userInfoAjax) {
     return {
         showList: function () {
             _self = this;
@@ -27,8 +26,7 @@ define(['underscore',
             _self.selectTaskStaOption();
 
             $("#chooseBelongGroup").on('click', function () {
-                // dictOpener.openChooseDict($(this));
-                dictOpener.openChoosePort($(this),$post,"/group/getGroupPage",{},"groupname","groupnum");
+                dictOpener.openChoosePort($(this),null,null,{userId:top.userId});
             });
             $("#chooseCreateName").on('click', function () {
                 dictOpener.openUserChoosePort($(this));
@@ -180,6 +178,7 @@ define(['underscore',
             $confirm('催办任务？', function (bol) {
                 if (bol) {
                     var param = {
+                        // taskid: id,
                         id: id,
                         userId: top.userId,
                         deparmentcode: top.orgCode
@@ -251,7 +250,6 @@ define(['underscore',
                 taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl,r));
-                        // $("#mainDiv").empty().html(_.template(taskFeedbackTpl,r));
                         var videoFileInfo = {},picFileInfo = {};
                         $("#addVideo input[type='file']").val("");
                         $("#addVideo input[type='file']").off("change").on("change", function () {
@@ -318,14 +316,15 @@ define(['underscore',
             $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
             $("#userListDiv .panel-container").empty().html(_.template(userListTpl,{checkboxMulti:false}));
             $("#userListDiv").on('click',"#chooseUint", function () {
-                dictOpener.openChooseDict($(this));
+                dictOpener.openUnitChoosePort($(this));
             });
             $("#userListDiv").on("click", "#resetBtn", function () {
-                console.info("用户重置按钮");
+                selectUtils.clearQueryValue();
+                return false;
             });
             $("#userListDiv").on("click", "#queryBtn", function () {
-                console.info("用户查询按钮");
                 _self.queryUserList(false,taskId);
+                return false;
             });
 
             //加载用户列表
@@ -338,10 +337,10 @@ define(['underscore',
             $("#createtime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
 
             $("#chooseGroup").on('click', function () {
-                dictOpener.openChooseDict($(this));
+                // dictOpener.openChooseDict($(this));
+                dictOpener.openChoosePort($(this),null,null,{userId:top.userId});
             });
             $("#chooseReceive").on('click', function () {
-                // dictOpener.openChooseDict($(this));
                 dictOpener.openUserChoosePort($(this));
             });
             //绑定返回事件
@@ -355,7 +354,7 @@ define(['underscore',
                 }
                 var param = $("#taskAddForm").serializeObject();
                 var jsrParam = str2obj($("#jsr").attr("paramattr"));
-                var jsr = $.trim($("#jsr").val()).split(",");
+                var groupParam = str2obj($("#groupid").attr("paramattr"));
                 $.extend(param, {
                     creator: top.userId,
                     createname: top.trueName,
@@ -364,7 +363,7 @@ define(['underscore',
                     bcrwid: bcrwid ? bcrwid : "",
                     fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
-                    groupid: $.trim($("#groupid").val()),
+                    groupid: groupParam.id,
                     jsr: jsrParam.userId,
                     jsrname: jsrParam.userName,
                     fqrLxfs: top.phone,
@@ -418,13 +417,13 @@ define(['underscore',
                         ops: top.opsMap,
                         checkboxMulti:isCheckboxMulti
                     }));
-                    if(isCheckboxMulti == false){
-                        //任务移交给用户
-                        _self.saveTransfer(taskId);
-                    }else{
-                        //专案组添加成员
-                        _self.saveStaff();
-                    }
+                    //任务移交给用户
+                    _self.saveTransfer(taskId);
+                    // if(isCheckboxMulti == false){
+                    // }else{
+                    //     //专案组添加成员
+                    //     _self.saveStaff();
+                    // }
 
                     $("#userListDiv").on('click', "#cancelBtn", function () {
                         $('#userListDiv').$close();

@@ -18,6 +18,7 @@ top.superName = top.currentUser ? top.currentUser.orgInfo.superName:'';
 top.orgName = top.currentUser ? top.currentUser.orgInfo.orgName:'';
 top.orgLevel = top.currentUser ? top.currentUser.orgInfo.orgLevel:'';
 top.userId = top.currentUser ? top.currentUser.userId:'';
+top.policeId = top.currentUser ? top.currentUser.userInfo.policeId:'';
 top.phone = top.currentUser ? top.currentUser.userInfo.phone:'';
 top.serverIp = location.hostname;
 top.serverPort = location.port;

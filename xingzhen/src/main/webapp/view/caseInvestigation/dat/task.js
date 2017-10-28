@@ -14,9 +14,9 @@ define(function () {
         },
         //任务详情
         taskDetail: function (param, callback) {
-            $get(top.servicePath_xz + '/task/taskDetail', param, function (response) {
+            $post(top.servicePath_xz + '/task/taskDetail', param, function (response) {
                 callback(response);
-            }, false)
+            }, true)
         },
         //移交
         moveTask: function (param, callback) {

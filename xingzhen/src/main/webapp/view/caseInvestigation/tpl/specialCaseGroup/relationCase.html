@@ -6,13 +6,13 @@
         <div class="query-block-row">
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">案件编号：</span>
-                <input class="common-input" id="caseId" type="text">
+                <input class="common-input" id="ajbh" type="text" placeholder="请输入案件编号">
             </div>
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">案别：</span>
                 <div class="dict-opener">
-                    <input class="common-input" id="caseType" type="text">
-                    <i id="chooseCaseType" class="icon-list cur-p button steelblue" title="案别" dict-value="CFMC"></i>
+                    <input class="common-input" id="ab" type="text" placeholder="请输入案别" readonly>
+                    <i id="chooseCaseType" class="icon-list cur-p button steelblue" title="案别" dict-value="24"></i>
                 </div>
             </div>
         </div>
@@ -20,25 +20,39 @@
         <div class="query-block-row">
             <div class="fl qc-group-l">
                 <span class="qc-label-xl">案件名称：</span>
-                <input class="common-input" id="caseName" type="text">
+                <input class="common-input" id="ajmc" type="text" placeholder="请输入案件名称">
             </div>
-            <div class="fl qc-group-l">
+            <div class="fl qc-group-xxl">
                 <span class="qc-label-xl">发案时间初值：</span>
-                <input class="common-input" id="occurrenceDate" type="text" value="">
+                <div class="text-time">
+                    <input class="cm-input date-range-picker" type="text" id="createtime" placeholder="请输入时间范围" readonly>
+                    <i class="icon-calendar icon-time"></i>
+                    <input type="hidden" name="startTime" id="startTime" />
+                    <input type="hidden" name="endTime" id="endTime" />
+                </div>
+                <span class="option date-select" id="changeTimeScope">
+                    <u class="default active">全部</u>
+                    <u>当天</u>
+                    <u>本周</u>
+                    <u>当月</u>
+                    <u>当季</u>
+                </span>
             </div>
         </div>
 
         <div class="query-block-row">
             <div class="fl qc-group-xl">
                 <span class="qc-label-xl">案件状态：</span>
-                <span class="option" id="changeCaseSta">
-                    <u class="active default " val="">全部</u>
-                    <u class="  " val="0">已受理</u>
-                    <u class="  " val="1">已立案</u>
-                    <u class="  " val="0">已破案</u>
-                    <u class="  " val="1">已结案</u>
-                    <u class="  " val="1">已撤销</u>
-                </span>
+                <dict dict-id="ajstate" dict-name="ajstate" dict-type="radio" dict-root="56" class="dictInLineSelect" ></dict>
+
+                <!--<span class="option" id="changeCaseSta">-->
+                    <!--<u class="active default " val="">全部</u>-->
+                    <!--<u class="  " val="0">已受理</u>-->
+                    <!--<u class="  " val="1">已立案</u>-->
+                    <!--<u class="  " val="0">已破案</u>-->
+                    <!--<u class="  " val="1">已结案</u>-->
+                    <!--<u class="  " val="1">已撤销</u>-->
+                <!--</span>-->
             </div>
         </div>
         <div class="query-widget-wrap">

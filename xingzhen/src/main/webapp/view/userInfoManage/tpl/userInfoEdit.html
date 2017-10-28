@@ -21,7 +21,7 @@
                            maxlength="10"
                            onkeyup="var pattern = /^[A-Za-z\u4E00-\u9FA5-]+$/;if(!pattern.test(this.value)){this.value='';this.value=this.value.replace(/^[A-Za-z\u4E00-\u9FA5-]+$/,'')};"/>
                 </td>
-                <td colspan="2" rowspan="4" style="width: 50%">
+                <td colspan="2" rowspan="5" style="width: 50%">
                     <div id="person-photo" style="margin-right: 219px;">
                         <form id="avatarUploadForm" enctype="multipart/form-data">
                             <input type="hidden" name="avatar" id="avatar" value='<%=data.avatar%>'/>
@@ -52,6 +52,12 @@
                             </div>
                         </form>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>警号：</td>
+                <td>
+                    <input id="policeId" name="policeId" type="text" value="<%=data.policeId%>" class="common-input w260px validate" placeholder="请填写警号" data-options="required:true">
                 </td>
             </tr>
             <tr>
