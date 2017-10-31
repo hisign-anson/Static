@@ -10,27 +10,55 @@
             <div class="form-body wrapper-fluid">
                 <div class="form-row block-row">
                     <div class="equal-col-6">
-                        <span class="common-field">任务名称：</span>
+                        <span class="common-field"><%=text%>名称：</span>
                         <input class="common-input" type="text" name="" id="taskName" placeholder="请输入任务名称" />
                     </div>
                     <div class="equal-col-6">
                         <span class="common-field"><em class="require-star">*</em>专案组：</span>
                         <div class="dict-opener">
+                            <%if(text == "补充任务"){%>
+                            <input class="common-input task-valid" type="text" name="" id="groupid" data-options="required:true" value="<%=taskInfo.groupName%>" taskparamattr='<%=obj2str(taskInfo)%>' placeholder="请输入专案组名称" readonly />
+                            <%}else if(text == "追加任务"){%>
+                            <input class="common-input task-valid" type="text" name="" id="groupid" data-options="required:true" value="<%=taskInfo.groupName%>" taskparamattr='<%=obj2str(taskInfo)%>' placeholder="请输入专案组名称" readonly />
+                            <%}else{%>
                             <input class="common-input task-valid" type="text" name="" id="groupid" data-options="required:true" placeholder="请输入专案组名称" readonly />
                             <i id="chooseGroup" class="icon-list cur-p button steelblue" title="专案组"></i>
+                            <%}%>
                         </div>
                     </div>
                 </div>
                 <div class="form-row block-row">
                     <div class="equal-col-6">
                         <span class="common-field"><em class="require-star">*</em>接收人：</span>
+
+                        <%if(text == "补充任务"){%>
+                        <div class="dict-opener">
+                            <input class="common-input task-valid" type="text" name="" id="jsr" data-options="required:true" taskparamattr='<%=obj2str(taskInfo)%>' placeholder="请输入接收人" readonly />
+                            <i id="chooseReceive" class="icon-list cur-p button steelblue" title="接收人"></i>
+                        </div>
+
+                        <%}else if(text == "追加任务"){%>
+
+                        <div class="dict-opener">
+                            <input class="common-input task-valid" type="text" name="" id="jsr" data-options="required:true" value="<%=taskInfo.jsrname%>" taskparamattr='<%=obj2str(taskInfo)%>' placeholder="请输入接收人" readonly />
+                            <i id="chooseReceive" class="icon-list cur-p button steelblue" title="接收人"></i>
+                        </div>
+
+                        <%}else{%>
                         <div class="dict-opener">
                             <input class="common-input task-valid" type="text" name="" id="jsr" data-options="required:true" placeholder="请输入接收人" readonly />
                             <i id="chooseReceive" class="icon-list cur-p button steelblue" title="接收人"></i>
-                        </div></div>
+                        </div>
+                        <%}%>
+                    </div>
                     <div class="equal-col-6">
+                        <%if(text == "追加任务"){%>
+                        <span class="common-field">接收人联系方式：</span>
+                        <input class="common-input" type="text" name="" id="jsrLxfs" value="<%=taskInfo.jsrlxfs%>" placeholder="请输入接收人联系方式" />
+                        <%}else{%>
                         <span class="common-field">接收人联系方式：</span>
                         <input class="common-input" type="text" name="" id="jsrLxfs" placeholder="请输入接收人联系方式" />
+                        <%}%>
                     </div>
                 </div>
                 <div class="form-row block-row">

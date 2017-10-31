@@ -1,7 +1,13 @@
 <%_.each(data, function(item,i){%>
 <tr>
     <td><%=i+1%></td>
+
+    <%if(isOperation == true){%>
     <td><a class="link-text" ajbh="<%=item.ajbh%>"><%=item.ajbh%></a></td>
+    <%}else if(isOperation==false){%>
+    <td><%=item.ajbh%></td>
+    <%}%>
+
     <td><%=item.ajmc%></td>
     <td><span class="span" dict-root="44"  return-value="<%=item.ajlx%>"></span></td>
     <td><span class="span" dict-root="56"  return-value="<%=item.ajstate%>"></span></td>
@@ -9,10 +15,12 @@
     <td><%=item.zyaq%></td>
     <td><%=item.fadd%></td>
     <td><%=item.ajzbry%></td>
+    <%if(isOperation == true){%>
     <td>
         <%if(top.userId == groupcreator){%>
         <a class="into-delete icon-delete" id="<%=item.id%>" ajbh="<%=item.ajbh%>" title="移除案件"></a>
         <%}%>
     </td>
+    <%}%>
 </tr>
 <%})%>

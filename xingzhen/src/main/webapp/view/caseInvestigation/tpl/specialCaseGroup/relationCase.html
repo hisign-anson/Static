@@ -67,9 +67,11 @@
         <div class="new-color-bar">
             <i class="icon-search fs14 mr10"></i>
             <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
+            <%if(isOperation == true){%>
             <div class="bar-btn-div">
                 <b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>
             </div>
+            <%}%>
         </div>
         <div class="div-table-wrap">
             <table id="relationCaseTable" class="relationCaseList-table typical-tb">
@@ -84,7 +86,9 @@
                     <th>简要案情</th>
                     <th>发案地点详址</th>
                     <th>主要办案人</th>
+                    <%if(isOperation == true){%>
                     <th>操作</th>
+                    <%}%>
                 </tr>
                 </thead>
                 <tbody></tbody>

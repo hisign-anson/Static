@@ -56,6 +56,7 @@ var selectUtils = {
             $(this).val("");
         });
         $("span.option").each(function () {
+            debugger
             $(this).children("u").removeClass("active").eq(0).addClass("active");
         });
     }

@@ -232,7 +232,9 @@ input[disabled], textarea[disabled], select[disabled] {
 .add-bar + #dict-wrap {
     margin-top: 40px;
 }
-
+#dict-wrap .disabled {
+    display: none;
+}
 #dict-wrap u {
     display: block;
     padding: 5px 10px;

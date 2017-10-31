@@ -67,8 +67,8 @@
     background: #ffffff;
 }
 .all-group-list ul li {
-    line-height: 30px;
-    height: 30px;
+    line-height: 40px;
+    height: 40px;
     border-bottom: 1px solid #dddddd;
 }
 .all-group-list ul li:hover {
@@ -147,7 +147,7 @@
 .group-list-s .group-list .left-line,
 .group-list-s .group-list .left-line + span,
 .group-list-s .group-list .all-group-list,
-.group-list-s .group-list .common-group,
+.group-list-s .group-list .common-group-list,
 .group-list-s .group-list .title-icon {
     display: none;
 }

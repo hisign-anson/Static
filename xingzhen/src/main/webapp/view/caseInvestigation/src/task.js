@@ -18,12 +18,12 @@ define(['underscore',
             _self = this;
             // //关闭没有关闭的弹框
             // dictOpener.closeOpenerDiv();
-            $("#mainDiv").empty().html(_.template(taskListTpl, {ops: top.opsMap, status: status}));
+            $("#mainDiv").empty().html(_.template(taskListTpl, {isOperation:true}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#fkqrzt");
             // selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
             //选择任务状态
-            _self.selectTaskStaOption();
+            _self.selectTaskStaOption("#changeTaskStatus");
 
             $("#chooseBelongGroup").on('click', function () {
                 dictOpener.openChoosePort($(this),null,null,{userId:top.userId});
@@ -72,9 +72,9 @@ define(['underscore',
             });
             _self.queryList();
         },
-        selectTaskStaOption:function () {
+        selectTaskStaOption:function (obj) {
             _self = this;
-            $("#changeTaskStatus").on("click","u",function(){
+            $(obj).on("click","u",function(){
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 var text = $(this).hasClass("active") ? $(this).text() : "";
                 if(text == "被移交"){
@@ -85,13 +85,16 @@ define(['underscore',
                     $("#fkzt").val($(this).attr("val"));
                 } else if (text == "未反馈"){
                     $("#fkzt").val($(this).attr("val"));
+                } else {
+                    $("#yjzt").val("");
+                    $("#overdue").val("");
+                    $("#fkzt").val("");
                 }
             });
         },
         //查询功能
         queryList:function(){
             _self = this;
-            var param = {};
             // var myStatus;
             // var myOverdue;
             // if (status) {
@@ -105,7 +108,7 @@ define(['underscore',
             // } else {
             //     myStatus = $("#fkqrzt").val();
             // }
-            $.extend(param, {
+            var param = {
                 userId:top.userId,
                 taskType:$.trim($("#taskType").val()),
                 taskName:$.trim($("#taskName").val()),
@@ -122,12 +125,12 @@ define(['underscore',
                 deparmentcode:$.trim($("#deparmentcode").val()),
                 fkstartTime:$.trim($("#fkstartTime").val()),
                 fkendTime:$.trim($("#fkendTime").val())
-            });
+            };
             $('#taskListResult').pagingList({
                 action:top.servicePath_xz+'/task/getTaskPage',
                 jsonObj:param,
                 callback:function(data){
-                    $("#taskListTable tbody").empty().html(_.template(taskListTrTpl, {data: data, ops: top.opsMap }));
+                    $("#taskListTable tbody").empty().html(_.template(taskListTrTpl, {data: data, isOperation:true }));
                     $(".link-text").on("click",function () {
                         _self.handleDetail($(this).attr('id'));
                     });
@@ -142,10 +145,9 @@ define(['underscore',
                     });
                     $(".into-transfer").on("click", function () {
                         var id=$(this).attr('id');
-                        var createname=$(this).attr('createname');
-                        var creator=$(this).attr('creator');
-                        var deparmentcode=$(this).attr('deparmentcode');
-                        _self.handleTransfer(id,createname,creator,deparmentcode);
+                        var taskInfo=$(this).attr('taskinfo');
+                        _self.handleTransfer(id,taskInfo);
+                        return false;
                     });
                 }
             });
@@ -153,13 +155,14 @@ define(['underscore',
         handleDetail:function (id) {
             _self = this;
             if (id) {
-                taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
+                taskAjax.taskDetail({
+                    id: id, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
                         //判断是否任务是否反馈
                         $("#mainDiv").empty().html(_.template(taskEditTpl,r));
                         //在反馈上追加任务
                         $(".into-appendTaskBtn").on("click",function () {
-                            _self.showAdd(null,$(this).attr("fkid"));
+                            _self.showAdd($(this).attr("taskinfo"),$(this).attr("title"));
                         });
                         $("#cancelBtn").on("click",function () {
                             _self.showList();
@@ -167,7 +170,7 @@ define(['underscore',
 
                         //在任务上补充任务
                         $("#replenishTaskBtn").on("click",function () {
-                            _self.showAdd($(this).attr("bcrwid"));
+                            _self.showAdd($(this).attr("taskinfo"),$(this).text());
                         });
                     }
                 });
@@ -179,7 +182,7 @@ define(['underscore',
                 if (bol) {
                     var param = {
                         // taskid: id,
-                        id: id,
+                        taskid: id,
                         userId: top.userId,
                         deparmentcode: top.orgCode
                     };
@@ -268,14 +271,15 @@ define(['underscore',
                             // if ($('.validatebox-invalid').length > 0) {
                             //     return false;
                             // }
-                            var taskfkFileModels = [];
+                            _self.upclick();
+                            var taskFkFiles = [];
                             if(videoFileInfo){
-                                taskfkFileModels.push(videoFileInfo);
+                                taskFkFiles.push(videoFileInfo);
                             }
                             if(picFileInfo) {
-                                taskfkFileModels.push(picFileInfo);
+                                taskFkFiles.push(picFileInfo);
                             }
-                            console.info(taskfkFileModels);
+                            console.info(taskFkFiles);
                             var param = {
                                 bz: $.trim($("#bz").val()),
                                 createname: top.trueName,
@@ -290,7 +294,7 @@ define(['underscore',
                                 // pgroupid: "string",
                                 // qrTime: "2017-10-26T06:05:06.124Z",
                                 // qrzt: "string",
-                                taskfkFileModels: taskfkFileModels,
+                                taskFkFiles: taskFkFiles,
                                 taskid: taskId
                             };
                             taskAjax.addTaskFk(param, function (r) {
@@ -311,7 +315,7 @@ define(['underscore',
             }
 
         },
-        handleTransfer:function (taskId,createname,creator,deparmentcode) {
+        handleTransfer:function (taskId,taskInfo) {
             _self = this;
             $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
             $("#userListDiv .panel-container").empty().html(_.template(userListTpl,{checkboxMulti:false}));
@@ -323,25 +327,37 @@ define(['underscore',
                 return false;
             });
             $("#userListDiv").on("click", "#queryBtn", function () {
-                _self.queryUserList(false,taskId);
+                _self.queryUserList(false,taskId,taskInfo);
                 return false;
             });
 
             //加载用户列表
-            _self.queryUserList(false,taskId);
+            _self.queryUserList(false,taskId,taskInfo);
             },
-        showAdd:function (bcrwid,fkid) {
+        showAdd:function (taskinfo,text) {
             _self = this;
-            $("#mainDiv").empty().html(_.template(taskAddTpl));
+            var bcrwid,fkid;
+            var taskinfo = str2obj(taskinfo);
+            debugger
+            if(taskinfo){
+                bcrwid = taskinfo.bcrwid;
+                fkid = taskinfo.fkid;
+            }
+            $("#mainDiv").empty().html(_.template(taskAddTpl,{taskInfo:taskinfo,text:text}));
             $("#fkjzTime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
             $("#createtime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
 
             $("#chooseGroup").on('click', function () {
-                // dictOpener.openChooseDict($(this));
                 dictOpener.openChoosePort($(this),null,null,{userId:top.userId});
             });
             $("#chooseReceive").on('click', function () {
-                dictOpener.openUserChoosePort($(this));
+                if($("#groupid").val()){
+                    var groupinfo = str2obj($("#groupid").attr("paramattr"));
+                    var taskinfo = str2obj($("#groupid").attr("taskparamattr"));
+                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id}, "user");
+                } else {
+                    toast("请先选择专案组！",600).warn();
+                }
             });
             //绑定返回事件
             $("#cancelBtn").on("click",function () {
@@ -355,6 +371,11 @@ define(['underscore',
                 var param = $("#taskAddForm").serializeObject();
                 var jsrParam = str2obj($("#jsr").attr("paramattr"));
                 var groupParam = str2obj($("#groupid").attr("paramattr"));
+                var taskParam;
+                //由追加任务 补充任务跳转过来
+                if(text){
+                    taskParam = str2obj($("#groupid").attr("taskparamattr"));
+                }
                 $.extend(param, {
                     creator: top.userId,
                     createname: top.trueName,
@@ -363,9 +384,9 @@ define(['underscore',
                     bcrwid: bcrwid ? bcrwid : "",
                     fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
-                    groupid: groupParam.id,
-                    jsr: jsrParam.userId,
-                    jsrname: jsrParam.userName,
+                    groupid: text?taskParam.groupid:groupParam.id,
+                    jsr: text?taskParam.jsr:jsrParam.userId,
+                    jsrname: text?taskParam.jsrname:jsrParam.userName,
                     fqrLxfs: top.phone,
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
@@ -383,34 +404,14 @@ define(['underscore',
                 });
             });
         },
-        queryUserList: function (isCheckboxMulti,taskId) {
+        queryUserList: function (isCheckboxMulti,taskId,taskInfo) {
             _self = this;
-            ////分页
-            // $("#userTableResult").pagingList({
-            //     action:top.servicePath+'/sys/user/getUserInfoListByOrgId',
-            //     pageOnce:5,
-            //     jsonObj:{orgId: top.orgId},
-            //     callback:function(data,t, n, i, o, a, r){
-            //         $("#userTable tbody").empty().html(_.template(userListTrTpl, {
-            //             data: data,
-            //             ops: top.opsMap,
-            //             checkboxMulti:isCheckboxMulti
-            //         }));
-            //         if(isCheckboxMulti == false){
-            //             //任务移交给用户
-            //             _self.saveTransfer(taskId);
-            //         }else{
-            //             //专案组添加成员
-            //             _self.saveStaff();
-            //         }
-            //
-            //         $("#userListDiv").on('click', "#cancelBtn", function () {
-            //             $('#userListDiv').$close();
-            //         });
-            //     }
-            // });
-            //不分页
-            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId},function (r) {
+            //获取专案组组内成员
+            var taskInfo = str2obj(taskInfo);
+            var param = {
+                groupId:taskInfo.groupid
+            };
+            $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {
                 if (r.flag == 1) {
                     $("#userTable tbody").empty().html(_.template(userListTrTpl, {
                         data: r.data,
@@ -419,17 +420,26 @@ define(['underscore',
                     }));
                     //任务移交给用户
                     _self.saveTransfer(taskId);
-                    // if(isCheckboxMulti == false){
-                    // }else{
-                    //     //专案组添加成员
-                    //     _self.saveStaff();
-                    // }
-
                     $("#userListDiv").on('click', "#cancelBtn", function () {
                         $('#userListDiv').$close();
                     });
                 }
-            });
+            },true);
+            // //不分页
+            // userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId},function (r) {
+            //     if (r.flag == 1) {
+            //         $("#userTable tbody").empty().html(_.template(userListTrTpl, {
+            //             data: r.data,
+            //             ops: top.opsMap,
+            //             checkboxMulti:isCheckboxMulti
+            //         }));
+            //         //任务移交给用户
+            //         _self.saveTransfer(taskId);
+            //         $("#userListDiv").on('click', "#cancelBtn", function () {
+            //             $('#userListDiv').$close();
+            //         });
+            //     }
+            // });
         },
         saveTransfer:function (taskId) {
             _self = this;
@@ -507,6 +517,30 @@ define(['underscore',
                     $('#userListDiv').$close();
                 } else {
                     toast("请至少选择一个用户！", 600).warn()
+                }
+            });
+        },
+        upclick:function () {
+            _self = this;
+            //上传图片
+            upclick({
+                dataname: "file",
+                element: "addVideo1",
+                action: top.servicePath + '/sys/file/upload?isResize=true',
+                onstart: function (filename) {
+                    debugger
+                    $(".progress-bar").css('width','50%');
+                },
+                oncomplete: function (r) {
+                    debugger
+                    if (r.flag == 1) {
+                        // $("#avatar").val(obj2str(r.data));
+                        // $("#avatar-img").attr('src', top.ftpServer + r.data.source);
+                    } else {
+                        toast(obj.msg, 600).err();
+                        $(".progress-bar").css('width','0%');
+                    }
+                    $(".progress-bar").css('width','100%');
                 }
             });
         }

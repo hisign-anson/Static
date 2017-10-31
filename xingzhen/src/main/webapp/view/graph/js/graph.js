@@ -708,7 +708,7 @@ var layout = d3.layout.force()
     .gravity(0.08);
 
 //定义svg画板
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#test").append("svg")
     .attr("width", width)
     .attr("height", height);
 

@@ -25,7 +25,8 @@ top.serverPort = location.port;
 top.clientKey = localData.get('clientKey');
 top.opsMap = new HashMap();
 // initDictForGXS();
-
+// //调用极光初始化接口
+// jchatGloabal.init();
 function HashMap() {     
     this.elements = new Array();     
        
@@ -231,6 +232,9 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     });
     top.molKeys=molDatas.select('m=>m.molNo');
     localParamsInit(top.molKeys);
+
+    // jchatGloabal.login();
+    // console.info("jm登录状态：" + JIM.isLogin());
     indexInit();
 
     //顶层属性与供内部frame调用的方法
@@ -650,6 +654,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
             $clogout.addClass('hide');
         }).on('click', '#logout-ok', function(){ /*确认退出*/
             logout();
+            JIM.loginOut();//极光退出登录
         })
     });
     //默认载入首页

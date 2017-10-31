@@ -106,6 +106,7 @@ $(document).ready(function () {
     makeMiddle();
     $('.btn-login').on('click', function () {
         login();
+        return false
     });
     $('#error').on('click', function () {
         $('#error').fadeOut();

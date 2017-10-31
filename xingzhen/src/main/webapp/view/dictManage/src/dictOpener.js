@@ -18,6 +18,9 @@ define(['underscore',
             opener.find("#dict-wrap").off("click").on("click","div",function(){
                 var input = obj.prev();//页面上需要填入的input
                 input.val($(this).find("span").text());
+
+                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                inputHidden.val($(this).find("span").attr("val"));
                 opener.$close();
             });
 
@@ -166,17 +169,21 @@ define(['underscore',
                 }
             });
         },
-        openChoosePort:function (obj,portType,portAddress,param,paramRes1,paramRes2) {
+        openChoosePort:function (obj,portType,portAddress,param,chooseType) {
             _selfDict = this;
             var title = obj.attr("title");
             window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
             if(portAddress){
-                _selfDict.getPortList(portType,portAddress,param,paramRes1,paramRes2);
+                debugger
+                _selfDict.getPortList(portType,portAddress,param,chooseType);
             }else {
                 _selfDict.getGroupByIdPortList(param);
             }
             var opener = $(".panel #dict-block");
-            opener.find("#dict-wrap").off("click").on("click","div",function(){
+            opener.find("#dict-wrap").off("click").on("click","div:not(.disabled)",function(){
+                toast("不能选择自己！",600).warn();
+            });
+            opener.find("#dict-wrap").off("click").on("click","div:not(.disabled)",function(){
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
                 input.val($(this).find("span").text());
                 var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
@@ -211,7 +218,20 @@ define(['underscore',
             });
 
         },
-        getPortList:function (portType,portAddress,param,paramRes1,paramRes2) {
+        getUserByGroupIdPortList:function (param) {
+            _selfDict = this;
+            $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {
+                if (r.flag == 1) {
+                    var target = $("#dict-wrap");
+                    var tpl='';
+                    $.each(r.data, function (i, o) {
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                    });
+                    target.html(tpl);
+                }
+            },true);
+        },
+        getPortList:function (portType,portAddress,param,chooseType) {
             _selfDict = this;
             var flagThis;
             if(portType == $post){
@@ -221,12 +241,25 @@ define(['underscore',
             }
             portType(portAddress,param,function(r) {
                 if (r.flag == 1) {
-                    debugger
                     var target = $("#dict-wrap");
                     var tpl='';
-                    $.each(r.data, function (i, o) {
-                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.paramRes1+"'>"+o.paramRes2+"</span></div></u>";
-                    });
+                    switch (chooseType){
+                        case "user":
+                            $.each(r.data, function (i, o) {
+                                if(o.userId == top.userId){
+                                    tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                                }else {
+                                    tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+
+                                }
+                            });
+                            break;
+                        case "unit":
+                            $.each(r.data, function (i, o) {
+                                tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgCode+"'>"+o.orgName+"</span></div></u>";
+                            });
+                            break;
+                    }
                     target.html(tpl);
                 }
             },flagThis);

@@ -530,6 +530,7 @@ var clickHandle = {
 };
 $(function () {
     chatHandle.init();
+
     $("#sendFileBtn").on("click", function () {
         clickHandle.sendFile();
     });

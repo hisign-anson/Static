@@ -799,7 +799,9 @@
   };
   d3_selectionPrototype.append = function(name) {
     name = d3_selection_creator(name);
-    return this.select(function() {
+      debugger
+
+      return this.select(function() {
         return this.appendChild(name.apply(this, arguments));
     });
   };
