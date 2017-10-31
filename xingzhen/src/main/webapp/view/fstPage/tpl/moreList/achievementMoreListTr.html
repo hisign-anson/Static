@@ -1,10 +1,12 @@
+<%_.each(data,function(item){%>
 <tr>
-    <td>1</td>
-    <td>ZAZ2017040315002</td>
-    <td>李四被杀案专案组</td>
-    <td>2017-03-10</td>
-    <td><a class="link-text">广州某某公司被入室盗窃案告破</a></td>
-    <td>刘某</td>
-    <td>越秀分局一大队</td>
-    <td>2017-05-10</td>
+    <td><%=item.rownum%></td>
+    <td><%=item.groupNum%></td>
+    <td><%=item.groupName%></td>
+    <td><%=item.createTime%></td>
+    <td><a class="link-text" data-groupId="<%=item.groupId%>"><%=item.name%></a></td>
+    <td><%=item.backupPerson%></td>
+    <td><%=item.departmentName%></td>
+    <td><%=item.backupTime%></td>
 </tr>
+<%})%>

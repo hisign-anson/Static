@@ -3,10 +3,10 @@
     <div class="col-panel-body contentDiv" id="achieveContent">
         <%_.each(data, function(item){%>
         <div>
-            <a href="#" data-id="<%=item.id%>" class="noticeOne">
+            <a href="#" data-id="<%=item.groupId%>" class="listOne">
                 <span class="dot-decoration ml15 vam"></span>
                 <span class="text-record ml15" title="<%=item.msgTitle%>"><%=item.name%></span>
-                <span class="span-time"><%=rangeUtil.formatDate(item.time,'yyyy-MM-dd hh:mm')%></span>
+                <span class="span-time"><%=rangeUtil.formatDate(item.createTime,'yyyy-MM-dd hh:mm')%></span>
             </a>
         </div>
         <%})%>

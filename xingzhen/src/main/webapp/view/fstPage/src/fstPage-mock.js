@@ -59,6 +59,7 @@ define([
 
             //显示各区域专案组创建情况
             _self.showAreaCreateCaseList();
+
         },
 
         showTodoList:function () {//待办任务
@@ -131,6 +132,7 @@ define([
             //};
 
         },
+
         showAchievementsList:function () {//平台成果展示
             _self = this;
             //var achievementData = {
@@ -193,8 +195,29 @@ define([
                     $('#achieveDiv .more-link').on('click', function () {
                         var htmlPage = 'fstPage/achievementMoreList.html';
                         _self.clcikMore(this,htmlPage);
-
                     });
+                    //平台成果展示点击每列
+                    $("#achieveContent").on("click", "a.listOne", function (e) {
+                        e.preventDefault();
+                        debugger
+                        var groupId=$(this).attr("data-groupId");
+                        var htmlPage = 'fstPage/achievementMoreList.html';
+                        //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                        var tabTitle="平台成果展示";
+                        if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                            $openOnce(getViewPath(htmlPage), tabTitle)
+                        } else {
+                            window.msgTab = $open(getViewPath(htmlPage), tabTitle);
+                        }
+                        fstPageAjax.getGroupMemberList({groupId:groupId},function(r){
+                            debugger
+                            if(r.flag==1){
+                                $("#staffTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                            }else{
+                                toast(r.msg,600).err();
+                            }
+                        });
+                    })
                 }else{
                     toast(r.msg,600).err();
                 }
