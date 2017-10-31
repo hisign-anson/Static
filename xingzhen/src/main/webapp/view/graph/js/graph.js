@@ -382,6 +382,7 @@ updateGraphURL(jsonInitUrl);
 //根据链接更新
 function updateGraphURL(jsonUrl) {
     d3.json(jsonUrl, function (error, json) {
+        debugger
         if (error) {
             return console.log(error);
         }

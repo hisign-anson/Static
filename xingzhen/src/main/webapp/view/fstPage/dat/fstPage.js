@@ -71,7 +71,18 @@
 			$get(top.servicePath+'/xz/index/getTaskCountInfo',param,function(response) {
 				callback(response);
 			})
-		}
-
+		},
+		//平台成果展示(点击更多--获取所有组内成员)
+		getAjGroupPage:function(param,callback){
+			$post(top.servicePath+'/xz/asjAj/getAjGroupPage',param,function(response) {
+				callback(response);
+			},true)
+		},
+		//平台成果展示(点击更多--涉及案件)
+		getGroupMemberList:function(param,callback){
+			$post(top.servicePath+'/xz/usergroup/getGroupMemberList',param,function(response) {
+				callback(response);
+			},true)
+		},
 	}
 })
