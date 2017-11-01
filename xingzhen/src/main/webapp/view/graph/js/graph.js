@@ -1,10 +1,9 @@
 var width = 1200,
     height = 900;
 
-var img_w = 50,
-    img_h = 60;
+var img_w = 48,
+    img_h = 48;
 var jsonContext, edges_line, edges_text, node_img, node_text;
-debugger
 var groupid = $("#mapSvgFrame",parent.document).attr("groupid");
 // var jsonInitUrl = "huangshijinTest.json";
 var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=groupid";
@@ -394,7 +393,6 @@ function updateGraphURL(jsonUrl) {
 
 //根据json更新
 function updateGraphJSON(json) {
-    debugger
     jsonContext = json;
     layout
         .nodes(json.nodes)
@@ -417,7 +415,7 @@ function updateGraphJSON(json) {
     edges_line = edges_lineSVG
         .enter()
         .append("line")
-        .style("stroke", "#ff0000")//颜色
+        .style("stroke", "#808080")//颜色
         .style("stroke_width", 1)
         .style("marker-end", "url(#resolved)")
     edges_lineSVG.exit().remove();
@@ -742,4 +740,4 @@ var marker =
         .attr("stroke-width", 2)//箭头宽度
         .append("path")
         .attr("d", "M0,-5L10,0L0,5")//箭头的路径
-        .attr('fill', '#ff0000');//箭头颜色
+        .attr('fill', '#808080');//箭头颜色

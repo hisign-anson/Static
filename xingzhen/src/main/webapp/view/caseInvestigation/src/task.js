@@ -239,215 +239,215 @@ define(['underscore',
                 }
             });
         },
-        getFileInfoArr: function ($element) {
-            _self = this;
-            var fileDiv = $element[0];
-            var fileDetail;
-            var fileArr = [];
-            if (!fileDiv.files) {
-                alert('error:' + '获取文件失败');
-                throw new Error('获取文件失败');
-            }
-            console.info(fileDiv.files)
-            debugger;
-            fileDetail = fileDiv.files;
-            var file = fileDiv.files[0];
-            // console.log(file);
-            // alert(file['name']);
-            $.each(fileDetail, function (index, value) {
-                // var a = value;
-                var fileDetailItem = fileDetail[index];
-                debugger
-                var arr = {
-                    fileName: fileDetailItem['name'],
-                    fileOldName: fileDetailItem['name'],
-                    filePath: "",
-                    fileSize: fileDetailItem['size'],
-                    fileType: fileDetailItem['type']
-                };
-                fileArr.push(arr);
-            })
-            console.info(fileArr);
-            return fileArr;
-        },
         handleFeedback: function (taskId) {
             _self = this;
             if (taskId) {
                 taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl, r));
-                        var videoFileInfo = {}, picFileInfo = {},fileInfo = [];
-                        // $("#addVideo").siblings("input[type='file']").val("");
-                        // $("#addVideo").siblings("input[type='file']").off("change").on("change", function () {
-                        //     videoFileInfo = _self.getFileInfoArr($("#addVideo").siblings("input[type='file']"));
-                        //     $.each(videoFileInfo,function (index,value) {
-                        //         var fileArr = {
-                        //             fileName: videoFileInfo[0].fileName,
-                        //             fileOldName: videoFileInfo[0].fileName,
-                        //             filePath: videoFileInfo[0].filePath,
-                        //             fileSize: videoFileInfo[0].fileSize,
-                        //             fileType: videoFileInfo[0].fileType
-                        //         }
-                        //         fileInfo.push(fileArr);
-                        //     })
-                        // });
+                        var fileInfoArr = []; //传入后台参数的文件数组...
+                        var filesArr = []; //存放文件的数组...
+                        $("#addVideo").siblings("input[type='file']").val("");
+                        $("#addVideo").siblings("input[type='file']").off("change").on("change", function () {
+                            var $this = $(this)[0];
+                            //未上传前，在展示区域显示要上传内容的图片
+                            var fileList = $this.files;
+                            if (fileList.length == 0) {
+                                return false;
+                            }
+                            for (var i = 0; i < fileList.length; i++) {
+                                var tpObj = {};
+                                var file = fileList[i];
+                                //大小限制
+                                if (file.size > 10 * 1024 * 1024) {
+                                    $alert('单个视频大小超过10M， 上传速度将过慢，请重新上传');
+                                    break;
+                                }
+                                tpObj.fileMd5 = _self.getGuid();//图片对应fileMd5
+                                if (file.type.indexOf('image') > -1) {
+                                    tpObj.src = '../../../img/tp-img.png';
+                                } else {
+                                    tpObj.src = '../../../img/tp-word.png';
+                                }
+                                tpObj.proofName = file.name.replace(/\.\w+$/, '');//图片的名字
+                                tpObj.size = file.size;//(file.size / (1024 * 1024)).toFixed(2) + 'M';//图片的大小
+                                tpObj.file = file;//存放input的file值
+                                tpObj.flag = 1;
+                                tpObj.createTime = new Date().format('yyyy-mm-dd hh:mm:ss');//时间
 
-//                         $("#addImg").siblings("input[type='file']").val("");
-//                         $("#addImg").siblings("input[type='file']").off("change").on("change", function () {
-//                             picFileInfo = _self.getFileInfoArr($("#addImg").siblings("input[type='file']"));
-//                             $.each(picFileInfo,function (index,value) {
-//                                 var fileArr = {
-//                                     fileName: picFileInfo[0].fileName,
-//                                     fileOldName: picFileInfo[0].fileName,
-//                                     filePath: picFileInfo[0].filePath,
-//                                     fileSize: picFileInfo[0].fileSize,
-//                                     fileType: picFileInfo[0].fileType
-//                                 }
-//                                 fileInfo.push(fileArr);
-//                             })
-//                             debugger
-//                             var filesArr = []; //存放文件的数组...
-//                             // _self.upload(filesArr, $(this)[0]);
-//                             var $this = $(this)[0];
-//                             //未上传前，在展示区域显示要上传内容的图片
-//                             var fileList = $this.files;
-//                             if (fileList.length == 0) {
-//                                 return false;
-//                             }
-//                             for (var i = 0; i < fileList.length; i++) {
-//                                 var tpObj = {};
-//                                 var file = fileList[i];
-//                                 //大小限制
-//                                 if (file.size > 10 * 1024 * 1024) {
-//                                     $alert('单张图片大小超过10M， 上传速度将过慢，请压缩后重新上传');
-//                                     break;
-//                                 }
-//                                 tpObj.fileMd5 = _self.getGuid();//图片对应fileMd5
-//                                 // tpObj.id = tpObj.fileMd5;
-//                                 if (file.type.indexOf('image') > -1) {
-//                                     tpObj.src = '../../../img/tp-img.png';
-//                                 } else {
-//                                     tpObj.src = '../../../img/tp-word.png';
-//                                 }
-//                                 tpObj.proofName = file.name.replace(/\.\w+$/, '');//图片的名字
-//                                 tpObj.tipClass = 'icon-remove';//上传状态icon
-//                                 tpObj.state = '等待上传';//图片上传状态
-//                                 tpObj.size = (file.size / (1024 * 1024)).toFixed(2) + 'M';//图片的大小
-//                                 tpObj.file = file;//存放input的file值
-//                                 tpObj.flag = 1;
-//                                 tpObj.createTime = new Date().format('yyyy-mm-dd hh:mm:ss');//时间
-//
-//                                 var fileType = file.type;
-//                                 tpObj.fileMd5 = _self.getGuid();
-//                                 tpObj.fileName = file.name;
-//                                 tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
-//
-//                                 filesArr.push(tpObj);
-//                             }
-//
-//                             //附件按钮disabled
-//                             // $this.parent().addClass('disabled');
-//
-//                             //slick
-//                             filesArr.each(function (item, index) {
-//                                 item.serialNo = index + 1;
-//                             })
-//                             // _self.slickFn('#pics-wrap',filesArr);
-//
-//                             var picWrap = $('#pics-wrap');
-//                             //h5表单文件上传
-//                             filesArr.forEach(function (item, i) {
-//                                 var $slide = picWrap.find('[fileMd5="{0}"]'.format(item.fileMd5)); //找到对应的slide元素
-//                                 var filedownload, fileNameRemote;
-//                                 if (item.file) {
-//                                     var time2;
-//                                     var data = new FormData();
-//                                     data.append('file', item.file);
-//                                     //调用远程服务器上传文件
-//                                     $.ajax({
-//                                         url: top.servicePath + '/sys/file/upload?isResize=true',
-//                                         type: 'POST',
-//                                         data: data,
-//                                         async: true,
-//                                         cache: false,
-//                                         processData: false,
-//                                         contentType: false,
-//                                         beforeSend: function () {
-//                                             //设置进度条
-//                                             var $progressActive = $slide.find('.progress>span');
-//
-//                                             $slide.find('.state').html('上传中...');
-//                                             $slide.find('.progress').show();
-//
-//                                             //添加css3动画
-//                                             $progressActive.addClass('progress-bar-animate');
-//
-//                                         },
-//                                         success: function (res) {
-//                                             debugger
-//                                             if (res.flag == 1) {
-//                                                 debugger
-// //上传成功后的操作
-//                                                 // clearInterval(time2); //清除进度条的定时器
-//                                                 // $slide.find('.progress>span').css('width', '100%');
-//                                                 // // $slide.find('.progress>span').css('width', '100%');//设置对应进度条为100%
-//                                                 //
-//                                                 // setTimeout(function () {
-//                                                 //     $slide.find('.progress').hide();//隐藏进度条
-//                                                 //     $slide.find('.tip').addClass('icon-ok').removeClass('icon-remove');//修改右下角小图标
-//                                                 //     $slide.find('.state').html('上传完成');//修改上传状态
-//                                                 //
-//                                                 //     //如果上传的是image 则修改对应的图片地址
-//                                                 //     if (item.file.type.indexOf('image') > -1) {
-//                                                 //         $slide.find('img').prop('src', filedownload + res.data.fileNameRemote);
-//                                                 //         item.src = filedownload + res.data.fileNameRemote;
-//                                                 //
-//                                                 //     } else {
-//                                                 //         $slide.find('img').prop('src', '../../img/tp-word-ok.png');
-//                                                 //         item.src = '../../img/tp-word-ok.png';
-//                                                 //     }
-//                                                 //
-//                                                 //     //修改对应item的值
-//                                                 //     item.state = '上传完成';
-//                                                 //     item.tipClass = 'icon-ok';
-//                                                 //
-//                                                 //     //将附件信息存放在img上
-//                                                 //     item.proofType = item.file.type.indexOf('image') > -1 ? '1' : '2'; //附件类型
-//                                                 //     item.fileServerPath = res.data.fileNameRemote;//文件服务器返回的地址
-//                                                 //     $slide.find('img').attr('fileServerPath', item.fileServerPath);
-//                                                 //     delete item['file'];
-//                                                 // }, 2000);
-//                                             } else {
-//                                                 console.info(res);
-//                                             }
-//                                         },
-//                                         error: function () {
-//                                             //远程调用错误时，调用本地的上传文件接口
-//                                             //TODO
-//                                         }
-//                                     });
-//                                 }
-//                             });
-//
-//                             //附件按钮判断是否禁用
-//                             var time = setInterval(function () {
-//                                 //全部已经上传成功后，附件按钮可以点击
-//                                 if (picWrap.find('.tip.icon-remove').length == 0) {
-//                                     $('.upload-file').removeClass('disabled');
-//                                     clearInterval(time);
-//                                 }
-//                             }, 20);
-//                         });
-//                         $('.slick-list').slick({
-//                             dots: true
-//                         });
+                                var fileType = file.type;
+                                tpObj.fileMd5 = _self.getGuid();
+                                tpObj.fileName = file.name;
+                                tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
+                                tpObj.type = fileType.substr(fileType.indexOf('/') + 1);
 
-                        // _self.upclickImg();
-                        // _self.upclickVideo();
+                                filesArr.push(tpObj);
+                            }
+                            var picWrap = $('#pics-wrap');
+                            //h5表单文件上传
+                            filesArr.forEach(function (item, i) {
+                                if (item.file) {
+                                    var data = new FormData();
+                                    data.append('file', item.file);
+                                    //调用远程服务器上传文件
+                                    $.ajax({
+                                        url: top.servicePath + '/sys/file/upload?isResize=true',
+                                        type: 'POST',
+                                        data: data,
+                                        async: true,
+                                        cache: false,
+                                        processData: false,
+                                        contentType: false,
+                                        beforeSend: function () {
+                                            debugger
+                                            //设置进度条
+                                            // var $progressActive = $slide.find('.progress>span');
+                                            //
+                                            // $slide.find('.state').html('上传中...');
+                                            // $slide.find('.progress').show();
+                                            //
+                                            // //添加css3动画
+                                            // $progressActive.addClass('progress-bar-animate');
+
+                                        },
+                                        success: function (res) {
+                                            debugger
+                                            if (res.flag == 1) {
+                                                debugger
+                                                //上传成功后的操作
+                                                item.responseName = res.data.source.substring(12);
+                                                item.responseOldName = res.data.oldName;
+                                                item.responsePath = res.data.source;
+                                                if(filesArr){
+                                                    $.each(filesArr,function (index,value) {
+                                                        var item = {
+                                                            fileName: value.responseName,
+                                                            fileOldName: value.responseOldName,
+                                                            filePath: value.responsePath,
+                                                            fileSize: value.size,
+                                                            fileType: value.type
+                                                        }
+                                                        fileInfoArr.push(item);
+                                                    });
+                                                }
+
+                                            } else {
+                                                console.info(res);
+                                            }
+                                        },
+                                        error: function () {
+                                            //远程调用错误时，调用本地的上传文件接口
+                                            //TODO
+                                        }
+                                    });
+                                }
+                            });
+                        });
+
+                        $("#addImg").siblings("input[type='file']").val("");
+                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {
+                            var $this = $(this)[0];
+                            //未上传前，在展示区域显示要上传内容的图片
+                            var fileList = $this.files;
+                            if (fileList.length == 0) {
+                                return false;
+                            }
+                            for (var i = 0; i < fileList.length; i++) {
+                                var tpObj = {};
+                                var file = fileList[i];
+                                //大小限制
+                                if (file.size > 10 * 1024 * 1024) {
+                                    $alert('单张图片大小超过10M， 上传速度将过慢，请压缩后重新上传');
+                                    break;
+                                }
+                                tpObj.fileMd5 = _self.getGuid();//图片对应fileMd5
+                                if (file.type.indexOf('image') > -1) {
+                                    tpObj.src = '../../../img/tp-img.png';
+                                } else {
+                                    tpObj.src = '../../../img/tp-word.png';
+                                }
+                                tpObj.proofName = file.name.replace(/\.\w+$/, '');//图片的名字
+                                tpObj.size = file.size;//(file.size / (1024 * 1024)).toFixed(2) + 'M';//图片的大小
+                                tpObj.file = file;//存放input的file值
+                                tpObj.flag = 1;
+                                tpObj.createTime = new Date().format('yyyy-mm-dd hh:mm:ss');//时间
+
+                                var fileType = file.type;
+                                tpObj.fileMd5 = _self.getGuid();
+                                tpObj.fileName = file.name;
+                                tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
+                                tpObj.type = fileType.substr(fileType.indexOf('/') + 1);
+
+                                filesArr.push(tpObj);
+                            }
+                            var picWrap = $('#pics-wrap');
+                            //h5表单文件上传
+                            filesArr.forEach(function (item, i) {
+                                if (item.file) {
+                                    var data = new FormData();
+                                    data.append('file', item.file);
+                                    //调用远程服务器上传文件
+                                    $.ajax({
+                                        url: top.servicePath + '/sys/file/upload?isResize=true',
+                                        type: 'POST',
+                                        data: data,
+                                        async: true,
+                                        cache: false,
+                                        processData: false,
+                                        contentType: false,
+                                        beforeSend: function () {
+                                            debugger
+                                            //设置进度条
+                                            // var $progressActive = $slide.find('.progress>span');
+                                            //
+                                            // $slide.find('.state').html('上传中...');
+                                            // $slide.find('.progress').show();
+                                            //
+                                            // //添加css3动画
+                                            // $progressActive.addClass('progress-bar-animate');
+
+                                        },
+                                        success: function (res) {
+                                            debugger
+                                            if (res.flag == 1) {
+                                                debugger
+                                                //上传成功后的操作
+                                                item.responseName = res.data.source.substring(12);
+                                                item.responseOldName = res.data.oldName;
+                                                item.responsePath = res.data.source;
+                                                if(filesArr){
+                                                    $.each(filesArr,function (index,value) {
+                                                        var item = {
+                                                            fileName: value.responseName,
+                                                            fileOldName: value.responseOldName,
+                                                            filePath: value.responsePath,
+                                                            fileSize: value.size,
+                                                            fileType: value.type
+                                                        }
+                                                        fileInfoArr.push(item);
+                                                    });
+                                                }
+
+                                            } else {
+                                                console.info(res);
+                                            }
+                                        },
+                                        error: function () {
+                                            //远程调用错误时，调用本地的上传文件接口
+                                            //TODO
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                        $('.slick-list').slick({
+                            dots: true
+                        });
+
                         //反馈任务
                         $("#feedbackBtn").on("click", function () {
-                            debugger
-                            _self.saveFeedback(taskId, videoFileInfo, picFileInfo,fileInfo);
+                            console.info(fileInfoArr);
+                            _self.saveFeedback(taskId,fileInfoArr);
                         });
                         $("#cancelBtn").on("click", function () {
                             _self.showList();
@@ -467,137 +467,6 @@ define(['underscore',
             return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
         },
         upload: function (filesArr, $this) {
-            _self = this;
-            debugger
-            var $this = $this;
-            //未上传前，在展示区域显示要上传内容的图片
-            var fileList = $this.files;
-            if (fileList.length == 0) {
-                return false;
-            }
-            for (var i = 0; i < fileList.length; i++) {
-                var tpObj = {};
-                var file = fileList[i];
-                //大小限制
-                if (file.size > 10 * 1024 * 1024) {
-                    $alert('单张图片大小超过10M， 上传速度将过慢，请压缩后重新上传');
-                    break;
-                }
-                tpObj.fileMd5 = _self.getGuid();//图片对应fileMd5
-                // tpObj.id = tpObj.fileMd5;
-                if (file.type.indexOf('image') > -1) {
-                    tpObj.src = '../../../img/tp-img.png';
-                } else {
-                    tpObj.src = '../../../img/tp-word.png';
-                }
-                tpObj.proofName = file.name.replace(/\.\w+$/, '');//图片的名字
-                tpObj.tipClass = 'icon-remove';//上传状态icon
-                tpObj.state = '等待上传';//图片上传状态
-                tpObj.size = (file.size / (1024 * 1024)).toFixed(2) + 'M';//图片的大小
-                tpObj.file = file;//存放input的file值
-                tpObj.flag = 1;
-                tpObj.createTime = new Date().format('yyyy-mm-dd hh:mm:ss');//时间
-
-                var fileType = file.type;
-                tpObj.fileMd5 = _self.getGuid();
-                tpObj.fileName = file.name;
-                tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
-
-                filesArr.push(tpObj);
-            }
-
-            //附件按钮disabled
-            // $this.parent().addClass('disabled');
-
-            //slick
-            filesArr.each(function (item, index) {
-                item.serialNo = index + 1;
-            })
-            // _self.slickFn('#pics-wrap',filesArr);
-
-            var picWrap = $('#pics-wrap');
-            //h5表单文件上传
-            filesArr.forEach(function (item, i) {
-                var $slide = picWrap.find('[fileMd5="{0}"]'.format(item.fileMd5)); //找到对应的slide元素
-                var filedownload, fileNameRemote;
-                if (item.file) {
-                    var time2;
-                    var data = new FormData();
-                    data.append('file', item.file);
-                    //调用远程服务器上传文件
-                    $.ajax({
-                        url: top.servicePath + '/sys/file/upload?isResize=true',
-                        type: 'POST',
-                        data: data,
-                        async: true,
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function () {
-                            //设置进度条
-                            var $progressActive = $slide.find('.progress>span');
-
-                            $slide.find('.state').html('上传中...');
-                            $slide.find('.progress').show();
-
-                            //添加css3动画
-                            $progressActive.addClass('progress-bar-animate');
-
-                        },
-                        success: function (res) {
-                            debugger
-                            if (res.flag == 1) {
-                                debugger
-//上传成功后的操作
-                                // clearInterval(time2); //清除进度条的定时器
-                                // $slide.find('.progress>span').css('width', '100%');
-                                // // $slide.find('.progress>span').css('width', '100%');//设置对应进度条为100%
-                                //
-                                // setTimeout(function () {
-                                //     $slide.find('.progress').hide();//隐藏进度条
-                                //     $slide.find('.tip').addClass('icon-ok').removeClass('icon-remove');//修改右下角小图标
-                                //     $slide.find('.state').html('上传完成');//修改上传状态
-                                //
-                                //     //如果上传的是image 则修改对应的图片地址
-                                //     if (item.file.type.indexOf('image') > -1) {
-                                //         $slide.find('img').prop('src', filedownload + res.data.fileNameRemote);
-                                //         item.src = filedownload + res.data.fileNameRemote;
-                                //
-                                //     } else {
-                                //         $slide.find('img').prop('src', '../../img/tp-word-ok.png');
-                                //         item.src = '../../img/tp-word-ok.png';
-                                //     }
-                                //
-                                //     //修改对应item的值
-                                //     item.state = '上传完成';
-                                //     item.tipClass = 'icon-ok';
-                                //
-                                //     //将附件信息存放在img上
-                                //     item.proofType = item.file.type.indexOf('image') > -1 ? '1' : '2'; //附件类型
-                                //     item.fileServerPath = res.data.fileNameRemote;//文件服务器返回的地址
-                                //     $slide.find('img').attr('fileServerPath', item.fileServerPath);
-                                //     delete item['file'];
-                                // }, 2000);
-                            } else {
-                                console.info(res);
-                            }
-                        },
-                        error: function () {
-                            //远程调用错误时，调用本地的上传文件接口
-                            //TODO
-                        }
-                    });
-                }
-            });
-
-            //附件按钮判断是否禁用
-            var time = setInterval(function () {
-                //全部已经上传成功后，附件按钮可以点击
-                if (picWrap.find('.tip.icon-remove').length == 0) {
-                    $('.upload-file').removeClass('disabled');
-                    clearInterval(time);
-                }
-            }, 20);
         },
         //slide 图片轮播
         slickFn: function (selector, tpArr, flag, $index) {
@@ -632,17 +501,17 @@ define(['underscore',
                 });
             }
         },
-        saveFeedback: function (taskId, videoFileInfo, picFileInfo,fileInfo) {
+        saveFeedback: function (taskId,fileInfoArr) {
             _self = this;
             $('.feedback-valid').validatebox();
             if ($('.validatebox-invalid').length > 0) {
                 return false;
             }
             var taskFkFiles = [];
-            if(fileInfo){
-                debugger
-                taskFkFiles = fileInfo;
+            if(fileInfoArr){
+                taskFkFiles = fileInfoArr;
             }
+            debugger
             console.info(taskFkFiles);
             var param = {
                 bz: $.trim($("#bz").val()),
@@ -657,6 +526,7 @@ define(['underscore',
                 taskid: taskId
             };
             taskAjax.addTaskFk(param, function (r) {
+                debugger
                 if (r.flag == 1) {
                     toast('反馈成功！', 600, function () {
                         _self.showList();
