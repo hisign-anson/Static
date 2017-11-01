@@ -15,12 +15,38 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="command.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="command.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/src/command.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="292" column="48" lean-forward="false" selection-start-line="292" selection-start-column="48" selection-end-line="292" selection-end-column="48" />
+              <folding>
+                <element signature="e#6244#7891#0" expanded="false" />
+                <element signature="e#11634#13057#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery.fullscreen.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugin/fullscreen/jquery.fullscreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="833">
+              <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="548">
+              <caret line="253" column="22" lean-forward="false" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
+              <folding>
+                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="task.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="236">
@@ -78,16 +104,6 @@
                 <element signature="e#38225#40215#0" expanded="false" />
                 <element signature="e#40248#41820#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="task.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/task.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -160,8 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>top.ftpServer</find>
-      <find>rev</find>
       <find>handleFeedback</find>
       <find>upclickImg</find>
       <find>onstart</find>
@@ -174,7 +188,6 @@
       <find>unslick</find>
       <find>slickFn</find>
       <find>pics-wrap</find>
-      <find>$slide</find>
       <find>parent.</find>
       <find>parent.document</find>
       <find>img</find>
@@ -188,8 +201,11 @@
       <find>nodes</find>
       <find>node_textSVG</find>
       <find>mapSvgFrame</find>
-      <find>h-upload</find>
       <find>body</find>
+      <find>$slide</find>
+      <find>fullPanel</find>
+      <find>full</find>
+      <find>h-upload</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -252,9 +268,9 @@
         <option value="$PROJECT_DIR$/view/graph/huangshijinTest.json" />
         <option value="$PROJECT_DIR$/view/graph/css/graph.css" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/tpl/commandPage.html" />
-        <option value="$PROJECT_DIR$/view/commandCooperationManage/src/command.js" />
         <option value="$PROJECT_DIR$/view/graph/js/graph.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
+        <option value="$PROJECT_DIR$/view/commandCooperationManage/src/command.js" />
       </list>
     </option>
   </component>
@@ -487,12 +503,12 @@
       <workItem from="1509066564568" duration="30221000" />
       <workItem from="1509152914748" duration="26617000" />
       <workItem from="1509325670253" duration="21514000" />
-      <workItem from="1509353153759" duration="60373000" />
+      <workItem from="1509353153759" duration="61355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="288314000" />
+    <option name="totallyTimeSpent" value="289296000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -529,21 +545,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/dat/task.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="163" column="21" lean-forward="true" selection-start-line="161" selection-start-column="16" selection-end-line="163" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="444">
@@ -684,17 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="248" column="37" lean-forward="true" selection-start-line="248" selection-start-column="37" selection-end-line="251" selection-end-column="61" />
-          <folding>
-            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/chatPage/src/chat.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -719,21 +709,6 @@
         <state relative-caret-position="596">
           <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-          <folding>
-            <element signature="n#!!block;n#HashMap#0" expanded="false" />
-            <element signature="n#!!block;n#initDictForGXS#0" expanded="false" />
-            <element signature="n#!!block;n#gotoLogin#0" expanded="false" />
-            <element signature="n#!!block;n#getUserInfo#0" expanded="false" />
-            <element signature="e#6640#6852#0" expanded="false" />
-            <element signature="e#6887#7230#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -911,14 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/dat/specialCaseGroup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="64" column="70" lean-forward="false" selection-start-line="64" selection-start-column="70" selection-end-line="64" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/task.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
@@ -973,14 +940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/src/command.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/graph/js/graph.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -1029,6 +988,67 @@
             <element signature="e#36626#38183#0" expanded="false" />
             <element signature="e#38225#40215#0" expanded="false" />
             <element signature="e#40248#41820#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/dat/specialCaseGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="64" column="70" lean-forward="false" selection-start-line="64" selection-start-column="70" selection-end-line="64" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/fullpanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-117">
+          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="331" column="11" lean-forward="true" selection-start-line="331" selection-start-column="11" selection-end-line="331" selection-end-column="11" />
+          <folding>
+            <element signature="n#!!block;n#HashMap#0" expanded="false" />
+            <element signature="n#!!block;n#initDictForGXS#0" expanded="false" />
+            <element signature="n#!!block;n#gotoLogin#0" expanded="false" />
+            <element signature="n#!!block;n#getUserInfo#0" expanded="false" />
+            <element signature="e#6640#6852#0" expanded="false" />
+            <element signature="e#6887#7230#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="253" column="22" lean-forward="false" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/fullscreen/jquery.fullscreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/src/command.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="292" column="48" lean-forward="false" selection-start-line="292" selection-start-column="48" selection-end-line="292" selection-end-column="48" />
+          <folding>
+            <element signature="e#6244#7891#0" expanded="false" />
+            <element signature="e#11634#13057#0" expanded="false" />
           </folding>
         </state>
       </provider>

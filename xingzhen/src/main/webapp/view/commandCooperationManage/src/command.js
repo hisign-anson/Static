@@ -75,7 +75,6 @@ define(['underscore',
             //全屏显示脉络图 fullPanelUtils.fullPanel(触发元素，全屏元素)
             var clickDiv = $("#fullscreenBtn");
             fullPanelUtils.fullPanel(clickDiv, clickDiv.parents(".map-list"));
-
             //显示脉络图查询条件
             _selfCommand.showCondition();
         },
@@ -89,7 +88,19 @@ define(['underscore',
                 "width": "100%",
                 "height": "100%"
             });
-
+            // $('.request-fullscreen').click(function() {
+            //     if (screenCheck) {
+            //         if ($.fullscreen.isFullScreen()) {
+            //             $.fullscreen.exit();
+            //         } else {
+            //             $('html').fullscreen({
+            //                 overflow: 'visible'
+            //             });
+            //         }
+            //     } else {
+            //         toast('浏览器不支持全屏模式')
+            //     }
+            // });
             //进入专案组讨论
             $(".into-communication").on("click", function () {
                 if(groupinfo){
@@ -108,6 +119,7 @@ define(['underscore',
             });
             //跳转到任务清单
             $(".into-taskList").on("click", function () {
+                debugger
                 if(groupinfo){
                     _selfCommand.intoTaskList(groupinfo);
                 } else {
@@ -173,6 +185,12 @@ define(['underscore',
             _selfCommand = this;
             var groupinfo = str2obj(groupinfo);
             $open('#taskListDiv', {width: 800, title: '&nbsp任务清单'});
+
+            var fullActivedCheck = $(".map-list").hasClass("full-panel");
+            if(fullActivedCheck){
+                $("#top-mask",parent.document).height(0);
+            }
+
             var openerDiv = $("#taskListDiv");
             openerDiv.find(".panel-container").empty().html(_.template(taskListTpl, {isOperation:false}));
             selectUtils.selectTextOption("#taskListDiv #changeTaskType", "#taskType");
@@ -269,6 +287,11 @@ define(['underscore',
             _selfCommand = this;
             var groupinfo = str2obj(groupinfo);
             $open('#taskListDiv', {width: 800, title: '&nbsp涉及案件'});
+
+            var fullActivedCheck = $(".map-list").hasClass("full-panel");
+            if(fullActivedCheck){
+                $("#top-mask",parent.document).height(0);
+            }
             var openerDiv = $("#taskListDiv");
             openerDiv.find(".panel-container").empty().html(_.template(relationCaseTpl, {isOperation:false}));
             $(".form-btn-block").addClass("hide");
