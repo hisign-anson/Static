@@ -4,8 +4,10 @@ var width = 1200,
 var img_w = 50,
     img_h = 60;
 var jsonContext, edges_line, edges_text, node_img, node_text;
-var jsonInitUrl = "huangshijinTest.json";
-
+debugger
+var groupid = $("#mapSvgFrame",parent.document).attr("groupid");
+// var jsonInitUrl = "huangshijinTest.json";
+var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=groupid";
 var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 var setting = {
@@ -381,84 +383,18 @@ function addNode(nodeArrays, linkArrays) {
 updateGraphURL(jsonInitUrl);
 //根据链接更新
 function updateGraphURL(jsonUrl) {
-    d3.json(jsonUrl, function (error, json) {
+    d3.json(jsonInitUrl, function (error, json) {
         debugger
         if (error) {
             return console.log(error);
         }
         updateGraphJSON(json);
     });
-    // var param1 ={
-    //     limitLevel:20,
-    //     maxNode:50,
-    //     detail:false,
-    //     startNodeValue:"5BBD1241B23CDB7DE050A8C0520139C0",
-    //     startNodeType:"groupid"
-    // };
-    // $.ajax({
-    //     url: "/graph/getGraph",
-    //     type: "GET",
-    //     async: false,
-    //     data: param1,
-    //     timeout: 3000,
-    //     success: function(msg) {
-    //         debugger
-    //     },
-    //     error:function (msg) {
-    //         debugger
-    //
-    //     }
-    // });
-
-    // $.ajax({
-    //     type: "GET",
-    //     url: '/sys/org/getOrgTreeListBySuperId',
-    //     dataType: "json",
-    //     contentType:"application/json; charset=utf-8",
-    //     headers: {
-    //         Accept: "*/*",
-    //         token: top.token
-    //     },
-    //     data: {superId: top.orgId},
-    //     success: function (data) {
-    //         debugger
-    //         callback(data)
-    //     },
-    //     error: function (msg) {
-    //         debugger
-    //
-    //     }
-    // });
-    // $.ajax({
-    //     url: "http://192.168.1.85:8089/getGraph",
-    //     type: "GET",
-    //     async: false,
-    //     // dataType: 'jsonp',
-    //     dataJson:"",
-    //     // jsonp: 'callback',
-    //     // jsonpCallback: 'callbackfunction',
-    //     crossDomain: true,
-    //     data: param,
-    //     timeout: 3000,
-    //     // contentType: "application/x-www-form-urlencoded",
-    //     success: function(msg) {
-    //         debugger
-    //         d3.json(msg, function (error, json) {
-    //             if (error) {
-    //                 return console.log(error);
-    //             }
-    //             updateGraphJSON(json);
-    //         });
-    //     },
-    //     error:function (msg) {
-    //         debugger
-    //
-    //     }
-    // });
 }
 
 //根据json更新
 function updateGraphJSON(json) {
+    debugger
     jsonContext = json;
     layout
         .nodes(json.nodes)
@@ -481,9 +417,9 @@ function updateGraphJSON(json) {
     edges_line = edges_lineSVG
         .enter()
         .append("line")
-        .style("stroke", "#ccc")
+        .style("stroke", "#ff0000")//颜色
         .style("stroke_width", 1)
-        .style("marker-end", "url(#resolved)");
+        .style("marker-end", "url(#resolved)")
     edges_lineSVG.exit().remove();
 
     //连线上的字
@@ -502,7 +438,23 @@ function updateGraphJSON(json) {
         .attr("width", img_w)
         .attr("height", img_h)
         .attr("xlink:href", function (d) {
-            return d.image;
+            var image;
+            switch (d.type){
+                case "groupid":
+                    image = "../../img/graph/type_group.png";
+                    break;
+                case "taskid":
+                    image = "../../img/graph/type_task.png";
+                    break;
+                case "fkid":
+                    image = "../../img/graph/type_feedback.png";
+                    break;
+                case "ajid":
+                    image = "../../img/graph/type_case.png";
+                    break;
+
+            }
+            return image;
         })
         //去掉默认的contextmenu事件，否则会和右键事件同时出现。
         .on("contextmenu", function () {
@@ -627,8 +579,10 @@ function updateGraphJSON(json) {
         .call(layout.drag);
     node_imgSVG.exit().remove();
 
-    var node_dx = -20,
-        node_dy = 20;
+    var node_dx = 0;//-20,
+    var node_dy = 20;
+    // var html = '<tspan class="name-text" dx="' + node_dx + '" dy="' + node_dy + '" x="' + node_dx + '" y="' + node_dy + '"></tspan>' +
+    //     '<tspan class="time-text" x="' + node_dx + '" y="' + node_dy + 20 + '" dx="' + node_dx + '" dy="' + node_dy + 20 + '"></tspan>';
     //节点上的字
     node_text = node_textSVG
         .enter()
@@ -636,10 +590,66 @@ function updateGraphJSON(json) {
         .attr("class", "nodetext")
         .attr("dx", node_dx)
         .attr("dy", node_dy)
+        // .html(html)
         .text(function (d) {
+            console.info(d.name);
+            var arr = [];
+            arr = d.name.split("@");
+            var name = arr[0];
+            var time = arr[1];
+            name = name ? name : "";
+            time = time ? time : "";
+
             // return d.name.substring(0,9) + "...";
-            return d.name;
+            return name;
         });
+        // .selectAll(".name-text")
+        // .attr("dx", node_dx)
+        // .attr("dy", node_dy).data(function (d) {
+        //     debugger
+        //         var arr = [];
+        //         arr = d.name.split("@");
+        //         var name = arr[0];
+        //         var time = arr[1];
+        //         // if(name){
+        //         //     svg.select(".name-text").text("11");
+        //         // }
+        //         // if(time){
+        //         //     svg.selectAll(".time-text").text("22");
+        //         // }
+        //     return name;
+        //
+        // })
+        // .selectAll(".time-text").data(function (d) {
+        //     debugger
+        //     var arr = [];
+        //     arr = d.name.split("@");
+        //     var name = arr[0];
+        //     var time = arr[1];
+        //     return time;
+        //
+        // })
+
+    // for (i = 0; i < json.nodes.length; i++) {
+    //     debugger
+    //     var arr = [];
+    //     arr = json.nodes[i].name.split("@");
+    //     var name = arr[0];
+    //     var time = arr[1];
+    //     if(name){
+    //         svg.selectAll(".name-text").data(name);
+    //     }
+    //     if(time){
+    //         svg.selectAll(".time-text").data(time);
+    //     }
+    // }
+    // svg.selectAll(".name-text").text(function (d) {
+    //     return d;
+    // });
+    // svg.selectAll(".time-text").text(function (d) {
+    //     return d;
+    // });
+
     node_textSVG.exit().remove();
 
     //拖拽开始后设定被拖拽对象为固定
@@ -709,9 +719,12 @@ var layout = d3.layout.force()
     .gravity(0.08);
 
 //定义svg画板
-var svg = d3.select("#test").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+var svg = d3.select("body").append("svg")
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
+    .attr("viewBox", "0 0 1200 900");
+    // .attr("width", width)
+    // .attr("height", height);
 
 //箭头
 var marker =
@@ -721,12 +734,12 @@ var marker =
         //.attr("markerUnits","strokeWidth")//设置为strokeWidth箭头会随着线的粗细发生变化
         .attr("markerUnits", "userSpaceOnUse")
         .attr("viewBox", "0 -5 10 10")//坐标系的区域
-        .attr("refX", 32)//箭头坐标
-        .attr("refY", -1)
+        .attr("refX", 30)//箭头坐标
+        .attr("refY", 0)
         .attr("markerWidth", 12)//标识的大小
         .attr("markerHeight", 12)
         .attr("orient", "auto")//绘制方向，可设定为：auto（自动确认方向）和 角度值
         .attr("stroke-width", 2)//箭头宽度
         .append("path")
         .attr("d", "M0,-5L10,0L0,5")//箭头的路径
-        .attr('fill', '#000000');//箭头颜色
+        .attr('fill', '#ff0000');//箭头颜色

@@ -65,76 +65,32 @@
                             <div class="upload-block">
                                 <!--<b id="addVideo" class="cm-btn-icon h-add orange-btn upload-btn">视频上传<input type="file" accept=".mp4,.aiff,.avi,.mpg,.mpeg,.wmv,.mkv"></b>-->
                                 <!--<b id="addPic" class="cm-btn-icon h-add orange-btn upload-btn">图片上传<input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff"></b>-->
-
-
-
-                                <div class="">
-                                    <div class="progress" style="height: 6px;margin-bottom:3px;width: 150px;" >
+                                <div class="avatar-upload">
+                                    <div class="progress" style="height: 6px;margin-bottom:3px" >
                                         <div class="progress-bar progress-bar-success" role="progressbar"
                                              aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"
                                              style="width: 0%;">
                                         </div>
                                     </div>
                                     <label class="cm-upload-btn" title="Upload image file">
-                                        <b id="addVideo" class="cm-btn-icon h-add orange-btn upload-btn">视频上传
-                                            <input type="file" accept=".mp4,.aiff,.avi,.mpg,.mpeg,.wmv,.mkv">
-                                        </b>
+                                        <input type="file" class="sr-only" multiple="multiple" accept=".mp4,.aiff,.avi,.mpg,.mpeg,.wmv,.mkv">
+                                        <span id="addVideo" class="cm-btn-icon h-add orange-btn upload-btn">视频上传</span>
                                     </label>
                                 </div>
-                                <div class="">
-                                    <div class="progress" style="height: 6px;margin-bottom:3px;width: 150px;" >
+
+
+                                <div class="avatar-upload">
+                                    <div class="progress" style="height: 6px;margin-bottom:3px">
                                         <div class="progress-bar progress-bar-success" role="progressbar"
                                              aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"
                                              style="width: 0%;">
                                         </div>
                                     </div>
                                     <label class="cm-upload-btn" title="Upload image file">
-                                        <b id="addPic" class="cm-btn-icon h-add orange-btn upload-btn">图片上传
-                                            <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
-                                        </b>
-
-                                        <!--<input type="file" class="sr-only" id="inputImage" name="imageUpload"-->
-                                        <!--accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">-->
-                                        <!--<span id="avatar-btn" class="upload-text">选择头像</span>-->
+                                        <input type="file" class="sr-only" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                                        <span id="addImg" class="cm-btn-icon h-add orange-btn upload-btn">图片上传</span>
                                     </label>
                                 </div>
-
-                                <!--<form id= "avatarUploadForm"  enctype="multipart/form-data">-->
-                                    <!--<input type="hidden" name="avatar" id="avatar" value=""/>-->
-                                    <!--<div class="avatar-upload">-->
-                                        <!--<a class="avatar-selectedImg" id="avatar-selectedImg" href="javascript:void(0);">-->
-                                            <!--<img class="avatar-img" id="avatar-img" src="../../img/touxiang.jpg">-->
-                                        <!--</a>-->
-                                        <!--<div class="progress" style="height: 6px;margin-bottom:3px" >-->
-                                            <!--<div class="progress-bar progress-bar-success" role="progressbar"-->
-                                                 <!--aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"-->
-                                                 <!--style="width: 0%;">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<label class="cm-upload-btn" for="inputImage" title="Upload image file">-->
-                                            <!--<input type="file" class="sr-only" id="inputImage" name="imageUpload" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">-->
-                                            <!--<span id="avatar-btn" class="upload-text">选择头像</span>-->
-                                        <!--</label>-->
-                                    <!--</div>-->
-                                <!--</form>-->
-                                <!--<div>-->
-                                    <!--<input type="hidden" name="avatar" id="avatar" value=""/>-->
-                                    <!--<div class="avatar-upload">-->
-                                        <!--<a class="avatar-selectedImg" id="avatar-selectedImg" href="javascript:void(0);">-->
-                                            <!--<img class="avatar-img" id="avatar-img" src="../../img/touxiang.jpg">-->
-                                        <!--</a>-->
-                                        <!--<div class="progress" style="height: 6px;margin-bottom:3px" >-->
-                                            <!--<div class="progress-bar progress-bar-success" role="progressbar"-->
-                                                 <!--aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"-->
-                                                 <!--style="width: 0%;">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<label class="cm-upload-btn" for="inputImage" title="Upload image file">-->
-                                            <!--<input type="file" class="sr-only" id="inputImage" name="imageUpload" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">-->
-                                            <!--<span id="avatar-btn" class="upload-text">选择头像</span>-->
-                                        <!--</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
 
 
                                 <span class="red">调查过程材料上传</span>
@@ -158,6 +114,16 @@
                         <span class="common-field">反馈人：</span>
                         <input type="hidden" id="fkr"/>
                         <input class="common-input" type="text"  name="" id="fkrname" value="<%=top.trueName%>" readonly/>
+                    </div>
+                </div>
+
+                <div class="pic-info">
+                    <div class="slick-list draggable" tabindex="0">
+                        <!--<div><img src="../../../../img/6.jpg" alt=""></div>-->
+                        <!--<div><img src="../../../../img/empty.png" alt=""></div>-->
+                        <!--<div><img src="../../../../img/error.png" alt=""></div>-->
+                        <!--<div><img src="../../../../img/pc-avatar.png" alt=""></div>-->
+                        <!--<div><img src="../../../../img/pc-avatar2.png" alt=""></div>-->
                     </div>
                 </div>
                 <%}%>

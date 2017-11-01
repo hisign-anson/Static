@@ -135,16 +135,17 @@ body {
 
 /*tooltip的样式 end*/
 .nodetext {
-    fill: #ff3451;
-
+    fill: #494949;
+    text-anchor: middle;
     /*display: inline-block;*/
     /*width: 20px;*/
     /*color: #dddddd;*/
 }
 
 .linetext {
-    fill: #000079;
+    fill: #494949;
     fill-opacity: 1.0;
+    text-anchor: middle;
 }
 
 .link.resolved {
