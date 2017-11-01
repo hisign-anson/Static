@@ -61,10 +61,10 @@ define(function(){
             }, true)
         },
         //专案组撤销归档
-        // groupBackupAdd: function (param, callback) {
-        //     $post(top.servicePath_xz + '/groupBackup/add', param, function (response) {
-        //         callback(response);
-        //     }, true)
-        // }
+        groupBackupRemove: function (param, callback) {
+            $post(top.servicePath_xz + '/groupBackup/remove', param, function (response) {
+                callback(response);
+            }, true)
+        }
     }
 });

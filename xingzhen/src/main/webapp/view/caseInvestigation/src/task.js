@@ -265,47 +265,33 @@ define(['underscore',
                             // picFile = _self.getFile("#addPic input[type='file']");
                             picFileInfo = _self.getFileInfo("#addPic input[type='file']");
                         });
-                        //反馈任务
-                        $("#feedbackBtn").on("click",function () {
-                            // $('.feedback-valid').validatebox();
-                            // if ($('.validatebox-invalid').length > 0) {
-                            //     return false;
-                            // }
-                            _self.upclick();
-                            var taskFkFiles = [];
-                            if(videoFileInfo){
-                                taskFkFiles.push(videoFileInfo);
-                            }
-                            if(picFileInfo) {
-                                taskFkFiles.push(picFileInfo);
-                            }
-                            console.info(taskFkFiles);
-                            var param = {
-                                bz: $.trim($("#bz").val()),
-                                createname: top.trueName,
-                                // createtime: "2017-10-26T06:05:06.124Z",
-                                creator: top.userId,
-                                deparmentcode: top.orgCode,
-                                fkTime: $("#fkTime").val(),
-                                fkr: top.userId,
-                                fkrname: top.trueName,
-                                fkxs: $("#fkxs").val(),
-                                // groupid: "string",
-                                // pgroupid: "string",
-                                // qrTime: "2017-10-26T06:05:06.124Z",
-                                // qrzt: "string",
-                                taskFkFiles: taskFkFiles,
-                                taskid: taskId
-                            };
-                            taskAjax.addTaskFk(param, function (r) {
-                                if (r.flag == 1) {
-                                    toast('反馈成功！', 600, function () {
-                                        _self.showList();
-                                    }).ok();
-                                } else {
-                                    toast(r.msg, 600).err()
+                        debugger
+                        //上传附件
+                        upclick(
+                            {
+                                dataname: "file",
+                                element: "upload-btn",
+                                action: top.servicePath+'/sys/file/upload?isResize=false',
+                                onstart: function (filename) {
+                                    $(".progress-bar").css('width','50%');
+                                },
+                                oncomplete: function (r) {
+                                    if(r.flag==1){
+                                        $("#rev1").val(obj2str(r.data.source));
+                                        $("#file").val(r.data.oldName);
+                                        $(".progress-bar").css('width','100%');
+                                    }else{
+                                        console.info(r)
+                                        toast(r.msg,600).err();
+                                        $(".progress-bar").css('width','0%');
+                                    }
                                 }
                             });
+                        // _self.upclick();
+
+                        //反馈任务
+                        $("#feedbackBtn").on("click",function () {
+                            _self.saveFeedback(taskId,videoFileInfo,picFileInfo);
                         });
                         $("#cancelBtn").on("click",function () {
                             _self.showList();
@@ -313,6 +299,47 @@ define(['underscore',
                     }
                 });
             }
+
+        },
+        saveFeedback:function (taskId,videoFileInfo,picFileInfo) {
+            _self = this;
+            $('.feedback-valid').validatebox();
+            if ($('.validatebox-invalid').length > 0) {
+                return false;
+            }
+            var taskFkFiles = [];
+            if(videoFileInfo){
+                taskFkFiles.push(videoFileInfo);
+            }
+            if(picFileInfo) {
+                taskFkFiles.push(picFileInfo);
+            }
+            console.info(taskFkFiles);
+            var param = {
+                // groupid: "string",
+                // pgroupid: "string",
+                // qrTime: "2017-10-26T06:05:06.124Z",
+                // qrzt: "string",
+                bz: $.trim($("#bz").val()),
+                createname: top.trueName,
+                creator: top.userId,
+                deparmentcode: top.orgCode,
+                fkTime: $("#fkTime").val(),
+                fkr: top.userId,
+                fkrname: top.trueName,
+                fkxs: $("#fkxs").val(),
+                taskFkFiles: taskFkFiles,
+                taskid: taskId
+            };
+            taskAjax.addTaskFk(param, function (r) {
+                if (r.flag == 1) {
+                    toast('反馈成功！', 600, function () {
+                        _self.showList();
+                    }).ok();
+                } else {
+                    toast(r.msg, 600).err()
+                }
+            });
 
         },
         handleTransfer:function (taskId,taskInfo) {
@@ -345,7 +372,6 @@ define(['underscore',
             }
             $("#mainDiv").empty().html(_.template(taskAddTpl,{taskInfo:taskinfo,text:text}));
             $("#fkjzTime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
-            $("#createtime").datetimepicker({format:'YYYY-MM-DD',pickTime:false});
 
             $("#chooseGroup").on('click', function () {
                 dictOpener.openChoosePort($(this),null,null,{userId:top.userId});
@@ -418,6 +444,7 @@ define(['underscore',
                         ops: top.opsMap,
                         checkboxMulti:isCheckboxMulti
                     }));
+                    $(".span").span();
                     //任务移交给用户
                     _self.saveTransfer(taskId);
                     $("#userListDiv").on('click', "#cancelBtn", function () {
@@ -521,11 +548,12 @@ define(['underscore',
             });
         },
         upclick:function () {
+            debugger
             _self = this;
             //上传图片
             upclick({
                 dataname: "file",
-                element: "addVideo1",
+                element: "avatar-btn",
                 action: top.servicePath + '/sys/file/upload?isResize=true',
                 onstart: function (filename) {
                     debugger
@@ -534,8 +562,8 @@ define(['underscore',
                 oncomplete: function (r) {
                     debugger
                     if (r.flag == 1) {
-                        // $("#avatar").val(obj2str(r.data));
-                        // $("#avatar-img").attr('src', top.ftpServer + r.data.source);
+                        $("#avatar").val(obj2str(r.data));
+                        $("#avatar-img").attr('src', top.ftpServer + r.data.source);
                     } else {
                         toast(obj.msg, 600).err();
                         $(".progress-bar").css('width','0%');

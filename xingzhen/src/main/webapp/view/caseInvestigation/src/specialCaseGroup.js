@@ -76,7 +76,7 @@ define(['underscore',
         //查询功能
         queryList: function () {
             _self = this;
-            var userParam = str2obj($("#membername").attr("paramattr")):
+            var userParam = str2obj($("#membername").attr("paramattr"));
             var param = {
                 ajbh: "",
                 backupStatu: "",
@@ -85,7 +85,7 @@ define(['underscore',
                 endTime: "",
                 groupname: "",
                 groupnum: "",
-                memberId: userParam.userId,
+                memberId: userParam?userParam.userId:"",
                 startTime: "",
                 userId: top.userId
 
@@ -114,7 +114,7 @@ define(['underscore',
                         window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
                     });
                     $(".into-group").on('click', function () {
-                        _self.showGroupOfGroup($(this),$(this).attr("groupid"),$(this).attr("jmgid"),userParam.userName);
+                        _self.showGroupOfGroup($(this),$(this).attr("groupid"),$(this).attr("jmgid"));
                     });
 
                 }
@@ -162,21 +162,21 @@ define(['underscore',
                 $("#archiveBlock").$close();
             });
         },
-        showGroupOfGroup:function (obj,groupid,jmgid,membername) {
+        showGroupOfGroup:function (obj,groupid,jmgid) {
             _self = this;
             //嵌套表格的实现--------------------------------------------------------------------------------------------
             var isOpen = obj.hasClass("clicked-open");
             var currentTr = obj.parents("tr");
+            var userParam = str2obj($("#membername").attr("paramattr"));
 
             debugger;
             if (isOpen) {
                 obj.removeClass("clicked-open");
                 currentTr.next().remove();
             } else {
-                obj.addClass("clicked-open");
                 var param = {
                     groupId:groupid,
-                    memberName:$.trim($("#membername").val());
+                    memberName:$.trim($("#membername").val())
                 };
                 $.ajax({
                     url: top.servicePath_xz+'/group/getChildGroupList',
@@ -184,9 +184,9 @@ define(['underscore',
                     contentType: "application/x-www-form-urlencoded",
                     data: param,
                     success: function (r) {
-                        debugger
                         if(r.flag == 1){
                             if(r.data && r.data.length > 0 ){
+                                obj.addClass("clicked-open");
                                 var tableHtml = _.template(groupListTpl, {data: r.data});
                                 console.info(tableHtml);
                                 console.info($(tableHtml));
@@ -230,11 +230,6 @@ define(['underscore',
                 if ($(this).attr("id") == "navBaseInfo") {
                     var groupinfo =  str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
                     $(this).tab('show');
-                    //判断是否有专案组信息
-                    //如果有：展示基本信息
-                    //否则：报错
-                    // toast("是否保存过专案组基本信息？").warn();
-
                     debugger;
                     if(groupinfo){
                         _self.showBaseInfo(groupinfo);
@@ -246,14 +241,13 @@ define(['underscore',
                     var groupinfo =  str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
                     $('#baseInfo .field-valid').validatebox();
                     if ($('.validatebox-invalid').length > 0) {
-                        toast("请先保存专案组基本信息！").warn();
+                        toast("请先填写专案组基本信息！").warn();
                         return false;
                     } else {
                         $(this).tab('show');
-                        if (groupinfo.id){
+                        if (groupinfo){
                             _self.handleRelationCase(groupinfo);
                         }else {
-                            // _self.saveGroupInfo();
                             //保存专案组基本信息
                             $("#btnBaseInfo #saveBtn").trigger("click");
                         }
@@ -263,11 +257,11 @@ define(['underscore',
                     var groupinfo =  str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
                     $('#baseInfo .field-valid').validatebox();
                     if ($('.validatebox-invalid').length > 0) {
-                        toast("请先保存专案组基本信息！").warn();
+                        toast("请先填写专案组基本信息！").warn();
                         return false;
                     } else {
                         $(this).tab('show');
-                        if (groupinfo.id){
+                        if (groupinfo){
                             _self.handleGroupStaff(groupinfo);
                         }else {
                             //保存专案组基本信息
@@ -334,25 +328,19 @@ define(['underscore',
         handleBaseInfo: function (pgroupid) {
             _self = this;
             debugger;
-            var groupId,jmgid;
             $(".form-content-block").empty().html(_.template(baseInfoTpl));
             $(".form-btn-block").removeClass("hide");
-            // if (flag) {
-            //     //已经保存过 输入框设值 并且不可修改 不可提交
-            //     $("#baseInfo").find("input,select,i").attr("disabled", "disabled").val("def ");
-            // } else {
-            // }
             $("#chooseGroupType").on('click', function () {
                 dictOpener.openChooseDict($(this));
             });
             $("#btnBaseInfo #saveBtn").on("click", function () {
-                _self.saveGroupInfo(pgroupid,groupId,jmgid);
+                _self.saveGroupInfo(pgroupid);
             });
             $("#btnBaseInfo #exitBtn").off("click").on("click", function () {
                 _self.showList();
             });
         },
-        saveGroupInfo:function (pgroupid,groupId,jmgid) {
+        saveGroupInfo:function (pgroupid) {
             _self = this;
             $('.field-valid').validatebox();
             if ($('.validatebox-invalid').length > 0) {
@@ -374,7 +362,6 @@ define(['underscore',
                         toast('保存成功！', 600).ok();
                         debugger
                         $('#addGroupTab').attr("groupinfo",obj2str(r.data));
-                        // $('#addGroupTab').attr("groupid",groupId).attr("jmgid",jmgid);
                         $('#addGroupTab a#navRelationCase').trigger("click");
                     } else {
                         toast('保存失败！', 600).err();
@@ -409,9 +396,24 @@ define(['underscore',
                         _self.handleRelationCase(groupInfo);
                     });
                 });
+                if(groupInfo.backupStatu && groupInfo.backupStatu == 1 && groupInfo.creator == top.userId){
+                    $(".form-btn-block #revokeBtn").removeClass("hide");
+                } else {
+                    $(".form-btn-block #revokeBtn").addClass("hide");
+                }
                 $(".form-btn-block #revokeBtn").on("click", function () {
                     //如果归档状态为已归档 显示按钮 并执行撤销操作
-                    
+                    $confirm('确定对【' + groupInfo.groupname + '】进行撤销归档操作吗？', function (bol) {
+                        if (bol) {
+                            specialCaseGroupAjax.groupBackupRemove({groupid: groupInfo.id}, function (r) {
+                                if (r.flag) {
+                                    toast("撤销归档成功", 600, function () {
+                                        _self.showList();
+                                    }).ok();
+                                }
+                            });
+                        }
+                    });
                 });
                 $(".form-btn-block #exitBtn").on("click", function () {
                     _self.showList();
