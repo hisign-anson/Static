@@ -27,8 +27,6 @@ define([
             _self.showAchievementsList();
             //显示通知公告
             _self.showNewsList();
-
-
             //显示信息提醒
             _self.showMessageList();
             //信息提醒点击更多
@@ -199,27 +197,46 @@ define([
                     //平台成果展示点击每列
                     $("#achieveContent").on("click", "a.listOne", function (e) {
                         e.preventDefault();
-                        debugger
-                        var groupId=$(this).attr("data-groupId");
+                        var groupId=$(this).attr("data-groupid");
                         var htmlPage = 'fstPage/achievementMoreList.html';
                         //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
-                        var tabTitle="平台成果展示";
+                        var tabTitle='<em id="newsTitle" data-id="' + groupId + '">平台成果展示</em>';
                         if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
-                            $openOnce(getViewPath(htmlPage), tabTitle)
+                            //$openOnce(getViewPath(htmlPage), tabTitle)
+                            window.msgTab = $open(getViewPath(htmlPage), tabTitle);
                         } else {
                             window.msgTab = $open(getViewPath(htmlPage), tabTitle);
                         }
-                        fstPageAjax.getGroupMemberList({groupId:groupId},function(r){
-                            debugger
-                            if(r.flag==1){
-                                $("#staffTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
-                            }else{
-                                toast(r.msg,600).err();
-                            }
-                        });
                     })
                 }else{
                     toast(r.msg,600).err();
+                }
+            });
+        },
+        getAjGroupPage:function(groupId){//平台成果展示(点击每列--涉及案件)
+            _self=this;
+            fstPageAjax.getAjGroupPage({groupId:groupId},function(r){
+                if(r.flag==1){
+                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+        },
+        getGroupMemberList:function(groupId){//平台成果展示(点击每列--获取所有组内成员)
+            _self=this;
+            $.ajax({
+                url:top.servicePath_xz+'/usergroup/getGroupMemberList',
+                type:"post",
+                contentType: "application/x-www-form-urlencoded",
+                data:{groupId:groupId},
+                success:function(r){
+                    if(r.flag==1){
+                        $("#staffTable tbody").empty().html(_.template(achievementInfoGroupMemberTrTpl,{data: r.data}));
+                        $("#staffTableChild").empty().html(_.template(achievementInfoGroupMemberChildTrTpl,{data: r.data}));
+                    }else{
+                        toast(r.msg,600).err();
+                    }
                 }
             });
         },
