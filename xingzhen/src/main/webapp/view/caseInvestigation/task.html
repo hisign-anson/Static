@@ -10,6 +10,46 @@
     <title>任务管理</title>
     <!--<link rel="stylesheet" href="../../css/base.css?version=0.99">-->
     <link rel="stylesheet" href="../../css/base-plus-xz.css">
+    <link rel="stylesheet" href="../../plugin/slick/slick.css">
+    <style>
+        * { margin: 0; padding: 0;}
+        .slick { width: 600px; margin: 0 auto;}
+        .slick-prev:before, .slick-next:before { position: absolute; left: 0; top: 1px; color: #ccc;}
+        .slick-prev, .slick-next{
+            background: rgb(228, 16, 16);
+            color: rgb(242, 49, 49);
+        }
+        .slick-prev { left: 0;}
+        .slick-next { right: 0;}
+        .slick-dots { bottom: -35px;}
+    </style>
+
+    <style>
+        .item-img{
+            height: auto;
+            width: 190px!important;
+            display: inline-block;
+            vertical-align: top;
+            min-height: 1px;
+        }
+        .item-img img{
+            display: block;
+            width: 160px;
+            height: 120px;
+            margin: 0 auto;
+        }
+        .item-video{
+            display: inline-block;
+            width: 200px;
+        }
+        .video-name{
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
 <div class="body-agent" id="mainDiv">
@@ -40,6 +80,7 @@
 <script src="../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
 <script src="../../plugin/daterangepicker/moment.js?version=0.99"></script>
 <script src="../../plugin/upclick-min.js"></script>
+<script src="../../plugin/slick/slick.min.js"></script>
 
 <script src="../../plugin/timeScope.js"></script>
 <script src="../../script/selectUtils.js"></script>

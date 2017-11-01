@@ -58,6 +58,7 @@ function upclick(d) {
         b.type = "file";
         b.size = "1";
         b.runat = "server";
+        // b.multiple = "multiple";
         a.appendChild(b);
         b.style.position = "absolute";
         b.style.display = "block";
