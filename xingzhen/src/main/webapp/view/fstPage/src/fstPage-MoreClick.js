@@ -64,9 +64,12 @@ define([
             $("#myTabMinor a").on("click", function () {
                 $(this).tab('show');
                 var groupId=$("#myTabMinor").attr("data-groupid");//获取导航头的值
+                debugger
                 if ($(this).attr("id") == "01") {
                     // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
-                    _self.showChart();
+                    if(groupId){
+                        _self.showChart();
+                    }
                 } else {
                     if(groupId){
                         _self.showTable(groupId);
@@ -102,11 +105,13 @@ define([
                 }
             });
         },
-        showChart: function () {//显示图
+        showChart: function (groupId) {//显示图
             _self = this;
             var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/graph/d3graphView.html"></iframe>';
+            debugger
             $(".tab-content.content-minor").empty().html(_.template(iframe));
             $("#taskListResult").addClass("hide").siblings(".tab-content.content-minor").removeClass("hide");
+            $("#mapSvgFrame").attr("groupid",groupId);
             $("#mapSvgFrame").css({
                 "width": "100%",
                 "height": "500px",
