@@ -13,8 +13,33 @@
                         <a href="#" id="02">表格</a>
                     </li>
                 </ul>
-                <div class="tab-content content-minor">
+                <div class="tab-content content-minor hide">
 
+                </div>
+                <div id="taskListResult" class=" hide">
+                    <div class="new-color-bar">
+                        <i class="icon-search fs14 mr10"></i>
+                        <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
+                    </div>
+                    <div class="div-table-wrap">
+                        <table id="taskListTable" class="taskList-table typical-tb">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>任务编号</th>
+                                <th>任务内容</th>
+                                <th>任务名称</th>
+                                <th>创建人</th>
+                                <th>创建时间</th>
+                                <th>接收人</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="paging"></div>
                 </div>
             </div>
         </div>
@@ -28,23 +53,18 @@
                     <table id="staffTable" class="staffList-table typical-tb">
                         <thead>
                         <tr>
-                            <th>姓名</th>
-                            <th>警号</th>
-                            <th>单位</th>
+                            <th width="20%">专案组</th>
+                            <th width="25%">警号</th>
+                            <th width="25%">单位</th>
+                            <th width="20%">成员姓名</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <!--<tr>-->
-                            <!--<td>倪慧（组长）</td>-->
-                            <!--<td>0087</td>-->
-                            <!--<td>越秀区第一大队</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>于继华</td>-->
-                            <!--<td>0089</td>-->
-                            <!--<td>越秀区三分局</td>-->
-                        <!--</tr>-->
+
                         </tbody>
+                    </table>
+                    <table id="staffTableChild" class="staffList-table typical-tb">
+
                     </table>
                 </div>
             </div>
@@ -59,8 +79,14 @@
                     <table id="caseTable" class="caseList-table typical-tb">
                         <thead>
                         <tr>
+                            <th>序号</th>
                             <th>案件编号</th>
                             <th>案件名称</th>
+                            <th>案件类型</th>
+                            <th>案件状态</th>
+                            <th>案别</th>
+                            <th>简要案情</th>
+                            <th>发案地点详址</th>
                             <th>主要办案人</th>
                         </tr>
                         </thead>

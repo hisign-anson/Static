@@ -763,11 +763,12 @@ define(['underscore',
             // _selfCommand.updateGraphURL();
             // $("#mapSvg").empty().html(svg);
 
-            // $("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html");
-            // $("#mapSvgFrame").css({
-            //     "width": "100%",
-            //     "height": "calc(100vh - 75px)"
-            // });
+             //$("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html");
+            var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/graph/d3graphView.html"></iframe>';
+             $("#mapSvgFrame").css({
+                 "width": "100%",
+                 "height": "calc(100vh - 75px)"
+             });
 
             //进入专案组讨论
             $(".into-communication").on("click", function () {

@@ -6,6 +6,7 @@ define([
     'text!/view/fstPage/tpl/moreList/achievementInfo.html',
     'text!/view/fstPage/tpl/moreList/achievementInfoAjTr.html',
     'text!/view/fstPage/tpl/moreList/achievementInfoGroupMemberTr.html',
+    'text!/view/fstPage/tpl/moreList/achievementInfoGroupMemberChildTr.html',
     'text!/view/fstPage/tpl/moreList/groupTaskList.html',
     'text!/view/fstPage/tpl/moreList/newsMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/messageMoreListTr.html',
@@ -13,7 +14,7 @@ define([
     'text!/view/fstPage/tpl/moreList/toolDownloadMoreListTr.html',
     'text!/view/fstPage/tpl/moreList/commonMoreListTr.html',
     'text!/view/caseInvestigation/tpl/task/taskEdit.html',
-    '../dat/fstPage.js'], function (_, achieveMoreListTpl, achieveMoreListTrTpl, achievementInfoTpl,achievementInfoAjTrTpl,achievementInfoGroupMemberTrTpl, groupTaskListTpl,
+    '../dat/fstPage.js'], function (_, achieveMoreListTpl, achieveMoreListTrTpl, achievementInfoTpl,achievementInfoAjTrTpl,achievementInfoGroupMemberTrTpl,achievementInfoGroupMemberChildTrTpl, groupTaskListTpl,
                                                                               newsMoreListTrTpl, messageMoreListTrTpl, knowledgeMoreListTrTpl, downloadMoreListTrTpl,commonMoreListTrTpl,taskEditTpl,fstPageAjax) {
     return {
         showAchieveMoreList: function () {
@@ -22,7 +23,6 @@ define([
                 action:top.servicePath_xz+'/index/getAchievement',
                 jsonObj:{},
                 callback:function(data){
-                    debugger
                     $("#achieveListTable tbody").empty().html(_.template(achieveMoreListTrTpl, {data: data}));
 
                     $("#achieveListTable").on("click", ".link-text", function () {
@@ -31,14 +31,16 @@ define([
                         $("#myTabMinor").attr("data-groupid",groupId);//把值存到导航头
                         if(groupId){
                             _self.getGroupMemberList(groupId);//平台成果展示(点击更多--获取所有组内成员)
+                            _self.getAjGroupPage(groupId);//平台成果展示(点击更多--涉及案件)
                         }
-                        _self.getAjGroupPage();//平台成果展示(点击更多--涉及案件)
                         $("#myTabMinor a").on("click", function () {
                             $(this).tab('show');
                             var groupId=$("#myTabMinor").attr("data-groupid");//获取导航头的值
                             if ($(this).attr("id") == "01") {
                                 // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
-                                _self.showChart();
+                                if(groupId){
+                                    _self.showChart(groupId);
+                                }
                             } else {
                                 if(groupId){
                                     _self.showTable(groupId);
@@ -51,11 +53,31 @@ define([
             })
 
         },
-
-        getAjGroupPage:function(){//平台成果展示(点击更多--涉及案件)
+        showAchieveOne:function(groupId){//点击首页成果展示每列
             _self=this;
-            fstPageAjax.getAjGroupPage({},function(r){
-                debugger
+            $("#mainDiv").empty().html(_.template(achievementInfoTpl));
+            $("#myTabMinor").attr("data-groupid",groupId);//把值存到导航头
+            if(groupId){
+                _self.getGroupMemberList(groupId);
+                _self.getAjGroupPage(groupId);
+            }
+            $("#myTabMinor a").on("click", function () {
+                $(this).tab('show');
+                var groupId=$("#myTabMinor").attr("data-groupid");//获取导航头的值
+                if ($(this).attr("id") == "01") {
+                    // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
+                    _self.showChart();
+                } else {
+                    if(groupId){
+                        _self.showTable(groupId);
+                    }
+                }
+            });
+            $('#myTabMinor a:first').click();
+        },
+        getAjGroupPage:function(groupId){//平台成果展示(点击更多--涉及案件)
+            _self=this;
+            fstPageAjax.getAjGroupPage({groupId:groupId},function(r){
                 if(r.flag==1){
                     $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
                 }else{
@@ -71,26 +93,27 @@ define([
                 contentType: "application/x-www-form-urlencoded",
                 data:{groupId:groupId},
                 success:function(r){
-                    debugger
                     if(r.flag==1){
-                        $("#staffTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                        $("#staffTable tbody").empty().html(_.template(achievementInfoGroupMemberTrTpl,{data: r.data}));
+                        $("#staffTableChild").empty().html(_.template(achievementInfoGroupMemberChildTrTpl,{data: r.data}));
                     }else{
                         toast(r.msg,600).err();
                     }
                 }
             });
         },
-        showChart: function () {
+        showChart: function () {//显示图
             _self = this;
             var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/graph/d3graphView.html"></iframe>';
             $(".tab-content.content-minor").empty().html(_.template(iframe));
+            $("#taskListResult").addClass("hide").siblings(".tab-content.content-minor").removeClass("hide");
             $("#mapSvgFrame").css({
                 "width": "100%",
                 "height": "500px",
                 "border": "1px solid #eeeeee"
             });
         },
-        showTable: function (groupId) {
+        showTable: function (groupId) {//显示表
             _self = this;
             // var param = $("#query-condition").serializeObject();
             // $.extend(param, {
@@ -117,7 +140,7 @@ define([
                 //fkstartTime:$.trim($("#fkstartTime").val()),
                 //fkendTime:$.trim($("#fkendTime").val())
             };
-            $('.tab-content.content-minor').pagingList({
+            $('#taskListResult').pagingList({
                 action:top.servicePath_xz+'/task/getTaskPage',
                 jsonObj:param,
                 callback:function(r){
@@ -125,15 +148,19 @@ define([
                     //$(".link-text").on("click",function () {
                     //    _selfCommand.handleDetail($(this).attr('id'));
                     //});
-                    $(".tab-content.content-minor").empty().html(_.template(groupTaskListTpl, {data: r}));
+                    debugger
+                    $("#taskListResult").removeClass("hide").siblings(".tab-content.content-minor").addClass("hide");
+                    $("#taskListTable tbody").empty().html(_.template(groupTaskListTpl, {data: r}));
                     $(".into-feedback").on('click', function () {
                         //console.info("任务的反馈信息");
                         var id=$(this).attr("data-id");
                         fstPageAjax.taskDetail({id: id, userId: top.userId}, function (r) {
                             if (r.flag == 1) {
-                                $open("#panelDiv", {width: 600, title: '&nbsp反馈信息'});
-                                debugger
-                                $("#panelDiv .panel-container").empty().html(_.template(taskEditTpl, r.data));
+                                $open("#panelDiv", {width: 800, title: '&nbsp反馈信息'});
+                                $("#panelDiv .panel-container").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:false}));
+                                $("#cancelBtn").on("click",function(){
+                                    $("#panelDiv").$close();
+                                });
                             }
                         });
                         $("#panelDiv").on("click", "#closeBtn", function () {
