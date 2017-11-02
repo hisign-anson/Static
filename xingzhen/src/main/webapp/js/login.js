@@ -96,6 +96,8 @@ $(document).ready(function () {
                         }
                     }
                     localData.set('isGeneralRole', isGeneralRole);
+                    // //调用极光初始化接口
+                    // jchatGloabal.init();
                     location.replace(window.path + '/view/home.html?version=' + config.version);
                 }
             }

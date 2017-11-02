@@ -798,3 +798,24 @@ input[disabled], textarea[disabled], select[disabled] {
     cursor: pointer;
     opacity: 0;
 }
+/*全局 呼出聊天窗口*/
+.fixed-chat{
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: 64px;
+    height: 64px;
+    background: #65c4f6;
+    cursor: pointer;
+}
+.conversation{
+    position: absolute;
+    right: 64px;
+    bottom: 0;
+    width: 400px;
+    height: 300px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 3px;
+}

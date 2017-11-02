@@ -19,11 +19,12 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/relationCaseTr.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/groupStaff.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html',
+    'text!/view/chatPage/tpl/chatPage.html',
     'text!/view/tpl_EmptyOrError/emptyDataPage.html',
     '../dat/specialCaseGroup.js',
     '../../dictManage/src/dictOpener.js',
     '../../userInfoManage/dat/userInfo.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl,broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl,caseInfoTpl,
-                                                     userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl,emptyDataPage,
+                                                     userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl,chatPageTpl,emptyDataPage,
                                                      specialCaseGroupAjax,dictOpener,userInfoAjax) {
     return {
         showList: function () {
@@ -72,24 +73,26 @@ define(['underscore',
                 _self.addGroupOfGroup();
             });
             _self.queryList();
+            // init();
+            // login();
         },
         //查询功能
         queryList: function () {
             _self = this;
             var userParam = str2obj($("#membername").attr("paramattr"));
             var param = {
-                ajbh: "",
-                backupStatu: "",
-                creator: "",
-                deparmentcode: "",
-                endTime: "",
-                groupname: "",
-                groupnum: "",
-                memberId: userParam?userParam.userId:"",
-                startTime: "",
+                ajbh: $.trim($("#ajbh").val()),
+                backupStatu: $("#backupStatu").val(),
+                creator: $.trim($("#creator").val()),
+                deparmentcode: $.trim($("#deparmentcode").val()),
+                groupname: $.trim($("#groupname").val()),
+                groupnum: $.trim($("#groupnum").val()),
+                memberId: userParam ? userParam.userId : "",
+                endTime: $("#endTime").val(),
+                startTime: $("#startTime").val(),
                 userId: top.userId
 
-            };//$("#queryCondition").serializeObject();
+            };
             $('#specialGroupListResult').pagingList({
                 action:top.servicePath_xz+'/group/getGroupPage',
                 jsonObj:param,
@@ -105,13 +108,21 @@ define(['underscore',
                         _self.groupBroadcast($(this).attr("groupid"),$(this).attr("jmgid"));
                     });
                     $(".into-communication").on("click", function () {
-                        console.info("进入聊天界面！");
-                        // // $("#mainDiv").empty().html(_.template(chatPageTpl));
-                        // $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                        // // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
-                        // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-                        // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
-                        window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
+                        var groupid = $(this).attr("groupid");
+                        var jmgid =  $(this).attr("jmgid");
+
+                        $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+                        // $("#archiveBlock .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+                        // window.parent.jchatGloabal.getUserInfo();
+                        // window.parent.jchatGloabal.getGroupInfo(jmgid);
+                        // debugger;
+
+
+                        // console.info(window.parent.JIM)
+                        // console.info(window.parent.JIM.isLogin())
+                        // console.info("进入聊天界面！");
+                        var iframe = '<iframe id="chartiFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
+                        $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
                     });
                     $(".into-group").on('click', function () {
                         _self.showGroupOfGroup($(this),$(this).attr("groupid"),$(this).attr("jmgid"));
@@ -127,6 +138,7 @@ define(['underscore',
             $(".dict").dict();
             $("#archiveBlock").on("click","#saveBtn",function () {
                 var param = {
+                    backupStatus:1,
                     backupReason: $.trim($("#backupReason").val()),
                     backupTime: $("#backupTime").val(),
                     creator: top.userId,
@@ -134,7 +146,7 @@ define(['underscore',
                     groupid: groupid,
                     policeId: top.policeId
                 };
-                specialCaseGroupAjax.groupBackupAdd(param,function(r){
+                specialCaseGroupAjax.groupBackup(param,function(r){
                     if(r.flag==1){
                         toast('归档成功！',600,function(){
                             $("#archiveBlock").$close();
@@ -405,7 +417,16 @@ define(['underscore',
                     //如果归档状态为已归档 显示按钮 并执行撤销操作
                     $confirm('确定对【' + groupInfo.groupname + '】进行撤销归档操作吗？', function (bol) {
                         if (bol) {
-                            specialCaseGroupAjax.groupBackupRemove({groupid: groupInfo.id}, function (r) {
+                            var param = {
+                                backupStatus:0,
+                                backupReason: "",
+                                backupTime: "",
+                                creator: top.userId,
+                                deparmentcode: top.orgCode,
+                                groupid: groupInfo.id,
+                                policeId: top.policeId
+                            };
+                            specialCaseGroupAjax.groupBackup(param, function (r) {
                                 if (r.flag) {
                                     toast("撤销归档成功", 600, function () {
                                         _self.showList();

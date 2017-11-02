@@ -439,16 +439,16 @@ function updateGraphJSON(json) {
             var image;
             switch (d.type){
                 case "groupid":
-                    image = "../../img/graph/type_group.png";
+                    image = "images/graph/type_group.png";
                     break;
                 case "taskid":
-                    image = "../../img/graph/type_task.png";
+                    image = "images/graph/type_task.png";
                     break;
                 case "fkid":
-                    image = "../../img/graph/type_feedback.png";
+                    image = "images/graph/type_feedback.png";
                     break;
                 case "ajid":
-                    image = "../../img/graph/type_case.png";
+                    image = "images/graph/type_case.png";
                     break;
 
             }
@@ -720,7 +720,7 @@ var layout = d3.layout.force()
 var svg = d3.select("body").append("svg")
     .attr("preserveAspectRatio", "xMidYMid meet")
     //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
-    .attr("viewBox", "0 0 1200 900");
+    .attr("viewBox", "0 0 1200 900")
     // .attr("width", width)
     // .attr("height", height);
 

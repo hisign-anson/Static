@@ -18,6 +18,7 @@ top.superName = top.currentUser ? top.currentUser.orgInfo.superName:'';
 top.orgName = top.currentUser ? top.currentUser.orgInfo.orgName:'';
 top.orgLevel = top.currentUser ? top.currentUser.orgInfo.orgLevel:'';
 top.userId = top.currentUser ? top.currentUser.userId:'';
+top.userPassword = "123456";
 top.policeId = top.currentUser ? top.currentUser.userInfo.policeId:'';
 top.phone = top.currentUser ? top.currentUser.userInfo.phone:'';
 top.serverIp = location.hostname;
@@ -25,9 +26,7 @@ top.serverPort = location.port;
 top.clientKey = localData.get('clientKey');
 top.opsMap = new HashMap();
 // initDictForGXS();
-// //调用极光初始化接口
-// jchatGloabal.init();
-function HashMap() {     
+function HashMap() {
     this.elements = new Array();     
        
     //获取MAP元素个数     
@@ -172,6 +171,7 @@ function gotoLogin(){
 //获取当前用户信息接口
 function getUserInfo(param,callback){
     $get(top.servicePath+'/sys/user/getUserInfo',param,function(response) {
+
         callback(response);
     });
 }
@@ -187,9 +187,9 @@ if(!top.token || !top.limits ||!top.trueName){
         if (r.flag == 1) {
             var data = r.data;
             if(data.avatar && data.avatar !=''){
-                var obj = eval('(' + data.avatar + ')');
-                byid('img-responsive').src=top.ftpServer + obj.p160_160;
-                byid('confirm-logout-img').src=top.ftpServer + obj.p160_160;
+                var avatar = data.avatar;
+                byid('img-responsive').src=top.ftpServer + avatar;
+                byid('confirm-logout-img').src=top.ftpServer + avatar;
             }else{
                 byid('img-responsive').src="../img/touxiang.jpg";
             }
@@ -233,8 +233,8 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     top.molKeys=molDatas.select('m=>m.molNo');
     localParamsInit(top.molKeys);
 
-    // jchatGloabal.login();
-    // console.info("jm登录状态：" + JIM.isLogin());
+    //调用极光初始化接口
+    // jchatGloabal.init();
     indexInit();
 
     //顶层属性与供内部frame调用的方法

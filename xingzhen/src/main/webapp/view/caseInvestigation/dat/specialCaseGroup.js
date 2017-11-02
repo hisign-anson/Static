@@ -54,6 +54,7 @@ define(function(){
                 callback(response);
             }, true)
         },
+
         //专案组归档
         groupBackupAdd: function (param, callback) {
             $post(top.servicePath_xz + '/groupBackup/add', param, function (response) {
@@ -63,6 +64,12 @@ define(function(){
         //专案组撤销归档
         groupBackupRemove: function (param, callback) {
             $post(top.servicePath_xz + '/groupBackup/remove', param, function (response) {
+                callback(response);
+            }, true)
+        },
+        //专案组归档&撤销归档
+        groupBackup: function (param, callback) {
+            $post(top.servicePath_xz + '/groupBackup/backup', param, function (response) {
                 callback(response);
             }, true)
         }

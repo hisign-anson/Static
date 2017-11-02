@@ -1,7 +1,3 @@
-
-//用户登录账号 密码
-var user_name = top.userId;
-var user_password = '123456';
 // importing('currentDate');
 var jchatHandle = {
     // _selfChat = this;
@@ -74,17 +70,20 @@ var jchatHandle = {
         _selfChat = this;
         return JIM.isLogin();
     },
-    // getUserInfo: function () {
-    //     _selfChat = this;
-    //     JIM.getUserInfo({
-    //         'username': user_name
-    //     }).onSuccess(function (data) {
-    //         $(".group-name").append('用户' + str2obj(data).user_info.username + '进入：');
-    //
-    //     }).onFail(function (data) {
-    //         toast(obj2str(data), 600).err();
-    //     });
-    // }
+    getUserInfo: function () {
+        var t = top.userId;
+        debugger
+        _selfChat = this;
+        JIM.getUserInfo({
+            'username': top.userId
+        }).onSuccess(function (data) {
+            debugger
+            $(".group-name").append('用户' + str2obj(data).user_info.username + '进入：');
+
+        }).onFail(function (data) {
+            toast(obj2str(data), 600).err();
+        });
+    }
 };
 
 
