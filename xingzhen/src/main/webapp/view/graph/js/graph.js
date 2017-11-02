@@ -312,57 +312,6 @@ var menuById = [
         ]
     }
 ];
-var menuByType = [
-    {
-        "menuName": "zNodes1",
-        "type": "1",
-        "menuData": [
-            {
-                name: "type1菜单1",
-                open: true,
-                children: [
-                    {name: "type1菜单1的子节点1"},
-                    {name: "type1菜单1的子节点2"}
-                ]
-            },
-            {
-                name: "type1菜单2",
-                open: true,
-                children: [
-                    {name: "type1菜单2的子节点1"},
-                    {name: "type1菜单2的子节点2"}
-                ]
-            },
-            {
-                name: "type1没有子节点的菜单2"
-            }
-        ]
-    },
-    {
-        "menuName": "zNodes2",
-        "type": "2",
-        "menuData": [
-            {
-                name: "type2菜单1",
-                open: true,
-                children: [
-                    {name: "type2菜单1的子节点1"},
-                    {name: "type2菜单1的子节点2"}
-                ]
-            }
-        ]
-    },
-    {
-        "menuName": "zNodes3",
-        "type": "3",
-        "menuData": [
-            {
-                name: "type3没有子节点的菜单1"
-            }
-        ]
-    }
-];
-
 function addNode(nodeArrays, linkArrays) {
     var lenNodes = nodeArrays.length;
     var lenLinks = linkArrays.length;
@@ -456,6 +405,7 @@ function updateGraphJSON(json) {
         })
         //去掉默认的contextmenu事件，否则会和右键事件同时出现。
         .on("contextmenu", function () {
+            debugger
             //DOM事件对象——d3.event
             d3.event.preventDefault();
         })
@@ -472,31 +422,65 @@ function updateGraphJSON(json) {
                 console.info(i);
                 //根据id和type显示不同的菜单
                 var zNodes;
-                if (d.id) {
-                    // 加载不同的树形菜单数据
-                    // var zNodes = "zNodes" + i;
-                    // zNodes = eval('(' + zNodes + ')');
-                    zNodes = menuById[i].menuData;
-                } else {
-                    if (d.type) {
-                        switch (d.type) {
-                            case "1":
-                                zNodes = menuByType[1].menuData;
-                                break;
-                            case "2":
-                                zNodes = menuByType[2].menuData;
-                                break;
-                            case "3":
-                                zNodes = menuByType[3].menuData;
-                                break;
-                            default:
-                                zNodes = menuDefault;
-                        }
-                    } else {
-                        //加载同一个树形菜单数据
-                        zNodes = menuDefault;
-                    }
+                var menuByGroupType = [
+                    {name: "专案组详情"},
+                    {name: "涉及案件"},
+                    {name: "专案组成员"},
+                    {name: "任务下发"}
+                ];
+                var menuByTaskType = [
+                    {name: "接收人反馈任务"},
+                    {name: "接收人移交任务"},
+                    {name: "接收人补充任务"},
+                    {name: "下发人催办任务"}
+                ];
+                var menuByFeedbackType = [
+                    {name: "下发人追加任务"}
+                ];
+                var menuByCaseType = [
+                    {name: "查看案件详情"}
+                ];
+                switch (d.type){
+                    case "groupid":
+                        zNodes =menuByGroupType;
+                        break;
+                    case "taskid":
+                        zNodes = menuByTaskType;
+                        break;
+                    case "fkid":
+                        zNodes = menuByFeedbackType;
+                        break;
+                    case "ajid":
+                        zNodes = menuByCaseType;
+                        break;
+
                 }
+                // if (d.id) {
+                //     // 加载不同的树形菜单数据
+                //     // var zNodes = "zNodes" + i;
+                //     // zNodes = eval('(' + zNodes + ')');
+                //     zNodes = menuById[i].menuData;
+                // } else {
+                //     if (d.type) {
+                //         debugger
+                //         switch (d.type) {
+                //             case "1":
+                //                 zNodes = menuByType[1].menuData;
+                //                 break;
+                //             case "2":
+                //                 zNodes = menuByType[2].menuData;
+                //                 break;
+                //             case "3":
+                //                 zNodes = menuByType[3].menuData;
+                //                 break;
+                //             default:
+                //                 zNodes = menuDefault;
+                //         }
+                //     } else {
+                //         //加载同一个树形菜单数据
+                //         zNodes = menuDefault;
+                //     }
+                // }
                 zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
 
                 var tooltipCurrent = $("#tooltip" + i);

@@ -112,17 +112,64 @@ define(['underscore',
                         var jmgid =  $(this).attr("jmgid");
 
                         $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                        // $("#archiveBlock .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
-                        // window.parent.jchatGloabal.getUserInfo();
-                        // window.parent.jchatGloabal.getGroupInfo(jmgid);
-                        // debugger;
+                        $("#archiveBlock .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+                        window.parent.jchatGloabal.getUserInfo();
+                        window.parent.jchatGloabal.getGroupInfo(jmgid);
+                        window.parent.jchatGloabal.getGroupMembers(jmgid);
+                        window.parent.JIM.updateConversation({
+                            'gid' : jmgid,
+                            'extras' : {'key':'val','is_top':true}
+                        });//离线消息同步监听
+                        window.parent.jchatGloabal.onSyncConversation();
+                        //聊天消息实时监听
+                        window.parent.jchatGloabal.onMsgReceive();
 
+                        $("#sendFileBtn").on("click", function () {
+                            window.parent.clickHandle.sendFile(jmgid);
+                        });
+                        $("#sendFileImagesBtn").on("click", function () {
+                            window.parent.clickHandle.sendFileImages(jmgid);
+                        });
+                        $("#sendEmojiBtn").on("click", function (event) {
+                            window.parent.clickHandle.choseEmoji(this);
+                        });
+                        $("#setTextSizeBtn").on("click", function (event) {
+                            window.parent.clickHandle.setTextSize(this);
+                        });
+                        $("#sendBtn").on("click", function () {
+                            window.parent.clickHandle.sendText(jmgid);
+                        });
 
+                        $("#messageContent").on('keyup', function (event) {
+                            var e = event || window.event;
+                            if (e.keyCode === 13) {
+                                window.parent.clickHandle.sendText(jmgid);
+                            }
+                        });
+                        $(".window").find(".panel-tool-close").click(function () {
+                            var chatParam = {
+                                createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
+                                creator: top.userId
+                            };
+                            // content (string, optional): 日志内容 ,
+                            //     createTime (string, optional): 创建时间 ,
+                            //     creator (string, optional): 创建人 ,
+                            //     deleteFlag (string, optional): 删除标识 ,
+                            //     id (string, optional): 主键ID ,
+                            //     ip (string, optional): ip ,
+                            //     logLevel (string, optional): 日志级别 ,
+                            //     logType (string, optional): 日志类型（专案组，任务等） ,
+                            // reserveField1 (string, optional): 预留字段1 ,
+                            //     reserveField2 (string, optional): 预留字段2
+                            specialCaseGroupAjax.addChatLog(chatParam,function () {
+                                debugger
+                            })
+                        });
                         // console.info(window.parent.JIM)
                         // console.info(window.parent.JIM.isLogin())
                         // console.info("进入聊天界面！");
-                        var iframe = '<iframe id="chartiFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-                        $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
+                        // var iframe = '<iframe id="chartiFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
+                        // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
                     });
                     $(".into-group").on('click', function () {
                         _self.showGroupOfGroup($(this),$(this).attr("groupid"),$(this).attr("jmgid"));
@@ -212,13 +259,46 @@ define(['underscore',
                                     _self.groupBroadcast($(this).attr("groupid"),$(this).attr("jmgid"));
                                 });
                                 $(".into-communication").on("click", function () {
-                                    console.info("进入聊天界面！");
-                                    // // $("#mainDiv").empty().html(_.template(chatPageTpl));
-                                    // $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                                    // // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
-                                    // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-                                    // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
-                                    window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
+                                    var groupid = $(this).attr("groupid");
+                                    var jmgid =  $(this).attr("jmgid");
+
+                                    $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+                                    $("#archiveBlock .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+                                    window.parent.jchatGloabal.getUserInfo();
+                                    window.parent.jchatGloabal.getGroupInfo(jmgid);
+                                    window.parent.jchatGloabal.getGroupMembers(jmgid);
+                                    window.parent.JIM.onSyncConversation(function(data) { //离线消息同步监听
+                                        console.log('event_receive: ' + data);
+                                    });
+                                    $("#sendFileBtn").on("click", function () {
+                                        window.parent.clickHandle.sendFile(jmgid);
+                                    });
+                                    $("#sendFileImagesBtn").on("click", function () {
+                                        window.parent.clickHandle.sendFileImages(jmgid);
+                                    });
+                                    $("#sendEmojiBtn").on("click", function (event) {
+                                        window.parent.clickHandle.choseEmoji(this);
+                                    });
+                                    $("#setTextSizeBtn").on("click", function (event) {
+                                        window.parent.clickHandle.setTextSize(this);
+                                    });
+                                    $("#sendBtn").on("click", function () {
+                                        window.parent.clickHandle.sendText(jmgid);
+                                    });
+
+                                    $("#messageContent").on('keyup', function (event) {
+                                        var e = event || window.event;
+                                        if (e.keyCode === 13) {
+                                            window.parent.clickHandle.sendText(jmgid);
+                                        }
+                                    });
+                                    // console.info("进入聊天界面！");
+                                    // // // $("#mainDiv").empty().html(_.template(chatPageTpl));
+                                    // // $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+                                    // // // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
+                                    // // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
+                                    // // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
+                                    // window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
                                 });
                             }else {
                                 toast("该专案组没有小组！",600).warn();
@@ -533,6 +613,7 @@ define(['underscore',
         queryRelationCaseList: function (groupInfo) {
             _self = this;
             var param = {
+                isInGroup:true,
                 groupId:groupInfo.id,
                 ab: $.trim($("#ab").val()),
                 ajbh: $("#ajbh").val(),
@@ -574,20 +655,21 @@ define(['underscore',
         queryCaseList: function (groupInfo) {
             _self = this;
             var param = {
+                isInGroup:false,
                 groupId: groupInfo.id,
-                ab: $("#ab").val(),
-                ajbh: $.trim($("#ajbh").val()),
-                ajmc: $.trim($("#ajmc").val()),
-                ajstate: $("#ajstate").val(),
-                fadd:$.trim($("#fadd").val()),
-                endTime: $("#endTime").val(),
-                startTime: $("#startTime").val(),
-                slEndTime:$("#slEndTime").val(),
-                slStartTime:$("#slStartTime").val(),
-                sljsdw:$("#sljsdw").val()
+                ab: $("#caseListDiv #ab").val(),
+                ajbh: $.trim($("#caseListDiv #ajbh").val()),
+                ajmc: $.trim($("#caseListDiv #ajmc").val()),
+                ajstate: $("#caseListDiv #ajstate").val(),
+                fadd:$.trim($("#caseListDiv #fadd").val()),
+                endTime: $("#caseListDiv #endTime").val(),
+                startTime: $("#caseListDiv #startTime").val(),
+                slEndTime:$("#caseListDiv #slEndTime").val(),
+                slStartTime:$("#caseListDiv #slStartTime").val(),
+                sljsdw:$("#caseListDiv #sljsdw").val()
             };
             $('#caseListDiv #caseListResult').pagingList({
-                action: top.servicePath_xz + '/asjAj/getAjPage',
+                action: top.servicePath_xz + '/asjAj/getAjGroupPage ',
                 jsonObj: param,
                 callback: function (data) {
                     $("#caseTable tbody").empty().html(_.template(caseListTrTpl, {data: data}));
@@ -725,9 +807,9 @@ define(['underscore',
         queryUserList: function (isCheckboxMulti,groupInfo) {
             _self = this;
             var param = {
-                orgId: $("#orgId").val(),
-                userName:$.trim($("#userName").val()),
-                policeId:$.trim($("#policeId").val())
+                orgId: $("#userListDiv #orgId").val(),
+                userName:$.trim($("#userListDiv #userName").val()),
+                policeId:$.trim($("#userListDiv #policeId").val())
             };
             $('#userListDiv #userTableResult').pagingList({
                 action: top.servicePath + '/sys/user/getUserInfoListByOrgId',

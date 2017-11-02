@@ -54,11 +54,11 @@ var chatHandle = {
             chatHandle.getGroupMembers();
             // //获取会话列表
             // chatHandle.getConversation();
-
+debugger
             //离线消息同步监听
-            chatHandle.onSyncConversation(data);
+            chatHandle.onSyncConversation();
             //聊天消息实时监听
-            chatHandle.onMsgReceive(data);
+            chatHandle.onMsgReceive();
 
             //业务事件监听
             JIM.onEventNotification(function (data) {
@@ -106,7 +106,7 @@ var chatHandle = {
             toast(obj2str(data), 600).err();
         });
     },
-    onSyncConversation: function (data) {
+    onSyncConversation: function () {
         JIM.onSyncConversation(function (data) {
             //do something
             // $('.message-list').template(data[0].msgs, function (item, i) {
@@ -220,7 +220,7 @@ var chatHandle = {
         fd.append(file.files[0].name, file.files[0]);
         return fd;
     },
-    onMsgReceive: function (data) {
+    onMsgReceive: function () {
         JIM.onMsgReceive(function (data) {
             var msg_type = data.messages[0].content.msg_type;
             var message_content = data.messages[0].content;

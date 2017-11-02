@@ -1,14 +1,14 @@
 <div class="message-container">
     <div class="message-main">
         <div class="left-sidebar">
-            <div class="group-name">haha </div>
+            <div class="group-name"></div>
             <div class="search-wrap"><input type="text" class="common-input" placeholder="请输入关键字搜索"/></div>
-            <ul class="member-list" tpsource="#member-list-tp"> </ul>
+            <ul class="member-list"> </ul>
         </div>
 
         <div class="right-main">
             <div class="m-message">
-                <ul class="message-list" tpsource="#message-list-tp"> </ul>
+                <ul class="message-list"> </ul>
             </div>
             <div class="m-emoji">
                 <b id="sendFileBtn" class="fa fa-folder-o" title="发送文件">
@@ -33,12 +33,6 @@
     </div>
 </div>
 
-<script type="text/template" id="member-list-tp">
-    <li class="">
-        <img class="member-avatar" src="../../img/pc-avatar.png"/>
-        <span class="member">{nickName}</span>
-    </li>
-</script>
 <script type="text/template" id="message-list-tp">
     <li>
         <div class="time"><span>{content.create_time}</span></div>

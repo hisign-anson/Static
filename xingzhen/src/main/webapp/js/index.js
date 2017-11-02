@@ -234,7 +234,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     localParamsInit(top.molKeys);
 
     //调用极光初始化接口
-    // jchatGloabal.init();
+    jchatGloabal.init();
     indexInit();
 
     //顶层属性与供内部frame调用的方法

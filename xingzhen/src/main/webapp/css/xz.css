@@ -807,6 +807,7 @@ input[disabled], textarea[disabled], select[disabled] {
     height: 64px;
     background: #65c4f6;
     cursor: pointer;
+    z-index: 1;
 }
 .conversation{
     position: absolute;
@@ -814,8 +815,42 @@ input[disabled], textarea[disabled], select[disabled] {
     bottom: 0;
     width: 400px;
     height: 300px;
+    overflow-y: auto;
     background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 3px;
+}
+.conversations-li{
+    position: relative;
+    border-bottom: 1px dotted #cccccc;
+    padding: 5px 10px;
+}
+.jim-avatar {
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+}
+.conversations-body{
+    width: calc(100% - 70px);
+    margin-left: 5px;
+    height: 64px;
+    vertical-align: middle;
+}
+.conversations-body .name,.conversations-body .text-describe{
+    line-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.unread-msg{
+    position: absolute;
+    left: 50px;
+    top: 5px;
+    display: inline-block;
+    background: #ff0000;
+    color: #ffffff;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 12px;
 }

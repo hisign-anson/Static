@@ -730,37 +730,6 @@ define(['underscore',
                 }
             });
         },
-        saveStaff: function () {
-            _self = this;
-
-            //专案组添加成员
-            $("#userTable #selectAll").on('click', function () {
-                $('#userTable').find('tbody input:checkbox').prop('checked', this.checked);
-            });
-            $("#userListDiv").on("click", "#saveStaffBtn", function () {
-                console.info("添加成员保存按钮");
-                var checkbox = [];
-                $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
-                    checkbox.push($(e).val());
-                });
-                if (checkbox.length > 0) {
-                    // var ids = checkbox.join(",");
-                    // var orgName = $("#myProjectUnit u.active").attr("val");
-                    //
-                    // $("#applySum-form").html("");
-                    // $("#applySum-form").attr("action", top.servicePath + '/sw/report/exesApplySum');
-                    // $("#applySum-form").append("<input type='hidden' name='ids' value='" + ids + "'/>");
-                    // $("#applySum-form").append("<input type='hidden' name='orgName' value='" + orgName + "'/>");
-                    // $("#applySum-form").attr("target", "winExesApplySum");//打开新窗口
-                    // $("#applySum-form").attr("onsubmit", function openwin(){window.open('about:blank', 'winExesApplySum', 'width=800,height=600');});
-                    // $("#applySum-form").submit();
-
-                    $('#userListDiv').$close();
-                } else {
-                    toast("请至少选择一个用户！", 600).warn()
-                }
-            });
-        },
         upclickImg: function () {
             _self = this;
             // //上传图片

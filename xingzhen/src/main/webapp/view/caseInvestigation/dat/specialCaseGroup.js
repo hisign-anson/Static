@@ -1,16 +1,16 @@
-define(function(){
+define(function () {
     return {
         //专案组查询分页
-        getGroupPage:function(param,callback){
-            $post(top.servicePath_xz+'/group/getGroupPage',param,function(response) {
+        getGroupPage: function (param, callback) {
+            $post(top.servicePath_xz + '/group/getGroupPage', param, function (response) {
                 callback(response);
-            },true)
+            }, true)
         },
         //查询子专案组列表
-        getChildGroupList:function(param,callback){
-            $post(top.servicePath_xz+'/group/getChildGroupList',param,function(response) {
+        getChildGroupList: function (param, callback) {
+            $post(top.servicePath_xz + '/group/getChildGroupList', param, function (response) {
                 callback(response);
-            },true)
+            }, true)
         },
         //新增
         addGroup: function (param, callback) {
@@ -26,7 +26,7 @@ define(function(){
         },
         //查看专案组详情
         groupDetail: function (param, callback) {
-            $post(top.servicePath_xz + '/group/groupDetail/'+ param, {}, function (response) {
+            $post(top.servicePath_xz + '/group/groupDetail/' + param, {}, function (response) {
                 callback(response);
             }, true)
         },
@@ -70,6 +70,12 @@ define(function(){
         //专案组归档&撤销归档
         groupBackup: function (param, callback) {
             $post(top.servicePath_xz + '/groupBackup/backup', param, function (response) {
+                callback(response);
+            }, true)
+        },
+        //
+        addChatLog: function (param, callback) {
+            $post(top.servicePath_xz + '/xzlog/addChatLog', param, function (response) {
                 callback(response);
             }, true)
         }

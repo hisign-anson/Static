@@ -10,14 +10,15 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/relationCaseTr.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/caseList.html',
+    'text!/view/chatPage/tpl/chatPage.html',
     '../dat/command.js',
     '../../caseInvestigation/dat/specialCaseGroup.js',
     '../../caseInvestigation/src/specialCaseGroup.js',
     '../../caseInvestigation/dat/task.js',
     '../../caseInvestigation/src/task.js',
     '../../dictManage/src/dictOpener.js',
-    '../../chatPage/src/chat.js'], function (_, d3, commandPage,groupLiTpl, taskListTpl,taskListTrTpl, relationCaseTpl, relationCaseTrTpl,
-                                                      caseListTpl,commandAjax,specialCaseGroupAjax,specialCaseGroup,taskAjax,task,dictOpener,chat) {
+    '../../chatPage/src/chat.js'], function (_, d3, commandPage,groupLiTpl, taskListTpl,taskListTrTpl, relationCaseTpl, relationCaseTrTpl,caseListTpl,chatPageTpl,
+                                             commandAjax,specialCaseGroupAjax,specialCaseGroup,taskAjax,task,dictOpener,chat) {
     return {
         showList: function () {
             _selfCommand = this;
@@ -79,31 +80,31 @@ define(['underscore',
             var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
             debugger
             //进入专案组讨论
-            $(".into-communication").on("click", function () {
+            $(".full-actived .into-communication").on("click", function () {
                 if(!groupChoose){
                     toast("请先选择专案组！").err();
                 }
             });
             //打印
-            $(".into-print").on("click", function () {
+            $(".full-actived .into-print").on("click", function () {
                 if(!groupChoose){
                     toast("请先选择专案组！").err();
                 }
             });
             //跳转到任务清单
-            $(".into-taskList").on("click", function () {
+            $(".full-actived .into-taskList").on("click", function () {
                 if(!groupChoose){
                     toast("请先选择专案组！").err();
                 }
             });
             //跳转到涉及案件
-            $(".into-relationCase").on("click", function () {
+            $(".full-actived .into-relationCase").on("click", function () {
                 if(!groupinfo){
                     toast("请先选择专案组！").err();
                 }
             });
             // //生成案件侦办过程报告
-            // $(".into-report").on("click", function () {
+            // $(".full-actived .into-report").on("click", function () {
             //
             // });
             //显示脉络图查询条件
@@ -133,39 +134,40 @@ define(['underscore',
             //     }
             // });
             //进入专案组讨论
-            $(".into-communication").on("click", function () {
+            $(".group-content .into-communication").on("click", function () {
+                debugger
                 if(groupinfo){
                     _selfCommand.intoCommunication(groupinfo);
                 } else {
-                    toast("请先选择专案组！").err();
+                    toast("请先选择专案组！").warn();
                 }
             });
             //打印
-            $(".into-print").on("click", function () {
+            $(".group-content .into-print").on("click", function () {
                 if(groupinfo){
                     $("#mapSvgFrame").contents().find("svg").jqprint();
                 } else {
-                    toast("请先选择专案组！").err();
+                    toast("请先选择专案组！").warn();
                 }
             });
             //跳转到任务清单
-            $(".into-taskList").on("click", function () {
+            $(".group-content .into-taskList").on("click", function () {
                 if(groupinfo){
                     _selfCommand.intoTaskList(groupinfo);
                 } else {
-                    toast("请先选择专案组！").err();
+                    toast("请先选择专案组！").warn();
                 }
             });
             //跳转到涉及案件
-            $(".into-relationCase").on("click", function () {
+            $(".group-content .into-relationCase").on("click", function () {
                 if(groupinfo){
                     _selfCommand.intoRelatedCase(groupinfo);
                 } else {
-                    toast("请先选择专案组！").err();
+                    toast("请先选择专案组！").warn();
                 }
             });
             // //生成案件侦办过程报告
-            // $(".into-report").on("click", function () {
+            // $(".group-content .into-report").on("click", function () {
             //
             // });
         },
@@ -204,12 +206,43 @@ define(['underscore',
             });
         },
         intoCommunication: function (groupinfo) {
-            _selfCommand = this;
+            var groupinfo = str2obj(groupinfo);
+            var groupid = groupinfo.id;
+            var jmgid =  groupinfo.jmgid;
 
-            // $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-            // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-            // $("#taskListDiv .panel-container").css("margin","0px").empty().html(_.template(iframe));
-            window.open("/view/chatPage/chatPage.html", "nw", "width=840,height=640");
+            $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+            $("#taskListDiv .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+            window.parent.jchatGloabal.getUserInfo();
+            window.parent.jchatGloabal.getGroupInfo(jmgid);
+            window.parent.jchatGloabal.getGroupMembers(jmgid)
+            $("#sendFileBtn").on("click", function () {
+                window.parent.clickHandle.sendFile(jmgid);
+            });
+            $("#sendFileImagesBtn").on("click", function () {
+                window.parent.clickHandle.sendFileImages(jmgid);
+            });
+            $("#sendEmojiBtn").on("click", function (event) {
+                window.parent.clickHandle.choseEmoji(this);
+            });
+            $("#setTextSizeBtn").on("click", function (event) {
+                window.parent.clickHandle.setTextSize(this);
+            });
+            $("#sendBtn").on("click", function () {
+                window.parent.clickHandle.sendText(jmgid);
+            });
+
+            $("#messageContent").on('keyup', function (event) {
+                var e = event || window.event;
+                if (e.keyCode === 13) {
+                    window.parent.clickHandle.sendText(jmgid);
+                }
+            });
+            // _selfCommand = this;
+            //
+            // // $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+            // // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
+            // // $("#taskListDiv .panel-container").css("margin","0px").empty().html(_.template(iframe));
+            // window.open("/view/chatPage/chatPage.html", "nw", "width=840,height=640");
         },
         intoTaskList: function (groupinfo) {
             _selfCommand = this;
