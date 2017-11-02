@@ -75,6 +75,37 @@ define(['underscore',
             //全屏显示脉络图 fullPanelUtils.fullPanel(触发元素，全屏元素)
             var clickDiv = $("#fullscreenBtn");
             fullPanelUtils.fullPanel(clickDiv, clickDiv.parents(".map-list"));
+
+            var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
+            debugger
+            //进入专案组讨论
+            $(".into-communication").on("click", function () {
+                if(!groupChoose){
+                    toast("请先选择专案组！").err();
+                }
+            });
+            //打印
+            $(".into-print").on("click", function () {
+                if(!groupChoose){
+                    toast("请先选择专案组！").err();
+                }
+            });
+            //跳转到任务清单
+            $(".into-taskList").on("click", function () {
+                if(!groupChoose){
+                    toast("请先选择专案组！").err();
+                }
+            });
+            //跳转到涉及案件
+            $(".into-relationCase").on("click", function () {
+                if(!groupinfo){
+                    toast("请先选择专案组！").err();
+                }
+            });
+            // //生成案件侦办过程报告
+            // $(".into-report").on("click", function () {
+            //
+            // });
             //显示脉络图查询条件
             _selfCommand.showCondition();
         },
@@ -119,7 +150,6 @@ define(['underscore',
             });
             //跳转到任务清单
             $(".into-taskList").on("click", function () {
-                debugger
                 if(groupinfo){
                     _selfCommand.intoTaskList(groupinfo);
                 } else {

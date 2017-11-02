@@ -716,7 +716,7 @@ function sysXtdhFn() {
                     $("#edit-ifSfzh").click(function(){
                         changeDlType('edit', 'sfzhPara', $(this).prop("checked"));
                     });
-                    $post(xtdhListAction, {sortName: 'sort', sortOrder:'asc'}, function (res) {
+                    $post(xtdhListAction, {orderBy: 'sort', isDesc:false}, function (res) {
                         var thisObj = res.data.where('o=>o.id=="'+id+'"');
                         if(thisObj[0].rownum > 1) {
                             var systemCode = res.data[thisObj[0].rownum - 2].systemCode;
@@ -828,7 +828,7 @@ function sysXtdhFn() {
         //新增
         $('.cm-add-btn').on('click', function () {
             $('#add-img0').attr('src',top.path + '/img/replace_photo.png');
-            $post(xtdhListAction, {sortName: 'sort', sortOrder:'asc'}, function (res) {
+            $post(xtdhListAction, {orderBy: 'sort', isDesc:false}, function (res) {
                 var systemCode = res.data[res.data.length - 1].systemCode;
                 var sort = res.data[res.data.length - 1].sort;
                 $('#add-sort-last').html('上一个' + systemCode + ' ' + sort);

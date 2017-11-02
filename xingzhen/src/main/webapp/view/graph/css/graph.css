@@ -132,14 +132,14 @@ body {
     width: 200px;
     overflow: auto;
 }
-
+.nodetext,.linetext{
+    font-family:"Microsoft YaHei";
+    font-size: 12px;
+}
 /*tooltip的样式 end*/
 .nodetext {
     fill: #494949;
     text-anchor: middle;
-    /*display: inline-block;*/
-    /*width: 20px;*/
-    /*color: #dddddd;*/
 }
 
 .linetext {
