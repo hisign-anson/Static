@@ -1,16 +1,16 @@
 <%_.each(data.childs, function(item){%>
 
 <thead>
-<tr>
-    <th width="20%">子专案组</th>
-    <th width="25%">警号</th>
-    <th width="25%">单位</th>
-    <th width="20%">成员姓名</th>
+<tr class="row">
+    <th class="col-md-3">子专案组</th>
+    <th class="col-md-3">警号</th>
+    <th class="col-md-3">单位</th>
+    <th class="col-md-3">成员姓名</th>
 </tr>
 </thead>
 <tbody>
 <%_.each(item, function(itemChild){%>
-<tr>
+<tr class="row">
     <td><%=itemChild.groupname%></td>
     <td><%=itemChild.policeId%></td>
     <td><%=itemChild.orgName%></td>

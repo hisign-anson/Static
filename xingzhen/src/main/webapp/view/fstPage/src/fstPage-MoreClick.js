@@ -68,7 +68,7 @@ define([
                 if ($(this).attr("id") == "01") {
                     // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
                     if(groupId){
-                        _self.showChart();
+                        _self.showChart(groupId);
                     }
                 } else {
                     if(groupId){
@@ -108,7 +108,6 @@ define([
         showChart: function (groupId) {//显示图
             _self = this;
             var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/graph/d3graphView.html"></iframe>';
-            debugger
             $(".tab-content.content-minor").empty().html(_.template(iframe));
             $("#taskListResult").addClass("hide").siblings(".tab-content.content-minor").removeClass("hide");
             $("#mapSvgFrame").attr("groupid",groupId);

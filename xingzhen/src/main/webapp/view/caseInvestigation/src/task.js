@@ -72,7 +72,25 @@ define(['underscore',
                 _self.queryList();
                 return false;
             });
-            _self.queryList();
+            //判断如果点击首页待办进行查询
+            $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                if ($(item).attr("page-no") == 'A0102') {
+                    var fkqrzt=$($(item).find("a")[0]).attr('fkqrzt');
+                    var taskType=$($(item).find("a")[0]).attr('taskType');
+                    var overdue=$($(item).find("a")[0]).attr('overdue');
+                    if(fkqrzt){
+                        $("#changeConfirmStatus u").eq(1).click();
+                    }else if(taskType){
+                        $("#changeTaskType u").eq(1).click();
+                    }else if(overdue){
+                        $("#changeTaskStatus u").eq(4).click();
+                    }else{
+                        _self.queryList();
+                    }
+                    $("#queryBtn").click();
+                }
+            });
+
         },
         selectTaskStaOption: function (obj) {
             _self = this;
@@ -96,6 +114,7 @@ define(['underscore',
         },
         //查询功能
         queryList: function () {
+            debugger
             _self = this;
             // var myStatus;
             // var myOverdue;
