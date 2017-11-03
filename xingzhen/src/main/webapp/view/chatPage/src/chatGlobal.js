@@ -70,12 +70,32 @@ var jchatGloabal = {
             //业务事件监听
             JIM.onEventNotification(function (data) {
                 //do something
+                switch (data.event_type){
+                    case "1":
+                        //同时登录，被迫下线示例：event_type = 1
+                        //被踢者收到该事件
+                        toast("同时登录，被迫下线",600).warn();
+                        break;
+                    case "2":
+                        //密码被修改，被迫下线示例：event_type = 2
+                        //当前在线者收到该事件
+                        toast("密码被修改，被迫下线",600).warn();
+                        break;
+                }
+
             });
-            JIM.onUserInfUpdate(function (data) {
+            //同业务事件监听
+            JIM.onSyncEvent(function (data) {
                 //do something
             });
-
-            JIM.onSyncEvent(function (data) {
+            //会话未读数变更监听（多端在线）
+            JIM.onMutiUnreadMsgUpdate(function(data) {
+                // data.type 会话类型
+                // data.gid 群 id
+                // data.appkey 所属 appkey
+                // data.username 会话 username
+            });
+            JIM.onUserInfUpdate(function (data) {
                 //do something
             });
 
@@ -245,6 +265,14 @@ var jchatGloabal = {
                 // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
                 window.open($(this).attr("src"));
             });
+
+            // $("#main-frame").contents().find(".message-image").imgbox({
+            //     'speedIn'		: 0,
+            //     'speedOut'		: 0,
+            //     'alignment'		: 'center',
+            //     'overlayShow'	: true,
+            //     'allowMultiple'	: false
+            // });
             clickHandle.scrollBottom();
         }).onFail(function (data) {
             toast('success:' + JSON.stringify(data));
@@ -592,7 +620,6 @@ $(function () {
     $(".fixed-chat").on("click", function () {
         clickHandle.showConversationList($(this));
     });
-
     // $(document).on("click", function (e) {
     //     if (!$(e.target).is(".fixed-chat")) {
     //         $(".fixed-chat").find(".conversation").removeClass("hide");
