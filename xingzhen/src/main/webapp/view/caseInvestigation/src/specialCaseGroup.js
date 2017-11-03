@@ -116,10 +116,7 @@ define(['underscore',
                         window.parent.jchatGloabal.getUserInfo();
                         window.parent.jchatGloabal.getGroupInfo(jmgid);
                         window.parent.jchatGloabal.getGroupMembers(jmgid);
-                        window.parent.JIM.updateConversation({
-                            'gid' : jmgid,
-                            'extras' : {'key':'val','is_top':true}
-                        });//离线消息同步监听
+                        //离线消息同步监听
                         window.parent.jchatGloabal.onSyncConversation();
                         //聊天消息实时监听
                         window.parent.jchatGloabal.onMsgReceive();
@@ -148,19 +145,10 @@ define(['underscore',
                         });
                         $(".window").find(".panel-tool-close").click(function () {
                             var chatParam = {
+                                groupid:groupid,
                                 createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
                                 creator: top.userId
                             };
-                            // content (string, optional): 日志内容 ,
-                            //     createTime (string, optional): 创建时间 ,
-                            //     creator (string, optional): 创建人 ,
-                            //     deleteFlag (string, optional): 删除标识 ,
-                            //     id (string, optional): 主键ID ,
-                            //     ip (string, optional): ip ,
-                            //     logLevel (string, optional): 日志级别 ,
-                            //     logType (string, optional): 日志类型（专案组，任务等） ,
-                            // reserveField1 (string, optional): 预留字段1 ,
-                            //     reserveField2 (string, optional): 预留字段2
                             specialCaseGroupAjax.addChatLog(chatParam,function () {
                                 debugger
                             })
@@ -267,9 +255,10 @@ define(['underscore',
                                     window.parent.jchatGloabal.getUserInfo();
                                     window.parent.jchatGloabal.getGroupInfo(jmgid);
                                     window.parent.jchatGloabal.getGroupMembers(jmgid);
-                                    window.parent.JIM.onSyncConversation(function(data) { //离线消息同步监听
-                                        console.log('event_receive: ' + data);
-                                    });
+                                    //离线消息同步监听
+                                    window.parent.jchatGloabal.onSyncConversation();
+                                    //聊天消息实时监听
+                                    window.parent.jchatGloabal.onMsgReceive();
                                     $("#sendFileBtn").on("click", function () {
                                         window.parent.clickHandle.sendFile(jmgid);
                                     });
@@ -291,6 +280,16 @@ define(['underscore',
                                         if (e.keyCode === 13) {
                                             window.parent.clickHandle.sendText(jmgid);
                                         }
+                                    });
+                                    $(".window").find(".panel-tool-close").click(function () {
+                                        var chatParam = {
+                                            groupid:groupid,
+                                            createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
+                                            creator: top.userId
+                                        };
+                                        specialCaseGroupAjax.addChatLog(chatParam,function () {
+                                            debugger
+                                        })
                                     });
                                     // console.info("进入聊天界面！");
                                     // // // $("#mainDiv").empty().html(_.template(chatPageTpl));

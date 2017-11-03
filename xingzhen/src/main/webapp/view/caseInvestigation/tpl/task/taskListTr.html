@@ -41,7 +41,7 @@
             <a class="into-delete icon-delete" id="<%=item.id%>" taskNo="<%=item.taskNo%>" title="删除"></a>
             <%}%>
 
-            <%if(item.jsr == top.userId){%>
+            <%if(item.jsr == top.userId && item.fkCount < 3){%>
             <a class="into-feedback icon-feedback" id="<%=item.id%>" title="反馈"></a>
             <%}%>
             <%if(item.jsr == top.userId && item.fkzt == 0){%>
@@ -57,7 +57,7 @@
                 <a class="into-delete icon-delete" id="<%=item.id%>" taskNo="<%=item.taskNo%>" title="删除"></a>
                 <%}%>
 
-                <%if(item.jsr == top.userId){%>
+                <%if(item.jsr == top.userId && item.fkCount < 3){%>
                 <a class="into-feedback icon-feedback" id="<%=item.id%>" title="反馈"></a>
                 <%}%>
                 <%if(item.jsr == top.userId && item.fkzt == 0){%>

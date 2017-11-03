@@ -214,7 +214,11 @@ define(['underscore',
             $("#taskListDiv .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
             window.parent.jchatGloabal.getUserInfo();
             window.parent.jchatGloabal.getGroupInfo(jmgid);
-            window.parent.jchatGloabal.getGroupMembers(jmgid)
+            window.parent.jchatGloabal.getGroupMembers(jmgid);
+            //离线消息同步监听
+            window.parent.jchatGloabal.onSyncConversation();
+            //聊天消息实时监听
+            window.parent.jchatGloabal.onMsgReceive();
             $("#sendFileBtn").on("click", function () {
                 window.parent.clickHandle.sendFile(jmgid);
             });
@@ -236,6 +240,16 @@ define(['underscore',
                 if (e.keyCode === 13) {
                     window.parent.clickHandle.sendText(jmgid);
                 }
+            });
+            $(".window").find(".panel-tool-close").click(function () {
+                var chatParam = {
+                    groupid:groupid,
+                    createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
+                    creator: top.userId
+                };
+                specialCaseGroupAjax.addChatLog(chatParam,function () {
+                    debugger
+                })
             });
             // _selfCommand = this;
             //

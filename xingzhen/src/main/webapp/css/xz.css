@@ -258,13 +258,18 @@ input[disabled], textarea[disabled], select[disabled] {
     width: calc(100% - 140px);
 }
 .query-block-row .qc-label-xl + .dict-opener {
-    width: calc(100% - 154px);
+    width: calc(100% - 138px);
  }
 .query-block-row .common-field + .dict-opener{
     width: calc(100% - 154px);
 }
 .query-block-row .dict-opener .icon-list {
     top: 15px;
+}
+.query-block-row .common-select,
+.query-block-row .common-input,
+.query-block-row .cm-input{
+    width: 190px;
 }
 /*表单页面 样式 start*/
 .form-content {

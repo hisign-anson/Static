@@ -59,7 +59,7 @@
 
 
                 <%}else{%>
-                    <%if(data.jsr == top.userId){%>
+                    <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
                     <div class="form-row block-row">
                         <div class="equal-col-12">
                             <span class="common-field">反馈信息：</span>
@@ -113,7 +113,12 @@
         <%if(data.fkzt && data.fkzt == 1){%>
         <div class="form-content-block">
             <div class="form-header">
-                <h5 class="form-title"><i class="left-line"></i><span>查看反馈信息</span></h5>
+                <h5 class="form-title"><i class="left-line"></i>
+                    <span>查看反馈信息</span>
+                    <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
+                    <span>已反馈3次不能再反馈</span>
+                    <%}%>
+                </h5>
             </div>
             <div class="form-body wrapper-fluid">
                 <div class="div-table-wrap">
@@ -144,7 +149,7 @@
                                 <%if(item.taskFkFiles && item.taskFkFiles !=''){%>
                                     <% _.each(item.taskFkFiles, function(itemFile,i){%>
                                         <% var path = top.ftpServer+itemFile.filePath; %>
-                                        <span class="download-text" path="<%=path%>" id="<%=itemFile.id%>" title="<%=path%>"><%=itemFile.fileName%>.<%=itemFile.fileType%></span><br>
+                                        <a class="download-text" href="<%=path%>" download="<%=itemFile.fileName%>" path="<%=path%>" id="<%=itemFile.id%>" title="<%=path%>"><%=itemFile.fileName%>.<%=itemFile.fileType%></a><br>
                                     <%})%>
                                 <%}%>
                             <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd')%></td>
@@ -177,12 +182,11 @@
     <div class="form-btn-block">
         <button id="cancelBtn" class="cm-cancel-btn">取 消</button>
         <%if(isOperation && isOperation == false){%>
-        debugger
         <%}else{%>
             <%if(data.fkzt && data.fkzt == 0 && data.jsr == top.userId){%>
             <button id="replenishTaskBtn" class="cm-save-btn"  bcrwid="<%=data.id%>" taskinfo='<%=obj2str(data)%>'>补充任务</button>
             <%}%>
-            <%if(data.jsr == top.userId){%>
+            <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
             <button id="feedbackBtn" class="cm-save-btn" taskinfo='<%=obj2str(data)%>'>反 馈</button>
             <%}%>
         <%}%>
