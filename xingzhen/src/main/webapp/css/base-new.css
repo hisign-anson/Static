@@ -4408,7 +4408,7 @@ body .icon-remove-btn:before {
 .bar-btn-div a,
 .bar-btn-div b {
   height: 24px;
-  line-height: 1;
+  line-height: 24px;
   font-size: 14px;
   /*font-family: "FontAwesome";*/
   box-sizing: border-box;

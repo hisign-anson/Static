@@ -11,10 +11,11 @@ define([
     'text!/view/fstPage/tpl/newsList.html',
     'text!/view/fstPage/tpl/messageList.html',
     'text!/view/fstPage/tpl/knowledgeList.html',
+    'text!/view/fstPage/tpl/knowledgeOne.html',
     'text!/view/fstPage/tpl/toolDownloadList.html',
     'text!/view/fstPage/tpl/areaSolveCaseList.html',
     'text!/view/fstPage/tpl/areaCreateCaseList.html',
-    '../dat/fstPage.js'], function (_, ec, fstPageTpl,todoListTpl,achievementListTpl,newsListTpl,messageListTpl,knowledgeListTpl,toolDownloadListTpl,areaSolveCaseListTpl,areaCreateCaseListTpl,
+    '../dat/fstPage.js'], function (_, ec, fstPageTpl,todoListTpl,achievementListTpl,newsListTpl,messageListTpl,knowledgeListTpl,knowledgeOneTpl,toolDownloadListTpl,areaSolveCaseListTpl,areaCreateCaseListTpl,
                                     fstPageAjax) {
     return {
         showFstPage: function () {
@@ -31,7 +32,7 @@ define([
             _self.showMessageList();
             //信息提醒点击更多
             $('#messageDiv .more-link').on('click', function () {
-                var htmlPage = 'fstPage/messageMoreList.html';
+                var htmlPage = 'fstPage/newsMoreList.html';
                 _self.clcikMore(this,htmlPage);
             });
 
@@ -58,6 +59,9 @@ define([
             //显示各区域专案组创建情况
             _self.showAreaCreateCaseList();
 
+            _self.newsOne();//点击通知公告每列
+            _self.messageOne();//点击信息提醒每列
+            _self.knowledgeOne();//点击知识库每列
         },
 
         showTodoList:function () {//待办任务
@@ -134,63 +138,12 @@ define([
             //        "number":1
             //    }
             //};
-
         },
 
         showAchievementsList:function () {//平台成果展示
             _self = this;
-            //var achievementData = {
-            //    "code":0,
-            //    "data":[
-            //        {
-            //            "createDate":"2017-09-08 11:42:11",
-            //            "id":"58A65CB316DFA592E050007F01003F1B",
-            //            "msgContent":"谢斌杀人系列案告破",
-            //            "msgTitle":"谢斌杀人系列案告破",
-            //            "rownum":"1"
-            //        },
-            //        {
-            //            "createDate":"2017-09-08 11:30:39",
-            //            "id":"58A5F3833C5EB497E050007F01005030",
-            //            "msgContent":"某某被入室盗窃系列案",
-            //            "msgTitle":"某某被入室盗窃系列案",
-            //            "rownum":"2"
-            //        },
-            //        {
-            //            "createDate":"2017-09-07 11:58:30",
-            //            "id":"7E102EB13BCB4103B7748F819F7DBA17",
-            //            "msgContent":"李四杀人案告破",
-            //            "msgTitle":"李四杀人案告破",
-            //            "rownum":"3"
-            //        },
-            //        {
-            //            "createDate":"2017-09-07 11:42:28",
-            //            "id":"B1EEE28663F742EC8F106DDAB57ED578",
-            //            "msgContent":"王五被绑架案告破",
-            //            "msgTitle":"王五被绑架案告破",
-            //            "rownum":"4"
-            //        },
-            //        {
-            //            "createDate":"2017-09-07 11:05:30",
-            //            "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-            //            "msgContent":"广州某某公司被入室盗窃案告破",
-            //            "msgTitle":"广州某某公司被入室盗窃案告破",
-            //            "rownum":"5"
-            //        },
-            //        {
-            //            "createDate":"2017-09-07 10:43:02",
-            //            "id":"9D5632A8E72E459B80879033DC9BC53A",
-            //            "msgContent":"广州某某小孩被拐案件告破",
-            //            "msgTitle":"广州某某小孩被拐案件告破",
-            //            "rownum":"6"
-            //        }
-            //    ],
-            //    "flag":1,
-            //    "totalCount":6
-            //};
-            fstPageAjax.getAchievement({},function(r){
+            fstPageAjax.getAchievement({end:8},function(r){
                 if(r.flag==1){
-                    debugger
                     $("#achieveDiv").empty().html(_.template(achievementListTpl, {data: r.data}));
                     if(r.data && r.data.length<=0){
                         $("#achieveContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
@@ -248,57 +201,28 @@ define([
         },
         showNewsList:function () {//通知公告
             _self = this;
-            var newsData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"C11607D4E132424B80ACD5F83BA8458B",
-                        "msgContent":"2017年11月3日系统更新，本...",
-                        "msgTitle":"2017年11月3日系统更新，本...",
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"3AD948322B064223AD70169F4F1CFF7E",
-                        "msgContent":"2017年11月3日系统更新",
-                        "msgTitle":"2017年11月3日系统更新",
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "msgContent":"关于平台使用操作的通知",
-                        "msgTitle":"关于平台使用操作的通知",
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:42:28",
-                        "id":"FC7114D4977044539129A4C34716EBDB",
-                        "msgContent":"平台新功能上线说明书",
-                        "msgTitle":"平台新功能上线说明书",
-                        "rownum":"4"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:05:30",
-                        "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-                        "msgContent":"省公安厅专题部署开展打击突出刑事犯罪“飓风2017”专项行动",
-                        "msgTitle":"省公安厅专题部署开展打击突出刑事犯罪“飓风2017”专项行动",
-                        "rownum":"5"
-                    },
-                    {
-                        "createDate":"2017-09-07 10:43:02",
-                        "id":"9D5632A8E72E459B80879033DC9BC53A",
-                        "msgContent":"广东省公安厅2016年部门决算公开情况说明",
-                        "msgTitle":"广东省公安厅2016年部门决算公开情况说明",
-                        "rownum":"6"
+            fstPageAjax.findRePage({type: 1, receiverId: top.userName, end: 8}, function (r) {//通知公告
+                if (r.flag == 1) {
+                    $("#newsDiv").empty().html(_.template(newsListTpl, {data: r.data}));
+                    if(r.data && r.data.length<=0){
+                        $("#newsContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
-                ],
-                "flag":1,
-                "totalCount":6
-            };
-            $("#newsDiv").empty().html(_.template(newsListTpl, {data: newsData.data}));
-            //fstPageAjax.getAchievement({},function(r){
+                    //通知公告点击更多
+                    $('#newsDiv .more-link').on('click', function () {
+                        //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                        if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                            var html = '<em id="newsTitle">通知公告</em>';
+                            window.msgTab = $openOnce(getViewPath('fstPage/newsMoreList.html'), html);
+                        } else {
+                            var html = '<em id="newsTitle">通知公告</em>';
+                            window.msgTab = $open(getViewPath('fstPage/newsMoreList.html'), html);
+                        }
+                    });
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+            //fstPageAjax.findRePage({},function(r){
             //    if(r.flag==1){
             //        debugger
             //        $("#newsDiv").empty().html(_.template(newsListTpl, {data: r.data}));
@@ -307,7 +231,7 @@ define([
             //        }
             //        //通知公告点击更多
             //        $('#newsDiv .more-link').on('click', function () {
-            //            var htmlPage = 'fstPage/newsMoreList.html';
+            //            var htmlPage = 'fstPage/messageMoreList.html';
             //            _self.clcikMore(this,htmlPage);
             //        });
             //    }else{
@@ -315,140 +239,176 @@ define([
             //    }
             //});
         },
-        showMessageList:function () {
+        showMessageList:function () {//信息提醒
             _self = this;
-            var messageData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"C11607D4E132424B80ACD5F83BA8458B",
-                        "msgContent":"新案件：您所在“张三被枪杀专案组”关联了",
-                        "msgTitle":"新案件：您所在“张三被枪杀专案组”关联了",
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"3AD948322B064223AD70169F4F1CFF7E",
-                        "msgContent":"新专案组：您已被添加到张三被枪杀专案组",
-                        "msgTitle":"新专案组：您已被添加到张三被枪杀专案组",
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "msgContent":"催办：八两金催促您尽快办理“人口拐卖专...",
-                        "msgTitle":"催办：八两金催促您尽快办理“人口拐卖专...",
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:42:28",
-                        "id":"FC7114D4977044539129A4C34716EBDB",
-                        "msgContent":"移交：“人口拐卖专案组”中你下发的“周边...",
-                        "msgTitle":"移交：“人口拐卖专案组”中你下发的“周边...",
-                        "rownum":"4"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:05:30",
-                        "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-                        "msgContent":"广播：“人口拐卖专案组”中你下发的“周边...",
-                        "msgTitle":"广播：“人口拐卖专案组”的李狗蛋广播了...",
-                        "rownum":"5"
+            fstPageAjax.findPage({type: 4, end: 8}, function (r) {
+                debugger
+                if (r.flag == 1) {
+                    $("#messageDiv").empty().html(_.template(messageListTpl,{data:r.data}));
+                    if(r.data && r.data.length<=0){
+                        $("#messageContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
-                ],
-                "flag":1,
-                "totalCount":6
-            };
-            $("#messageDiv").empty().html(_.template(messageListTpl, {data: messageData.data}));
+                    $('#messageMore').on('click', function () {
+                        //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                        if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                            var html = '<em id="noticeTitle">信息提醒</em>';
+                            $openOnce(getViewPath('fstPage/messageMoreList.html'), html)
+                        } else {
+                            var html = '<em id="noticeTitle">信息提醒</em>';
+                            window.msgTab = $open(getViewPath('fstPage/messageMoreList.html'), html);
+                        }
+                    })
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+            //var messageData = {
+            //    "code":0,
+            //    "data":[
+            //        {
+            //            "createDate":"2017-09-08 11:42:11",
+            //            "id":"C11607D4E132424B80ACD5F83BA8458B",
+            //            "msgContent":"新案件：您所在“张三被枪杀专案组”关联了",
+            //            "msgTitle":"新案件：您所在“张三被枪杀专案组”关联了",
+            //            "rownum":"1"
+            //        },
+            //        {
+            //            "createDate":"2017-09-08 11:30:39",
+            //            "id":"3AD948322B064223AD70169F4F1CFF7E",
+            //            "msgContent":"新专案组：您已被添加到张三被枪杀专案组",
+            //            "msgTitle":"新专案组：您已被添加到张三被枪杀专案组",
+            //            "rownum":"2"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:58:30",
+            //            "id":"9D263D9CB95E4482B96166F50995C779",
+            //            "msgContent":"催办：八两金催促您尽快办理“人口拐卖专...",
+            //            "msgTitle":"催办：八两金催促您尽快办理“人口拐卖专...",
+            //            "rownum":"3"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:42:28",
+            //            "id":"FC7114D4977044539129A4C34716EBDB",
+            //            "msgContent":"移交：“人口拐卖专案组”中你下发的“周边...",
+            //            "msgTitle":"移交：“人口拐卖专案组”中你下发的“周边...",
+            //            "rownum":"4"
+            //        },
+            //        {
+            //            "createDate":"2017-09-07 11:05:30",
+            //            "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
+            //            "msgContent":"广播：“人口拐卖专案组”中你下发的“周边...",
+            //            "msgTitle":"广播：“人口拐卖专案组”的李狗蛋广播了...",
+            //            "rownum":"5"
+            //        }
+            //    ],
+            //    "flag":1,
+            //    "totalCount":6
+            //};
+            //$("#messageDiv").empty().html(_.template(messageListTpl, {data: messageData.data}));
+        },
+        //点击通知公告每列
+        newsOne: function () {
+            _self = this;
+            $("#newsDiv").on("click", "a.new-column", function (e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                var type = $(this).attr("msg-type");
+                //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                    window.msgTab.$close();
+                    var html = '<em id="newsTitle" data-id="' + id + '" msg-type="' + type + '">通知公告</em>';
+                    window.msgTab = $open(getViewPath('fstPage/newsMoreList.html'), html);
+                } else {
+                    var html = '<em id="newsTitle" data-id="' + id + '" msg-type="' + type + '">通知公告</em>';
+                    window.msgTab = $open(getViewPath('fstPage/newsMoreList.html'), html);
+                }
+            });
+        },
+        //点击信息提醒每列
+        messageOne: function () {
+            _self = this;
+            $("#messageDiv").on("click", "a.new-column", function (e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                var type = $(this).attr("msg-type");
+
+                //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                    window.msgTab.$close();
+                    var html = '<em id="newsTitle" data-id="' + id + '" msg-type="' + type + '">信息提醒</em>';
+                    window.msgTab = $open(getViewPath('fstPage/messageMoreList.html'), html);
+                } else {
+                    var html = '<em id="newsTitle" data-id="' + id + '" msg-type="' + type + '">信息提醒</em>';
+                    window.msgTab = $open(getViewPath('fstPage/messageMoreList.html'), html);
+                }
+            });
         },
         showKnowledgeList:function () {
             _self = this;
-            var knowledgeData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"C11607D4E132424B80ACD5F83BA8458B",
-                        "msgContent":"从误划生熟谈侦查思维.",
-                        "msgTitle":"从误划生熟谈侦查思维",
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"3AD948322B064223AD70169F4F1CFF7E",
-                        "msgContent":"经济犯罪案件侦查的组...",
-                        "msgTitle":"经济犯罪案件侦查的组...",
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "msgContent":"被害人权利的逻辑起点",
-                        "msgTitle":"被害人权利的逻辑起点",
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:42:28",
-                        "id":"FC7114D4977044539129A4C34716EBDB",
-                        "msgContent":"从“疑罪从无”谈测谎技...",
-                        "msgTitle":"从“疑罪从无”谈测谎技...",
-                        "rownum":"4"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:05:30",
-                        "id":"53A8D6BF5A6C486D8BC72F2751A51A53",
-                        "msgContent":"从侦查公诉审判的目的...",
-                        "msgTitle":"从侦查公诉审判的目的...",
-                        "rownum":"5"
+            fstPageAjax.findPage({type: 2, end: 8}, function (r) {
+                if (r.flag == 1) {
+                    $("#knowledgeDiv").empty().html(_.template(knowledgeListTpl, {data: r.data}));
+                    if(r.data && r.data.length<=0){
+                        $("#knowledgeDiv .rule").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
-                ],
-                "flag":1,
-                "totalCount":6
-            };
-            $("#knowledgeDiv").empty().html(_.template(knowledgeListTpl, {data: knowledgeData.data}));
+                    //知识库点击更多
+                    $('#knowledgeDiv .more-link').on('click', function () {
+                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                            if ("tzgg" == $(item).attr("page-no")) {
+                                $(item).find('a')[0].click();
+                                $(item).find("li a")[0].click();
+                                $('.tabs-selected', window.parent.document).find('span.tabs-title').attr('data-noticeid',"02");
+                            }
+                        });
+                    });
+                }else{
+                    toast(r.msg,600).err();
+                }
+            });
+        },
+        //点击知识库每列
+        knowledgeOne: function () {
+            _self = this;
+            $("#knowledgeDiv").on("click", "a.knowledgeOne", function (e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                fstPageAjax.findById({id: id}, function (res) {
+                    if (res.flag == 1) {
+                        //打开弹出框
+                        $('#myModal').modal('show');
+                        $('#myModal').on('shown.bs.modal', function (e) {
+                            $(".modal-body").height($(".modal-content").outerHeight(true) - $(".panel-header").outerHeight(true) - 35)
+                        });
+                        $(".modal-content").empty().html(_.template(knowledgeOneTpl, {data: res.data}));
+                        if ($.trim($("#ruleRev1").find("a").html()) == "") {
+                            $("#ruleRev1").hide();
+                        }
+                    }else{
+                        toast(res.msg,600).err();
+                    }
+                })
+            })
         },
         showToolDownloadList:function () {
             _self = this;
-            var toolDownloadData = {
-                "code":0,
-                "data":[
-                    {
-                        "createDate":"2017-09-08 11:42:11",
-                        "id":"C11607D4E132424B80ACD5F83BA8458B",
-                        "msgContent":"相关控件下载",
-                        "msgTitle":"相关控件下载",
-                        "fileType":".pdf",
-                        "rownum":"1"
-                    },
-                    {
-                        "createDate":"2017-09-08 11:30:39",
-                        "id":"3AD948322B064223AD70169F4F1CFF7E",
-                        "msgContent":"系统操作手册",
-                        "msgTitle":"系统操作手册",
-                        "fileType":".doc",
-                        "rownum":"2"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "msgContent":"平台APP下载",
-                        "msgTitle":"平台APP下载",
-                        "fileType":".jpg",
-                        "rownum":"3"
-                    },
-                    {
-                        "createDate":"2017-09-07 11:58:30",
-                        "id":"9D263D9CB95E4482B96166F50995C779",
-                        "msgContent":"平台APP下载",
-                        "msgTitle":"平台APP下载",
-                        "fileType":"未知类型",
-                        "rownum":"4"
+            fstPageAjax.findPage({type: 3, end: 5}, function (r) {//表格下载
+                if (r.flag == 1) {
+                    $("#toolDownloadDiv").empty().html(_.template(toolDownloadListTpl, {data: r.data}));
+                    if(r.data && r.data.length<=0){
+                        $("#toolDownloadDiv .tabledown").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
-                ],
-                "flag":1,
-                "totalCount":3
-            };
-            $("#toolDownloadDiv").empty().html(_.template(toolDownloadListTpl, {data: toolDownloadData.data}));
+                    $('#toolDownloadDiv .more-link').on('click', function () {
+                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                            if ("tzgg" == $(item).attr("page-no")) {
+                                $(item).find('a')[0].click();
+                                $(item).find("li a")[0].click();
+                                $('.tabs-selected', window.parent.document).find('span.tabs-title').attr('data-noticeid',"03");
+                            }
+                        });
+                    });
+                }
+            });
+
         },
         showAreaSolveCaseList:function () {//各区域专案组创建情况
             _self = this;
@@ -563,7 +523,6 @@ define([
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        // debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -587,7 +546,6 @@ define([
                     });
                 } else if ($(this).index() == 1) {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        // debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -611,7 +569,6 @@ define([
                     });
                 } else {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -749,7 +706,6 @@ define([
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
                     fstPageAjax.getCreateInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -775,7 +731,6 @@ define([
 
                 } else if ($(this).index() == 1) {
                     fstPageAjax.getCreateInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -800,7 +755,6 @@ define([
                     });
                 } else {
                     fstPageAjax.getCreateInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];

@@ -3,7 +3,7 @@
     <div class="col-panel-body tabledown">
         <%_.each(data, function(item){%>
         <div>
-            <a href="#" id="<%=item.id%>" class="tableOne">
+            <a href="#" id="<%=item.id%>" class="tableOne" download="<%=item.rev1%>" title="下载">
                 <%var fileType = item.fileType;%>
                 <%if(fileType == ".xls" || fileType == ".xlsx"){%>
                 <span class="icon-file-excel ml15 vam"></span>
@@ -20,7 +20,7 @@
                 <%}else {%>
                 <span class="icon-file-noType ml15 vam"></span>
                 <%}%>
-                <span class="text-record ml10" title="<%=item.msgTitle%>"><%=item.msgTitle%></span>
+                <span class="text-record ml10" title="<%=item.msgTitle%>"><%=item.subject%></span>
                 <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
             </a>
         </div>
