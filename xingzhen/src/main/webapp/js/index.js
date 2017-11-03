@@ -483,8 +483,10 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                 $("#userName").val(data.userName);
                 $("#orgName").val(data.orgName);
                 if(data.avatar && data.avatar !=''){
-                    var obj = eval('(' + data.avatar + ')');
-                    $("#avatar-img").attr("src",top.ftpServer+obj.source);
+                    //var obj = eval('(' + data.avatar + ')');
+                    //$("#avatar-img").attr("src",top.ftpServer+obj.source);
+                    var avatar = data.avatar;
+                    byid('avatar-img').src=top.ftpServer + avatar;
                 }else{
                     $("#avatar-img").attr("src","../img/touxiang.jpg");
                 }
@@ -533,7 +535,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                 $(".dict").dictSelect(data.post);
                 $("[dict-id='post'] #post").addClass("w260px");
                 $("#address").val(data.address);
-                $open('#edit-user-block', {width: 800, top: 180, title: '&nbsp用户个人中心'});
+                $open('#edit-user-block', {width: 680, top: 80, title: '&nbsp用户个人中心'});
                 importing(  '../plugin/daterangepicker/moment.js','../plugin/daterangepicker/datetimepicker.js', function () {
                     $("#birth").datetimepicker({
                         format: 'YYYY-MM-DD',

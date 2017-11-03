@@ -106,7 +106,7 @@
     </div>
     <div id="top-mask" class="mask"></div>
     <div id="left-mask" class="mask"></div>
-    <div class="fixed-chat">
+    <div class="fixed-chat" id="fixed-chat">
         <img src="../img/chat.jpg">
         <div class="conversation hide">
             <ul>
@@ -215,7 +215,7 @@
     <div class="edit-div">
         <span class="common-field"><span class="orangered">★ </span>原密码：</span><input id="old-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:'length[3,20]'">
         <span class="common-field"><span class="orangered">★ </span>新密码：</span><input id="new-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:['length[3,20]','noChinese']">
-        <span class="common-field"><span class="orangered">★ </span>确认新密码：</span><input id="confirm-new-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:['length[3,20]','noChinese']">
+        <span class="common-field"><span class="orangered">★ </span>确认密码：</span><input id="confirm-new-pwd" class="common-input mt10 pwd-validate" type="password" data-options="required:true,validType:['length[3,20]','noChinese']">
         <!--<div id="pwd-error"></div>-->
         <p>注：密码长度在3~20个字符之间，不能包含中文。</p>
     </div>
@@ -266,4 +266,9 @@
 
 <script src="../plugin/upclick-min.js"></script>
 <script src="../plugin/cropper/cropper.js"></script>
+<script>
+    $(function() {
+        $( "#fixed-chat" ).draggable();
+    });
+</script>
 </html>

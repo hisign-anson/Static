@@ -30,28 +30,12 @@ define([
             _self.showNewsList();
             //显示信息提醒
             _self.showMessageList();
-            //信息提醒点击更多
-            $('#messageDiv .more-link').on('click', function () {
-                var htmlPage = 'fstPage/newsMoreList.html';
-                _self.clcikMore(this,htmlPage);
-            });
 
             //显示知识库
             _self.showKnowledgeList();
-            //知识库点击更多
-            $('#knowledgeDiv .more-link').on('click', function () {
-                var htmlPage = 'fstPage/knowledgeMoreList.html';
-                _self.clcikMore(this,htmlPage);
-                _self.achievementMore();
-            });
 
             //显示系统工具下载
             _self.showToolDownloadList();
-            //系统工具下载点击更多
-            $('#toolDownloadDiv .more-link').on('click', function () {
-                var htmlPage = 'fstPage/toolDownloadMoreList.html';
-                _self.clcikMore(this,htmlPage);
-            });
 
             //显示各区域专案组破案情况
             _self.showAreaSolveCaseList();
