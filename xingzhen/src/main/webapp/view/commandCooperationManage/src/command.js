@@ -78,7 +78,6 @@ define(['underscore',
             fullPanelUtils.fullPanel(clickDiv, clickDiv.parents(".map-list"));
 
             var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
-            debugger
             //进入专案组讨论
             $(".full-actived .into-communication").on("click", function () {
                 if(!groupChoose){
@@ -120,19 +119,6 @@ define(['underscore',
                 "width": "100%",
                 "height": "100%"
             });
-            // $('.request-fullscreen').click(function() {
-            //     if (screenCheck) {
-            //         if ($.fullscreen.isFullScreen()) {
-            //             $.fullscreen.exit();
-            //         } else {
-            //             $('html').fullscreen({
-            //                 overflow: 'visible'
-            //             });
-            //         }
-            //     } else {
-            //         toast('浏览器不支持全屏模式')
-            //     }
-            // });
             //进入专案组讨论
             $(".group-content .into-communication").on("click", function () {
                 debugger
@@ -425,6 +411,23 @@ define(['underscore',
                     $('.span').span();
                 }
             });
+        },
+
+        //查看专案组基本信息
+        showGroupInfo:function () {
+            _selfCommand = this;
+        },
+        //查看专案组涉及案件
+        showGroupCase:function () {
+            _selfCommand = this;
+        },
+        //查看专案组成员
+        showGroupStaff:function () {
+            _selfCommand = this;
+        },
+        //查看案件详情
+        showCaseInfo:function () {
+            _selfCommand = this;
         }
     }
 });

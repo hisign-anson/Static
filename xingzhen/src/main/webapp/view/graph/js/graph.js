@@ -10,6 +10,10 @@ var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNo
 var zTreeObj;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 var setting = {
+    view: {
+        //可以允许节点名称支持 HTML 内容
+        nameIsHTML: true
+    },
     callback: {
         //单击菜单节点之前的事件回调函数
         beforeClick: function (treeId, treeNode, clickFlag) {
@@ -18,7 +22,11 @@ var setting = {
         },
         //菜单节点被点击的事件回调函数
         onClick: function (event, treeId, treeNode, clickFlag) {
+            var className = $(event).find("span").attr("class");
+            // var classname = treeNode.name.attr("class");
+            debugger
             alert("[ onClick ]:" + treeNode.name);
+
             return (treeNode.click != false);
         }
     }
@@ -405,7 +413,6 @@ function updateGraphJSON(json) {
         })
         //去掉默认的contextmenu事件，否则会和右键事件同时出现。
         .on("contextmenu", function () {
-            debugger
             //DOM事件对象——d3.event
             d3.event.preventDefault();
         })
@@ -420,25 +427,26 @@ function updateGraphJSON(json) {
                 }
                 console.info(d);
                 console.info(i);
+                //获取节点id（专案组id，任务id，反馈id，案件id）  d.id
                 //根据id和type显示不同的菜单
                 var zNodes;
                 var menuByGroupType = [
-                    {name: "专案组详情"},
-                    {name: "涉及案件"},
-                    {name: "专案组成员"},
-                    {name: "任务下发"}
+                    {name: "<span class='groupHandle' id='"+d.id+"'>专案组详情</span>"},
+                    {name: "<span class='groupHandle' id='"+d.id+"'>涉及案件</span>"},
+                    {name: "<span class='groupHandle' id='"+d.id+"'>专案组成员</span>"},
+                    {name: "<span class='groupHandle' id='"+d.id+"'>任务下发</span>"}
                 ];
                 var menuByTaskType = [
-                    {name: "接收人反馈任务"},
-                    {name: "接收人移交任务"},
-                    {name: "接收人补充任务"},
-                    {name: "下发人催办任务"}
+                    {name: "<span class='taskHandle' id='"+d.id+"'>接收人反馈任务</span>"},
+                    {name: "<span class='taskHandle' id='"+d.id+"'>接收人移交任务</span>"},
+                    {name: "<span class='taskHandle' id='"+d.id+"'>接收人补充任务</span>"},
+                    {name: "<span class='taskHandle' id='"+d.id+"'>下发人催办任务</span>"}
                 ];
                 var menuByFeedbackType = [
-                    {name: "下发人追加任务"}
+                    {name: "<span class='feedbackHandle' id='"+d.id+"'>下发人追加任务</span>"}
                 ];
                 var menuByCaseType = [
-                    {name: "查看案件详情"}
+                    {name: "<span class='caseHandle' id='"+d.id+"'>查看案件详情</span>"}
                 ];
                 switch (d.type){
                     case "groupid":
@@ -446,6 +454,10 @@ function updateGraphJSON(json) {
                         break;
                     case "taskid":
                         zNodes = menuByTaskType;
+                        // //登录人是否是任务的创建人
+                        // if(d.taskCreatorUserId == top.userId){
+                        //     //菜单显示催办任务
+                        // }
                         break;
                     case "fkid":
                         zNodes = menuByFeedbackType;
@@ -702,11 +714,11 @@ var layout = d3.layout.force()
 
 //定义svg画板
 var svg = d3.select("body").append("svg")
-    .attr("preserveAspectRatio", "xMidYMid meet")
-    //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
-    .attr("viewBox", "0 0 1200 900")
-    // .attr("width", width)
-    // .attr("height", height);
+    // .attr("preserveAspectRatio", "xMidYMid meet")
+    // //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
+    // .attr("viewBox", "0 0 1200 900")
+    .attr("width", width)
+    .attr("height", height);
 
 //箭头
 var marker =

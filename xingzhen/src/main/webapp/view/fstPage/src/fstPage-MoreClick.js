@@ -64,7 +64,6 @@ define([
             $("#myTabMinor a").on("click", function () {
                 $(this).tab('show');
                 var groupId=$("#myTabMinor").attr("data-groupid");//获取导航头的值
-                debugger
                 if ($(this).attr("id") == "01") {
                     // $(".tab-content.content-minor").empty().html(_.template("graph 图"));
                     if(groupId){
@@ -125,7 +124,6 @@ define([
             //     endTime: $.trim($("#endTime").val())
             // });
             // expenseStatAjax.getExesApplyStatList(param, function (r) {
-            debugger
             var param = {
                 userId:top.userId,
                 //taskType:$.trim($("#taskType").val()),
@@ -152,7 +150,6 @@ define([
                     //$(".link-text").on("click",function () {
                     //    _selfCommand.handleDetail($(this).attr('id'));
                     //});
-                    debugger
                     $("#taskListResult").removeClass("hide").siblings(".tab-content.content-minor").addClass("hide");
                     $("#taskListTable tbody").empty().html(_.template(groupTaskListTpl, {data: r}));
                     $(".into-feedback").on('click', function () {

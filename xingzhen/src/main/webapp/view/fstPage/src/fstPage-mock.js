@@ -208,7 +208,6 @@ define([
             });
             //fstPageAjax.findRePage({},function(r){
             //    if(r.flag==1){
-            //        debugger
             //        $("#newsDiv").empty().html(_.template(newsListTpl, {data: r.data}));
             //        if(r.data && r.data.length<=0){
             //            $("#newsContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
