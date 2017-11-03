@@ -660,6 +660,8 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     //默认载入首页
     $('.accordion-toggle')[0].click();
     $('a[direct$=html]')[0].click();
+
+
     // //打开收件箱页面
     // $('#msg-count-wrap').on('click',function(){
     //     //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个

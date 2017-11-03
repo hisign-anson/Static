@@ -190,7 +190,6 @@ define([
             //};
             fstPageAjax.getAchievement({},function(r){
                 if(r.flag==1){
-                    debugger
                     $("#achieveDiv").empty().html(_.template(achievementListTpl, {data: r.data}));
                     if(r.data && r.data.length<=0){
                         $("#achieveContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
@@ -300,7 +299,6 @@ define([
             $("#newsDiv").empty().html(_.template(newsListTpl, {data: newsData.data}));
             //fstPageAjax.getAchievement({},function(r){
             //    if(r.flag==1){
-            //        debugger
             //        $("#newsDiv").empty().html(_.template(newsListTpl, {data: r.data}));
             //        if(r.data && r.data.length<=0){
             //            $("#newsContent").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
@@ -563,7 +561,6 @@ define([
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        // debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -587,7 +584,6 @@ define([
                     });
                 } else if ($(this).index() == 1) {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        // debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -611,7 +607,6 @@ define([
                     });
                 } else {
                     fstPageAjax.getSolveCaseInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -749,7 +744,6 @@ define([
                 $(this).addClass("active").siblings(".active").removeClass("active");
                 if ($(this).index() == 0) {
                     fstPageAjax.getCreateInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -775,7 +769,6 @@ define([
 
                 } else if ($(this).index() == 1) {
                     fstPageAjax.getCreateInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
@@ -800,7 +793,6 @@ define([
                     });
                 } else {
                     fstPageAjax.getCreateInfo({dateType:dateType},function(r){
-                        debugger
                         if(r.flag==1){
                             var name = [];
                             var value = [];
