@@ -3,9 +3,9 @@
     <div class="col-panel-body rule">
         <%_.each(data, function(item){%>
         <div>
-            <a href="#" data-id="<%=item.id%>" class="ruleOne">
+            <a href="#" data-id="<%=item.id%>" class="knowledgeOne">
                 <span class="icon-book ml15 vam"></span>
-                <span class="text-record ml10" title="<%=item.msgTitle%>"><%=item.msgTitle%></span>
+                <span class="text-record ml10" title="<%=item.msgTitle%>"><%=item.subject%></span>
                 <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
             </a>
         </div>

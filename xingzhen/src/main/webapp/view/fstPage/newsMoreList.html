@@ -3,34 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>通知公告</title>
-    <link rel="stylesheet" href="../../css/base-plus-xz.css">
+    <link rel="stylesheet" href="../../../css/base.css?version=0.99">
+    <link rel="stylesheet" href="../../../css/message.css?version=0.99">
 </head>
 <body>
 
-<div id="newsListResult" class="query-result">
-    <div class="new-color-bar">
-        <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
+<div class="query-block" id="query-condition">
+    <div class="query-condition-p">
+        <span class="qc-label w80px">时间：</span>
+        <span class="text-time">
+            <input id="query-date" readonly="readonly" class="common-input w190px" placeholder="请输入时间范围" tabindex="-1">
+            <input type="hidden" name="startTime" id="queryDateBegin" />
+            <input type="hidden" name="endTime" id="queryDateEnd" />
+        </span>
+        <!--<input id="startTime" type="text" class="query-date"/>~<input id="endTime" type="text" class="query-date mr15"/>-->
+        <p class="query-reset">
+            <b id="msg-receive-query" class="cm-query-btn"></b>
+            <b id="msg-receive-reset" class="cm-reset-btn"></b>
+        </p>
     </div>
-    <div class="div-table-wrap">
-        <table id="newsListTable" class="typical-tb" >
-            <thead>
-            <tr>
-                <th width="10%">序号</th>
-                <th width="35%">标题</th>
-                <th width="25%">附件名</th>
-                <th width="20%">发布时间</th>
-                <th width="10%">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-        <div class="paging"></div>
+</div>
+<div id="msg-main-box">
+    <div class="new-color-bar">
+        <span class="title">通知公告（共 <span class="total-count"></span> 条消息）</span>
+        <div class="bar-btn-div">
+            <!--<b id="receive-remove-btn" class="cm-remove-btn"></b>-->
+        </div>
+    </div>
+    <div id="msg-content">
+        <div id="msg-left">
+            <div class="msg-left-title">
+                <div class="d1">序号</div>
+                <div class="d2">标题</div>
+                <div class="d3" sort-name="createDate">时间</div>
+            </div>
+            <div id="msg-left-content" tpsource="#msg-left-list"></div>
+            <div class="paging"></div>
+        </div>
+        <div id="msg-right">
+            <div class="un-selected-detail-div">
+                <h2>未选定查看任何消息</h2>
+                <div>单击任何消息即可在阅读窗格中进行查看</div>
+            </div>
+            <div class="selected-detail-div" tpsource="#msg-right-detail"></div>
+        </div>
     </div>
 </div>
 </body>
-<script src="../../js/base.js?version=0.99"></script>
-<script data-main="fstPageMoreClick.js" src="/plugin/require.js" type="text/javascript"></script>
+<script type="text/template" id="msg-left-list">
+    <div class="li {readLi}" rownum="{rownum}">
+        <table class="typical-tb" cellpadding="3">
+            <tbody>
+            <tr>
+                <td class="cx">{rownum}</td>
+                <td class="cc" paramId="{id}" rownum="{rownum}">
+                    <div class="c-title"><div class="sender-name ellipsis" title="{subject}">{subject}</div><div class="msg-time">{msgDateTxt}</div></div>
+                </td>
+                <td><div param="{id}" class="c-remove hideplus" title="删除"><i class="icon-remove"></i></div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
+<script type="text/template" id="msg-right-detail">
+    <div class="read-info">
+        <h2>{subject}</h2>
+        <!--<div><span>发件人：</span><span class="tcolor">{rev2}</span></div>-->
+        <div class="hide{senderUnit}"><span>发件人单位：</span><span class="tcolor">{senderUnit}</span></div>
+        <div><span>时间：{msgDetailDate}</span></div>
+        <div><span>附件：<a href="#" id="attachment"></a></span></div>
+    </div>
+    <div class="read-content has-table-wrapper">
+        <div>
 
+        </div>
+    </div>
+</script>
+<script src="../../../js/base.js?version=0.99"></script>
+<script src="../../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+<script src="../../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
+<script src="../../../plugin/daterangepicker/moment.js?version=0.99"></script>
+<script src="../../../js/sys.js?version=0.99"></script>
+<script>
+    var id = $('.tabs-selected', window.parent.document).find('em').attr('data-id');
+    var type = $('.tabs-selected', window.parent.document).find('em').attr('msg-type');
+    typeof newsMoreFn(id,type)=='function' && newsMoreFn(id,type);
+</script>
 </html>

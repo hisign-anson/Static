@@ -26,7 +26,7 @@ define(['underscore',
 			var type=1;
 			_self.queryNoticeList(type);
 			$('#add-btn').on('click',function () {
-				var type=1;//123分别是通知公告、规章制度、表格下载
+				var type=1;//123分别是通知公告、规章制度、表格下载--通知公告、知识库、系统工具下载
 			    _self.noticeAdd(type);
 		 	});
 			$("#query-btn").on('click',function(){

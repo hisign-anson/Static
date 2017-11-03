@@ -1244,7 +1244,7 @@ function sysXtmkglHtml(){
     });
 }
 
-//首页点击当月最新发布--更多
+//首页点击信息提醒--更多
 function newsMessageFn(vId,vType){
     importing('dict', 'datepicker', function(){
         var thisYear = Date.format('YYYY');
@@ -1289,19 +1289,16 @@ function newsMessageFn(vId,vType){
             top.registry.global.checkMsgIds=[];
             var param = {
                 msgState:$.trim($('#msg-receive-xxzt').val()),
-                startTime:$.trim($('#startTime').val()),
-                endTime:$.trim($('#endTime').val()),
+                startTime:$.trim($('#queryDateBegin').val()),
+                endTime:$.trim($('#queryDateEnd').val()),
                 msgContent:$.trim($("#subject").val()),
-                receiverId:top.userName
+                receiverId:top.userName,
+                type:4
             };
             $('#msg-left').pagingList({
-                action:top.servicePath+'sys/message/findReceivePage',
+                action:top.servicePath+'/sys/message/findPage',//  /sys/message/findPage
                 jsonObj:param,
                 callback:function(data,t, n, u, o, a, r){
-                    var obj=[];
-                    for(var i=0;i<data.length;i++){
-                        obj[i]= JSON.parse(data[i].msgContent);
-                    }
                     var temp_date, queryData = [];
                     //查询消息数量
                     $('.total-count').text(r);
@@ -1316,7 +1313,7 @@ function newsMessageFn(vId,vType){
                         item.readLi = item.msgState == '0' ? 'unread' : 'read';
                         //右边 详细 时间格式
                         item.msgDetailDate = temp_date.format('YYYY年M月D日') + '('+weeks[temp_date.getDay()]+') ' + temp_date.format('hh:mm');
-                        item=$.extend(item,{obj:obj[i]});
+
                         queryData.push(item);
                     });
                     $('.check-msg').on('click',function(i,ele){
@@ -1336,8 +1333,10 @@ function newsMessageFn(vId,vType){
                     top.registry.global.messageList = queryData;
 
                     //初始化
-                    if(vId!="undefined" && vType!="undefined"){
+                    if(vId!=undefined && vType!=undefined){
                         $("#msg-left-content div.li .cc:not(.c-remove-hover)[data-id="+vId+"]").trigger("click");
+                    }else{
+                        $("#msg-left-content div.li:eq(0) .cc").click();//进来后读取第一条
                     }
                 }
             });
@@ -1844,8 +1843,8 @@ function noticeMessageFn(){
 
 }
 
-//首页点击规章制度--更多
-function ruleMessageFn() {
+//首页点击通知公告--更多
+function newsMoreFn(vId,vType) {
     importing('dict', 'datepicker', function(){
         var thisYear = Date.format('YYYY');
         var weeks = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
@@ -1873,9 +1872,9 @@ function ruleMessageFn() {
                 action:top.servicePath+'/sys/message/findPage',
                 currentPage:$('.paging').data('currentPage'),
                 jsonObj:{
-                    startTime:$('#startTime').val(),
-                    endTime:$('#endTime').val(),
-                    type:2
+                    startTime:$('#queryDateBegin').val(),
+                    endTime:$('#queryDateEnd').val(),
+                    type:1
                 },
                 callback:function(data,t, n, u, o, a, r){
                     var temp_date, queryData = [];
@@ -1895,6 +1894,13 @@ function ruleMessageFn() {
                     });
 
                     top.registry.global.messageList = queryData;
+
+                    //初始化
+                    if(vId!=undefined && vType!=undefined){
+                        $("#msg-left-content div.li .cc:not(.c-remove-hover)[paramid="+vId+"]").trigger("click");
+                    }else{
+                        $("#msg-left-content div.li:eq(0) .cc").click();//进来后读取第一条
+                    }
                 }
             });
             $('.selected-detail-div').hide();
@@ -1906,14 +1912,20 @@ function ruleMessageFn() {
         $('#msg-receive-query').on('click',function(){
             if($('.sort-arrow')) $('.sort-arrow').remove();
             //时间判断
-            var t_beginDate = $('#startTime').val();
-            var t_endDate = $('#endTime').val();
+            var t_beginDate = $('#queryDateBegin').val();
+            var t_endDate = $('#queryDateBegin').val();
             if(!t_beginDate.isEmpty() && !t_endDate.isEmpty() && t_beginDate > t_endDate){
                 toast('消息开始时间不能大于结束时间！').css('width','300px').warn();
                 return false;
             }
             //执行查询
             queryForMessage();
+        });
+        //点击重置
+        $("#msg-receive-reset").on('click', function () {
+            $('#query-condition :input').each(function () {
+                $(this).val("");
+            });
         });
         $('#msg-left').on('click', 'div.li .cc:not(.c-remove-hover)', function(){
             //右侧阅读窗口 样式修改
