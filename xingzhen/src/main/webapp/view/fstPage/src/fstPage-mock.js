@@ -225,7 +225,6 @@ define([
         showMessageList:function () {//信息提醒
             _self = this;
             fstPageAjax.findPage({type: 4, end: 8}, function (r) {
-                debugger
                 if (r.flag == 1) {
                     $("#messageDiv").empty().html(_.template(messageListTpl,{data:r.data}));
                     if(r.data && r.data.length<=0){

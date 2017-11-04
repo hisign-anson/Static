@@ -16,8 +16,10 @@
 }
 
 body {
+    background: #ffffff;
     font-family: 'Microsoft Yahei', Arial, SimSun, sans-serif;
     font-size: 12px;
+    overflow: auto;
 }
 
 /*覆盖ztree的样式 start */

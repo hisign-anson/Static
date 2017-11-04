@@ -2,9 +2,9 @@ $(document).ready(function () {
 
     window.path = '';
     window.servicePath = '';
-    window.servicePath_xz = '/xz';
-    // window.servicePath_xz = '/xz_23';
-    // window.servicePath_xz = '/xz_137';
+window.servicePath_xz = '/xz';
+//     window.servicePath_xz = '/xz_23';
+//     window.servicePath_xz = '/xz_137';
 
     window.version = '0.99';
     $("[data-toggle='tooltip']").tooltip();
