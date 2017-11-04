@@ -23,9 +23,9 @@ define(['underscore',
     'text!/view/tpl_EmptyOrError/emptyDataPage.html',
     '../dat/specialCaseGroup.js',
     '../../dictManage/src/dictOpener.js',
-    '../../userInfoManage/dat/userInfo.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl,broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl,caseInfoTpl,
-                                                     userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl,chatPageTpl,emptyDataPage,
-                                                     specialCaseGroupAjax,dictOpener,userInfoAjax) {
+    '../../userInfoManage/dat/userInfo.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl, broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl, caseInfoTpl,
+                                                       userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, chatPageTpl, emptyDataPage,
+                                                       specialCaseGroupAjax, dictOpener, userInfoAjax) {
     return {
         showList: function () {
             _self = this;
@@ -94,10 +94,15 @@ define(['underscore',
 
             };
             $('#specialGroupListResult').pagingList({
-                action:top.servicePath_xz+'/group/getGroupPage',
-                jsonObj:param,
-                callback:function(data){
-                    $("#specialGroupListTable tbody").empty().html(_.template(specialCaseGroupListTrTpl, { data: data, ops: top.opsMap }));
+                action: top.servicePath_xz + '/group/getGroupPage',
+                jsonObj: param,
+                callback: function (data) {
+                    $("#specialGroupListTable tbody").empty().html(_.template(specialCaseGroupListTrTpl, {
+                        data: data,
+                        ops: top.opsMap
+                    }));
+                    _self.oneChoose();//限制单选
+
                     $(".link-text").on("click", function () {
                         _self.showEdit($(this).attr("groupid"));
                     });
@@ -105,14 +110,14 @@ define(['underscore',
                         _self.groupBackupAdd($(this).attr("groupid"));
                     });
                     $(".into-broadcast").on("click", function () {
-                        _self.groupBroadcast($(this).attr("groupid"),$(this).attr("jmgid"));
+                        _self.groupBroadcast($(this).attr("groupid"), $(this).attr("jmgid"));
                     });
                     $(".into-communication").on("click", function () {
                         var groupid = $(this).attr("groupid");
-                        var jmgid =  $(this).attr("jmgid");
+                        var jmgid = $(this).attr("jmgid");
 
-                        $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                        $("#archiveBlock .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+                        $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
+                        $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
                         window.parent.jchatGloabal.getUserInfo();
                         window.parent.jchatGloabal.getGroupInfo(jmgid);
                         window.parent.jchatGloabal.getGroupMembers(jmgid);
@@ -143,14 +148,15 @@ define(['underscore',
                                 window.parent.clickHandle.sendText(jmgid);
                             }
                         });
-                        $(".window").find(".panel-tool-close").click(function () {
+                        $("#archiveBlock").parents(".window").find(".panel-tool-close").click(function () {
                             var chatParam = {
-                                groupid:groupid,
-                                createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
-                                creator: top.userId
+                                reserveField1: groupid,
+                                createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(), 'yyyy-MM-dd'),
+                                creator: top.userId,
+                                content:"hah"
                             };
-                            specialCaseGroupAjax.addChatLog(chatParam,function () {
-                                debugger
+                            specialCaseGroupAjax.addChatLog(chatParam, function () {
+
                             })
                         });
                         // console.info(window.parent.JIM)
@@ -160,20 +166,20 @@ define(['underscore',
                         // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
                     });
                     $(".into-group").on('click', function () {
-                        _self.showGroupOfGroup($(this),$(this).attr("groupid"),$(this).attr("jmgid"));
+                        _self.showGroupOfGroup($(this), $(this).attr("groupid"), $(this).attr("jmgid"));
                     });
 
                 }
             });
         },
-        groupBackupAdd:function (groupid) {
+        groupBackupAdd: function (groupid) {
             _self = this;
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组归档'});
             $("#archiveBlock .panel-container").empty().html(_.template(archivePageTpl));
             $(".dict").dict();
-            $("#archiveBlock").on("click","#saveBtn",function () {
+            $("#archiveBlock").on("click", "#saveBtn", function () {
                 var param = {
-                    backupStatus:1,
+                    backupStatus: 1,
                     backupReason: $.trim($("#backupReason").val()),
                     backupTime: $("#backupTime").val(),
                     creator: top.userId,
@@ -181,58 +187,56 @@ define(['underscore',
                     groupid: groupid,
                     policeId: top.policeId
                 };
-                specialCaseGroupAjax.groupBackup(param,function(r){
-                    if(r.flag==1){
-                        toast('归档成功！',600,function(){
+                specialCaseGroupAjax.groupBackup(param, function (r) {
+                    if (r.flag == 1) {
+                        toast('归档成功！', 600, function () {
                             $("#archiveBlock").$close();
                             _self.queryList();
                         }).ok()
-                    }else{
+                    } else {
                         toast(r.msg, 600).err();
                     }
                 });
             });
-            $("#archiveBlock").on("click","#cancelBtn",function () {
+            $("#archiveBlock").on("click", "#cancelBtn", function () {
                 $("#archiveBlock").$close();
             });
         },
-        groupBroadcast:function (groupid,jmgid) {
+        groupBroadcast: function (groupid, jmgid) {
             _self = this;
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
-            $("#archiveBlock").on("click","#saveBtn",function () {
+            $("#archiveBlock").on("click", "#saveBtn", function () {
                 //调用极光接口
                 $("#archiveBlock").$close();
             });
 
-            $("#archiveBlock").on("click","#cancelBtn",function () {
+            $("#archiveBlock").on("click", "#cancelBtn", function () {
                 $("#archiveBlock").$close();
             });
         },
-        showGroupOfGroup:function (obj,groupid,jmgid) {
+        showGroupOfGroup: function (obj, groupid, jmgid) {
             _self = this;
             //嵌套表格的实现--------------------------------------------------------------------------------------------
             var isOpen = obj.hasClass("clicked-open");
             var currentTr = obj.parents("tr");
             var userParam = str2obj($("#membername").attr("paramattr"));
-
-            debugger;
             if (isOpen) {
                 obj.removeClass("clicked-open");
                 currentTr.next().remove();
             } else {
                 var param = {
-                    groupId:groupid,
-                    memberName:$.trim($("#membername").val())
+                    groupId: groupid,
+                    memberName: $.trim($("#membername").val())
                 };
                 $.ajax({
-                    url: top.servicePath_xz+'/group/getChildGroupList',
+                    url: top.servicePath_xz + '/group/getChildGroupList',
                     type: "post",
                     contentType: "application/x-www-form-urlencoded",
                     data: param,
                     success: function (r) {
-                        if(r.flag == 1){
-                            if(r.data && r.data.length > 0 ){
+                        if (r.flag == 1) {
+                            if (r.data && r.data.length > 0) {
                                 obj.addClass("clicked-open");
                                 var tableHtml = _.template(groupListTpl, {data: r.data});
                                 console.info(tableHtml);
@@ -244,14 +248,14 @@ define(['underscore',
                                     _self.showEdit($(this).attr("groupid"));
                                 });
                                 $(".into-broadcast").on("click", function () {
-                                    _self.groupBroadcast($(this).attr("groupid"),$(this).attr("jmgid"));
+                                    _self.groupBroadcast($(this).attr("groupid"), $(this).attr("jmgid"));
                                 });
                                 $(".into-communication").on("click", function () {
                                     var groupid = $(this).attr("groupid");
-                                    var jmgid =  $(this).attr("jmgid");
+                                    var jmgid = $(this).attr("jmgid");
 
-                                    $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                                    $("#archiveBlock .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+                                    $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
+                                    $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
                                     window.parent.jchatGloabal.getUserInfo();
                                     window.parent.jchatGloabal.getGroupInfo(jmgid);
                                     window.parent.jchatGloabal.getGroupMembers(jmgid);
@@ -281,14 +285,15 @@ define(['underscore',
                                             window.parent.clickHandle.sendText(jmgid);
                                         }
                                     });
-                                    $(".window").find(".panel-tool-close").click(function () {
+                                    $("#archiveBlock").parents(".window").find(".panel-tool-close").click(function () {
                                         var chatParam = {
-                                            groupid:groupid,
-                                            createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
-                                            creator: top.userId
+                                            reserveField1: groupid,
+                                            createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(), 'yyyy-MM-dd'),
+                                            creator: top.userId,
+                                            content:"hah"
                                         };
-                                        specialCaseGroupAjax.addChatLog(chatParam,function () {
-                                            debugger
+                                        specialCaseGroupAjax.addChatLog(chatParam, function () {
+
                                         })
                                     });
                                     // console.info("进入聊天界面！");
@@ -299,8 +304,8 @@ define(['underscore',
                                     // // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
                                     // window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
                                 });
-                            }else {
-                                toast("该专案组没有小组！",600).warn();
+                            } else {
+                                toast("该专案组没有小组！", 600).warn();
                                 // currentTr.next().attr("colspan","11").empty().html(_.template(emptyDataPage));
                                 // byid("empty-container").style.width = window.innerWidth * 0.8 + 'px';
                                 // byid("empty-container").style.height = (window.innerHeight - 340) + 'px';
@@ -316,45 +321,42 @@ define(['underscore',
         },
         showAdd: function (pgroupid) {
             _self = this;
-            $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl,{data:null}));
+            $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl, {data: null}));
             $('#addGroupTab a').click(function (e) {
                 if ($(this).attr("id") == "navBaseInfo") {
-                    var groupinfo =  str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
+                    var groupinfo = str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
                     $(this).tab('show');
-                    debugger;
-                    if(groupinfo){
+                    if (groupinfo) {
                         _self.showBaseInfo(groupinfo);
                     } else {
                         _self.handleBaseInfo(pgroupid);
                     }
                 } else if ($(this).attr("id") == "navRelationCase") {
-                    debugger
-                    var groupinfo =  str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
+                    var groupinfo = str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
                     $('#baseInfo .field-valid').validatebox();
                     if ($('.validatebox-invalid').length > 0) {
                         toast("请先填写专案组基本信息！").warn();
                         return false;
                     } else {
                         $(this).tab('show');
-                        if (groupinfo){
+                        if (groupinfo) {
                             _self.handleRelationCase(groupinfo);
-                        }else {
+                        } else {
                             //保存专案组基本信息
                             $("#btnBaseInfo #saveBtn").trigger("click");
                         }
                     }
                 } else if ($(this).attr("id") == "navGroupStaff") {
-                    debugger
-                    var groupinfo =  str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
+                    var groupinfo = str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
                     $('#baseInfo .field-valid').validatebox();
                     if ($('.validatebox-invalid').length > 0) {
                         toast("请先填写专案组基本信息！").warn();
                         return false;
                     } else {
                         $(this).tab('show');
-                        if (groupinfo){
+                        if (groupinfo) {
                             _self.handleGroupStaff(groupinfo);
-                        }else {
+                        } else {
                             //保存专案组基本信息
                             $("#btnBaseInfo #saveBtn").trigger("click");
                         }
@@ -365,12 +367,11 @@ define(['underscore',
         },
         addGroupOfGroup: function () {
             _self = this;
-            _self.oneChoose();//限制单选
             var checkbox = [];
             $('#specialGroupListTable').find('tbody input:checkbox[name=group]:checked').each(function (i, e) {
                 var groupInfo = {
-                    groupnum:$(e).attr('groupnum'),
-                    groupid:$(e).attr('groupid')
+                    groupnum: $(e).attr('groupnum'),
+                    groupid: $(e).attr('groupid')
                 };
                 checkbox.push(groupInfo);
             });
@@ -381,24 +382,24 @@ define(['underscore',
                 toast("请选择一个专案组！", 600).warn()
             }
         },
-        oneChoose:function(){
-            $('#specialGroupListTable input:checkbox[name=group]').on("click",function(){
-                if($(this).is(':checked')){
-                    $(this).attr('checked', true).parent().parent().siblings().find("input:checkbox[name=group]").attr('checked', false);
+        oneChoose: function () {
+            $('#specialGroupListTable input:checkbox[name="group"]').on("click", function () {
+                if ($(this).is(':checked')) {
+                    $(this).attr('checked', true).parent().parent().siblings().find("input:checkbox[name='group']").attr('checked', false);
                 } else {
-                    $(this).prop("checked",false);
+                    $(this).prop("checked", false);
                 }
             });
         },
         showEdit: function (id) {
             _self = this;
             $.ajax({
-                url: top.servicePath_xz+'/group/groupDetail/'+id,
+                url: top.servicePath_xz + '/group/groupDetail/' + id,
                 type: "post",
                 contentType: "application/x-www-form-urlencoded",
                 success: function (r) {
                     if (r.data) {
-                        $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl,{data:r.data}));
+                        $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl, {data: r.data}));
                         $('#addGroupTab a').click(function (e) {
                             if ($(this).attr("id") == "navBaseInfo") {
                                 $(this).tab('show');
@@ -418,7 +419,6 @@ define(['underscore',
         },
         handleBaseInfo: function (pgroupid) {
             _self = this;
-            debugger;
             $(".form-content-block").empty().html(_.template(baseInfoTpl));
             $(".form-btn-block").removeClass("hide");
             $("#chooseGroupType").on('click', function () {
@@ -431,7 +431,7 @@ define(['underscore',
                 _self.showList();
             });
         },
-        saveGroupInfo:function (pgroupid) {
+        saveGroupInfo: function (pgroupid) {
             _self = this;
             $('.field-valid').validatebox();
             if ($('.validatebox-invalid').length > 0) {
@@ -449,10 +449,9 @@ define(['underscore',
             };
             specialCaseGroupAjax.addGroup(param, function (r) {
                 if (r.flag == 1) {
-                    if(r.data.id){
+                    if (r.data.id) {
                         toast('保存成功！', 600).ok();
-                        debugger
-                        $('#addGroupTab').attr("groupinfo",obj2str(r.data));
+                        $('#addGroupTab').attr("groupinfo", obj2str(r.data));
                         $('#addGroupTab a#navRelationCase').trigger("click");
                     } else {
                         toast('保存失败！', 600).err();
@@ -465,7 +464,7 @@ define(['underscore',
         showBaseInfo: function (groupInfo) {
             _self = this;
             //专案组id存在
-            if(groupInfo.id){
+            if (groupInfo.id) {
                 $(".form-content-block").empty().html(_.template(baseInfoTpl));
                 $("#grouptype").siblings("i#chooseGroupType").remove();
                 $("#baseInfo").find("input,select").attr("disabled", "disabled");
@@ -477,17 +476,17 @@ define(['underscore',
                 $("#grouptypeName").val(groupInfo.grouptypeName);
                 $("#createname").val(groupInfo.createname);
                 $("#deparmentcode").val(groupInfo.deparmentname);
-                $("#createtime").val(rangeUtil.formatDate(groupInfo.createtime,'yyyy-MM-dd'));
+                $("#createtime").val(rangeUtil.formatDate(groupInfo.createtime, 'yyyy-MM-dd'));
 
                 $(".form-btn-block #nextBtn").on("click", function () {
-                    $('#addGroupTab').attr("groupinfo",obj2str(groupInfo));
+                    $('#addGroupTab').attr("groupinfo", obj2str(groupInfo));
                     $('#addGroupTab a#navRelationCase').trigger("click");
                     $('#addGroupTab a#navRelationCase').on("click", function () {
                         $(this).tab('show');
                         _self.handleRelationCase(groupInfo);
                     });
                 });
-                if(groupInfo.backupStatu && groupInfo.backupStatu == 1 && groupInfo.creator == top.userId){
+                if (groupInfo.backupStatu && groupInfo.backupStatu == 1 && groupInfo.creator == top.userId) {
                     $(".form-btn-block #revokeBtn").removeClass("hide");
                 } else {
                     $(".form-btn-block #revokeBtn").addClass("hide");
@@ -497,7 +496,7 @@ define(['underscore',
                     $confirm('确定对【' + groupInfo.groupname + '】进行撤销归档操作吗？', function (bol) {
                         if (bol) {
                             var param = {
-                                backupStatus:0,
+                                backupStatus: 0,
                                 backupReason: "",
                                 backupTime: "",
                                 creator: top.userId,
@@ -524,11 +523,10 @@ define(['underscore',
         },
         handleRelationCase: function (groupInfo) {
             _self = this;
-            debugger
-            $(".form-content-block").empty().html(_.template(relationCaseTpl, {isOperation:true}));
+            $(".form-content-block").empty().html(_.template(relationCaseTpl, {isOperation: true,groupcreator: groupInfo.creator}));
             $(".form-btn-block").addClass("hide");
 
-            $("#chooseCaseType").on('click', function () {
+            $("#relationCase #chooseCaseType").on('click', function () {
                 dictOpener.openChooseDict($(this));
             });
             //点击选择时间范围（当天当月当季当年）
@@ -545,11 +543,11 @@ define(['underscore',
             $(".dictInLineSelect").dictInLineSelect();
             selectUtils.selectTextMultiOpt("#changeCaseSta", "caseSta");
 
-            $("#relationCase").on("click", "#resetBtn", function () {
+            $("#relationCase #resetBtn").on("click", function () {
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#relationCase").on("click", "#queryBtn", function () {
+            $("#relationCase #queryBtn").on("click", function () {
                 _self.queryRelationCaseList(groupInfo);
                 return false;
             });
@@ -557,10 +555,10 @@ define(['underscore',
             //加载已关联案件列表
             _self.queryRelationCaseList(groupInfo);
             //关联新案件
-            $("#linkNewCase").on("click", function () {
+            $("#relationCase #linkNewCase").on("click", function () {
                 console.info("涉及案件关联新案件按钮");
                 $open('#caseListDiv', {width: 800, title: '&nbsp案件查询'});
-                $("#caseListDiv .panel-container").empty().html(_.template(caseListTpl,{groupid:groupInfo.id}));
+                $("#caseListDiv .panel-container").empty().html(_.template(caseListTpl, {groupid: groupInfo.id}));
 
                 //点击选择时间范围（当天当月当季当年）
                 selectUtils.selectTimeRangeOption("#caseListDiv #changeTimeScope", "#caseListDiv #occurrenceDate", "#caseListDiv #startTime", "#caseListDiv #endTime");
@@ -584,21 +582,19 @@ define(['underscore',
                     $('#slEndTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
                 });
 
-                $("#caseListDiv").on('click',"#chooseAcceptUint", function () {
-                    dictOpener.openChoosePort($(this),null,null,{userId:top.userId});
+                $("#caseListDiv #chooseAcceptUint").on('click', function () {
+                    dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
                 });
                 //点击多选案件状态
                 $(".dictInLineSelect").dictInLineSelect();
-                // selectUtils.selectTextMultiOpt("#caseListDiv #changeCaseSta", "caseSta");
-                // selectUtils.selectTextOption("#caseListDiv #chooseCaseType", "#caseType");
-                $("#caseListDiv").on('click',"#chooseCaseType", function () {
+                $("#caseListDiv #chooseCaseType").on('click', function () {
                     dictOpener.openChooseDict($(this));
                 });
-                $("#caseListDiv").on("click", "#resetBtn", function () {
+                $("#caseListDiv #resetBtn").on("click", function () {
                     selectUtils.clearQueryValue();
                     return false;
                 });
-                $("#caseListDiv").on("click", "#queryBtn", function () {
+                $("#caseListDiv #queryBtn").on("click",  function () {
                     console.info("案件查询按钮");
                     _self.queryCaseList(groupInfo);
                     return false;
@@ -609,11 +605,11 @@ define(['underscore',
                 return false;
             });
         },
-        queryRelationCaseList: function (groupInfo) {
+        queryRelationCaseList: function (groupInfo, isGraphOperation) {
             _self = this;
             var param = {
-                isInGroup:true,
-                groupId:groupInfo.id,
+                isInGroup: true,
+                groupId: groupInfo.id,
                 ab: $.trim($("#ab").val()),
                 ajbh: $("#ajbh").val(),
                 ajmc: $.trim($("#ajmc").val()),
@@ -633,19 +629,18 @@ define(['underscore',
                 callback: function (data) {
                     $("#relationCaseTable tbody").empty().html(_.template(relationCaseTrTpl, {
                         data: data,
-                        isOperation:true,
-                        groupid:groupInfo.id,
-                        groupcreator:groupInfo.creator
+                        isOperation: isGraphOperation == false ? false : true,
+                        groupid: groupInfo.id,
+                        groupcreator: groupInfo.creator
                     }));
                     $('.span').span();
 
-                    $("#relationCaseTable").on("click",".link-text", function () {
+                    $("#relationCaseTable").off("click").on("click", ".link-text", function () {
                         console.info("案件详情按钮");
-                        $open('#userListDiv', {width: 800, title: '&nbsp案件详情'});
-                        _self.showCaseInfo();
+                        _self.showCaseInfo($(this).attr("ajid"));
                     });
-                    $(".into-delete").on("click", function () {
-                        _self.delCase(groupInfo,$(this).attr('id'),$(this).attr('ajbh'));
+                    $(".into-delete").off("click").on("click", function () {
+                        _self.delCase(groupInfo, $(this).attr('id'), $(this).attr('ajbh'), $(this).attr('ajmc'));
                     });
 
                 }
@@ -654,87 +649,110 @@ define(['underscore',
         queryCaseList: function (groupInfo) {
             _self = this;
             var param = {
-                isInGroup:false,
+                isInGroup: false,
                 groupId: groupInfo.id,
                 ab: $("#caseListDiv #ab").val(),
                 ajbh: $.trim($("#caseListDiv #ajbh").val()),
                 ajmc: $.trim($("#caseListDiv #ajmc").val()),
                 ajstate: $("#caseListDiv #ajstate").val(),
-                fadd:$.trim($("#caseListDiv #fadd").val()),
+                fadd: $.trim($("#caseListDiv #fadd").val()),
                 endTime: $("#caseListDiv #endTime").val(),
                 startTime: $("#caseListDiv #startTime").val(),
-                slEndTime:$("#caseListDiv #slEndTime").val(),
-                slStartTime:$("#caseListDiv #slStartTime").val(),
-                sljsdw:$("#caseListDiv #sljsdw").val()
+                slEndTime: $("#caseListDiv #slEndTime").val(),
+                slStartTime: $("#caseListDiv #slStartTime").val(),
+                sljsdw: $("#caseListDiv #sljsdw").val()
             };
             $('#caseListDiv #caseListResult').pagingList({
-                action: top.servicePath_xz + '/asjAj/getAjGroupPage ',
+                action: top.servicePath_xz + '/asjAj/getAjGroupPage',
                 jsonObj: param,
                 callback: function (data) {
                     $("#caseTable tbody").empty().html(_.template(caseListTrTpl, {data: data}));
                     $(".span").span();
-                    $("#caseTable").on("click",".link-text", function () {
+                    $("#caseTable").on("click", ".link-text", function () {
                         console.info("案件详情按钮");
-                        $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
-                        _self.showCaseInfo();
-                    });
-                    $("#caseTable #selectAll").on('click', function () {
-                        $('#caseTable').find('tbody input:checkbox').prop('checked', this.checked);
-                    });
-                    //关联新案件
-                    $("#saveLinkBtn").on('click', function () {
-                        var checkbox = [];
-                        $('#caseTable').find('tbody input:checkbox:checked').each(function (i, e) {
-                            var caseInfo = {
-                                ajbh:$(e).attr("ajbh"),
-                                ajid:$(e).attr("ajid"),
-                                // createtime:"",
-                                creator:top.userId,
-                                deparmentcode:top.orgCode,
-                                groupid:groupInfo.id,
-                                pgroupid:""
-                            };
-                            checkbox.push(caseInfo);
-                        });
-                        if (checkbox.length > 0) {
-                            specialCaseGroupAjax.addAjGroupList(checkbox,function(r){
-                                if(r.flag==1){
-                                    toast('关联成功！',600,function(){
-                                        $('#caseListDiv').$close();
-                                        _self.queryRelationCaseList(groupInfo);
-                                    }).ok()
-                                }else{
-                                    toast(r.msg, 600).err();
-                                }
-                            });
-                        } else {
-                            toast("请至少选择一个案件！", 600).warn()
-                        }
+                        // $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
+                        _self.showCaseInfo($(this).attr("ajid"));
                     });
 
                 }
             });
-            $("#caseListDiv").on('click', "#cancelBtn", function () {
+            $("#caseTable #selectAll").on('click', function () {
+                $('#caseTable').find('tbody input:checkbox').prop('checked', this.checked);
+            });
+            //关联新案件
+            $("#caseListDiv #saveLinkBtn").off("click").on('click', function () {
+                debugger
+                var checkbox = [];
+                $('#caseTable').find('tbody input:checkbox:checked').each(function (i, e) {
+                    var caseInfo = {
+                        ajbh: $(e).attr("ajbh"),
+                        ajid: $(e).attr("ajid"),
+                        // createtime:"",
+                        creator: top.userId,
+                        deparmentcode: top.orgCode,
+                        groupid: groupInfo.id,
+                        pgroupid: ""
+                    };
+                    checkbox.push(caseInfo);
+                });
+                if (checkbox.length > 0) {
+                    specialCaseGroupAjax.addAjGroupList(checkbox, function (r) {
+                        if (r.flag == 1) {
+                            toast('关联成功！', 600, function () {
+                                $('#caseListDiv').$close();
+                                _self.queryRelationCaseList(groupInfo);
+                            }).ok()
+                        } else {
+                            toast(r.msg, 600).err();
+                        }
+                    });
+                } else {
+                    toast("请至少选择一个案件！", 600).warn()
+                }
+                return false;
+            });
+            $("#caseListDiv #cancelBtn").on('click', function () {
                 $('#caseListDiv').$close();
             });
         },
-        showCaseInfo:function () {
+        showCaseInfo: function (ajid) {
             _self = this;
-            $("#userListDiv .panel-container").empty().html(_.template(caseInfoTpl));
+            var param = {
+                id:ajid
+            };
+            $.ajax({
+                url: top.servicePath_xz + '/asjAj/getById',
+                type: "post",
+                contentType: "application/x-www-form-urlencoded",
+                data: param,
+                success: function (r) {
+                    if(r.flag == 1){
+                        $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
+                        $("#userListDiv .panel-container").empty().html(_.template(caseInfoTpl,{data:r.data}));
+                        $("#userListDiv").off("click").on('click', "#closeBtn", function () {
+                            $('#userListDiv').$close();
+                        });
+                    }
+
+                }
+            });
         },
-        delCase: function (groupInfo,id,ajbh) {
+        delCase: function (groupInfo, id, ajbh,ajmc) {
             _self = this;
-            $confirm('确定移除案件【'+ajbh+'】吗？',function(bol){
-                if(bol){
+            $confirm('确定移除案件【' + ajbh + '】吗？', function (bol) {
+                if (bol) {
                     var param = [{
-                        id: id
+                        id: id,
+                        groupid:groupInfo.id,
+                        creator:top.userId,
+                        caseName: ajmc
                     }];
-                    specialCaseGroupAjax.removeAjGroupList(param,function(r){
-                        if(r.flag==1){
-                            toast('移除成功！',600,function(){
+                    specialCaseGroupAjax.removeAjGroupList(param, function (r) {
+                        if (r.flag == 1) {
+                            toast('移除成功！', 600, function () {
                                 _self.queryRelationCaseList(groupInfo);
                             }).ok()
-                        }else{
+                        } else {
                             // toast('移除失败！',600).err();
                             toast(r.msg, 600).err()
                         }
@@ -744,114 +762,127 @@ define(['underscore',
         },
         handleGroupStaff: function (groupInfo) {
             _self = this;
-            debugger
             $(".form-content-block").empty().html(_.template(groupStaffTpl));
             $(".form-btn-block").addClass("hide");
 
-            $("#groupStaff").on('click',"#chooseUint", function () {
+            $("#groupStaff #chooseUint").on('click', function () {
                 dictOpener.openUnitChoosePort($(this));
             });
-            $("#groupStaff").on("click", "#resetBtn", function () {
+            $("#groupStaff #resetBtn").on("click", function () {
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#groupStaff").on("click", "#queryBtn", function () {
+            $("#groupStaff #queryBtn").on("click", function () {
                 _self.queryAddedStaffList(groupInfo);
                 return false;
             });
             //加载已添加的成员
             _self.queryAddedStaffList(groupInfo);
             //成员添加
-            $("#addStaff").on("click", function () {
+            $("#groupStaff #addStaff").on("click", function () {
                 $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
-                $("#userListDiv .panel-container").empty().html(_.template(userListTpl,{checkboxMulti:true,groupInfo:groupInfo}));
-                $("#userListDiv").on('click',"#chooseUint", function () {
+                $("#userListDiv .panel-container").empty().html(_.template(userListTpl, {
+                    checkboxMulti: true,
+                    groupInfo: groupInfo
+                }));
+                $("#userListDiv #chooseUint").on('click', function () {
                     dictOpener.openUnitChoosePort($(this));
                 });
-                $("#userListDiv").on("click", "#resetBtn", function () {
+                $("#userListDiv #resetBtn").on("click", function () {
                     selectUtils.clearQueryValue();
                     return false;
                 });
-                $("#userListDiv").on("click", "#queryBtn", function () {
-                    _self.queryUserList(true,groupInfo);
+                $("#userListDiv #queryBtn").on("click", function () {
+                    _self.queryUserList(true, groupInfo);
                     return false;
                 });
 
                 //加载用户列表
-                _self.queryUserList(true,groupInfo);
+                _self.queryUserList(true, groupInfo);
             });
         },
         queryAddedStaffList: function (groupInfo) {
             _self = this;
             var param = {
-                groupId:groupInfo.id,
+                isInGroup: true,
+                groupId: groupInfo.id,
                 orgId: $.trim($("#orgId").val()),
                 policeId: $.trim($("#policeId").val()),
-                userName:$.trim($("#userName").val())
+                userName: $.trim($("#userName").val())
             };
             $('#groupStaffResult').pagingList({
                 action: top.servicePath_xz + '/usergroup/getUsergroupPage',
                 jsonObj: param,
                 callback: function (data) {
-                    $("#staffTable tbody").empty().html(_.template(groupStaffTrTpl, {data: data,groupcreator:groupInfo.creator}));
+                    $("#staffTable tbody").empty().html(_.template(groupStaffTrTpl, {
+                        data: data,
+                        groupcreator: groupInfo.creator,
+                        isOperation :true
+                    }));
                     $('.span').span();
 
                     $(".into-delete").on("click", function () {
-                        _self.delGroupStaff(groupInfo,$(this).attr('id'),$(this).attr('username'));
+                        _self.delGroupStaff(groupInfo, $(this).attr('id'), $(this).attr('username'));
                     });
 
                 }
             });
         },
-        queryUserList: function (isCheckboxMulti,groupInfo) {
+        queryUserList: function (isCheckboxMulti, groupInfo) {
             _self = this;
             var param = {
+                isInGroup: false,
+                groupId: groupInfo.id,
                 orgId: $("#userListDiv #orgId").val(),
-                userName:$.trim($("#userListDiv #userName").val()),
-                policeId:$.trim($("#userListDiv #policeId").val())
+                userName: $.trim($("#userListDiv #userName").val()),
+                policeId: $.trim($("#userListDiv #policeId").val())
             };
             $('#userListDiv #userTableResult').pagingList({
-                action: top.servicePath + '/sys/user/getUserInfoListByOrgId',
+                action: top.servicePath_xz + '/usergroup/getUsergroupPage',
                 jsonObj: param,
                 callback: function (data) {
-                    $("#userTable tbody").empty().html(_.template(userListTrTpl, {data: data,checkboxMulti: isCheckboxMulti}));
-                    $("#userTable #selectAll").on('click', function () {
-                        $('#userTable').find('tbody input:checkbox').prop('checked', this.checked);
-                    });
-                    $("#saveStaffBtn").on('click', function () {
-                        //专案组添加成员
-                        _self.saveStaff(groupInfo);
-                    });
-                    $("#userListDiv").on('click', "#cancelBtn", function () {
-                        $('#userListDiv').$close();
-                    });
+                    $("#userTable tbody").empty().html(_.template(userListTrTpl, {
+                        data: data,
+                        checkboxMulti: isCheckboxMulti
+                    }));
                 }
             });
+            $("#userTable #selectAll").on('click', function () {
+                $('#userTable').find('tbody input:checkbox').prop('checked', this.checked);
+            });
+            $("#userListDiv #saveStaffBtn").off("click").on('click', function () {
+                //专案组添加成员
+                _self.saveStaff(groupInfo);
+                return false;
+            });
+            $("#userListDiv #cancelBtn").on('click', function () {
+                $('#userListDiv').$close();
+            });
         },
-        saveStaff:function (groupInfo) {
+        saveStaff: function (groupInfo) {
             _self = this;
             var checkbox = [];
             $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
                 var userInfo = {
-                    jh:$(e).attr("jh"),
-                    userid:$(e).attr("userid"),
-                    username:$(e).attr("username"),
-                    creator:top.userId,
-                    deparmentcode:top.orgCode,
-                    groupid:groupInfo.id
+                    jh: $(e).attr("jh"),
+                    userid: $(e).attr("userid"),
+                    username: $(e).attr("username"),
+                    creator: top.userId,
+                    deparmentcode: top.orgCode,
+                    groupid: groupInfo.id
                     // pgroupid:""
                     // id (string, optional): 人员关联ID ,
                 };
                 checkbox.push(userInfo);
             });
             if (checkbox.length > 0) {
-                specialCaseGroupAjax.addUserGroupList(checkbox,function(r){
-                    if(r.flag==1){
-                        toast('添加成功！',600,function(){
+                specialCaseGroupAjax.addUserGroupList(checkbox, function (r) {
+                    if (r.flag == 1) {
+                        toast('添加成功！', 600, function () {
                             $('#userListDiv').$close();
                             _self.queryAddedStaffList(groupInfo);
                         }).ok()
-                    }else{
+                    } else {
                         toast(r.msg, 600).err();
                     }
                 });
@@ -859,22 +890,22 @@ define(['underscore',
                 toast("请至少选择一个用户！", 600).warn()
             }
         },
-        delGroupStaff: function (groupInfo,id,userName) {
+        delGroupStaff: function (groupInfo, id, userName) {
             _self = this;
-            $confirm('确定移除成员【'+userName+'】吗？',function(bol){
-                if(bol){
+            $confirm('确定移除成员【' + userName + '】吗？', function (bol) {
+                if (bol) {
                     var param = [{
-                        groupid:groupInfo.id,
-                        creator:top.userId,
-                        userid:id
+                        groupid: groupInfo.id,
+                        creator: top.userId,
+                        userid: id
                         // id:id
                     }];
-                    specialCaseGroupAjax.deleteUsergroupList(param,function(r){
-                        if(r.flag==1){
-                            toast('移除成功！',600,function(){
+                    specialCaseGroupAjax.deleteUsergroupList(param, function (r) {
+                        if (r.flag == 1) {
+                            toast('移除成功！', 600, function () {
                                 _self.queryAddedStaffList(groupInfo);
                             }).ok()
-                        }else{
+                        } else {
                             toast(r.msg, 600).err()
                         }
                     })

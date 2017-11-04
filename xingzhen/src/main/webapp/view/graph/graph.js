@@ -3,5 +3,6 @@ $.ajaxSetup({
     complete:hideLoading
 });
 require(['src/graph.js'],function(graph){
-    graph.showList();
+    var groupid = $("#mapSvgFrame",parent.document).attr("groupid");
+    graph.showList(groupid);
 });

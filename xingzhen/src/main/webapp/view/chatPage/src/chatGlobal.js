@@ -76,7 +76,22 @@ var jchatGloabal = {
 
             //业务事件监听
             JIM.onEventNotification(function (data) {
-                debugger
+                if(data.event_type  == 1){
+                    toast("被挤下线！退出登录",1000,function () {
+                        $post(top.servicePath+"/sys/logout",null, function(res){
+                            if(res && res.flag==1){
+                                localData.set('token','');
+                                localData.set('limits','');
+                                localData.set('username','');
+                                localData.set('password','');
+                                localData.set('login-password','');
+                                localData.get('currentUser','');
+                                location.replace(window.path+ '/index.html?version='+config.version);
+                            }
+                        });
+                        JIM.loginOut();//极光退出登录
+                    }).warn();
+                }
                 //do something
                 localData.set('onEventNotification_res', data);
             });

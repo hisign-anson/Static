@@ -939,6 +939,7 @@ define(['underscore',
             //获取专案组组内成员
             var taskInfo = str2obj(taskInfo);
             var param = {
+                isInGroup:true,
                 groupId: taskInfo.groupid
             };
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {

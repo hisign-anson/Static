@@ -13,10 +13,12 @@
         无效
         <%}%>
     </td>
+    <%if(isOperation == true){%>
     <td>
         <%if(top.userId == groupcreator && item.userId != groupcreator){%>
         <a class="into-delete icon-delete" id="<%=item.userId%>" username="<%=item.userName%>" title="移除成员"></a>
         <%}%>
     </td>
+    <%}%>
 </tr>
 <%})%>

@@ -22,15 +22,109 @@ var setting = {
         },
         //菜单节点被点击的事件回调函数
         onClick: function (event, treeId, treeNode, clickFlag) {
-            var className = $(event).find("span").attr("class");
-            // var classname = treeNode.name.attr("class");
-            debugger
-            alert("[ onClick ]:" + treeNode.name);
-
+            var className = $(event.currentTarget).find("#"+treeNode.tId).find("#"+treeNode.tId+"_span>span").attr("class");
+            var id =  $(event.currentTarget).find("#"+treeNode.tId).find("#"+treeNode.tId+"_span>span").attr("id");
+            var text = $(event.currentTarget).find("#"+treeNode.tId).find("#"+treeNode.tId+"_span>span").text();
+            var val = $(event.currentTarget).find("#"+treeNode.tId).find("#"+treeNode.tId+"_span>span").attr("val");
+            switch (className){
+                case "groupHandle":
+                    rightMenu.groupHandle(id,val,text);
+                    break;
+                case "taskHandle":
+                    rightMenu.taskHandle(id,val,text);
+                    break;
+                case "feedbackHandle":
+                    rightMenu.feedbackHandle(id,val,text);
+                    break;
+                case "caseHandle":
+                    rightMenu.caseHandle(id,val,text);
+                    break;
+            }
             return (treeNode.click != false);
         }
     }
 };
+
+var rightMenu = {
+    groupHandle:function (id,val,text) {
+        console.info("groupid:" +id);
+        console.info("text:" +text);
+        switch (val){
+            case "1":
+                rightMenu.showGroupInfo(id);
+                break;
+            case "2":
+                rightMenu.taskHandle(id,val,text);
+                break;
+            case "3":
+                rightMenu.feedbackHandle(id,val,text);
+                break;
+            case "4":
+                rightMenu.caseHandle(id,val,text);
+                break;
+        }
+    },
+    taskHandle:function (id,val,text) {
+        console.info("taskid:" +id);
+        console.info("text:" +text);
+        switch (val){
+            case "1":
+                rightMenu.groupHandle(id,val,text);
+                break;
+            case "2":
+                rightMenu.taskHandle(id,val,text);
+                break;
+            case "3":
+                rightMenu.feedbackHandle(id,val,text);
+                break;
+            case "4":
+                rightMenu.caseHandle(id,val,text);
+                break;
+        }
+    },
+    feedbackHandle:function (id,val,text) {
+        console.info("feedbackid:" +id);
+        console.info("text:" +text);
+        switch (val){
+            case "1":
+                rightMenu.groupHandle(id,val,text);
+                break;
+        }
+    },
+    caseHandle:function(id,val,text) {
+        console.info("caseid:" +id);
+        console.info("text:" +text);
+        switch (val){
+            case "1":
+                rightMenu.groupHandle(id,val,text);
+                break;
+        }
+    },
+
+    //查看专案组基本信息
+    showGroupInfo:function () {
+        $open('#taskListDiv', {width: 800, title: '&nbsp专案组基本信息'});
+        var openerDiv = $("#taskListDiv");
+        openerDiv.find(".panel-container").empty().html(_.template(taskListTpl, {isOperation:false}));
+    },
+    //查看专案组涉及案件
+    showGroupCase:function () {
+
+    },
+    //查看专案组成员
+    showGroupStaff:function () {
+
+    },
+    //查看案件详情
+    showCaseInfo:function () {
+
+    }
+}
+
+
+
+
+
 //菜单数据
 var menuDefault = [
     {
@@ -431,22 +525,22 @@ function updateGraphJSON(json) {
                 //根据id和type显示不同的菜单
                 var zNodes;
                 var menuByGroupType = [
-                    {name: "<span class='groupHandle' id='"+d.id+"'>专案组详情</span>"},
-                    {name: "<span class='groupHandle' id='"+d.id+"'>涉及案件</span>"},
-                    {name: "<span class='groupHandle' id='"+d.id+"'>专案组成员</span>"},
-                    {name: "<span class='groupHandle' id='"+d.id+"'>任务下发</span>"}
+                    {name: "<span class='groupHandle' id='"+d.id+"' val='1'>专案组详情</span>"},
+                    {name: "<span class='groupHandle' id='"+d.id+"' val='2'>涉及案件</span>"},
+                    {name: "<span class='groupHandle' id='"+d.id+"' val='3'>专案组成员</span>"},
+                    {name: "<span class='groupHandle' id='"+d.id+"' val='4'>任务下发</span>"}
                 ];
                 var menuByTaskType = [
-                    {name: "<span class='taskHandle' id='"+d.id+"'>接收人反馈任务</span>"},
-                    {name: "<span class='taskHandle' id='"+d.id+"'>接收人移交任务</span>"},
-                    {name: "<span class='taskHandle' id='"+d.id+"'>接收人补充任务</span>"},
-                    {name: "<span class='taskHandle' id='"+d.id+"'>下发人催办任务</span>"}
+                    {name: "<span class='taskHandle' id='"+d.id+"' val='1'>接收人反馈任务</span>"},
+                    {name: "<span class='taskHandle' id='"+d.id+"' val='2'>接收人移交任务</span>"},
+                    {name: "<span class='taskHandle' id='"+d.id+"' val='3'>接收人补充任务</span>"},
+                    {name: "<span class='taskHandle' id='"+d.id+"' val='4'>下发人催办任务</span>"}
                 ];
                 var menuByFeedbackType = [
-                    {name: "<span class='feedbackHandle' id='"+d.id+"'>下发人追加任务</span>"}
+                    {name: "<span class='feedbackHandle' id='"+d.id+"' val='1'>下发人追加任务</span>"}
                 ];
                 var menuByCaseType = [
-                    {name: "<span class='caseHandle' id='"+d.id+"'>查看案件详情</span>"}
+                    {name: "<span class='caseHandle' id='"+d.id+"' val='1'>查看案件详情</span>"}
                 ];
                 switch (d.type){
                     case "groupid":

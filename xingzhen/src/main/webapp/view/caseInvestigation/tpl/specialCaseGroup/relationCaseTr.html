@@ -3,7 +3,7 @@
     <td><%=i+1%></td>
 
     <%if(isOperation == true){%>
-    <td><a class="link-text" ajbh="<%=item.ajbh%>"><%=item.ajbh%></a></td>
+    <td><a class="link-text" ajbh="<%=item.ajbh%>" ajid="<%=item.ajid%>"><%=item.ajbh%></a></td>
     <%}else if(isOperation==false){%>
     <td><%=item.ajbh%></td>
     <%}%>
@@ -18,7 +18,7 @@
     <%if(isOperation == true){%>
     <td>
         <%if(top.userId == groupcreator){%>
-        <a class="into-delete icon-delete" id="<%=item.id%>" ajbh="<%=item.ajbh%>" title="移除案件"></a>
+        <a class="into-delete icon-delete" id="<%=item.id%>" ajbh="<%=item.ajbh%>" ajmc="<%=item.ajmc%>" title="移除案件"></a>
         <%}%>
     </td>
     <%}%>

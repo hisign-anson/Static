@@ -76,7 +76,9 @@ define(['underscore',
             //全屏显示脉络图 fullPanelUtils.fullPanel(触发元素，全屏元素)
             var clickDiv = $("#fullscreenBtn");
             fullPanelUtils.fullPanel(clickDiv, clickDiv.parents(".map-list"));
-
+            $(".map-content,#mapSvgFrame").on("contextmenu", function (e) {
+                e.preventDefault();
+            });
             var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
             //进入专案组讨论
             $(".full-actived .into-communication").on("click", function () {
@@ -227,14 +229,15 @@ define(['underscore',
                     window.parent.clickHandle.sendText(jmgid);
                 }
             });
-            $(".window").find(".panel-tool-close").click(function () {
+            $("#taskListDiv").parents(".window").find(".panel-tool-close").click(function () {
                 var chatParam = {
-                    groupid:groupid,
+                    reserveField1 :groupid,
                     createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
-                    creator: top.userId
+                    creator: top.userId,
+                    content:"hah"
                 };
                 specialCaseGroupAjax.addChatLog(chatParam,function () {
-                    debugger
+
                 })
             });
             // _selfCommand = this;
@@ -390,6 +393,7 @@ define(['underscore',
         queryRelatedCaseList: function (groupInfo) {
             _selfCommand = this;
             var param = {
+                isInGroup:true,
                 groupId:groupInfo.id,
                 ab: $.trim($("#ab").val()),
                 ajbh: $("#ajbh").val(),
@@ -412,22 +416,5 @@ define(['underscore',
                 }
             });
         },
-
-        //查看专案组基本信息
-        showGroupInfo:function () {
-            _selfCommand = this;
-        },
-        //查看专案组涉及案件
-        showGroupCase:function () {
-            _selfCommand = this;
-        },
-        //查看专案组成员
-        showGroupStaff:function () {
-            _selfCommand = this;
-        },
-        //查看案件详情
-        showCaseInfo:function () {
-            _selfCommand = this;
-        }
     }
 });

@@ -78,6 +78,12 @@ define(function () {
             $post(top.servicePath_xz + '/xzlog/addChatLog', param, function (response) {
                 callback(response);
             }, true)
+        },
+        //案件详情
+        getById: function (param, callback) {
+            $post(top.servicePath_xz + '/asjAj/getById', param, function (response) {
+                callback(response);
+            }, true)
         }
     }
 });
