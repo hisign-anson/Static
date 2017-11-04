@@ -224,7 +224,7 @@ define([
         },
         showMessageList:function () {//信息提醒
             _self = this;
-            fstPageAjax.findPage({type: 4, end: 8}, function (r) {
+            fstPageAjax.findReceivePage({receiverId: top.userId,receiverType:3, end: 5, msgState: "0"}, function (r) {
                 debugger
                 if (r.flag == 1) {
                     $("#messageDiv").empty().html(_.template(messageListTpl,{data:r.data}));

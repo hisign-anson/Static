@@ -100,12 +100,13 @@ define(['underscore',
                 }
             });
         },
-        openUserChoosePort:function (obj) {
+        openUserChoosePort:function (obj) {//打开人员选择端口
             _selfDict = this;
             var title = obj.attr("title");
             window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
             _selfDict.getUserPortList();
             var opener = $(".panel #dict-block");
+            opener.find(".query-block-row input").val("");
             opener.find("#dict-wrap").off("click").on("click",".item-value",function(){
                 // var input = obj.prev();//页面上需要填入的input
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
@@ -120,13 +121,19 @@ define(['underscore',
                 }
                 opener.$close();
             });
-
+            opener.find("#queryBtn").off("click").on("click",function(){
+                var userName=$.trim($('#userName').val());
+                _selfDict.getUserPortList(userName);
+            });
+            opener.find("#resetBtn").off("click").on("click",function(){
+                $(".query-block-row input").val("");
+            })
         },
-        getUserPortList:function () {
+        getUserPortList:function (userName) {
             _selfDict = this;
             var tpl='';
             var target = $("#dict-wrap");
-            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId},function (r) {
+            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:6},function (r) {
                 if (r.flag == 1) {
                     $.each(r.data, function (i, o) {
                         tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
@@ -139,10 +146,11 @@ define(['underscore',
         openUnitChoosePort:function (obj) {
             _selfDict = this;
             var title = obj.attr("title");
-            window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+            window.newwin=$open('#dict-block-unit',{width:400,height:300,top:100, title:'选择'+title});
             _selfDict.getUnitPortList();
-            var opener = $(".panel #dict-block");
-            opener.find("#dict-wrap").off("click").on("click",".item-value",function(){
+            var opener = $(".panel #dict-block-unit");
+            opener.find(".query-block-row input").val("");
+            opener.find("#dict-wrap-unit").off("click").on("click",".item-value",function(){
                 // var input = obj.prev();//页面上需要填入的input
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
                 input.val($(this).find("span").text());
@@ -153,13 +161,19 @@ define(['underscore',
                 input.attr("paramattr",paramAttr);
                 opener.$close();
             });
-
+            opener.find("#queryBtnOrgName").off("click").on("click",function(){
+                var orgName =$.trim($('#orgName').val());
+                _selfDict.getUnitPortList(orgName);
+            });
+            opener.find("#resetBtnOrgName").off("click").on("click",function(){
+                $(".query-block-row input").val("");
+            })
         },
-        getUnitPortList:function () {
+        getUnitPortList:function (orgName) {
             _selfDict = this;
-            userInfoAjax.getOrgTreeList({},function(r) {
+            userInfoAjax.getOrgTreeList({orgName:orgName,end:6},function(r) {
                 if (r.flag == 1) {
-                    var target = $("#dict-wrap");
+                    var target = $("#dict-wrap-unit");
                     var tpl='';
                     $.each(r.data, function (i, o) {
                         // tpl+='<div class="item-value"><u><span val="'+o.orgId+'">'+o.orgName+'</span></div></u>';
@@ -172,18 +186,18 @@ define(['underscore',
         openChoosePort:function (obj,portType,portAddress,param,chooseType) {
             _selfDict = this;
             var title = obj.attr("title");
-            window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+            window.newwin=$open('#dict-block-group',{width:400,height:300,top:100, title:'选择'+title});
             if(portAddress){
-                debugger
                 _selfDict.getPortList(portType,portAddress,param,chooseType);
             }else {
                 _selfDict.getGroupByIdPortList(param);
             }
-            var opener = $(".panel #dict-block");
-            opener.find("#dict-wrap").off("click").on("click","div:not(.disabled)",function(){
+            var opener = $(".panel #dict-block-group");
+            $(".query-block-row input").val("");
+            opener.find("#dict-wrap-group").off("click").on("click","div:not(.disabled)",function(){
                 toast("不能选择自己！",600).warn();
             });
-            opener.find("#dict-wrap").off("click").on("click","div:not(.disabled)",function(){
+            opener.find("#dict-wrap-group").off("click").on("click","div:not(.disabled)",function(){
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
                 input.val($(this).find("span").text());
                 var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
@@ -196,10 +210,23 @@ define(['underscore',
                 }
                 opener.$close();
             });
-
+            opener.find("#queryBtnGroupName").off("click").on("click",function(){
+                var groupName =$.trim($('#groupName').val());
+                if(portAddress){
+                    _selfDict.getPortList(portType,portAddress,param,chooseType,groupName);
+                }else {
+                    _selfDict.getGroupByIdPortList(param,groupName);
+                }
+            });
+            opener.find("#resetBtnGroupName").off("click").on("click",function(){
+                $(".query-block-row input").val("");
+            })
         },
-        getGroupByIdPortList:function (param){
+        getGroupByIdPortList:function (param,groupName){
             _selfDict = this;
+            $.extend(param,{
+                groupName:groupName
+            });
             $.ajax({
                 url: top.servicePath_xz+'/group/getAllGroupByUserId',
                 type: "post",
@@ -207,7 +234,7 @@ define(['underscore',
                 data: param,
                 success: function (r) {
                     if (r.flag == 1) {
-                        var target = $("#dict-wrap");
+                        var target = $("#dict-wrap-group");
                         var tpl='';
                         $.each(r.data, function (i, o) {
                             tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.id+"'>"+o.groupname+"</span></div></u>";
@@ -231,7 +258,7 @@ define(['underscore',
                 }
             },true);
         },
-        getPortList:function (portType,portAddress,param,chooseType) {
+        getPortList:function (portType,portAddress,param,chooseType,groupName) {
             _selfDict = this;
             var flagThis;
             if(portType == $post){
@@ -239,6 +266,7 @@ define(['underscore',
             } else if(portType == $get){
                 flagThis = false;
             }
+            $.extend(param,{groupName:groupName});
             portType(portAddress,param,function(r) {
                 if (r.flag == 1) {
                     var target = $("#dict-wrap");

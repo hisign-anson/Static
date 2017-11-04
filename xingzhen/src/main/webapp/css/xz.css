@@ -229,20 +229,20 @@ input[disabled], textarea[disabled], select[disabled] {
     position: relative;
 }
 
-.add-bar + #dict-wrap {
+.add-bar + #dict-wrap,.add-bar + #dict-wrap-unit,.add-bar + #dict-wrap-group {
     margin-top: 40px;
 }
-#dict-wrap .disabled {
+#dict-wrap .disabled,#dict-wrap-unit .disabled,#dict-wrap-group .disabled {
     display: none;
 }
-#dict-wrap u {
+#dict-wrap u ,#dict-wrap-unit u,#dict-wrap-group u{
     display: block;
     padding: 5px 10px;
     font-size: 14px;
     cursor: pointer;
 }
 
-#dict-wrap u:hover {
+#dict-wrap u:hover ,#dict-wrap-unit u:hover,#dict-wrap-group u:hover{
     background-color: #e2e2e2;
     color: #1866ce;
 }

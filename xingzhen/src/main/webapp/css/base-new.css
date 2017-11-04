@@ -3932,6 +3932,7 @@ tr:hover .common-input {
 .common-field {
   display: inline-block;
   width: 100px;
+  max-width:120px;
   height: 24px;
   line-height: 25px;
   text-align: right;

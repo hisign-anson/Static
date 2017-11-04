@@ -1292,13 +1292,14 @@ function newsMessageFn(vId,vType){
                 startTime:$.trim($('#queryDateBegin').val()),
                 endTime:$.trim($('#queryDateEnd').val()),
                 msgContent:$.trim($("#subject").val()),
-                receiverId:top.userName,
-                type:4
+                receiverId:top.userId,
+                receiverType:3
             };
             $('#msg-left').pagingList({
-                action:top.servicePath+'/sys/message/findPage',//  /sys/message/findPage
+                action:top.servicePath+'/sys/message/findReceivePage',
                 jsonObj:param,
                 callback:function(data,t, n, u, o, a, r){
+                    debugger
                     var temp_date, queryData = [];
                     //查询消息数量
                     $('.total-count').text(r);
@@ -1405,148 +1406,7 @@ function newsMessageFn(vId,vType){
                     }
                 }, true, false);
             }
-            //加载车牌号码
-            function initCarNoSelect(carType,carNo) {
-                $get(top.servicePath+'/sw/carMaintain/getCarInfoListByCarType',{carType:carType},function(r) {
-                    if(r.flag == 1){
-                        option ="<option value=''></option>";
-                        _.each(r.data,function(item){
-                            option+="<option value='"+item.carNo+"' "+(carNo==item.carNo?'selected':'')+" >"+item.carNo+"</option>";
-                        });
-                        $('#carNo').empty().append(option).on('change',function(){
-                            $("#carNo").val($(this).find("option:selected").text())
-                        })
-                    }
-                },false);
-            }
-            //出差审批表
-            function onBusiness() {
-                //查看审批表
-                $("#exesApplyDetailList-table .icon-show-btn[id*='onBusiness']").off("click").on('click', function () {
-                    var the = $(this);
-                    var detailId = "";
-                    $open('#onBusiness-view-block',{width:800,height:280,top:100,title:'出差审批表'});
-                    $get(top.servicePath + '/sw/exesApply/getExesApplyBis',{id:the.attr("travelid")}, function (r) {
-                        if (r.flag == 1) {
-                            detailId = $(this).attr("travelid");
-                            //加载车牌号码
-                            initCarNoSelect("",r.data.carNo);
-                            $("#driver").val(r.data.driver);
-                            $("#reason").val($("#remark").val());
-                            if(r.data.isSendCar == "0"){
-                                $("#unSendCar").attr("checked", "checked");
-                            } else{
-                                $("#sendCar").attr("checked", "checked");
-                            }
-                            if(r.data.isByAirCar == "0"){
-                                $("#byOne").attr("checked", "checked");
-                                $("#byTwo").removeAttr("checked");
-                            }  else  if(r.data.isByAirCar == "1"){
-                                $("#byTwo").attr("checked", "checked");
-                                $("#byOne").removeAttr("checked");
-                            }
-                        } else {
-                            toast(r.msg, 600).err();
-                        }
-                    });
-                });
-            }
             //点击对应列--修改列表显示msgState的值为已读
-            top.registry.global.messageList.each(function(o ,i){
-                var obj=[];
-                obj= JSON.parse(o.msgContent);
-                var detailObj = $('#msg-right .selected-detail-div');
-                if(msg_id == obj.id){
-                    o.msgState = '1';
-                    detailObj.template(o);
-                    if(type==1){
-                    	require(['underscore','text!/view/projectManage/tpl/expenseApply/expenseApplyShow.html'],function(_,expenseApplyShowTpl){
-                            importing('currentDate');
-                    		 $get(top.servicePath+'/sw/exesApply/getExesApply',{id:msg_id},function(r) {
-                                 if (r.flag == 1) {
-                                     var exesApply = r.data.exesApply;
-                                     var projectInfoList = r.data.projectInfoList;
-                                     $(".read-content").empty().html(_.template(expenseApplyShowTpl, {exesApply: exesApply, projectInfoList: projectInfoList}));
-
-                                     $("#projectId").val(exesApply.projectId);
-                                     $("#remainFund").text(parseFloat($("#projectId option:selected").attr("surplusFund")) / 10000);
-                                     $(".dict").dict();
-                                     $("#type").dictSelect(exesApply.type);
-                                     $("#type").attr("disabled", "disabled");
-                                     $("#applyLevel").dictSelect(exesApply.applyLevel);
-                                     $("#applyLevel").attr("disabled", "disabled");
-                                     //开支类别选择差旅费时
-                                     if (exesApply.type == "01") {
-                                         $("#travelExpense").show();
-                                         onBusiness();
-                                         $("#mealsExpense,#receptionist").hide();
-                                     } else if(exesApply.type == "03"){
-                                         $("#mealsExpense").show();
-                                         $("#travelExpense,#receptionist").hide();
-                                     } else if(exesApply.type == "04"){
-                                         $("#receptionist").show();
-                                         $("#mealsExpense,#travelExpense").hide();
-                                     }  else {
-                                         $("#travelExpense,#mealsExpense,#receptionist").hide();
-                                     }
-                                     //报销时间
-                                     $("#repayTime").val(rangeUtil.formatDate(exesApply.repayTimeStart, 'yyyy-MM-dd'));
-                                     $(".read-content .tcenter.mt40").remove();
-                                     // $(".read-content #exesApplyDetailList-table").css("min-width", "900px");
-                                 }
-                             });
-                    	});
-                    }else if(type==2){
-                        importing('currentDate');
-                        require(['underscore','text!/view/carManage/tpl/carApplyAudit.html'],function(_,carApplyAuditTpl){
-                            $get(top.servicePath+'/sw/carApply/getCarApply',{id:msg_id},function(r) {
-                                if (r.flag == 1) {
-                                    $(".read-content").empty().html(_.template(carApplyAuditTpl, $.extend(r, {taskId: null, userId: top.userId, trueName: top.trueName, firstPage: true})));
-
-                                    $(".dict").dict();
-                                    $("#carType").dictSelect(r.data.carType);
-                                    $("#brandType").dictSelect(r.data.brandType);
-                                    $("#carType,#brandType").attr("disabled", "disabled");
-                                    $("#applyLevel").dictSelect(r.data.applyLevel);
-                                    $("#applyLevel").attr("disabled", "disabled");
-                                    $("#isDriver").val(r.data.isDriver);
-                                }
-                            });
-                        });
-                    }else if(type==3){
-                        importing('currentDate');
-                        require(['underscore','text!/view/itemManage/tpl/itemApply/itemApplyAudit.html'],function(_,itemApplyAuditTpl){
-                            $get(top.servicePath+'/sw/itemApply/getItemApply',{id:msg_id},function(r) {
-                                if (r.flag == 1) {
-                                    $(".read-content").empty().html(_.template(itemApplyAuditTpl, $.extend(r, {taskId: null, trueName: top.trueName})));
-
-                                    $(".span").span();
-                                    $(".dict").dict();
-                                    $("#applyLevel").dictSelect(r.data.applyLevel);
-                                    $("#applyLevel").attr("disabled", "disabled");
-                                    $(".read-content .tcenter.mt40").remove();
-                                }
-                            });
-                        });
-                    }else if(type==4){
-                        importing('currentDate');
-                        require(['underscore','text!/view/itemManage/tpl/itemApply/itemApplyAudit.html'],function(_,itemApplyAuditTpl){
-                            $get(top.servicePath+'/sw/itemApplySum/getItemApplySum',{id:msg_id},function(r) {
-                                if (r.flag == 1) {
-                                    $(".read-content").empty().html(_.template(itemApplyAuditTpl, $.extend(r, {taskId: null, trueName: top.trueName})));
-
-                                    $(".span").span();
-                                    $(".dict").dict();
-                                    $("#applyLevel").dictSelect(r.data.applyLevel);
-                                    $("#applyLevel").attr("disabled", "disabled");
-                                    $(".read-content .tcenter.mt40").remove();
-                                }
-                            });
-                        });
-                    }
-                    return false;
-                }
-            });
         }).on('mouseenter', 'div.li', function(){
             $(this).find('.c-remove').removeClass('hideplus');
         }).on('mouseleave', 'div.li', function(){

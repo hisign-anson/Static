@@ -1,6 +1,6 @@
  define(function(){
 	return {
-		//最新发布
+		//信息提醒
 		findReceivePage:function(param,callback){
 			$post(top.servicePath+'/sys/message/findReceivePage',param,function(response) {
 				callback(response);
