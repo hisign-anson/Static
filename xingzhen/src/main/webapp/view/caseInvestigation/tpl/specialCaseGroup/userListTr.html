@@ -1,5 +1,5 @@
 <%_.each(data, function(item){%>
-<%if(item.userId != top.userId){%>
+<%if(item.userId != top.userId && item.userId != taskInfoFqr){%>
 <tr>
     <%if(checkboxMulti == false){%>
     <td><input class="choseOneUser" type="checkbox" jsr="<%=item.userId%>" jsrname="<%=item.userName%>" jsrLxfs="<%=item.phone%>"></td>

@@ -1,6 +1,10 @@
 // AppKey:13c78e9ee2ac862f30ce0b17
 // Master Secret:670180c73e6152cf44918e2e
 
+
+// AppKey:a15c1e9bb38c1607b9571eea
+// Master Secret:bd4d826e1e49340aac2d05e2
+
 var across_appkey = '13c78e9ee2ac862f30ce0b17';
 var across_random_str = '022cd9fd995849b58b3ef0e943421ed9';//20-36 长度的随机字符串
 var across_timestamp = new Date().getTime();

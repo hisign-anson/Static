@@ -865,8 +865,15 @@ define(['underscore',
             var bcrwid, fkid;
             var taskinfo = str2obj(taskinfo);
             if (taskinfo) {
-                bcrwid = taskinfo.bcrwid;
-                fkid = taskinfo.fkid;
+                switch (text){
+                    case "补充任务":
+                        bcrwid = taskinfo.id;
+                        break;
+                    case "追加任务":
+                        fkid = taskinfo.id;
+                        break;
+                    default:
+                }
             }
             $("#mainDiv").empty().html(_.template(taskAddTpl, {taskInfo: taskinfo, text: text}));
             $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false});
@@ -941,8 +948,10 @@ define(['underscore',
                     $("#userTable tbody").empty().html(_.template(userListTrTpl, {
                         data: r.data,
                         ops: top.opsMap,
-                        checkboxMulti: isCheckboxMulti
+                        checkboxMulti: isCheckboxMulti,
+                        taskInfoFqr:taskInfo.fqr
                     }));
+
                     $(".span").span();
                     //任务移交给用户
                     _self.saveTransfer(taskId);
