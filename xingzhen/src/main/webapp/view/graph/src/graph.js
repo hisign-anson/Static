@@ -9,8 +9,6 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/task/taskAdd.html',
     'text!/view/caseInvestigation/tpl/task/taskEdit.html',
 
-    // '../dat/task.js',
-
     '../../caseInvestigation/dat/specialCaseGroup.js',
     '../../caseInvestigation/src/specialCaseGroup.js',
     '../../caseInvestigation/dat/task.js',
@@ -336,79 +334,16 @@ define(['underscore',
 
     return {
         showList: function (groupid) {
-            debugger
             _selfGraph = this;
-            // var jsonInitUrl = "huangshijinTest.json";
             var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=groupid";
             _selfGraph.updateGraphURL(jsonInitUrl);
-            $("#updateGraph").on("click", function () {
-                _selfGraph.updateGraphURL('relation.json');
-            });
-            $("#addGraphNodes").on("click", function () {
-                _selfGraph.addNodes();
-            });
-        },
-        addNodes: function () {
-            _selfGraph = this;
-            var nodeStr1 = "{\n" +
-                "      \"id\":\"011\",\n" +
-                "      \"name\": \"反馈线索ccccc\",\n" +
-                "      \"image\": \"images/xkdna.jpg\",\n" +
-                "      \"type\": \"3\",\n" +
-                "      \"depth\": 0\n" +
-                "    }";
-            var nodeStr2 =
-                "{\n" +
-                "      \"id\":\"011\",\n" +
-                "      \"name\": \"反馈线索sssss\",\n" +
-                "      \"image\": \"images/xkdna.jpg\",\n" +
-                "      \"type\": \"3\",\n" +
-                "      \"depth\": 0\n" +
-                "    }";
-            var linkStr1 = "\n" +
-                "    {\n" +
-                "      \"source\": 3,\n" +
-                "      \"target\": 16,\n" +
-                "      \"relation\": \"\"\n" +
-                "    }";
-            var linkStr2 = "\n" +
-                "    {\n" +
-                "      \"source\": 4,\n" +
-                "      \"target\": 15,\n" +
-                "      \"relation\": \"\"\n" +
-                "    }";
-            var node1 = JSON.parse(nodeStr1);
-            var node2 = JSON.parse(nodeStr2);
-            var link1 = JSON.parse(linkStr1);
-            var nodeArray = new Array();
-            nodeArray.push(node1);
-            nodeArray.push(node2);
-            var linkArray = new Array();
-            linkArray.push(link1);
-            _selfGraph.addNode(nodeArray, linkArray);
-        },
-        addNode: function (nodeArrays, linkArrays) {
-            _selfGraph = this;
-            var lenNodes = nodeArrays.length;
-            var lenLinks = linkArrays.length;
-            console.info(jsonContext)
-            if (lenNodes > 0) {
-                for (var i = 0; i < lenNodes; i = i + 5000) {
-                    jsonContext.nodes.push.apply(jsonContext.nodes, nodeArrays.slice(i, Math.max(i + 5000, lenNodes)));
-                }
-            }
-            if (lenLinks > 0) {
-                for (var i = 0; i < lenLinks; i = i + 5000) {
-                    jsonContext.edges.push.apply(jsonContext.edges, linkArrays.slice(i, Math.max(i + 5000, lenNodes)));
-                }
-            }
-            _selfGraph.updateGraphJSON(jsonContext);
+
+
         },
         //根据链接更新
         updateGraphURL: function (jsonInitUrl) {
             _selfGraph = this;
             d3.json(jsonInitUrl, function (error, json) {
-                debugger
                 if (error) {
                     return console.log(error);
                 }
@@ -555,6 +490,10 @@ define(['underscore',
                 .append("image")
                 .attr("width", img_w)
                 .attr("height", img_h)
+
+                //     .call(layout.drag);
+                // node_imgSVG.exit().remove();
+
                 .attr("xlink:href", function (d) {
                     var image;
                     switch (d.type) {
@@ -599,12 +538,6 @@ define(['underscore',
                             {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"},
                             {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>任务下发</span>"}
                         ];
-                        // var menuByTaskType = [
-                        //     {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>接收人反馈任务</span>"},
-                        //     {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>接收人移交任务</span>"},
-                        //     {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>接收人补充任务</span>"},
-                        //     {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='4'>下发人催办任务</span>"}
-                        // ];
                         var menuByTaskType = [];
                         if (d.type == "taskid") {
                             if (d.taskCreatorUserId == top.userId) {
@@ -612,8 +545,6 @@ define(['underscore',
                                 var urge = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='4'>下发人催办任务</span>"};
                                 menuByTaskType.push(urge);
                             }
-
-
                             taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
                                 $(document).on("contextmenu", function (e) {
                                     //DOM事件对象——d3.event
@@ -635,6 +566,27 @@ define(['underscore',
                             });
                         }
                         var menuByFeedbackType = [];
+                        //查找
+                        debugger
+                        if (!node_imgSVG[0][d.index]){
+                            return;
+                        }
+                        var node = node_imgSVG[0];
+
+                        var edgesArray = node[d.index].attributes["edges"];
+                        if (!edgesArray) {
+                            return;
+                        }
+                        var edgesStr = edgesArray.value;
+                        var edges = edgesStr.split(",");
+                        // console.log(edges);
+                        for (var i = 0; i < edges.length; i++) {
+                            var edgeIndex = edges[i];
+                            // if (edgeIndex != "") {
+                            //     edges_lineSVG[0][edgeIndex].remove();
+                            //     edges_textSVG[0][edgeIndex].remove();
+                            // }
+                        }
                         // if(d.type == "fkid" && 反馈的上一条任务的下发人 == top.userId){
                         //     var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>下发人追加任务</span>"};
                         //     menuByFeedbackType.push(append_zj)
@@ -712,7 +664,6 @@ define(['underscore',
                                 tooltipCurrent.css({
                                     "top": (winST + 5) + "px"
                                 });
-                                console.info("top");
                             }
                         }
                         //end 判断当前节点的位置
@@ -776,19 +727,20 @@ define(['underscore',
                 .attr("class", "nodetext")
                 .attr("dx", node_dx)
                 .attr("dy", node_dy)
-                // .html(html)
-                .text(function (d) {
+                .html(function (d) {
                     console.info(d.name);
                     var arr = [];
                     arr = d.name.split("@");
                     var name = arr[0];
                     var time = arr[1];
                     name = name ? name : "";
-                    time = time ? time : "";
+                    time = time ? time : ""//rangeUtil.formatDate(time ? time : "",'yyyy-MM-dd');
 
-                    // return d.name.substring(0,9) + "...";
-                    return name;
-                });
+                    var nameHtml = "<tspan class='name-text' dx='" + (node_dx) + "' dy='" + node_dy + "'>" + name + "</tspan>";
+                    var timeHtml = "<tspan class='time-text' dx='" + (node_dx - 40) + "' dy='" + node_dy + "'>" + time + "</tspan>";
+
+                    return nameHtml + (nameHtml ? timeHtml : "");
+                })
 
             node_textSVG.exit().remove();
 
@@ -973,7 +925,7 @@ define(['underscore',
             });
             $("#chooseReceive").on('click', function () {
                 if ($("#groupid").val()) {
-                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,isInGroup: true,}, "user");
+                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,}, "user");
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }
@@ -1052,7 +1004,10 @@ define(['underscore',
                                     if ($("#groupid").val()) {
                                         var groupinfo = groupinfo;
                                         var taskinfo = taskinfo;
-                                        dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true,}, "user");
+                                        dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {
+                                            groupId: text ? taskinfo.groupid : groupinfo.id,
+                                            isInGroup: true,
+                                        }, "user");
                                     } else {
                                         toast("请先选择专案组！", 600).warn();
                                     }
