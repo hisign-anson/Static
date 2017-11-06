@@ -187,9 +187,12 @@ if(!top.token || !top.limits ||!top.trueName){
         if (r.flag == 1) {
             var data = r.data;
             if(data.avatar && data.avatar !=''){
-                var avatar = data.avatar;
-                byid('img-responsive').src=top.ftpServer + avatar;
-                byid('confirm-logout-img').src=top.ftpServer + avatar;
+                //var avatar = data.avatar;
+                //byid('img-responsive').src=top.ftpServer + avatar;
+                //byid('confirm-logout-img').src=top.ftpServer + avatar;
+                var obj = eval('(' + data.avatar + ')');
+                $("#img-responsive").attr("src",top.ftpServer+obj.source);
+                $("#confirm-logout-img").attr("src",top.ftpServer+obj.source);
             }else{
                 byid('img-responsive').src="../img/touxiang.jpg";
             }
@@ -483,10 +486,8 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                 $("#userName").val(data.userName);
                 $("#orgName").val(data.orgName);
                 if(data.avatar && data.avatar !=''){
-                    //var obj = eval('(' + data.avatar + ')');
-                    //$("#avatar-img").attr("src",top.ftpServer+obj.source);
-                    var avatar = data.avatar;
-                    byid('avatar-img').src=top.ftpServer + avatar;
+                    var obj = eval('(' + data.avatar + ')');
+                    $("#avatar-img").attr("src",top.ftpServer+obj.source);
                 }else{
                     $("#avatar-img").attr("src","../img/touxiang.jpg");
                 }

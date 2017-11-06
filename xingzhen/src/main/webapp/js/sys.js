@@ -1311,7 +1311,7 @@ function newsMessageFn(vId,vType){
                         temp_date = new Date(item.createDate);
                         item.msgDateTxt = thisYear == temp_date.format('YYYY') ? temp_date.format('M月D日 hh:mm') : temp_date.format('YYYY/MM/DD');
                         //消息已读or未读样式定义 1:未读
-                        item.readLi = item.msgState == '1' ? 'unread' : 'read';//1未读2已读
+                        item.readLi = item.msgState == '1' ? 'unread' : 'read';//1未读0已读
                         //右边 详细 时间格式
                         item.msgDetailDate = temp_date.format('YYYY年M月D日') + '('+weeks[temp_date.getDay()]+') ' + temp_date.format('hh:mm');
 
@@ -1403,7 +1403,7 @@ function newsMessageFn(vId,vType){
                     debugger
                     if(res.flag==1){
                         thisLi.removeClass('unread').addClass('read');
-                        thisLi.attr("data-read",2)
+                        thisLi.attr("data-read",0)
                     }
                 }, true, false);
             }
@@ -1412,7 +1412,7 @@ function newsMessageFn(vId,vType){
                 debugger
                 var detailObj = $('#msg-right .selected-detail-div');
                 if(msg_id == o.id){
-                    o.msgState = '2';
+                    o.msgState = '0';
                     detailObj.template(o);
                     return false;
                 }
@@ -1798,7 +1798,7 @@ function newsMoreFn(vId,vType) {
                 $(this).val("");
             });
         });
-        $('#msg-left').on('click', 'div.li .cc:not(.c-remove-hover)', function(){debugger
+        $('#msg-left').on('click', 'div.li .cc:not(.c-remove-hover)', function(){
             //右侧阅读窗口 样式修改
             $('.un-selected-detail-div').hide();
             $('.selected-detail-div').show();
@@ -1812,7 +1812,7 @@ function newsMoreFn(vId,vType) {
             top.registry.global.messageList.each(function(o ,i){
                 var detailObj = $('#msg-right .selected-detail-div');
                 if(msg_id == o.id){
-                    o.msgState = '1';
+                    //o.msgState = '1';
                     //detailObj.template(o);
                     //detailObj.find('.read-content').html(o.content);
                     $get(top.servicePath+'/sys/message/view',{id:msg_id},function(res){
