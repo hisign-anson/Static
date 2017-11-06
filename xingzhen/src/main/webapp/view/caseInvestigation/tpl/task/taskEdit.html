@@ -55,54 +55,67 @@
                         <input class="common-input" type="text"  name="" id="dateDue" value="<%=rangeUtil.formatDate(data.fkjzTime,'yyyy-MM-dd')%>" readonly/>
                     </div>
                 </div>
-                <%if(isOperation && isOperation == false){%>
+                <%if(isOperation == false){%>
 
                 <%}else{%>
-                    <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
-                    <div class="form-row block-row">
-                        <div class="equal-col-12">
-                            <span class="common-field">反馈信息：</span>
-                            <div class="textarea-group">
-                                <textarea class="common-textarea feedback-valid" id="fkxs" data-options="required:true"></textarea>
+                    <%if(data.jsr == top.userId){%>
+                        <%if(!data.taskFks || (data.taskFks && data.taskFks.length < 3)){%>
+                            <div class="form-row block-row">
+                                <div class="equal-col-12">
+                                    <span class="common-field">反馈信息：</span>
+                                    <div class="textarea-group">
+                                        <textarea class="common-textarea feedback-valid" id="fkxs" data-options="required:true"></textarea>
 
-                                <div class="upload-block">
-                                    <div class="avatar-upload">
-                                        <label class="cm-upload-btn" title="Upload image file">
-                                            <input type="file" class="sr-only" multiple="multiple" accept=".mp4,.aiff,.avi,.mpg,.mpeg,.wmv,.mkv">
-                                            <span id="addVideo" class="cm-btn-icon h-add orange-btn upload-btn">视频上传</span>
-                                        </label>
+                                        <div class="upload-block">
+                                            <div class="avatar-upload">
+                                                <label class="cm-upload-btn" title="Upload image file">
+                                                    <input type="file" class="sr-only" multiple="multiple" accept=".mp4,.aiff,.avi,.mpg,.mpeg,.wmv,.mkv">
+                                                    <span id="addVideo" class="cm-btn-icon h-add orange-btn upload-btn">视频上传</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="avatar-upload">
+                                                <label class="cm-upload-btn" title="Upload image file">
+                                                    <input type="file" class="sr-only" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                                                    <span id="addImg" class="cm-btn-icon h-add orange-btn upload-btn">图片上传</span>
+                                                </label>
+                                            </div>
+                                            <span class="state"></span>
+                                            <span class="red">调查过程材料上传</span>
+                                        </div>
                                     </div>
-
-                                    <div class="avatar-upload">
-                                        <label class="cm-upload-btn" title="Upload image file">
-                                            <input type="file" class="sr-only" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
-                                            <span id="addImg" class="cm-btn-icon h-add orange-btn upload-btn">图片上传</span>
-                                        </label>
-                                    </div>
-
-                                    <span class="red">调查过程材料上传</span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-row block-row">
-                        <div class="equal-col-12">
-                            <span class="common-field">备注：</span>
-                            <textarea class="common-textarea" name="" id="bz"></textarea>
+                            <div class="form-row block-row">
+                                <div class="equal-col-12">
+                                    <span class="common-field">备注：</span>
+                                    <textarea class="common-textarea" name="" id="bz"></textarea>
 
-                        </div>
-                    </div>
-                    <div class="form-row block-row">
-                        <div class="equal-col-6">
-                            <span class="common-field">反馈时间：</span>
-                            <input class="common-input" type="text"  name="" id="fkTime" value="<%=rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd')%>" readonly/>
-                        </div>
-                        <div class="equal-col-6">
-                            <span class="common-field">反馈人：</span>
-                            <input type="hidden" id="fkr"/>
-                            <input class="common-input" type="text"  name="" id="fkrname" value="<%=top.trueName%>" readonly/>
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row block-row">
+                                <div class="equal-col-6">
+                                    <span class="common-field">反馈时间：</span>
+                                    <input class="common-input" type="text"  name="" id="fkTime" value="<%=rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd')%>" readonly/>
+                                </div>
+                                <div class="equal-col-6">
+                                    <span class="common-field">反馈人：</span>
+                                    <input type="hidden" id="fkr"/>
+                                    <input class="common-input" type="text"  name="" id="fkrname" value="<%=top.trueName%>" readonly/>
+                                </div>
+                            </div>
+
+
+                            <div class="pic-info hide">
+                                <div class="slick-list draggable" tabindex="0">
+                                    <!--<div><img src="../../../../img/6.jpg" alt=""></div>-->
+                                    <!--<div><img src="../../../../img/empty.png" alt=""></div>-->
+                                    <!--<div><img src="../../../../img/error.png" alt=""></div>-->
+                                    <!--<div><img src="../../../../img/pc-avatar.png" alt=""></div>-->
+                                    <!--<div><img src="../../../../img/pc-avatar2.png" alt=""></div>-->
+                                </div>
+                            </div>
+                        <%}%>
                     <%}%>
                 <%}%>
 
@@ -114,7 +127,7 @@
             <div class="form-header">
                 <h5 class="form-title"><i class="left-line"></i>
                     <span>查看反馈信息</span>
-                    <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
+                    <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length < 3){%>
                     <span>已反馈3次不能再反馈</span>
                     <%}%>
                 </h5>
@@ -131,9 +144,9 @@
                             <th>反馈人</th>
                             <th>反馈确认状态</th>
                             <th>备注</th>
-                            <%if(isOperation && isOperation == 1){%>
+                            <%if(isOperation == false){%>
                             <%}else{%>
-                                <%if(data.fqr == top.userId){%>
+                                <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length < 3){%>
                                 <th>操作</th>
                                 <%}%>
                             <%}%>
@@ -161,9 +174,9 @@
                                 <%}%>
                             </td>
                             <td><%=item.bz%></td>
-                            <%if(isOperation && isOperation == 1){%>
+                            <%if(isOperation == false){%>
                             <%}else{%>
-                                <%if(data.fqr == top.userId){%>
+                                <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length < 3){%>
                                 <td>
                                     <a class="into-appendTaskBtn fa fa-plus-square" fkid="<%=item.id%>" taskinfo='<%=obj2str(data)%>' title="追加任务"></a>
                                 </td>
@@ -180,7 +193,7 @@
     </form>
     <div class="form-btn-block">
         <button id="cancelBtn" class="cm-cancel-btn">取 消</button>
-        <%if(isOperation && isOperation == false){%>
+        <%if(isOperation == false){%>
         <%}else{%>
             <%if(data.fkzt && data.fkzt == 0 && data.jsr == top.userId){%>
             <button id="replenishTaskBtn" class="cm-save-btn"  bcrwid="<%=data.id%>" taskinfo='<%=obj2str(data)%>'>补充任务</button>

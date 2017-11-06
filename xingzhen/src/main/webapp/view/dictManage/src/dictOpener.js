@@ -296,6 +296,8 @@ define(['underscore',
             portType(portAddress,param,function(r) {
                 if (r.flag == 1) {
                     var target = $("#dict-wrap-group");
+                    $(".dict-container").find(".query-block-row").empty();
+                    $(".dict-container").find(".query-block-row").siblings("hr").empty();
                     var tpl='';
                     switch (chooseType){
                         case "user":

@@ -23,6 +23,7 @@ define(['underscore',
         img_h = 48;
 
     var zTreeObj;
+    var jsonContext, edges_line, edges_text, node_img, node_text;
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
     var setting = {
         view: {
@@ -354,10 +355,7 @@ define(['underscore',
         updateGraphJSON: function (json) {
             _selfGraph = this;
             debugger
-            var edges_line, edges_text, node_img, node_text;
-            var jsonContext = json;
-
-
+            jsonContext = json;
             var tick = function () {
                 //限制结点的边界
                 jsonContext.nodes.forEach(function (d, i) {
@@ -412,8 +410,8 @@ define(['underscore',
                 .gravity(0.08);
 
 
-            //清除原有的画板
-            d3.select("svg").remove();
+            // //清除原有的画板
+            // d3.select("svg").remove();
             //定义svg画板
             var svg = d3.select("body").append("svg")
             // .attr("preserveAspectRatio", "xMidYMid meet")
@@ -473,6 +471,14 @@ define(['underscore',
                 .style("stroke", "#808080")//颜色
                 .style("stroke_width", 1)
                 .style("marker-end", "url(#resolved)")
+                .attr("source", function (d) {
+                    var source = d.source.index;
+                    var sourceLine = [];
+                    if (source) {
+                        sourceLine.push(source);
+                    }
+                    return d.source.index;
+                })
             edges_lineSVG.exit().remove();
 
             //连线上的字
@@ -481,7 +487,7 @@ define(['underscore',
                 .append("text")
                 .attr("class", "linetext")
                 .text(function (d) {
-                    return d.relation;
+                    return d.name;
                 });
             edges_textSVG.exit().remove();
             //绘制结点
@@ -491,8 +497,25 @@ define(['underscore',
                 .attr("width", img_w)
                 .attr("height", img_h)
 
-                //     .call(layout.drag);
-                // node_imgSVG.exit().remove();
+                .attr("edges", function (d) {
+                    var nodeInEdges = d.inEdges;
+                    var nodeOutEdges = d.outEdges;
+                    var nodeEdges;
+                    if (!nodeInEdges && nodeOutEdges) {
+                        nodeEdges = nodeOutEdges;
+                    } else if (!nodeOutEdges && nodeInEdges) {
+                        nodeEdges = nodeInEdges;
+                    } else if (nodeInEdges && nodeOutEdges) {
+                        nodeEdges = nodeInEdges.concat(nodeOutEdges);
+                    } else {
+                        return;
+                    }
+                    var result = "";
+                    for (var i = 0; i < nodeEdges.length; i++) {
+                        result += nodeEdges[i].index + ",";
+                    }
+                    return result;
+                })
 
                 .attr("xlink:href", function (d) {
                     var image;
@@ -524,6 +547,11 @@ define(['underscore',
                     var that = d3.event;
                     //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
                     if (that.button == 2) {
+
+                        $(document).on("contextmenu", function (e) {
+                            //DOM事件对象——d3.event
+                            e.preventDefault();
+                        })
                         if ($("#tooltip" + i).length <= 0) {
                             var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
                             $("body").append(tooltipDiv);
@@ -566,31 +594,37 @@ define(['underscore',
                             });
                         }
                         var menuByFeedbackType = [];
-                        //查找
+
+
                         debugger
-                        if (!node_imgSVG[0][d.index]){
+                        var inEdgesIndex = d.index;
+                        if (!node_img[0][inEdgesIndex]) {
                             return;
                         }
-                        var node = node_imgSVG[0];
+                        var node = node_img[0];
 
-                        var edgesArray = node[d.index].attributes["edges"];
+                        var edgesArray = node[inEdgesIndex].attributes["edges"];
                         if (!edgesArray) {
                             return;
                         }
                         var edgesStr = edgesArray.value;
                         var edges = edgesStr.split(",");
                         // console.log(edges);
+                        var edgeIndex;
                         for (var i = 0; i < edges.length; i++) {
-                            var edgeIndex = edges[i];
-                            // if (edgeIndex != "") {
-                            //     edges_lineSVG[0][edgeIndex].remove();
-                            //     edges_textSVG[0][edgeIndex].remove();
-                            // }
+                            //节点的上一条线
+                            edgeIndex = edges[0];
                         }
-                        // if(d.type == "fkid" && 反馈的上一条任务的下发人 == top.userId){
-                        //     var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>下发人追加任务</span>"};
-                        //     menuByFeedbackType.push(append_zj)
-                        // }
+                        if (edgeIndex != "") {
+                            //线的上一个节点
+                            var findLine = json.edges[edgeIndex]
+                            var lineSource = findLine.source;
+
+                            if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
+                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>下发人追加任务</span>"};
+                                menuByFeedbackType.push(append_zj);
+                            }
+                        }
                         var menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
                         switch (d.type) {
                             case "groupid":
@@ -611,32 +645,6 @@ define(['underscore',
                                 break;
 
                         }
-                        // if (d.id) {
-                        //     // 加载不同的树形菜单数据
-                        //     // var zNodes = "zNodes" + i;
-                        //     // zNodes = eval('(' + zNodes + ')');
-                        //     zNodes = menuById[i].menuData;
-                        // } else {
-                        //     if (d.type) {
-                        //         debugger
-                        //         switch (d.type) {
-                        //             case "1":
-                        //                 zNodes = menuByType[1].menuData;
-                        //                 break;
-                        //             case "2":
-                        //                 zNodes = menuByType[2].menuData;
-                        //                 break;
-                        //             case "3":
-                        //                 zNodes = menuByType[3].menuData;
-                        //                 break;
-                        //             default:
-                        //                 zNodes = menuDefault;
-                        //         }
-                        //     } else {
-                        //         //加载同一个树形菜单数据
-                        //         zNodes = menuDefault;
-                        //     }
-                        // }
                         zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
 
                         var tooltipCurrent = $("#tooltip" + i);
@@ -708,7 +716,6 @@ define(['underscore',
                             tooltipCurrent.css({
                                 "top": (winST + 5) + "px"
                             });
-                            console.info("top");
                         }
                     }
                     //end 判断当前节点的位置
@@ -734,7 +741,7 @@ define(['underscore',
                     var name = arr[0];
                     var time = arr[1];
                     name = name ? name : "";
-                    time = time ? time : ""//rangeUtil.formatDate(time ? time : "",'yyyy-MM-dd');
+                    time = rangeUtil.formatDate(time ? time : "",'yyyy-MM-dd');
 
                     var nameHtml = "<tspan class='name-text' dx='" + (node_dx) + "' dy='" + node_dy + "'>" + name + "</tspan>";
                     var timeHtml = "<tspan class='time-text' dx='" + (node_dx - 40) + "' dy='" + node_dy + "'>" + time + "</tspan>";
@@ -1334,5 +1341,29 @@ define(['underscore',
                 }
             });
         },
+        //格式化日期,
+        formatDate: function (date, format) {
+            _selfGraph = this;
+            var paddNum = function (num) {
+                num += "";
+                return num.replace(/^(\d)$/, "0$1");
+            }
+            //指定格式字符
+            var cfg = {
+                yyyy: date.getFullYear() //年 : 4位
+                , yy: date.getFullYear().toString().substring(2)//年 : 2位
+                , M: date.getMonth() + 1  //月 : 如果1位的时候不补0
+                , MM: paddNum(date.getMonth() + 1) //月 : 如果1位的时候补0
+                , d: date.getDate()   //日 : 如果1位的时候不补0
+                , dd: paddNum(date.getDate())//日 : 如果1位的时候补0
+                , hh: date.getHours()  //时
+                , mm: date.getMinutes() //分
+                , ss: date.getSeconds() //秒
+            }
+            format || (format = "yyyy-MM-dd hh:mm:ss");
+            return format.replace(/([a-z])(\1)*/ig, function (m) {
+                return cfg[m];
+            });
+        }
     }
 });
