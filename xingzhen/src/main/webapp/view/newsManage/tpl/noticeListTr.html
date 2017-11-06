@@ -3,7 +3,7 @@
        <td><%=item.rownum%></td>
        <td><%=item.subject%></td>
         <%if(item.type==3){%>
-        <td><%=item.content%></td>
+        <td><a href="#" title="下载" download="<%=top.ftpServer%><%=item.content%>"><%=item.content%></a></td>
         <%}%>
         <%if(item.type==1){%>
         <td>

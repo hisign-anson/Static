@@ -66,7 +66,7 @@
                 <td class="ci">
                     <div class="cir"></div>
                 </td>
-                <td class="cc" paramId="{obj.id}" data-id="{id}" rownum="{rownum}" data-type="{obj.type}" data-read="{msgState}">
+                <td class="cc" paramId="{id}" data-id="{id}" rownum="{rownum}" data-type="" data-read="{msgState}">
                     <div class="c-title"><div class="sender-name ellipsis"   title="{msgContent}">{msgContent}</div><div class="msg-time">{msgDateTxt}</div></div>
                 </td>
                 <td><div param="{id}" class="c-remove hideplus" title="删除"><i class="icon-remove"></i></div></td>
@@ -76,8 +76,14 @@
     </div>
 </script>
 <script type="text/template" id="msg-right-detail">
+    <div class="read-info">
+        <h2>{subject}</h2>
+        <div><span>时间：{msgDetailDate}</span></div>
+    </div>
     <div class="read-content has-table-wrapper">
-
+        <div>
+            {msgContent}
+        </div>
     </div>
 </script>
 <script src="../../js/base.js?version=0.99"></script>

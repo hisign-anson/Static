@@ -133,7 +133,7 @@ define(['underscore',
             _selfDict = this;
             var tpl='';
             var target = $("#dict-wrap");
-            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:6},function (r) {
+            userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:""},function (r) {
                 if (r.flag == 1) {
                     $.each(r.data, function (i, o) {
                         tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
@@ -171,7 +171,7 @@ define(['underscore',
         },
         getUnitPortList:function (orgName) {
             _selfDict = this;
-            userInfoAjax.getOrgTreeList({orgName:orgName,end:6},function(r) {
+            userInfoAjax.getOrgTreeList({orgName:orgName,end:""},function(r) {
                 if (r.flag == 1) {
                     var target = $("#dict-wrap-unit");
                     var tpl='';
