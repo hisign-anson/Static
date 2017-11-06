@@ -536,12 +536,12 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                 $("[dict-id='post'] #post").addClass("w260px");
                 $("#address").val(data.address);
                 $open('#edit-user-block', {width: 680, top: 80, title: '&nbsp用户个人中心'});
-                importing(  '../plugin/daterangepicker/moment.js','../plugin/daterangepicker/datetimepicker.js', function () {
-                    $("#birth").datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        pickTime: false
-                    });
-                });
+                //importing(  '../plugin/daterangepicker/moment.js','../plugin/daterangepicker/datetimepicker.js', function () {
+                //    $("#birth").datetimepicker({
+                //        format: 'YYYY-MM-DD',
+                //        pickTime: false
+                //    });
+                //});
 //                editavatar();
 //                //上传图片
                 upclick({

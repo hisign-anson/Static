@@ -10,7 +10,7 @@
 
  .daterangepicker.dropdown-menu {
   max-width: 560px;
-  z-index: 3000;
+  z-index: 9999;
    padding-top:40px;
 }
 

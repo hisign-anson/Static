@@ -1798,7 +1798,7 @@ function newsMoreFn(vId,vType) {
                 $(this).val("");
             });
         });
-        $('#msg-left').on('click', 'div.li .cc:not(.c-remove-hover)', function(){
+        $('#msg-left').on('click', 'div.li .cc:not(.c-remove-hover)', function(){debugger
             //右侧阅读窗口 样式修改
             $('.un-selected-detail-div').hide();
             $('.selected-detail-div').show();
@@ -1813,12 +1813,14 @@ function newsMoreFn(vId,vType) {
                 var detailObj = $('#msg-right .selected-detail-div');
                 if(msg_id == o.id){
                     o.msgState = '1';
-                    detailObj.template(o);
-                    detailObj.find('.read-content').html(o.content);
-                    $get(top.servicePath+'/sys/message/findById',{id:msg_id},function(res){
-                        $("#attachment").text(res.data.rev1);
-                        $("#attachment").attr("download",res.data.rev1);
-                        $("#attachment").attr("href",top.ftpServer+res.data.rev1)
+                    //detailObj.template(o);
+                    //detailObj.find('.read-content').html(o.content);
+                    $get(top.servicePath+'/sys/message/view',{id:msg_id},function(res){
+                        //$("#attachment").text(res.data.rev1);
+                        //$("#attachment").attr("download",res.data.rev1);
+                        //$("#attachment").attr("href",top.ftpServer+res.data.rev1)
+                        detailObj.template(res.data.message);
+                        detailObj.find('.read-content').html(res.data.message.content);
                     });
                 }
             })

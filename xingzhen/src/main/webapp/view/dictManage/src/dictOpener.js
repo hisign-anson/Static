@@ -11,19 +11,24 @@ define(['underscore',
             var dictVal = obj.attr("dict-value");
             var title = obj.attr("title");
             
-            window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+            window.newwin=$open('#dict-block-type',{width:600,height:400,top:100, title:'选择'+title});
             _selfDict.getDictListByParentKey(dictVal);
-            var opener = $(".panel #dict-block");
-            opener.find("#dict-wrap").attr('dictVal',dictVal);
-            opener.find("#dict-wrap").off("click").on("click","div",function(){
+            var opener = $(".panel #dict-block-type");
+            opener.find("#dict-wrap-type").attr('dictVal',dictVal);
+            opener.find("#dict-wrap-type").off("click").on("click","div",function(){
                 var input = obj.prev();//页面上需要填入的input
                 input.val($(this).find("span").text());
-
                 var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
                 inputHidden.val($(this).find("span").attr("val"));
                 opener.$close();
             });
-
+            opener.find("#queryBtnGroupType").off("click").on("click",function(){
+                var groupType=$.trim($('#groupType').val());
+                _selfDict.getDictListByParentKey(dictVal,groupType);
+            });
+            opener.find("#resetBtnGroupType").off("click").on("click",function(){
+                $(".query-block-row input").val("");
+            });
             $("#add-dict-btn").off("click").on('click',function(){
                 $open('#addReason-block',{width:400,height:330,top:100, title:'新增'+title});
                 $(".addReason-container").empty().html(_.template(dictOpenerAddTpl));
@@ -70,35 +75,56 @@ define(['underscore',
                 });
             });
         },
-        getDictListByParentKey: function (key) {
+        getDictListByParentKey: function (key,value) {
             _selfDict = this;
-            dictManageAjax.getDictListByParentKey({key:key},function(r) {
-                if (r.flag == 1) {
-                    var target = $("#dict-wrap");
-                    var tpl='';
-                    $.each(r.data, function (i, o) {
-                        tpl+='<div><u><span val="'+o.key+'">'+o.value+'</span><a class="delete-for icon-remove-btn" style="float: right" id="'+o.id+'" dictValue="'+o.value+'"  title="删除"></a></div></u>';
+            var param = {};
+            $.extend(param, {
+                key:key,
+                queryString:value
+            });
+            $('#dict-block-type').pagingList({
+                action: top.servicePath + '/sys/dict/getDictListByParentKey',
+                jsonObj: param,
+                callback: function (r) {
+                    var target = $("#dict-wrap-type");
+                    var tpl = '';
+                    $.each(r, function (i, o) {
+                        tpl += '<div><u><span val="' + o.key + '">' + o.value + '</span>' +
+                            //'<a class="delete-for icon-remove-btn" style="float: right" id="'+o.id+'" dictValue="'+o.value+'"  title="删除"></a>' +
+                        '</div></u>';
                     });
                     target.html(tpl);
-                    
-                    $("#dict-wrap .delete-for").off("click").on('click',function(){
-                		var id=$(this).attr('id');
-                		var val=$(this).attr('dictValue');
-                		var parentkey = $("#dict-wrap").attr('dictVal');
-                		$confirm('确认删除【'+val+'】字典？',function(bol) {
-                			if(bol){
-                				dictManageAjax.delDictById(id,parentkey,function(r){
-                					 if (r.flag == 1) {
-                						 _selfDict.getDictListByParentKey($("#dict-wrap").attr('dictVal'));
-                					 }else{
-                						 toast(r.msg, 600).err()
-                					 }
-                				});
-                			}
-                		});
-                	});
                 }
-            });
+            })
+            //dictManageAjax.getDictListByParentKey({key:key,value:value},function(r) {
+            //    if (r.flag == 1) {
+            //        var target = $("#dict-wrap-type");
+            //        var tpl='';
+            //        $.each(r.data, function (i, o) {
+            //            tpl+='<div><u><span val="'+o.key+'">'+o.value+'</span>' +
+            //            //'<a class="delete-for icon-remove-btn" style="float: right" id="'+o.id+'" dictValue="'+o.value+'"  title="删除"></a>' +
+            //            '</div></u>';
+            //        });
+            //        target.html(tpl);
+                    
+                    //$("#dict-wrap-type .delete-for").off("click").on('click',function(){
+                	//	var id=$(this).attr('id');
+                	//	var val=$(this).attr('dictValue');
+                	//	var parentkey = $("#dict-wrap-type").attr('dictVal');
+                	//	$confirm('确认删除【'+val+'】字典？',function(bol) {
+                	//		if(bol){
+                	//			dictManageAjax.delDictById(id,parentkey,function(r){
+                	//				 if (r.flag == 1) {
+                	//					 _selfDict.getDictListByParentKey($("#dict-wrap-type").attr('dictVal'));
+                	//				 }else{
+                	//					 toast(r.msg, 600).err()
+                	//				 }
+                	//			});
+                	//		}
+                	//	});
+                	//});
+        //        }
+        //    });
         },
         openUserChoosePort:function (obj) {//打开人员选择端口
             _selfDict = this;

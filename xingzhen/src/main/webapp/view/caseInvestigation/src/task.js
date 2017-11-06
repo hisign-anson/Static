@@ -18,8 +18,8 @@ define(['underscore',
     return {
         showList: function () {
             _self = this;
-            // //关闭没有关闭的弹框
-            // dictOpener.closeOpenerDiv();
+             //关闭没有关闭的弹框
+             dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(taskListTpl, {isOperation: true}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#fkqrzt");
@@ -79,10 +79,13 @@ define(['underscore',
                     var overdue=$($(item).find("a")[0]).attr('overdue');
                     if(fkqrzt){
                         $("#changeConfirmStatus u").eq(1).click();
+                        $("#creatname").val(top.userName);
                     }else if(taskType){
                         $("#changeTaskType u").eq(1).click();
+                        $("#changeRece u").eq(1).click();
                     }else if(overdue){
                         $("#changeTaskStatus u").eq(4).click();
+                        $("#changeTaskType u").eq(1).click();
                     }else{
                         _self.queryList();
                     }

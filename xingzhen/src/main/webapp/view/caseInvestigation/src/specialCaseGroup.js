@@ -584,7 +584,8 @@ define(['underscore',
                 });
 
                 $("#caseListDiv #chooseAcceptUint").on('click', "",function () {
-                    dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
+                    //dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
+                    dictOpener.openUnitChoosePort($(this));
                 });
                 //点击多选案件状态
                 $(".dictInLineSelect").dictInLineSelect();
