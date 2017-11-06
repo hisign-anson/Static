@@ -249,7 +249,7 @@ define(['underscore',
             _selfDict = this;
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {
                 if (r.flag == 1) {
-                    var target = $("#dict-wrap");
+                    var target = $("#dict-wrap-group");
                     var tpl='';
                     $.each(r.data, function (i, o) {
                         tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
@@ -269,7 +269,7 @@ define(['underscore',
             $.extend(param,{groupName:groupName});
             portType(portAddress,param,function(r) {
                 if (r.flag == 1) {
-                    var target = $("#dict-wrap");
+                    var target = $("#dict-wrap-group");
                     var tpl='';
                     switch (chooseType){
                         case "user":

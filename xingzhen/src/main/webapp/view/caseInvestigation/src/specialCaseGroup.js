@@ -208,6 +208,7 @@ define(['underscore',
             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
             $("#archiveBlock").on("click", "#saveBtn", function () {
                 //调用极光接口
+                window.parent.clickHandle.sendText(jmgid);
                 $("#archiveBlock").$close();
             });
 
@@ -582,7 +583,7 @@ define(['underscore',
                     $('#slEndTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
                 });
 
-                $("#caseListDiv #chooseAcceptUint").on('click', function () {
+                $("#caseListDiv #chooseAcceptUint").on('click', "",function () {
                     dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
                 });
                 //点击多选案件状态

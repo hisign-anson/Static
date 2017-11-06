@@ -613,7 +613,13 @@ define(['underscore',
                                 menuByTaskType.push(urge);
                             }
 
+
                             taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
+                                $(document).on("contextmenu", function (e) {
+                                    //DOM事件对象——d3.event
+                                    e.preventDefault();
+                                })
+
                                 if (r.flag == 1) {
                                     var taskinfo = r.data;
                                     if (taskinfo.jsr == top.userId) {
@@ -967,7 +973,7 @@ define(['underscore',
             });
             $("#chooseReceive").on('click', function () {
                 if ($("#groupid").val()) {
-                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id}, "user");
+                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,isInGroup: true,}, "user");
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }
@@ -1046,7 +1052,7 @@ define(['underscore',
                                     if ($("#groupid").val()) {
                                         var groupinfo = groupinfo;
                                         var taskinfo = taskinfo;
-                                        dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id}, "user");
+                                        dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true,}, "user");
                                     } else {
                                         toast("请先选择专案组！", 600).warn();
                                     }
