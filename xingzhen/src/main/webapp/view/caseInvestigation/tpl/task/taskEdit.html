@@ -55,7 +55,7 @@
                         <input class="common-input" type="text"  name="" id="dateDue" value="<%=rangeUtil.formatDate(data.fkjzTime,'yyyy-MM-dd')%>" readonly/>
                     </div>
                 </div>
-                <%if(isOperation && isOperation == 1){%>
+                <%if(isOperation && isOperation == false){%>
 
                 <%}else{%>
                     <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
@@ -180,13 +180,15 @@
     </form>
     <div class="form-btn-block">
         <button id="cancelBtn" class="cm-cancel-btn">取 消</button>
-        <%if(isOperation && isOperation ==1){%>
+        <%if(isOperation && isOperation == false){%>
         <%}else{%>
             <%if(data.fkzt && data.fkzt == 0 && data.jsr == top.userId){%>
             <button id="replenishTaskBtn" class="cm-save-btn"  bcrwid="<%=data.id%>" taskinfo='<%=obj2str(data)%>'>补充任务</button>
             <%}%>
-            <%if(data.jsr == top.userId && data.taskFks && data.taskFks.length < 3){%>
-            <button id="feedbackBtn" class="cm-save-btn" taskinfo='<%=obj2str(data)%>'>反 馈</button>
+            <%if(data.jsr == top.userId){%>
+                <%if(!data.taskFks || (data.taskFks && data.taskFks.length < 3)){%>
+                    <button id="feedbackBtn" class="cm-save-btn" taskinfo='<%=obj2str(data)%>'>反 馈</button>
+                <%}%>
             <%}%>
         <%}%>
 

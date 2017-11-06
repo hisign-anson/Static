@@ -8,12 +8,95 @@
     <link rel="stylesheet" href="css/graph.css">
 </head>
 <body>
+<script>
 
-<!--<input type="button" value="update" id="updateGraph"/>-->
-<!--<input type="button" value="add" id="addGraphNodes"/>-->
+    function removeNode(index) {
+        if (!node_imgSVG[0][index]){
+            return;
+        }
+        node_imgSVG[0][index].remove();
+        var node = node_imgSVG[0];
+        node_textSVG[0][index].remove();
+
+        var edgesArray = node[index].attributes["edges"];
+        if (!edgesArray) {
+            return;
+        }
+        var edgesStr = edgesArray.value;
+        var edges = edgesStr.split(",");
+        // console.log(edges);
+        for (var i = 0; i < edges.length; i++) {
+            var edgeIndex = edges[i];
+            if (edgeIndex != "") {
+                edges_lineSVG[0][edgeIndex].remove();
+                edges_textSVG[0][edgeIndex].remove();
+            }
+        }
+    }
+
+    function addNode(nodeArrays, linkArrays) {
+        var lenNodes = nodeArrays.length;
+        var lenLinks = linkArrays.length;
+        if (lenNodes > 0) {
+            for (var i = 0; i < lenNodes; i = i + 5000) {
+                jsonContext.nodes.push.apply(jsonContext.nodes, nodeArrays.slice(i, Math.max(i + 5000, lenNodes)));
+            }
+        }
+        if (lenLinks > 0) {
+            for (var i = 0; i < lenLinks; i = i + 5000) {
+                jsonContext.edges.push.apply(jsonContext.edges, linkArrays.slice(i, Math.max(i + 5000, lenNodes)));
+            }
+        }
+        updateGraphJSON(jsonContext);
+    }
+    function addNodes(){
+        var nodeStr1 = "{\n" +
+            "      \"id\":\"011\",\n" +
+            "      \"name\": \"反馈线索ccccc\",\n" +
+            "      \"image\": \"images/xkdna.jpg\",\n" +
+            "      \"type\": \"3\",\n" +
+            "      \"depth\": 0\n" +
+            "    }";
+        var nodeStr2 =
+            "{\n" +
+            "      \"id\":\"011\",\n" +
+            "      \"name\": \"反馈线索sssss\",\n" +
+            "      \"image\": \"images/xkdna.jpg\",\n" +
+            "      \"type\": \"3\",\n" +
+            "      \"depth\": 0\n" +
+            "    }";
+        var linkStr1 = "\n" +
+            "    {\n" +
+            "      \"source\": 3,\n" +
+            "      \"target\": 16,\n" +
+            "      \"relation\": \"\"\n" +
+            "    }";
+        var linkStr2 = "\n" +
+            "    {\n" +
+            "      \"source\": 4,\n" +
+            "      \"target\": 15,\n" +
+            "      \"relation\": \"\"\n" +
+            "    }";
+        var node1 = JSON.parse(nodeStr1);
+        var node2 = JSON.parse(nodeStr2);
+        var link1 = JSON.parse(linkStr1);
+        var nodeArray = new Array();
+        nodeArray.push(node1);
+        nodeArray.push(node2);
+        var linkArray = new Array();
+        linkArray.push(link1);
+        addNode(nodeArray,linkArray);
+    }
+</script>
+<input type="button" value="update" onclick="updateGraphURL('Test2.json')"/>
+<input type="button" value="add" onclick="addNode()"/>
+<input id="indexValue" type="text"/>
+<input type="button" value="remove3" onclick="var indexValue = $('#indexValue').val();removeNode(indexValue)"/>
+
+
 <div id="dict-block" class="hide">
     <div class="dict-container">
-        <div class="date-select" id="dict-wrap"> </div>
+        <div class="date-select" id="dict-wrap-group"> </div>
     </div>
 </div>
 <div id="addReason-block" class="hide">
@@ -26,6 +109,7 @@
 <div id="userListDiv" class="hide">
     <div class="panel-container"></div>
 </div>
+
 <script src="../../plugin/d3/d3.3.5.17.js"></script>
 <script src="../../js/base.js"></script>
 <script src="../../plugin/dict/dict.js?version=0.99"></script>
@@ -36,7 +120,9 @@
 <script src="../../plugin/timeScope.js"></script>
 <script src="../../script/selectUtils.js"></script>
 <script src="plugins/ztree/ztree.js"></script>
+<!--<script src="js/require.js" data-main="js/graphMain"></script>-->
 <script data-main="graph.js" src="/plugin/require.js" type="text/javascript"></script>
+<!--<script data-main="js/graphMain" src="js/require.js" type="text/javascript"></script>-->
 
 </body>
 </html>

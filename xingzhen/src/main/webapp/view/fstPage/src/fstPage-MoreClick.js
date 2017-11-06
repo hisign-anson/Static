@@ -158,7 +158,7 @@ define([
                         fstPageAjax.taskDetail({id: id, userId: top.userId}, function (r) {
                             if (r.flag == 1) {
                                 $open("#panelDiv", {width: 800, title: '&nbsp反馈信息'});
-                                $("#panelDiv .panel-container").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:1}));
+                                $("#panelDiv .panel-container").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:false}));
                                 $("#cancelBtn").on("click",function(){
                                     $("#panelDiv").$close();
                                 });

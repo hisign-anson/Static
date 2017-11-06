@@ -957,21 +957,6 @@ define(['underscore',
                     });
                 }
             }, true);
-            // //不分页
-            // userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId},function (r) {
-            //     if (r.flag == 1) {
-            //         $("#userTable tbody").empty().html(_.template(userListTrTpl, {
-            //             data: r.data,
-            //             ops: top.opsMap,
-            //             checkboxMulti:isCheckboxMulti
-            //         }));
-            //         //任务移交给用户
-            //         _self.saveTransfer(taskId);
-            //         $("#userListDiv").on('click', "#cancelBtn", function () {
-            //             $('#userListDiv').$close();
-            //         });
-            //     }
-            // });
         },
         saveTransfer: function (taskId) {
             _self = this;
@@ -1019,6 +1004,7 @@ define(['underscore',
                 } else {
                     toast("请选择一个用户！", 600).warn()
                 }
+                return false;
             });
         }
     }

@@ -79,31 +79,31 @@ define(['underscore',
             $(".map-content,#mapSvgFrame").on("contextmenu", function (e) {
                 e.preventDefault();
             });
-            var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
-            //进入专案组讨论
-            $(".full-actived .into-communication").on("click", function () {
-                if(!groupChoose){
-                    toast("请先选择专案组！").err();
-                }
-            });
-            //打印
-            $(".full-actived .into-print").on("click", function () {
-                if(!groupChoose){
-                    toast("请先选择专案组！").err();
-                }
-            });
-            //跳转到任务清单
-            $(".full-actived .into-taskList").on("click", function () {
-                if(!groupChoose){
-                    toast("请先选择专案组！").err();
-                }
-            });
-            //跳转到涉及案件
-            $(".full-actived .into-relationCase").on("click", function () {
-                if(!groupinfo){
-                    toast("请先选择专案组！").err();
-                }
-            });
+            // var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
+            // //进入专案组讨论
+            // $(".full-actived .into-communication").on("click", function () {
+            //     if(!groupChoose){
+            //         toast("请先选择专案组！").warn();
+            //     }
+            // });
+            // //打印
+            // $(".full-actived .into-print").on("click", function () {
+            //     if(!groupChoose){
+            //         toast("请先选择专案组！").warn();
+            //     }
+            // });
+            // //跳转到任务清单
+            // $(".full-actived .into-taskList").on("click", function () {
+            //     if(!groupChoose){
+            //         toast("请先选择专案组！").warn();
+            //     }
+            // });
+            // //跳转到涉及案件
+            // $(".full-actived .into-relationCase").on("click", function () {
+            //     if(!groupinfo){
+            //         toast("请先选择专案组！").warn();
+            //     }
+            // });
             // //生成案件侦办过程报告
             // $(".full-actived .into-report").on("click", function () {
             //
@@ -122,7 +122,7 @@ define(['underscore',
                 "height": "100%"
             });
             //进入专案组讨论
-            $(".group-content .into-communication").on("click", function () {
+            $(".group-content .into-communication,.full-actived .into-communication").on("click", function () {
                 debugger
                 if(groupinfo){
                     _selfCommand.intoCommunication(groupinfo);
@@ -131,7 +131,7 @@ define(['underscore',
                 }
             });
             //打印
-            $(".group-content .into-print").on("click", function () {
+            $(".group-content .into-print,.full-actived .into-print").on("click", function () {
                 if(groupinfo){
                     $("#mapSvgFrame").contents().find("svg").jqprint();
                 } else {
@@ -139,7 +139,7 @@ define(['underscore',
                 }
             });
             //跳转到任务清单
-            $(".group-content .into-taskList").on("click", function () {
+            $(".group-content .into-taskList,.full-actived .into-taskList").on("click", function () {
                 if(groupinfo){
                     _selfCommand.intoTaskList(groupinfo);
                 } else {
@@ -147,7 +147,7 @@ define(['underscore',
                 }
             });
             //跳转到涉及案件
-            $(".group-content .into-relationCase").on("click", function () {
+            $(".group-content .into-relationCase,.full-actived .into-relationCase").on("click", function () {
                 if(groupinfo){
                     _selfCommand.intoRelatedCase(groupinfo);
                 } else {
