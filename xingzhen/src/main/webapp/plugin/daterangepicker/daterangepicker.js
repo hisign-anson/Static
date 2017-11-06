@@ -548,8 +548,8 @@ typeof $style==='function'&& $style(getDistPath()+'plugin/daterangepicker/datera
 
         //create the picker HTML object
         var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +
-                '<div class="calendar first left"></div>' +
-                '<div class="calendar second right"></div>' +
+                '<div class="calendar second left"></div>' +
+                '<div class="calendar first right"></div>' +
                 '<div class="ranges">' +
                   '<div class="range_inputs">' +
                     '<div class="daterangepicker_start_input">' +
@@ -560,8 +560,10 @@ typeof $style==='function'&& $style(getDistPath()+'plugin/daterangepicker/datera
                       '<label for="daterangepicker_end"></label>' +
                       '<input class="input-mini" type="text" name="daterangepicker_end" value="" />' +
                     '</div>' +
-                    '<button class="applyBtn" disabled="disabled"></button>&nbsp;' +
-                    '<button class="cancelBtn"></button>' +
+                    '<div class="daterangepicker_btn">' +
+                        '<button class="applyBtn" disabled="disabled"></button>&nbsp;' +
+                        '<button class="cancelBtn"></button>' +
+                    '</div>' +
                   '</div>' +
                 '</div>' +
               '</div>';

@@ -6,13 +6,13 @@
 				callback(response);
 			},true)
 		},
-		//通知公告
+		//通知公告（接收）
 		findRePage:function(param,callback){
 			$post(top.servicePath+'/sys/message/findRePage',param,function(response) {
 				callback(response);
 			},true)
 		},
-		//知识库、表格下载
+		//通知公告、知识库、表格下载
 		findPage:function(param,callback){
 			$post(top.servicePath+'/sys/message/findPage',param,function(response) {
 				callback(response);

@@ -1311,7 +1311,7 @@ function newsMessageFn(vId,vType){
                         temp_date = new Date(item.createDate);
                         item.msgDateTxt = thisYear == temp_date.format('YYYY') ? temp_date.format('M月D日 hh:mm') : temp_date.format('YYYY/MM/DD');
                         //消息已读or未读样式定义 1:未读
-                        item.readLi = item.msgState == '0' ? 'unread' : 'read';
+                        item.readLi = item.msgState == '1' ? 'unread' : 'read';//1未读2已读
                         //右边 详细 时间格式
                         item.msgDetailDate = temp_date.format('YYYY年M月D日') + '('+weeks[temp_date.getDay()]+') ' + temp_date.format('hh:mm');
 
@@ -1400,13 +1400,23 @@ function newsMessageFn(vId,vType){
             myId.push(this.getAttribute('data-id'));
             if(thisLi.attr('class').indexOf('unread') > -1){
                 $post(top.servicePath+'/sys/message/setRead', {ids:myId,userId:top.userId}, function(res){
+                    debugger
                     if(res.flag==1){
                         thisLi.removeClass('unread').addClass('read');
-                        thisLi.attr("data-read",1)
+                        thisLi.attr("data-read",2)
                     }
                 }, true, false);
             }
             //点击对应列--修改列表显示msgState的值为已读
+            top.registry.global.messageList.each(function(o ,i){
+                debugger
+                var detailObj = $('#msg-right .selected-detail-div');
+                if(msg_id == o.id){
+                    o.msgState = '2';
+                    detailObj.template(o);
+                    return false;
+                }
+            });
         }).on('mouseenter', 'div.li', function(){
             $(this).find('.c-remove').removeClass('hideplus');
         }).on('mouseleave', 'div.li', function(){
@@ -1729,12 +1739,13 @@ function newsMoreFn(vId,vType) {
             //listData
             top.registry.global.messageList = [];
             $('#msg-left').pagingList({
-                action:top.servicePath+'/sys/message/findPage',
+                action:top.servicePath+'/sys/message/findRePage',
                 currentPage:$('.paging').data('currentPage'),
                 jsonObj:{
                     startTime:$('#queryDateBegin').val(),
                     endTime:$('#queryDateEnd').val(),
-                    type:1
+                    type:1,
+                    receiverId: top.userName
                 },
                 callback:function(data,t, n, u, o, a, r){
                     var temp_date, queryData = [];

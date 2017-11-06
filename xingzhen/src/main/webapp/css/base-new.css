@@ -4887,7 +4887,7 @@ th.sort-desc {
 }
 .query-result > table,
 .query-result > .all-fix-wrap {
-  margin: 12px 12px 16px 12px;
+  /*margin: 12px 12px 16px 12px;*/
 }
 .panel-control-color.ico-save:after {
   content: '\f0c7';

@@ -742,7 +742,7 @@ define(['underscore',
 		},
 		//点击进行删除
 		delNotice:function(id,type,subject){
-			$confirm('确定删除【'+subject+'】申请吗？',function(bol){
+			$confirm('确定删除【'+subject+'】吗？',function(bol){
 				if(bol){
 					var ids =[];
 					ids.push(id);
