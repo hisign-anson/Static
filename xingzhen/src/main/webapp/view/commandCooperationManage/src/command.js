@@ -115,6 +115,38 @@ define(['underscore',
             _selfCommand = this;
             var thisValue = obj.text();
             $(".choose-group").empty().text(thisValue);
+            $("#groupName").empty().text(thisValue);
+
+            debugger
+            //专案组小组
+            var param = {
+                groupId: str2obj(groupinfo).id,
+                memberName: ""
+            };
+            $.ajax({
+                url: top.servicePath_xz + '/group/getChildGroupList',
+                type: "post",
+                contentType: "application/x-www-form-urlencoded",
+                data: param,
+                success: function (r) {
+                    if (r.flag == 1) {
+                        if (r.data && r.data.length > 0) {
+                            var option = "<option val=''></option>"
+                            $.each(r.data,function (i,o) {
+                                option += "<option val='"+o.id+"'>"+o.groupname+"</option>"
+                            });
+                            $("#smallGroup").empty().html(option);
+                        } else {
+                            toast("该专案组没有小组！", 600).warn();
+                        }
+                    }
+                }
+            });
+            //下发人
+            //反馈人
+            //时间段
+            //任务状态
+
             $(".group-btn-div").removeClass("hide");
             $("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html").attr("groupid",str2obj(groupinfo).id);
             $("#mapSvgFrame").css({

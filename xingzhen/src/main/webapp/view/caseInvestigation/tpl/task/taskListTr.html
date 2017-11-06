@@ -28,7 +28,7 @@
     </td>
     <td><%=item.noFkqrCount%></td>
     <td><%=rangeUtil.formatDate(item.fkjzTime,'yyyy-MM-dd')%></td>
-    <td><%=rangeUtil.formatDate(item.fqTime,'yyyy-MM-dd')%></td>
+    <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd')%></td>
 
     <%if(isOperation == true){%>
     <td>
@@ -48,7 +48,7 @@
             <a class="into-transfer icon-transfer" taskinfo='<%=obj2str(item)%>' id="<%=item.id%>" createname="<%=item.createname%>" creator="<%=item.creator%>" deparmentcode="<%=item.deparmentcode%>" title="移交"></a>
             <%}%>
         <%}else{%>
-            <%if(!item.yjrwid){%>
+            <%if(item.yjrwid){%>
                 <% if(item.creator == top.userId){%>
                 <a class="into-urge icon-urge" id="<%=item.id%>" taskinfo='<%=obj2str(item)%>' title="催办"></a>
                 <%}%>

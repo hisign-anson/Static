@@ -23,6 +23,7 @@ define(['underscore',
             $("#mainDiv").empty().html(_.template(taskListTpl, {isOperation: true}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#fkqrzt");
+            selectUtils.selectTextOption("#changeRece", "#qszt");
             //选择任务状态
             _self.selectTaskStaOption("#changeTaskStatus");
 
@@ -133,13 +134,14 @@ define(['underscore',
                 startTime: $.trim($("#startTime").val()),
                 endTime: $.trim($("#endTime").val()),
                 fkqrzt: $.trim($("#fkqrzt").val()),
+                qszt: $.trim($("#qszt").val()),
                 fkzt: $.trim($("#fkzt").val()),
                 yjzt: $.trim($("#yjzt").val()),
                 overdue: $.trim($("#overdue").val()),
                 deparmentcode: $.trim($("#deparmentcode").val()),
                 fkjzstartTime: $.trim($("#fkjzstartTime").val()),
                 fkjzendTime: $.trim($("#fkjzendTime").val()),
-                orderBy:"task_name",
+                orderBy:"createtime",
                 isDesc:true
             };
             $('#taskListResult').pagingList({
@@ -592,22 +594,14 @@ define(['underscore',
                                         processData: false,
                                         contentType: false,
                                         beforeSend: function () {
-                                            debugger
-                                            //设置进度条
-                                            // var $progressActive = $slide.find('.progress>span');
-                                            //
-                                            // $slide.find('.state').html('上传中...');
-                                            // $slide.find('.progress').show();
-                                            //
-                                            // //添加css3动画
-                                            // $progressActive.addClass('progress-bar-animate');
-
+                                            $('.state').html('上传中...');
                                         },
                                         success: function (res) {
-                                            debugger
+                                            $('.state').html('');
                                             if (res.flag == 1) {
-                                                debugger
                                                 //上传成功后的操作
+                                                // $(".pic-info").removeClass("hide");
+
                                                 item.responseName = res.data.source.substring(12);
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
@@ -995,6 +989,8 @@ define(['underscore',
                             toast('移交成功！', 600, function () {
                                 $("#userListDiv").$close();
                                 _self.showList();
+                                return false;
+
                             }).ok()
                         } else {
                             // toast('移交失败！',600).err()
