@@ -884,7 +884,7 @@ define(['underscore',
                 if ($("#groupid").val()) {
                     var groupinfo = str2obj($("#groupid").attr("paramattr"));
                     var taskinfo = str2obj($("#groupid").attr("taskparamattr"));
-                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id}, "user");
+                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true}, "user");
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }

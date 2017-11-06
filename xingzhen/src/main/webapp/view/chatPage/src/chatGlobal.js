@@ -490,7 +490,7 @@ var clickHandle = {
         var ulHtml = $("#main-frame").contents().find(".message-list");
         var messageList = "";
         var msg_type = message.content.msg_type;
-        var msg_id = messages.msg_id;
+        var msg_id = message.msg_id;
         var time = clickHandle.getLocalTime(message.content.create_time);
 
         var from_id = message.content.from_id;
@@ -581,7 +581,7 @@ var clickHandle = {
     },
     scrollBottom: function () {
         var height = $("#main-frame").contents().find(".message-list").height();
-        $("#main-frame").contents().find(".m-message").scrollTop(25011);
+        $("#main-frame").contents().find(".m-message").scrollTop(height);
     }
 
 };
