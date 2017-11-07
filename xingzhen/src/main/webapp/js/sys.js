@@ -1409,7 +1409,6 @@ function newsMessageFn(vId,vType){
             }
             //点击对应列--修改列表显示msgState的值为已读
             top.registry.global.messageList.each(function(o ,i){
-                debugger
                 var detailObj = $('#msg-right .selected-detail-div');
                 if(msg_id == o.id){
                     o.msgState = '0';

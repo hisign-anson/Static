@@ -27,7 +27,7 @@ define(['underscore',
                 _selfDict.getDictListByParentKey(dictVal,groupType);
             });
             opener.find("#resetBtnGroupType").off("click").on("click",function(){
-                $(".query-block-row input").val("");
+                $("#groupType").val("");
             });
             $("#add-dict-btn").off("click").on('click',function(){
                 $open('#addReason-block',{width:400,height:330,top:100, title:'新增'+title});
@@ -152,7 +152,7 @@ define(['underscore',
                 _selfDict.getUserPortList(userName);
             });
             opener.find("#resetBtn").off("click").on("click",function(){
-                $(".query-block-row input").val("");
+                $("#userName").val("");
             })
         },
         getUserPortList:function (userName) {
@@ -192,7 +192,7 @@ define(['underscore',
                 _selfDict.getUnitPortList(orgName);
             });
             opener.find("#resetBtnOrgName").off("click").on("click",function(){
-                $(".query-block-row input").val("");
+                $('#orgName').val("");
             })
         },
         getUnitPortList:function (orgName) {
@@ -245,7 +245,7 @@ define(['underscore',
                 }
             });
             opener.find("#resetBtnGroupName").off("click").on("click",function(){
-                $(".query-block-row input").val("");
+                $('#groupName').val("");
             })
         },
         getGroupByIdPortList:function (param,groupName){
