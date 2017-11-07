@@ -893,7 +893,8 @@ define(['underscore',
                 if ($("#groupid").val()) {
                     var groupinfo = str2obj($("#groupid").attr("paramattr"));
                     var taskinfo = str2obj($("#groupid").attr("taskparamattr"));
-                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true}, "user");
+                    //dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true}, "user");
+                    dictOpener.getUserByGroupIdPortList($(this),{groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true})
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }
@@ -957,7 +958,10 @@ define(['underscore',
             var taskInfo = str2obj(taskInfo);
             var param = {
                 isInGroup:true,
-                groupId: taskInfo.groupid
+                groupId: taskInfo.groupid,
+                orgId:$.trim($("#userListDiv #orgId").val()),
+                userName: $.trim($("#userListDiv #userName").val()),
+                policeId: $.trim($("#userListDiv #policeId").val())
             };
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
                 if (r.flag == 1) {
@@ -967,7 +971,6 @@ define(['underscore',
                         checkboxMulti: isCheckboxMulti,
                         taskInfoFqr:taskInfo.fqr
                     }));
-
                     $(".span").span();
                     //任务移交给用户
                     _self.saveTransfer(taskId);

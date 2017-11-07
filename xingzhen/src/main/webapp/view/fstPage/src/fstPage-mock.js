@@ -224,8 +224,7 @@ define([
         },
         showMessageList:function () {//信息提醒
             _self = this;
-            fstPageAjax.findReceivePage({receiverId: top.userId,receiverType:3, end: 5, msgState: "1"}, function (r) {//1是未读
-                debugger
+            fstPageAjax.findReceivePage({receiverId: top.userId,receiverType:3, end: 5, msgState: "0"}, function (r) {//0是未读
                 if (r.flag == 1) {
                     $("#messageDiv").empty().html(_.template(messageListTpl,{data:r.data}));
                     if(r.data && r.data.length<=0){
@@ -449,11 +448,19 @@ define([
             var colors = ['#22A0E2', '#3BC087', '#FFA700', '#20B7B0','#EB6854', '#A78CF1', '#289358','#FF9016','#CF5748', '#5AC7AD', '#F88764', '#578ABE'];
             var option = {
                 color: colors,
+                toolbox: {
+                    feature: {
+                        dataView: {show: true, readOnly: false},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+
+                },
                 tooltip: {
                     formatter: "{a} <br/>{b} : {c}"
                 },
                 grid: { // 控制图的大小，调整下面这些值就可以，
-                    x: 100,
+                    x: 60,
                     x2: 20
                 },
                 legend: {
@@ -642,6 +649,10 @@ define([
                     }
 
                 },
+                grid: { // 控制图的大小，调整下面这些值就可以，
+                    x: 60,
+                    x2: 20
+                },
                 tooltip: {
                     trigger: 'axis',
                     formatter: "{a} <br/>{b} : {c}"
@@ -678,7 +689,6 @@ define([
                     }
                 ]
             };
-            // 为echarts对象加载数据
             // 为echarts对象加载数据
             if (!dateType) {
                 var dateType = 0;

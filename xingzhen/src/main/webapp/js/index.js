@@ -631,7 +631,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
             toast(' 请确认两次输入的新密码是否一致！').width(300).addClass('warn');
             return false;
         }
-        $post(top.servicePath+'/sys/user/password',{id:top.userId,userPwd:oldPwd,newPassword:newPwd,userName:top.userName},function (res) {
+        $post(top.servicePath+'/sys/user/password',{id:top.currentUser.id,userPwd:oldPwd,newPassword:newPwd,userName:top.userName},function (res) {
             var msg = res.msg;
             msg = msg?msg:'新密码修改成功！';
             toast(msg,600,function () {
