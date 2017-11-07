@@ -58,8 +58,6 @@ define(['underscore',
                     }
                 }
             });
-            //, {allGroupList:r.data,commonGroupList:null}
-            // $("#mainDiv").empty().html(_.template(commandPage, {ops: top.opsMap}));
             $("#toggleGroup").on("click", function () {
                 var $this = $(this);
                 $(".group-btn-div").removeClass("hide");
@@ -79,89 +77,11 @@ define(['underscore',
             $(".map-content,#mapSvgFrame").on("contextmenu", function (e) {
                 e.preventDefault();
             });
-            // var groupChoose  = $(".choose-group").text() != "请选择专案组"?true:false;
-            // //进入专案组讨论
-            // $(".full-actived .into-communication").on("click", function () {
-            //     if(!groupChoose){
-            //         toast("请先选择专案组！").warn();
-            //     }
-            // });
-            // //打印
-            // $(".full-actived .into-print").on("click", function () {
-            //     if(!groupChoose){
-            //         toast("请先选择专案组！").warn();
-            //     }
-            // });
-            // //跳转到任务清单
-            // $(".full-actived .into-taskList").on("click", function () {
-            //     if(!groupChoose){
-            //         toast("请先选择专案组！").warn();
-            //     }
-            // });
-            // //跳转到涉及案件
-            // $(".full-actived .into-relationCase").on("click", function () {
-            //     if(!groupinfo){
-            //         toast("请先选择专案组！").warn();
-            //     }
-            // });
-            // //生成案件侦办过程报告
-            // $(".full-actived .into-report").on("click", function () {
-            //
-            // });
-            //显示脉络图查询条件
-            _selfCommand.showCondition();
         },
         handleGroup: function (obj,groupinfo) {
             _selfCommand = this;
             var thisValue = obj.text();
             $(".choose-group").empty().text(thisValue);
-            $("#groupName").empty().text(thisValue);
-
-            debugger
-            //专案组小组
-            var param = {
-                groupId: str2obj(groupinfo).id,
-                memberName: ""
-            };
-            $.ajax({
-                url: top.servicePath_xz + '/group/getChildGroupList',
-                type: "post",
-                contentType: "application/x-www-form-urlencoded",
-                data: param,
-                success: function (r) {
-                    if (r.flag == 1) {
-                        if (r.data && r.data.length > 0) {
-                            var option = "<option val=''></option>";
-                            $.each(r.data,function (i,o) {
-                                option += "<option val='"+o.id+"'>"+o.groupname+"</option>"
-                            });
-                            $("#smallGroup").empty().html(option);
-                        } else {
-                            toast("该专案组没有小组！", 600).warn();
-                        }
-                    }
-                }
-            });
-            //下发人   //反馈人
-            var param = {
-                isInGroup: true,
-                groupId: str2obj(groupinfo).id
-            };
-            $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
-                if(r.flag == 1){
-                    if (r.data && r.data.length > 0) {
-                        var option = "<option val=''></option>";
-                        $.each(r.data,function (i,o) {
-                            option += "<option val='"+o.userId+"'>"+o.userName+"</option>"
-                        });
-                        $("#sponsor").empty().html(option);
-                        $("#feedbackUser").empty().html(option);
-                    }
-                }
-
-            }, true);
-            // 时间段
-            // 任务状态
 
             $(".group-btn-div").removeClass("hide");
             $("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html").attr("groupid",str2obj(groupinfo).id);
@@ -171,7 +91,6 @@ define(['underscore',
             });
             //进入专案组讨论
             $(".group-content .into-communication,.full-actived .into-communication").on("click", function () {
-                debugger
                 if(groupinfo){
                     _selfCommand.intoCommunication(groupinfo);
                 } else {
@@ -206,50 +125,6 @@ define(['underscore',
             // $(".group-content .into-report").on("click", function () {
             //
             // });
-        },
-        showCondition: function () {
-            _selfCommand = this;
-            var conditionDiv = $("#mapConditionWrap");
-            conditionDiv.add(conditionDiv.children()).addClass("hide");
-            $("#dateRange").daterangepicker({
-                separator: ' 至 ',
-                showWeekNumbers: true,
-                pickTime: true
-            }, function (start, end, label) {
-                $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
-                $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
-            });
-            selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
-            task.selectTaskStaOption("#changeTaskStatus");
-            $("#searchBtn").on("click", function () {
-                if (conditionDiv.is(":visible")) {
-                    conditionDiv.add(conditionDiv.children()).addClass("hide");
-                    conditionDiv.addClass("hide");
-                } else {
-                    conditionDiv.add(conditionDiv.children()).removeClass("hide");
-                    conditionDiv.removeClass("hide");
-                }
-            });
-            $("#closeBtn").on("click", function () {
-                conditionDiv.add(conditionDiv.children()).addClass("hide");
-                conditionDiv.addClass("hide");
-            });
-            $("#okBtn").on("click", function () {
-                debugger
-                var $form = $(this).parents(".form-btn-block").siblings("form");
-                var param = {
-                    smallGroup:$form.find("#smallGroup option:selected").val(),
-                    sponsor:$form.find("#sponsor option:selected").val(),
-                    feedbackUser:$form.find("#feedbackUser option:selected").val(),
-                    yesOrNo:$form.find("#yesOrNo").val(),
-                    startTime:$form.find("#startTime").val(),
-                    endTime:$form.find("#endTime").val(),
-                    overdue:$form.find("#overdue").val(),
-                    fkzt:$form.find("#fkzt").val()
-                };
-                // conditionDiv.add(conditionDiv.children()).addClass("hide");
-                // conditionDiv.addClass("hide");
-            });
         },
         intoCommunication: function (groupinfo) {
             var groupinfo = str2obj(groupinfo);
@@ -373,8 +248,6 @@ define(['underscore',
                     $("#taskListDiv").$close();
                 }
             });
-
-            // $("#taskListDiv .panel-container").empty().html(_.template(groupTaskListTpl));
         },
         queryTaskList: function (groupid) {
             _selfCommand = this;
@@ -417,7 +290,7 @@ define(['underscore',
                 $("#top-mask",parent.document).height(0);
             }
             var openerDiv = $("#taskListDiv");
-            openerDiv.find(".panel-container").empty().html(_.template(relationCaseTpl, {isOperation:false}));
+            openerDiv.find(".panel-container").empty().html(_.template(relationCaseTpl, {isOperation:false,groupcreator: groupinfo.creator}));
             $(".form-btn-block").addClass("hide");
             $("#relationCase").removeClass("form-body").find("#queryCondition").addClass("query-block").siblings("#relationCaseResult").removeClass("mrn mln");
 

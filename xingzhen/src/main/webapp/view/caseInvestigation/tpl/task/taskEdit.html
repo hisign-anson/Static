@@ -127,7 +127,7 @@
             <div class="form-header">
                 <h5 class="form-title"><i class="left-line"></i>
                     <span>查看反馈信息</span>
-                    <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length < 3){%>
+                    <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length > 3){%>
                     <span>已反馈3次不能再反馈</span>
                     <%}%>
                 </h5>
