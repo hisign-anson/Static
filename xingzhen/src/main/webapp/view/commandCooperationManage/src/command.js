@@ -131,7 +131,7 @@ define(['underscore',
                 success: function (r) {
                     if (r.flag == 1) {
                         if (r.data && r.data.length > 0) {
-                            var option = "<option val=''></option>"
+                            var option = "<option val=''></option>";
                             $.each(r.data,function (i,o) {
                                 option += "<option val='"+o.id+"'>"+o.groupname+"</option>"
                             });
@@ -142,10 +142,26 @@ define(['underscore',
                     }
                 }
             });
-            //下发人
-            //反馈人
-            //时间段
-            //任务状态
+            //下发人   //反馈人
+            var param = {
+                isInGroup: true,
+                groupId: str2obj(groupinfo).id
+            };
+            $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
+                if(r.flag == 1){
+                    if (r.data && r.data.length > 0) {
+                        var option = "<option val=''></option>";
+                        $.each(r.data,function (i,o) {
+                            option += "<option val='"+o.userId+"'>"+o.userName+"</option>"
+                        });
+                        $("#sponsor").empty().html(option);
+                        $("#feedbackUser").empty().html(option);
+                    }
+                }
+
+            }, true);
+            // 时间段
+            // 任务状态
 
             $(".group-btn-div").removeClass("hide");
             $("#mapSvgFrame").attr("src", "/view/graph/d3graphView.html").attr("groupid",str2obj(groupinfo).id);
@@ -195,6 +211,16 @@ define(['underscore',
             _selfCommand = this;
             var conditionDiv = $("#mapConditionWrap");
             conditionDiv.add(conditionDiv.children()).addClass("hide");
+            $("#dateRange").daterangepicker({
+                separator: ' 至 ',
+                showWeekNumbers: true,
+                pickTime: true
+            }, function (start, end, label) {
+                $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
+                $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
+            });
+            selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
+            task.selectTaskStaOption("#changeTaskStatus");
             $("#searchBtn").on("click", function () {
                 if (conditionDiv.is(":visible")) {
                     conditionDiv.add(conditionDiv.children()).addClass("hide");
@@ -202,27 +228,27 @@ define(['underscore',
                 } else {
                     conditionDiv.add(conditionDiv.children()).removeClass("hide");
                     conditionDiv.removeClass("hide");
-                    //     .animate({
-                    //     width:"340px"
-                    // },"fast");
-                    $("#dateRange").daterangepicker({
-                        separator: ' 至 ',
-                        showWeekNumbers: true,
-                        pickTime: true
-                    }, function (start, end, label) {
-                        $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
-                        $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
-                    });
-                    selectUtils.selectTextOption("#changeYesOrNo", "#taskType");
-                    selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
-                    $("#closeBtn").on("click", function () {
-                        conditionDiv.add(conditionDiv.children()).addClass("hide");
-                        conditionDiv.addClass("hide")
-                        //     .animate({
-                        //     width:"0"
-                        // },"fast");
-                    });
                 }
+            });
+            $("#closeBtn").on("click", function () {
+                conditionDiv.add(conditionDiv.children()).addClass("hide");
+                conditionDiv.addClass("hide");
+            });
+            $("#okBtn").on("click", function () {
+                debugger
+                var $form = $(this).parents(".form-btn-block").siblings("form");
+                var param = {
+                    smallGroup:$form.find("#smallGroup option:selected").val(),
+                    sponsor:$form.find("#sponsor option:selected").val(),
+                    feedbackUser:$form.find("#feedbackUser option:selected").val(),
+                    yesOrNo:$form.find("#yesOrNo").val(),
+                    startTime:$form.find("#startTime").val(),
+                    endTime:$form.find("#endTime").val(),
+                    overdue:$form.find("#overdue").val(),
+                    fkzt:$form.find("#fkzt").val()
+                };
+                // conditionDiv.add(conditionDiv.children()).addClass("hide");
+                // conditionDiv.addClass("hide");
             });
         },
         intoCommunication: function (groupinfo) {

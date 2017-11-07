@@ -845,7 +845,8 @@ define(['underscore',
                 callback: function (data) {
                     $("#userTable tbody").empty().html(_.template(userListTrTpl, {
                         data: data,
-                        checkboxMulti: isCheckboxMulti
+                        checkboxMulti: isCheckboxMulti,
+                        taskInfoFqr:null
                     }));
                 }
             });
