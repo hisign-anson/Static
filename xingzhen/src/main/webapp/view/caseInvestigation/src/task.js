@@ -91,6 +91,10 @@ define(['underscore',
                         _self.queryList();
                     }
                     $("#queryBtn").click();
+                    //以下清除参数
+                    var fkqrzt=$($(item).find("a")[0]).attr('fkqrzt',"");
+                    var taskType=$($(item).find("a")[0]).attr('taskType',"");
+                    var overdue=$($(item).find("a")[0]).attr('overdue',"");
                 }
             });
 
