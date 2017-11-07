@@ -33,6 +33,7 @@
 
                         <%if(text == "补充任务"){%>
                         <div class="dict-opener">
+                            <input type="hidden" id="jsrId">
                             <input class="common-input task-valid" type="text" name="" id="jsr" data-options="required:true" taskparamattr='<%=obj2str(taskInfo)%>' placeholder="请输入接收人" readonly />
                             <i id="chooseReceive" class="icon-list cur-p button steelblue" title="接收人"></i>
                         </div>
@@ -40,12 +41,14 @@
                         <%}else if(text == "追加任务"){%>
 
                         <div class="dict-opener">
+                            <input type="hidden" id="jsrId">
                             <input class="common-input task-valid" type="text" name="" id="jsr" data-options="required:true" value="<%=taskInfo.jsrname%>" taskparamattr='<%=obj2str(taskInfo)%>' placeholder="请输入接收人" readonly />
                             <i id="chooseReceive" class="icon-list cur-p button steelblue" title="接收人"></i>
                         </div>
 
                         <%}else{%>
                         <div class="dict-opener">
+                            <input type="hidden" id="jsrId">
                             <input class="common-input task-valid" type="text" name="" id="jsr" data-options="required:true" placeholder="请输入接收人" readonly />
                             <i id="chooseReceive" class="icon-list cur-p button steelblue" title="接收人"></i>
                         </div>

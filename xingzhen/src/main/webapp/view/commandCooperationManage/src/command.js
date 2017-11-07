@@ -290,7 +290,7 @@ define(['underscore',
                 $("#top-mask",parent.document).height(0);
             }
             var openerDiv = $("#taskListDiv");
-            openerDiv.find(".panel-container").empty().html(_.template(relationCaseTpl, {isOperation:false,groupcreator: groupinfo.creator}));
+            openerDiv.find(".panel-container").empty().html(_.template(relationCaseTpl, {isOperation:false,groupcreator: groupinfo.creator,pgroupid:groupinfo.pgroupid}));
             $(".form-btn-block").addClass("hide");
             $("#relationCase").removeClass("form-body").find("#queryCondition").addClass("query-block").siblings("#relationCaseResult").removeClass("mrn mln");
 
@@ -341,7 +341,8 @@ define(['underscore',
                         data: data,
                         isOperation:false,
                         groupid:groupInfo.id,
-                        groupcreator:groupInfo.creator
+                        groupcreator:groupInfo.creator,
+                        pgroupid:groupInfo.pgroupid
                     }));
                     $('.span').span();
                 }

@@ -176,11 +176,13 @@
                             <td><%=item.bz%></td>
                             <%if(isOperation == false){%>
                             <%}else{%>
-                                <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length < 3){%>
-                                <td>
-                                    <a class="into-appendTaskBtn fa fa-plus-square" fkid="<%=item.id%>" taskinfo='<%=obj2str(data)%>' title="追加任务"></a>
-                                </td>
-                                <%}%>
+                                <%if(data.fqr == top.userId){%>
+                                    <%if(!data.taskFks || (data.taskFks && data.taskFks.length < 3)){%>
+                                        <td>
+                                            <a class="into-appendTaskBtn fa fa-plus-square" fkid="<%=item.id%>" taskinfo='<%=obj2str(data)%>' title="追加任务"></a>
+                                        </td>
+                                    <%}%>
+                            <%}%>
                             <%}%>
                         </tr>
                         <%})%>

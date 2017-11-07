@@ -188,7 +188,7 @@ define(['underscore',
                         $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
                         //在反馈上追加任务
                         $(".into-appendTaskBtn").on("click", function () {
-                            _self.showAdd($(this).attr("taskinfo"), $(this).attr("title"));
+                            _self.showAdd($(this).attr("taskinfo"), $(this).attr("title"),$(this).attr("fkid"));
                         });
                         $("#cancelBtn").on("click", function () {
                             _self.showList();
@@ -852,14 +852,14 @@ define(['underscore',
             _self = this;
             $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
             $("#userListDiv .panel-container").empty().html(_.template(userListTpl, {checkboxMulti: false}));
-            $("#userListDiv").on('click', "#chooseUint", function () {
+            $("#userListDiv #chooseUint").on('click', function () {
                 dictOpener.openUnitChoosePort($(this));
             });
-            $("#userListDiv").on("click", "#resetBtn", function () {
+            $("#userListDiv #resetBtn").on("click", function () {
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#userListDiv").on("click", "#queryBtn", function () {
+            $("#userListDiv #queryBtn").on("click", function () {
                 _self.queryUserList(false, taskId, taskInfo);
                 return false;
             });
@@ -867,7 +867,8 @@ define(['underscore',
             //加载用户列表
             _self.queryUserList(false, taskId, taskInfo);
         },
-        showAdd: function (taskinfo, text) {
+        showAdd: function (taskinfo, text,fkid) {
+            debugger
             _self = this;
             var bcrwid, fkid;
             var taskinfo = str2obj(taskinfo);
@@ -877,7 +878,7 @@ define(['underscore',
                         bcrwid = taskinfo.id;
                         break;
                     case "追加任务":
-                        fkid = taskinfo.id;
+                        fkid = fkid;
                         break;
                     default:
                 }
@@ -914,6 +915,14 @@ define(['underscore',
                 if (text) {
                     taskParam = str2obj($("#groupid").attr("taskparamattr"));
                 }
+                var jsr,jsrname;
+                if($("#jsr").attr("paramattr")){
+                    jsr = jsrParam.userId;
+                    jsrname = jsrParam.userName;
+                } else {
+                    jsr = taskParam.jsr;
+                    jsrname = taskParam.jsrname;
+                }
                 $.extend(param, {
                     creator: top.userId,
                     createname: top.trueName,
@@ -923,8 +932,8 @@ define(['underscore',
                     fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
                     groupid: text ? taskParam.groupid : groupParam.id,
-                    jsr: text ? taskParam.jsr : jsrParam.userId,
-                    jsrname: text ? taskParam.jsrname : jsrParam.userName,
+                    jsr: jsr,
+                    jsrname: jsrname,
                     fqrLxfs: top.phone,
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
