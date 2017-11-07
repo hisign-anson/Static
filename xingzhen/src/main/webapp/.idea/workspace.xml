@@ -18,8 +18,8 @@
       <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="837" column="47" lean-forward="false" selection-start-line="837" selection-start-column="47" selection-end-line="837" selection-end-column="51" />
+            <state relative-caret-position="521">
+              <caret line="853" column="38" lean-forward="false" selection-start-line="853" selection-start-column="38" selection-end-line="853" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -517,12 +517,12 @@
       <workItem from="1509353153759" duration="72936000" />
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
-      <workItem from="1510017010991" duration="22465000" />
+      <workItem from="1510017010991" duration="22815000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="463423000" />
+    <option name="totallyTimeSpent" value="463773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -1232,8 +1232,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="837" column="47" lean-forward="false" selection-start-line="837" selection-start-column="47" selection-end-line="837" selection-end-column="51" />
+        <state relative-caret-position="521">
+          <caret line="853" column="38" lean-forward="false" selection-start-line="853" selection-start-column="38" selection-end-line="853" selection-end-column="38" />
           <folding />
         </state>
       </provider>

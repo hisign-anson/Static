@@ -851,6 +851,7 @@ define(['underscore',
                         checkboxMulti: isCheckboxMulti,
                         taskInfoFqr:null
                     }));
+                    $('.span').span();
                 }
             });
             $("#userTable #selectAll").on('click', function () {
