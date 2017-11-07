@@ -8,12 +8,13 @@ define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/userList.html',
     'text!/view/caseInvestigation/tpl/task/taskAdd.html',
     'text!/view/caseInvestigation/tpl/task/taskEdit.html',
-
+    'text!/view/caseInvestigation/tpl/task/taskInfo.html',
+    'text!/view/caseInvestigation/tpl/task/feedBackInfo.html',
     '../../caseInvestigation/dat/specialCaseGroup.js',
     '../../caseInvestigation/src/specialCaseGroup.js',
     '../../caseInvestigation/dat/task.js',
     '../../caseInvestigation/src/task.js',
-    '../../dictManage/src/dictOpener.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl, taskAddTpl, taskEditTpl,
+    '../../dictManage/src/dictOpener.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl, taskAddTpl, taskEditTpl,taskInfoTpl,feedBackInfoTpl,
                                                      specialCaseGroupAjax, specialCaseGroup, taskAjax, task, dictOpener) {
 
     var width = 1200,
@@ -44,302 +45,15 @@ define(['underscore',
         }
     };
     //菜单数据
-    var menuDefault = [
-        {
-            name: "默认菜单1",
-            open: true,
-            children: [
-                {name: "默认菜单1的子节点1"},
-                {name: "默认菜单1的子节点2"}
-            ]
-        },
-        {
-            name: "默认菜单2",
-            open: true,
-            children: [
-                {name: "默认菜单2的子节点1"},
-                {name: "默认菜单2的子节点2"}
-            ]
-        },
-        {
-            name: "没有子节点的默认菜单3"
-        }
-    ];
-    var menuById = [
-        {
-            "menuName": "zNodes0",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "001菜单1",
-                    open: true,
-                    children: [
-                        {name: "001菜单1的子节点1"},
-                        {name: "001菜单1的子节点2"}
-                    ]
-                },
-                {
-                    name: "001菜单2",
-                    open: true,
-                    children: [
-                        {name: "001菜单2的子节点1"},
-                        {name: "001菜单2的子节点2"}
-                    ]
-                },
-                {
-                    name: "001没有子节点的菜单2"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes1",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "002菜单1",
-                    open: true,
-                    children: [
-                        {name: "002菜单1的子节点1"},
-                        {name: "002菜单1的子节点2"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes2",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "003没有子节点的菜单1"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes3",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "004菜单1",
-                    open: true,
-                    children: [
-                        {name: "004菜单1的子节点1"},
-                        {name: "004菜单1的子节点2"}
-                    ]
-                },
-                {
-                    name: "004菜单2",
-                    open: true,
-                    children: [
-                        {name: "004菜单2的子节点1"}
-                    ]
-                },
-                {
-                    name: "004没有子节点的菜单2"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes4",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "005菜单1",
-                    open: true,
-                    children: [
-                        {name: "005菜单1的子节点1"}
-                    ]
-                },
-                {
-                    name: "005菜单2",
-                    open: true,
-                    children: [
-                        {name: "005菜单2的子节点1"},
-                        {name: "005菜单2的子节点2"}
-                    ]
-                },
-                {
-                    name: "005没有子节点的菜单2"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes5",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "006菜单1",
-                    open: true,
-                    children: [
-                        {
-                            name: "006菜单1的子节点1",
-                            open: true,
-                            children: [
-                                {name: "006菜单1的子节点1的子节点1"},
-                                {name: "006菜单1的子节点1的子节点2"}
-                            ]
-                        },
-                        {name: "006菜单1的子节点2"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes6",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "007菜单1",
-                    open: true,
-                    children: [
-                        {name: "007菜单1的子节点1"},
-                        {name: "007菜单1的子节点2"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes7",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "008菜单1",
-                    open: true,
-                    children: [
-                        {name: "008菜单1的子节点1"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes8",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "009菜单1",
-                    open: true,
-                    children: [
-                        {name: "009菜单1的子节点1"},
-                        {name: "009菜单1的子节点2"}
-                    ]
-                },
-                {
-                    name: "009菜单2",
-                    open: true,
-                    children: [
-                        {name: "009菜单2的子节点1"},
-                        {name: "009菜单2的子节点2"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes9",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "010菜单1",
-                    open: true,
-                    children: [
-                        {name: "010菜单1的子节点1"},
-                        {name: "010菜单1的子节点2"}
-                    ]
-                },
-                {
-                    name: "010菜单2",
-                    open: true,
-                    children: [
-                        {name: "010菜单2的子节点1"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes10",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "011菜单1",
-                    open: true,
-                    children: [
-                        {name: "011菜单1的子节点1"},
-                        {name: "011菜单1的子节点2"}
-                    ]
-                },
-                {
-                    name: "011菜单2",
-                    open: true,
-                    children: [
-                        {name: "011菜单2的子节点1"},
-                        {name: "011菜单2的子节点2"}
-                    ]
-                },
-                {
-                    name: "011没有子节点的菜单2"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes11",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "012没有子节点的菜单1"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes12",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "013没有子节点的菜单1"
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes13",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "014菜单1",
-                    open: true,
-                    children: [
-                        {name: "014菜单1的子节点1"},
-                        {name: "014菜单1的子节点2"}
-                    ]
-                }
-            ]
-        },
-        {
-            "menuName": "zNodes14",
-            "type": "1",
-            "menuData": [
-                {
-                    name: "015菜单1",
-                    open: true,
-                    children: [
-                        {name: "015菜单1的子节点1"}
-                    ]
-                },
-                {
-                    name: "015菜单2",
-                    open: true,
-                    children: [
-                        {name: "015菜单2的子节点1"},
-                        {name: "015菜单2的子节点2"}
-                    ]
-                }
-            ]
-        }
-    ];
 
     return {
-        showList: function (groupid) {
+        showList: function (groupid,type) {
             _selfGraph = this;
-            var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=groupid";
+            var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType="+type;
             _selfGraph.updateGraphURL(jsonInitUrl);
 
-
+            //显示脉络图查询条件
+            _selfGraph.showCondition(groupid);
         },
         //根据链接更新
         updateGraphURL: function (jsonInitUrl) {
@@ -410,22 +124,17 @@ define(['underscore',
                 .gravity(0.08);
 
 
-            // //清除原有的画板
-            // d3.select("svg").remove();
+            //清除原有的画板
+            d3.select("svg").remove();
             //定义svg画板
             var svg = d3.select("body").append("svg")
-            // .attr("preserveAspectRatio", "xMidYMid meet")
-            // //自适应------- x:左上角横坐标，y:左上角纵坐标，width:宽度，height:高度
-            // .attr("viewBox", "0 0 1200 900")
                 .attr("width", width)
                 .attr("height", height);
 
-//箭头
+            //箭头
             var marker =
                 svg.append("marker")
-                //.attr("id", function(d) { return d; })
                     .attr("id", "resolved")
-                    //.attr("markerUnits","strokeWidth")//设置为strokeWidth箭头会随着线的粗细发生变化
                     .attr("markerUnits", "userSpaceOnUse")
                     .attr("viewBox", "0 -5 10 10")//坐标系的区域
                     .attr("refX", 30)//箭头坐标
@@ -440,10 +149,6 @@ define(['underscore',
 
             //拖拽开始后设定被拖拽对象为固定
             var drag = layout.drag().on("dragstart", function (d) {
-                //释放其他节点
-                // jsonContext.nodes.forEach(function (d, i) {
-                //     d.fixed = false;
-                // });
                 //本节点固定
                 d.fixed = true;
             });
@@ -478,7 +183,7 @@ define(['underscore',
                         sourceLine.push(source);
                     }
                     return d.source.index;
-                })
+                });
             edges_lineSVG.exit().remove();
 
             //连线上的字
@@ -496,7 +201,6 @@ define(['underscore',
                 .append("image")
                 .attr("width", img_w)
                 .attr("height", img_h)
-
                 .attr("edges", function (d) {
                     var nodeInEdges = d.inEdges;
                     var nodeOutEdges = d.outEdges;
@@ -516,7 +220,6 @@ define(['underscore',
                     }
                     return result;
                 })
-
                 .attr("xlink:href", function (d) {
                     var image;
                     switch (d.type) {
@@ -547,17 +250,15 @@ define(['underscore',
                     var that = d3.event;
                     //根据button判断鼠标点击类型 0（左键） 1（中键） 2（右键）
                     if (that.button == 2) {
-
                         $(document).on("contextmenu", function (e) {
-                            //DOM事件对象——d3.event
                             e.preventDefault();
-                        })
+                        });
+
                         if ($("#tooltip" + i).length <= 0) {
                             var tooltipDiv = "<div id='tooltip" + i + "' class='tooltip-box'><ul id='menuTree" + i + "' class='ztree deploy'></ul></div>";
                             $("body").append(tooltipDiv);
                         }
                         console.info(d);
-                        console.info(i);
                         //获取节点id（专案组id，任务id，反馈id，案件id）  d.id
                         //根据id和type显示不同的菜单
                         var zNodes;
@@ -566,7 +267,8 @@ define(['underscore',
                             {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"},
                             {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>任务下发</span>"}
                         ];
-                        var menuByTaskType = [];
+
+                        var menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
                         if (d.type == "taskid") {
                             if (d.taskCreatorUserId == top.userId) {
                                 //显示催办任务
@@ -574,10 +276,9 @@ define(['underscore',
                                 menuByTaskType.push(urge);
                             }
                             taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
-                                $(document).on("contextmenu", function (e) {
-                                    //DOM事件对象——d3.event
-                                    e.preventDefault();
-                                })
+                                // $(document).on("contextmenu", function (e) {
+                                //     e.preventDefault();
+                                // })
 
                                 if (r.flag == 1) {
                                     var taskinfo = r.data;
@@ -593,25 +294,21 @@ define(['underscore',
                                 }
                             });
                         }
+
                         var menuByFeedbackType = [];
-
-
-                        debugger
                         var inEdgesIndex = d.index;
                         if (!node_img[0][inEdgesIndex]) {
                             return;
                         }
                         var node = node_img[0];
-
                         var edgesArray = node[inEdgesIndex].attributes["edges"];
                         if (!edgesArray) {
                             return;
                         }
                         var edgesStr = edgesArray.value;
                         var edges = edgesStr.split(",");
-                        // console.log(edges);
                         var edgeIndex;
-                        for (var i = 0; i < edges.length; i++) {
+                        for (var index = 0; index < edges.length; index++) {
                             //节点的上一条线
                             edgeIndex = edges[0];
                         }
@@ -619,23 +316,22 @@ define(['underscore',
                             //线的上一个节点
                             var findLine = json.edges[edgeIndex]
                             var lineSource = findLine.source;
-
+                            var feedbackInfo= {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='2'>反馈信息详情</span>"};
+                            menuByFeedbackType.push(feedbackInfo);
                             if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
-                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>下发人追加任务</span>"};
+                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>下发人追加任务</span>"};
                                 menuByFeedbackType.push(append_zj);
                             }
                         }
                         var menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
+
+
                         switch (d.type) {
                             case "groupid":
                                 zNodes = menuByGroupType;
                                 break;
                             case "taskid":
                                 zNodes = menuByTaskType;
-                                // //登录人是否是任务的创建人
-                                // if(d.taskCreatorUserId == top.userId){
-                                //     //菜单显示催办任务
-                                // }
                                 break;
                             case "fkid":
                                 zNodes = menuByFeedbackType;
@@ -747,7 +443,7 @@ define(['underscore',
                     var timeHtml = "<tspan class='time-text' dx='" + (node_dx - 40) + "' dy='" + node_dy + "'>" + time + "</tspan>";
 
                     return nameHtml + (nameHtml ? timeHtml : "");
-                })
+                });
 
             node_textSVG.exit().remove();
 
@@ -760,15 +456,17 @@ define(['underscore',
             var text = $target.text();
             var val = $target.attr("val");
             var infoattr = $target.attr("infoattr");
+            var taskid = $target.attr("taskid");
+
             switch (className) {
                 case "groupHandle":
                     _selfGraph.groupHandle(id, val, infoattr);
                     break;
                 case "taskHandle":
-                    _selfGraph.taskHandle(id, val, infoattr);
+                    _selfGraph.taskHandle(id, val, infoattr,taskid);
                     break;
                 case "feedbackHandle":
-                    _selfGraph.feedbackHandle(id, val, infoattr);
+                    _selfGraph.feedbackHandle(id, val,taskid);
                     break;
                 case "caseHandle":
                     _selfGraph.caseHandle(id, val, infoattr);
@@ -789,7 +487,7 @@ define(['underscore',
                     break;
             }
         },
-        taskHandle: function (id, val, infoattr) {
+        taskHandle: function (id, val, infoattr,taskid) {
             _selfGraph = this;
             switch (val) {
                 case "1":
@@ -804,13 +502,19 @@ define(['underscore',
                 case "4":
                     _selfGraph.urgeTask(id);
                     break;
+                case "5":
+                    _selfGraph.showTaskInfo(id);
+                    break;
             }
         },
-        feedbackHandle: function (id, val) {
+        feedbackHandle: function (id, val,taskid) {
             _selfGraph = this;
             switch (val) {
                 case "1":
-                    // _selfGraph.addTaskHandle(id,"追加任务");
+                    _selfGraph.addTaskHandle(id,"追加任务",taskid);
+                    break;
+                case "2":
+                    _selfGraph.feedbackInfo(id,taskid);
                     break;
             }
         },
@@ -823,7 +527,34 @@ define(['underscore',
                     break;
             }
         },
+        showTaskInfo:function (id) {
+            _selfGraph = this;
+            taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
+                if (r.flag == 1) {
+                    $open('#userListDiv', {width: 800, title: '&nbsp任务详情'});
+                    $("#userListDiv .panel-container").empty().html(_.template(taskInfoTpl, {data: r.data,isOperation: true}));
 
+                    $("#cancelBtn").on("click", function () {
+                        $("#userListDiv").$close();
+                    });
+                }
+            });
+        },
+        feedbackInfo:function (id,taskid) {
+            _selfGraph = this;
+            debugger
+            taskAjax.taskDetail({id: taskid, userId: top.userId}, function (r) {
+                if (r.flag == 1) {
+                    $open('#userListDiv', {width: 800, title: '&nbsp反馈详情'});
+                    $("#userListDiv .panel-container").empty().html(_.template(feedBackInfoTpl, {data: r.data}));
+
+
+                    $("#cancelBtn").on("click", function () {
+                        $("#userListDiv").$close();
+                    });
+                }
+            });
+        },
         //查看专案组基本信息
         showGroupInfo: function (id, infoattr) {
             _selfGraph = this;
@@ -970,7 +701,7 @@ define(['underscore',
                     if (r.flag == 1) {
                         toast('保存成功！', 600, function () {
                             openerDiv.$close();
-                            _selfGraph.showList(id);
+                            _selfGraph.showList(id,"groupid");
                         }).ok();
                     } else {
                         toast(r.msg, 600).err()
@@ -979,15 +710,21 @@ define(['underscore',
             });
 
         },
-        addTaskHandle: function (id, text) {
+        addTaskHandle: function (id, text,taskid) {
             _selfGraph = this;
             var bcrwid, fkid;
-            taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
+            var paramId;
+            if(text == "补充任务"){
+                paramId = id;
+            }else if(text == "追加任务") {
+                paramId = taskid;
+            }
+            taskAjax.taskDetail({id: paramId, userId: top.userId}, function (r) {
                 if (r.flag == 1) {
                     var taskinfo = r.data;
                     if (taskinfo) {
-                        bcrwid = taskinfo.bcrwid;
-                        fkid = taskinfo.fkid;
+                        bcrwid = taskinfo.id;
+                        fkid = taskinfo.id;
                     }
                     $.ajax({
                         url: top.servicePath_xz + '/group/groupDetail/' + taskinfo.groupid,
@@ -1013,7 +750,7 @@ define(['underscore',
                                         var taskinfo = taskinfo;
                                         dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {
                                             groupId: text ? taskinfo.groupid : groupinfo.id,
-                                            isInGroup: true,
+                                            isInGroup: true
                                         }, "user");
                                     } else {
                                         toast("请先选择专案组！", 600).warn();
@@ -1024,8 +761,6 @@ define(['underscore',
                                     openerDiv.$close();
                                 });
                                 $("#saveBtn").on("click", function () {
-
-                                    debugger;
                                     $('.task-valid').validatebox();
                                     if ($('.validatebox-invalid').length > 0) {
                                         return false;
@@ -1060,7 +795,7 @@ define(['underscore',
                                     taskAjax.addTask(param, function (r) {
                                         if (r.flag == 1) {
                                             toast('保存成功！', 600, function () {
-                                                _selfGraph.showList();
+                                                _selfGraph.showList(taskinfo.groupid,"groupid");
                                             }).ok();
                                         } else {
                                             toast(r.msg, 600).err()
@@ -1341,28 +1076,152 @@ define(['underscore',
                 }
             });
         },
-        //格式化日期,
-        formatDate: function (date, format) {
-            _selfGraph = this;
-            var paddNum = function (num) {
-                num += "";
-                return num.replace(/^(\d)$/, "0$1");
-            }
-            //指定格式字符
-            var cfg = {
-                yyyy: date.getFullYear() //年 : 4位
-                , yy: date.getFullYear().toString().substring(2)//年 : 2位
-                , M: date.getMonth() + 1  //月 : 如果1位的时候不补0
-                , MM: paddNum(date.getMonth() + 1) //月 : 如果1位的时候补0
-                , d: date.getDate()   //日 : 如果1位的时候不补0
-                , dd: paddNum(date.getDate())//日 : 如果1位的时候补0
-                , hh: date.getHours()  //时
-                , mm: date.getMinutes() //分
-                , ss: date.getSeconds() //秒
-            }
-            format || (format = "yyyy-MM-dd hh:mm:ss");
-            return format.replace(/([a-z])(\1)*/ig, function (m) {
-                return cfg[m];
+
+        showCondition: function (groupid) {
+            _selfCommand = this;
+            debugger
+            var conditionDiv = $("#mapConditionWrap");
+            conditionDiv.add(conditionDiv.children()).addClass("hide");
+            $.ajax({
+                url: top.servicePath_xz + '/group/groupDetail/' + groupid,
+                type: "post",
+                contentType: "application/x-www-form-urlencoded",
+                success: function (r) {
+                    if (r.data) {
+                        $("#groupName").empty().text(r.data.groupname);
+                    }
+                }
+            });
+            //专案组小组
+            var param = {
+                groupId: groupid,
+                memberName: ""
+            };
+            $.ajax({
+                url: top.servicePath_xz + '/group/getChildGroupList',
+                type: "post",
+                contentType: "application/x-www-form-urlencoded",
+                data: param,
+                success: function (r) {
+                    if (r.flag == 1) {
+                        if (r.data && r.data.length > 0) {
+                            var option = "<option val=''></option>";
+                            $.each(r.data,function (i,o) {
+                                option += "<option val='"+o.id+"'>"+o.groupname+"</option>"
+                            });
+                            $("#smallGroup").empty().html(option);
+                        } else {
+                            // toast("该专案组没有小组！", 600).warn();
+                            $("#smallGroup").empty();
+                        }
+                    }
+                }
+            });
+            //下发人   //反馈人
+            var param = {
+                isInGroup: true,
+                groupId: groupid
+            };
+            $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
+                if(r.flag == 1){
+                    if (r.data && r.data.length > 0) {
+                        var option = "<option val=''></option>";
+                        $.each(r.data,function (i,o) {
+                            option += "<option val='"+o.userId+"'>"+o.userName+"</option>"
+                        });
+                        $("#sponsor").empty().html(option);
+                        $("#feedbackUser").empty().html(option);
+                    }
+                }
+
+            }, true);
+            // 时间段
+            $("#dateRange").daterangepicker({
+                separator: ' 至 ',
+                showWeekNumbers: true,
+                pickTime: true
+            }, function (start, end, label) {
+                $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
+                $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
+            });
+            selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
+            // 任务状态
+            task.selectTaskStaOption("#changeTaskStatus");
+            $("#searchBtn",parent.document).off("click").on("click", function () {
+                if (conditionDiv.is(":visible")) {
+                    conditionDiv.add(conditionDiv.children()).addClass("hide");
+                    conditionDiv.addClass("hide");
+                    $(".form-btn-block").siblings("form").find("select,input").val("");
+                    $(".form-btn-block").siblings("form").find("span.option").each(function () {
+                        $(this).children("u").removeClass("active").eq(0).addClass("active");
+                    });
+                } else {
+                    conditionDiv.add(conditionDiv.children()).removeClass("hide");
+                    conditionDiv.removeClass("hide");
+                }
+                return false;
+            });
+
+            $("#closeBtn").on("click", function () {
+                conditionDiv.add(conditionDiv.children()).addClass("hide");
+                conditionDiv.addClass("hide");
+                $(this).parents(".form-btn-block").siblings("form").find("select,input").val("");
+                $(this).parents(".form-btn-block").siblings("form").find("span.option").each(function () {
+                    $(this).children("u").removeClass("active").eq(0).addClass("active");
+                });
+                return false;
+            });
+            $("#okBtn").on("click", function () {
+                var $form = $(this).parents(".form-btn-block").siblings("form");
+                var param = {
+                    smallGroup:$form.find("#smallGroup option:selected").val(),
+                    sponsor:$form.find("#sponsor option:selected").val(),
+                    feedbackUser:$form.find("#feedbackUser option:selected").val(),
+                    yesOrNo:$form.find("#yesOrNo").val(),
+                    startTime:$form.find("#startTime").val(),
+                    endTime:$form.find("#endTime").val(),
+                    overdue:$form.find("#overdue").val(),
+                    fkzt:$form.find("#fkzt").val()
+                };
+                var groupid  = $form.find("#smallGroup option:selected").attr("val");
+                _selfGraph.showList(groupid,"pgroupid");
+
+                // var json = jsonContext;
+                // var taskinfo;
+                // var groupinfo;
+                // $.each(json.nodes,function (index,value) {
+                //     if(value.type == "taskid"){
+                //         taskAjax.taskDetail({id: value.id, userId: top.userId}, function (r) {
+                //             if (r.flag == 1) {
+                //                 taskinfo = r.data;
+                //                 $.ajax({
+                //                     url: top.servicePath_xz + '/group/groupDetail/' + taskinfo.groupid,
+                //                     type: "post",
+                //                     contentType: "application/x-www-form-urlencoded",
+                //                     success: function (r) {
+                //                         if (r.data) {
+                //                             groupinfo = r.data;
+                //                             console.info(taskinfo);
+                //                             console.info(groupinfo);
+                //                             debugger
+                //                             // if(){
+                //                             //
+                //                             // }
+                //
+                //                             _selfGraph.updateGraphJSON(json);
+                //
+                //                         }
+                //                     }
+                //                 });
+                //
+                //             }
+                //         });
+                //     }
+                // });
+
+                // conditionDiv.add(conditionDiv.children()).addClass("hide");
+                // conditionDiv.addClass("hide");
+                return false;
             });
         }
     }

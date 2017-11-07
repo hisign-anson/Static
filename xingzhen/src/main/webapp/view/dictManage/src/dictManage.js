@@ -20,7 +20,7 @@ define(['underscore',
             	async: {
             	   enable: true,
             	   url: top.servicePath+'/sys/dict/getDictTreeByParentKey',//异步加载时的请求地址
-		           autoParam: ["id"],//提交参数
+		           autoParam: ["id", "rootKey" ],//提交参数
 		           type: 'GET',
 		           dataType: 'json',
 		           headers: {
@@ -114,7 +114,8 @@ define(['underscore',
 			});
 			var param ={
 					currentPage:$('.paging').data('currentPage'),
-					key:key
+					key:key,
+					root:rootKey
 			};
 			$('#query-result').pagingList({
                 action:top.servicePath+'/sys/dict/getDictListByParentKey',

@@ -152,3 +152,69 @@ body {
 .link.resolved {
     stroke-dasharray: 0, 2 1;
 }
+
+.highlight{
+    fill: #22A0E2;
+}
+
+
+.map-condition {
+    width: 340px;
+    /*width: 0;*/
+    background: #f0f0f0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #dddddd;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+/*.map-condition.animated {*/
+/*display: block;*/
+/*-webkit-animation: fadeInleft 2s infinite ease-in-out;*/
+/*-moz-animation: fadeInleft 2s infinite ease-in-out;*/
+/*-ms-animation: fadeInleft 2s infinite ease-in-out;*/
+/*animation: fadeInleft 2s infinite ease-in-out;*/
+/*}*/
+.map-condition .form-content-block {
+    box-shadow: none;
+    border-radius: 0;
+    background: inherit;
+}
+
+.map-condition span.qc-label-m {
+    width: 135px;
+    display: inline-block;
+    text-align: right;
+}
+
+.map-condition .common-input,.map-condition .common-select {
+    width: 160px;
+}
+
+.map-condition .qc-group-l {
+    line-height: 40px;
+}
+
+.map-condition .title {
+    border-bottom: 1px solid #cccccc;
+    padding: 0 5px;
+    line-height: 35px;
+    margin-top: 0;
+}
+
+
+.option > u {
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.option > u.active {
+    font-weight: bold;
+    color: #3a88d2!important;
+}
+
+.map-condition .form-btn-block {
+    border: 0;
+    background: inherit;
+}

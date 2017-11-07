@@ -832,13 +832,16 @@ define(['underscore',
         },
         queryUserList: function (isCheckboxMulti, groupInfo) {
             _self = this;
+            debugger
+            var orgParam = str2obj($("#userListDiv #orgName").attr("paramattr"));
             var param = {
-                isInGroup: false,
-                groupId: groupInfo.id,
-                orgId: $("#userListDiv #orgId").val(),
+                isInGroup: groupInfo.pgroupid? true: false,
+                groupId: groupInfo.pgroupid?groupInfo.pgroupid:groupInfo.id,
+                orgId:orgParam?orgParam.orgId:"",
                 userName: $.trim($("#userListDiv #userName").val()),
                 policeId: $.trim($("#userListDiv #policeId").val())
             };
+
             $('#userListDiv #userTableResult').pagingList({
                 action: top.servicePath_xz + '/usergroup/getUsergroupPage',
                 jsonObj: param,
