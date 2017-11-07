@@ -23,11 +23,11 @@ define(['underscore',
                 opener.$close();
             });
             opener.find("#queryBtnGroupType").off("click").on("click",function(){
-                var groupType=$.trim($('#groupType').val());
+                var groupType=$.trim(opener.find('#groupType').val());
                 _selfDict.getDictListByParentKey(dictVal,groupType);
             });
             opener.find("#resetBtnGroupType").off("click").on("click",function(){
-                $("#groupType").val("");
+                opener.find("#groupType").val("");
             });
             $("#add-dict-btn").off("click").on('click',function(){
                 $open('#addReason-block',{width:400,height:330,top:100, title:'新增'+title});
@@ -148,11 +148,11 @@ define(['underscore',
                 opener.$close();
             });
             opener.find("#queryBtn").off("click").on("click",function(){
-                var userName=$.trim($('#userName').val());
+                var userName=$.trim(opener.find('#userName').val());
                 _selfDict.getUserPortList(userName);
             });
             opener.find("#resetBtn").off("click").on("click",function(){
-                $("#userName").val("");
+                opener.find("#userName").val("");
             })
         },
         getUserPortList:function (userName) {
@@ -188,11 +188,11 @@ define(['underscore',
                 opener.$close();
             });
             opener.find("#queryBtnOrgName").off("click").on("click",function(){
-                var orgName =$.trim($('#orgName').val());
+                var orgName =$.trim(opener.find('#orgName').val());
                 _selfDict.getUnitPortList(orgName);
             });
             opener.find("#resetBtnOrgName").off("click").on("click",function(){
-                $('#orgName').val("");
+                opener.find('#orgName').val("");
             })
         },
         getUnitPortList:function (orgName) {
@@ -271,8 +271,11 @@ define(['underscore',
             });
 
         },
-        getUserByGroupIdPortList:function (param) {
+        getUserByGroupIdPortList:function (obj,param) {//单独新增的方法（vince）
             _selfDict = this;
+            var title = obj.attr("title");
+            window.newwin=$open('#dict-block-group',{width:400,height:300,top:100, title:'选择'+title});
+            $(".dict-container").find(".query-block-row").empty();
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {
                 if (r.flag == 1) {
                     var target = $("#dict-wrap-group");
@@ -281,6 +284,24 @@ define(['underscore',
                         tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
+                    var opener = $(".panel #dict-block-group");
+                    $(".query-block-row input").val("");
+                    opener.find("#dict-wrap-group").off("click").on("click","div:not(.disabled)",function(){
+                        toast("不能选择自己！",600).warn();
+                    });
+                    opener.find("#dict-wrap-group").off("click").on("click","div:not(.disabled)",function(){
+                        var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                        input.val($(this).find("span").text());
+                        var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                        inputHidden.val($(this).find("span").attr("val"));
+
+                        var paramAttr = $(this).find("span").attr("paramattr");
+                        input.attr("paramattr",paramAttr);
+                        if($("#jsrLxfs").length > 0){
+                            $("#jsrLxfs").val($(this).find("span").attr("phone"));
+                        }
+                        opener.$close();
+                    });
                 }
             },true);
         },
