@@ -299,7 +299,7 @@ var jchatGloabal = {
                     '</span></a>';
             } else if (fileType == "image") {
                 //图片消息
-                fileDiv = '<a class="message-image preview-JIM-img" id="file_' + index + '" href="' + path_file_or_images + '"><img class="message-image" alt="" src="' + path_file_or_images + '" /></a>';
+                fileDiv = '<a class="message-image preview-JIM-img" id="file_' + index + '" href="javascript:;"><img class="message-image" alt="" src="' + path_file_or_images + '" /></a><div class="imgHover"><img class="img-responsive center-block" src="'+path_file_or_images+'" alt=""/></div>';
             }
             messageList = '<li>' +
                 '<div class="time"><span>' + time + '</span></div>' +
@@ -329,7 +329,10 @@ var jchatGloabal = {
             //     hideOnOverlayClick: true,
             //     hideOnContentClick: true
             // });
-
+            //$("#main-frame").contents().find(".preview-JIM-img").click(function(){
+            //    $("#main-frame").contents().find("div.imgHover").css("display","none");
+            //    $(this).siblings("div.imgHover").css("display","block");
+            //});
             clickHandle.scrollBottom();
         }).onFail(function (data) {
             toast('success:' + JSON.stringify(data));
