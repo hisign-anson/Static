@@ -132,6 +132,10 @@ define(['underscore',
             var jmgid =  groupinfo.jmgid;
 
             $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+            var fullActivedCheck = $(".map-list").hasClass("full-panel");
+            if(fullActivedCheck){
+                $("#top-mask",parent.document).height(0);
+            }
             $("#taskListDiv .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
             window.parent.jchatGloabal.getUserInfo();
             window.parent.jchatGloabal.getGroupInfo(jmgid);

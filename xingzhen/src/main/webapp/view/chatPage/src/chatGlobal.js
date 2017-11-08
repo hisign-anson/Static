@@ -1,14 +1,15 @@
+/**********************测试appkey**********************/
 // AppKey:13c78e9ee2ac862f30ce0b17
 // Master Secret:670180c73e6152cf44918e2e
 
-
+/**********************开发appkey**********************/
 // AppKey:a15c1e9bb38c1607b9571eea
 // Master Secret:bd4d826e1e49340aac2d05e2
 
-var across_appkey = '13c78e9ee2ac862f30ce0b17';
+var across_appkey = 'a15c1e9bb38c1607b9571eea';
 var across_random_str = '022cd9fd995849b58b3ef0e943421ed9';//20-36 长度的随机字符串
 var across_timestamp = new Date().getTime();
-var masterSecret = '670180c73e6152cf44918e2e';
+var masterSecret = 'bd4d826e1e49340aac2d05e2';
 // //签名，10 分钟后失效, 签名生成算法: signature = md5(appkey=appkey&timestamp=timestamp&random_str=random_str&key=secret)
 var across_signature = md5("appkey=" + across_appkey + "&timestamp=" + across_timestamp + "&random_str=" + across_random_str + "&key=" + masterSecret);
 window.JIM = new JMessage({
@@ -296,6 +297,14 @@ var jchatGloabal = {
                                 if (msg_type == "file" || msg_type == "image") {
                                     //文件消息 图片消息
                                     jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
+                                } else if(msg_type =="custom"){
+                                    //自动发的消息
+                                    list += '<li>' +
+                                        '<div class="time"><span>' + time + '</span></div>' +
+                                        '<div class="all">' +
+                                        '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                                        '</div></div>' +
+                                        '</li>';
                                 } else {
                                     //单聊文字消息 群聊文字消息
                                     list += '<li>' +

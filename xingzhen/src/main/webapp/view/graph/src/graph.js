@@ -14,7 +14,7 @@ define(['underscore',
     '../../caseInvestigation/src/specialCaseGroup.js',
     '../../caseInvestigation/dat/task.js',
     '../../caseInvestigation/src/task.js',
-    '../../dictManage/src/dictOpener.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl, taskAddTpl, taskEditTpl,taskInfoTpl,feedBackInfoTpl,
+    '../../dictManage/src/dictOpener.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl, taskAddTpl, taskEditTpl, taskInfoTpl, feedBackInfoTpl,
                                                      specialCaseGroupAjax, specialCaseGroup, taskAjax, task, dictOpener) {
 
     var width = 1200,
@@ -25,6 +25,12 @@ define(['underscore',
 
     var zTreeObj;
     var jsonContext, edges_line, edges_text, node_img, node_text;
+
+    // var edges_lineSVG;
+    // var edges_textSVG;
+    // var node_imgSVG;
+    // var node_textSVG;
+
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
     var setting = {
         view: {
@@ -47,9 +53,9 @@ define(['underscore',
     //菜单数据
 
     return {
-        showList: function (groupid,type) {
+        showList: function (groupid, type) {
             _selfGraph = this;
-            var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType="+type;
+            var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=" + type;
             _selfGraph.updateGraphURL(jsonInitUrl);
 
             //显示脉络图查询条件
@@ -316,10 +322,10 @@ define(['underscore',
                             //线的上一个节点
                             var findLine = json.edges[edgeIndex]
                             var lineSource = findLine.source;
-                            var feedbackInfo= {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='2'>反馈信息详情</span>"};
+                            var feedbackInfo = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='2'>反馈信息详情</span>"};
                             menuByFeedbackType.push(feedbackInfo);
                             if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
-                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>下发人追加任务</span>"};
+                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='1'>\追加任务</span>"};
                                 menuByFeedbackType.push(append_zj);
                             }
                         }
@@ -437,7 +443,7 @@ define(['underscore',
                     var name = arr[0];
                     var time = arr[1];
                     name = name ? name : "";
-                    time = rangeUtil.formatDate(time ? time : "",'yyyy-MM-dd');
+                    time = rangeUtil.formatDate(time ? time : "", 'yyyy-MM-dd');
 
                     var nameHtml = "<tspan class='name-text' dx='" + (node_dx) + "' dy='" + node_dy + "'>" + name + "</tspan>";
                     var timeHtml = "<tspan class='time-text' dx='" + (node_dx - 40) + "' dy='" + node_dy + "'>" + time + "</tspan>";
@@ -463,10 +469,10 @@ define(['underscore',
                     _selfGraph.groupHandle(id, val, infoattr);
                     break;
                 case "taskHandle":
-                    _selfGraph.taskHandle(id, val, infoattr,taskid);
+                    _selfGraph.taskHandle(id, val, infoattr, taskid);
                     break;
                 case "feedbackHandle":
-                    _selfGraph.feedbackHandle(id, val,taskid);
+                    _selfGraph.feedbackHandle(id, val, taskid);
                     break;
                 case "caseHandle":
                     _selfGraph.caseHandle(id, val, infoattr);
@@ -487,7 +493,7 @@ define(['underscore',
                     break;
             }
         },
-        taskHandle: function (id, val, infoattr,taskid) {
+        taskHandle: function (id, val, infoattr, taskid) {
             _selfGraph = this;
             switch (val) {
                 case "1":
@@ -507,14 +513,14 @@ define(['underscore',
                     break;
             }
         },
-        feedbackHandle: function (id, val,taskid) {
+        feedbackHandle: function (id, val, taskid) {
             _selfGraph = this;
             switch (val) {
                 case "1":
-                    _selfGraph.addTaskHandle(id,"追加任务",taskid);
+                    _selfGraph.addTaskHandle(id, "追加任务", taskid);
                     break;
                 case "2":
-                    _selfGraph.feedbackInfo(id,taskid);
+                    _selfGraph.feedbackInfo(id, taskid);
                     break;
             }
         },
@@ -527,12 +533,15 @@ define(['underscore',
                     break;
             }
         },
-        showTaskInfo:function (id) {
+        showTaskInfo: function (id) {
             _selfGraph = this;
             taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
                 if (r.flag == 1) {
                     $open('#userListDiv', {width: 800, title: '&nbsp任务详情'});
-                    $("#userListDiv .panel-container").empty().html(_.template(taskInfoTpl, {data: r.data,isOperation: true}));
+                    $("#userListDiv .panel-container").empty().html(_.template(taskInfoTpl, {
+                        data: r.data,
+                        isOperation: true
+                    }));
 
                     $("#cancelBtn").on("click", function () {
                         $("#userListDiv").$close();
@@ -540,7 +549,7 @@ define(['underscore',
                 }
             });
         },
-        feedbackInfo:function (id,taskid) {
+        feedbackInfo: function (id, taskid) {
             _selfGraph = this;
             debugger
             taskAjax.taskDetail({id: taskid, userId: top.userId}, function (r) {
@@ -701,7 +710,7 @@ define(['underscore',
                     if (r.flag == 1) {
                         toast('保存成功！', 600, function () {
                             openerDiv.$close();
-                            _selfGraph.showList(id,"groupid");
+                            _selfGraph.showList(id, "groupid");
                         }).ok();
                     } else {
                         toast(r.msg, 600).err()
@@ -710,13 +719,13 @@ define(['underscore',
             });
 
         },
-        addTaskHandle: function (id, text,taskid) {
+        addTaskHandle: function (id, text, taskid) {
             _selfGraph = this;
             var bcrwid, fkid;
             var paramId;
-            if(text == "补充任务"){
+            if (text == "补充任务") {
                 paramId = id;
-            }else if(text == "追加任务") {
+            } else if (text == "追加任务") {
                 paramId = taskid;
             }
             taskAjax.taskDetail({id: paramId, userId: top.userId}, function (r) {
@@ -795,7 +804,7 @@ define(['underscore',
                                     taskAjax.addTask(param, function (r) {
                                         if (r.flag == 1) {
                                             toast('保存成功！', 600, function () {
-                                                _selfGraph.showList(taskinfo.groupid,"groupid");
+                                                _selfGraph.showList(taskinfo.groupid, "groupid");
                                             }).ok();
                                         } else {
                                             toast(r.msg, 600).err()
@@ -1106,8 +1115,8 @@ define(['underscore',
                     if (r.flag == 1) {
                         if (r.data && r.data.length > 0) {
                             var option = "<option val=''></option>";
-                            $.each(r.data,function (i,o) {
-                                option += "<option val='"+o.id+"'>"+o.groupname+"</option>"
+                            $.each(r.data, function (i, o) {
+                                option += "<option val='" + o.id + "'>" + o.groupname + "</option>"
                             });
                             $("#smallGroup").empty().html(option);
                         } else {
@@ -1123,11 +1132,11 @@ define(['underscore',
                 groupId: groupid
             };
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
-                if(r.flag == 1){
+                if (r.flag == 1) {
                     if (r.data && r.data.length > 0) {
                         var option = "<option val=''></option>";
-                        $.each(r.data,function (i,o) {
-                            option += "<option val='"+o.userId+"'>"+o.userName+"</option>"
+                        $.each(r.data, function (i, o) {
+                            option += "<option val='" + o.userId + "'>" + o.userName + "</option>"
                         });
                         $("#sponsor").empty().html(option);
                         $("#feedbackUser").empty().html(option);
@@ -1144,10 +1153,11 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
-            selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
+            // selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
             // 任务状态
-            task.selectTaskStaOption("#changeTaskStatus");
-            $("#searchBtn",parent.document).off("click").on("click", function () {
+            // task.selectTaskStaOption("#changeTaskStatus");
+            selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
+            $("#searchBtn", parent.document).off("click").on("click", function () {
                 if (conditionDiv.is(":visible")) {
                     conditionDiv.add(conditionDiv.children()).addClass("hide");
                     conditionDiv.addClass("hide");
@@ -1174,55 +1184,150 @@ define(['underscore',
             $("#okBtn").on("click", function () {
                 var $form = $(this).parents(".form-btn-block").siblings("form");
                 var param = {
-                    smallGroup:$form.find("#smallGroup option:selected").val(),
-                    sponsor:$form.find("#sponsor option:selected").val(),
-                    feedbackUser:$form.find("#feedbackUser option:selected").val(),
-                    yesOrNo:$form.find("#yesOrNo").val(),
-                    startTime:$form.find("#startTime").val(),
-                    endTime:$form.find("#endTime").val(),
-                    overdue:$form.find("#overdue").val(),
-                    fkzt:$form.find("#fkzt").val()
+                    smallGroup: $form.find("#smallGroup option:selected").attr("val"),
+                    sponsor: $form.find("#sponsor option:selected").attr("val"),
+                    feedbackUser: $form.find("#feedbackUser option:selected").attr("val"),
+                    // yesOrNo:$form.find("#yesOrNo").val(),
+                    startTime: $form.find("#startTime").val(),
+                    endTime: $form.find("#endTime").val(),
+                    taskStatus: $form.find("#taskStatus").val()
                 };
-                var groupid  = $form.find("#smallGroup option:selected").attr("val");
-                _selfGraph.showList(groupid,"pgroupid");
+                // var groupid  = $form.find("#smallGroup option:selected").attr("val");
+                // if(groupid){
+                //     //选择小组
+                //     _selfGraph.showList(groupid,"pgroupid");
+                // } else {
+                //     //选择大组
+                //     _selfGraph.showList(groupid,"groupid");
+                //
+                // }
+                var json = jsonContext;
+                var nodes = [];
+                var edges = [];
+                // svg.selectAll(".nodetext")
+                // for (var i = 0; i < node_img; i++) {
+                //
+                // }
+                $.each(json.nodes, function (index, value) {
+                    var isInTimeRange = _selfGraph.isInTimeRange(param.startTime, param.endTime, value.taskCreateTime);
+                    debugger;
+                    console.info(value.id+"status"+param.sponsor);
+                    console.info(value.id+"value"+value.taskCreatorUserId);
+                    if ((param.startTime && param.endTime && value.taskCreateTime && isInTimeRange == false)
+                        || ((param.taskStatus && value.taskStatus && param.taskStatus != value.taskStatus)
+                        || (param.feedBackUserId && value.feedbackUser && param.feedBackUserId != value.feedbackUser)
+                        || (param.sponsor && value.taskCreatorUserId && param.sponsor != value.taskCreatorUserId))
+                    ) {
+                        console.info(value);
+                        _selfGraph.removeNode(index);
+                    }
 
-                // var json = jsonContext;
-                // var taskinfo;
-                // var groupinfo;
-                // $.each(json.nodes,function (index,value) {
-                //     if(value.type == "taskid"){
-                //         taskAjax.taskDetail({id: value.id, userId: top.userId}, function (r) {
-                //             if (r.flag == 1) {
-                //                 taskinfo = r.data;
-                //                 $.ajax({
-                //                     url: top.servicePath_xz + '/group/groupDetail/' + taskinfo.groupid,
-                //                     type: "post",
-                //                     contentType: "application/x-www-form-urlencoded",
-                //                     success: function (r) {
-                //                         if (r.data) {
-                //                             groupinfo = r.data;
-                //                             console.info(taskinfo);
-                //                             console.info(groupinfo);
-                //                             debugger
-                //                             // if(){
-                //                             //
-                //                             // }
-                //
-                //                             _selfGraph.updateGraphJSON(json);
-                //
-                //                         }
-                //                     }
-                //                 });
-                //
-                //             }
-                //         });
-                //     }
+                    // if ((param.sponsor && !value.taskCreatorUserId) || (param.feedBackUserId && !value.feedbackUser) || (param.taskStatus && !value.taskStatus) || (!( (value.taskCreatorUserId == param.sponsor) &&
+                    //         (value.feedbackUser == param.feedBackUserId) &&
+                    //         (isInTimeRange == true) &&
+                    //         (value.taskStatus == param.taskStatus)
+                    //     ))) {
+                    //     debugger
+                    //     console.info(value);
+                    //     _selfGraph.removeNode(index);
+                    // }
+
+
+                    // _selfGraph.updateGraphJSON(json);
+                    //     //下发人
+                    //     if (param.sponsor) {
+                    //         if (value.taskCreatorUserId) {
+                    //             if (value.taskCreatorUserId == param.sponsor) {
+                    //                 console.info("发起人满足" + value);
+                    //                 nodes.push(value);
+                    //             }
+                    //         }
+                    //     }
+                    //     //反馈人
+                    //     if (param.feedBackUserId) {
+                    //         if (value.feedbackUser) {
+                    //             if (value.feedbackUser == param.feedBackUserId) {
+                    //                 console.info("反馈人满足" + value);
+                    //                 nodes.push(value);
+                    //             }
+                    //         }
+                    //     }
+                    //     //时间段
+                    //     if (isInTimeRange == true) {
+                    //         console.info("时间段满足" + value);
+                    //         nodes.push(value);
+                    //     }
+                    //     //任务状态
+                    //     if (param.taskStatus) {
+                    //         if (value.taskStatus) {
+                    //             if (value.taskStatus == param.taskStatus) {
+                    //                 console.info("任务状态满足" + value);
+                    //                 nodes.push(value);
+                    //             }
+                    //         }
+                    //     }
+                    // });
+
+                    // console.info(json)
+
+                    // var inEdges = nodes.inEdges;
+                    // var outEdges = nodes.outEdges;
+                    // var nodeIndex = nodes.index;
+                    //
+                    // $.each(json.edges, function (index, value){
+                    //     $.each(inEdges, function (i, v){
+                    //         if(value.source == v.index){
+                    //
+                    //         }
+                    //     });
+                    //     $.each(outEdges, function (i, v){
+                    //         if(value.target == v.index){
+                    //
+                    //         }
+                });
                 // });
-
                 // conditionDiv.add(conditionDiv.children()).addClass("hide");
                 // conditionDiv.addClass("hide");
                 return false;
             });
+        },
+        isInTimeRange: function (start, end, time) {
+            _selfGraph = this;
+            if (start && end && time) {
+                time = time.split(" ")[0];
+                var start_time = parseInt(time.replace(/-/g, "")) > parseInt(start.replace(/-/g, ""));
+                var time_end = parseInt(end.replace(/-/g, "")) > parseInt(time.replace(/-/g, ""));
+                if (start_time && time_end) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        removeNode: function (index) {
+            _selfGraph = this;
+            // edges_line, edges_text, node_img, node_text;
+            if (!node_img[0][index]) {
+                return;
+            }
+            node_img[0][index].remove();
+            var node = node_img[0];
+            node_text[0][index].remove();
+
+            var edgesArray = node[index].attributes["edges"];
+            if (!edgesArray) {
+                return;
+            }
+            var edgesStr = edgesArray.value;
+            var edges = edgesStr.split(",");
+            // console.log(edges);
+            for (var i = 0; i < edges.length; i++) {
+                var edgeIndex = edges[i];
+                if (edgeIndex != "") {
+                    edges_line[0][edgeIndex].remove();
+                    edges_text[0][edgeIndex].remove();
+                }
+            }
         }
     }
 });

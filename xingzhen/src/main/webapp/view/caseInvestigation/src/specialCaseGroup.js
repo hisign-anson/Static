@@ -152,7 +152,7 @@ define(['underscore',
                                 reserveField1: groupid,
                                 createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(), 'yyyy-MM-dd'),
                                 creator: top.userId,
-                                content:"hah"
+                                content: "hah"
                             };
                             specialCaseGroupAjax.addChatLog(chatParam, function () {
 
@@ -208,7 +208,7 @@ define(['underscore',
             $("#archiveBlock").on("click", "#saveBtn", function () {
                 var broadcastContent = $("#broadcastContent").val();
                 //调用极光接口
-                window.parent.clickHandle.sendBroadcastText(jmgid,broadcastContent);
+                window.parent.clickHandle.sendBroadcastText(jmgid, broadcastContent);
                 $("#archiveBlock").$close();
             });
 
@@ -216,7 +216,7 @@ define(['underscore',
                 $("#archiveBlock").$close();
             });
         },
-        showGroupOfGroup: function (obj, groupid, jmgid,groupinfo) {
+        showGroupOfGroup: function (obj, groupid, jmgid, groupinfo) {
             _self = this;
 
             debugger;
@@ -230,7 +230,7 @@ define(['underscore',
                 currentTr.next().remove();
             } else {
                 var param = {
-                    userId:top.userId,
+                    userId: top.userId,
                     groupId: groupid,
                     memberName: userParam ? userParam.userName : ""
                 };
@@ -243,7 +243,7 @@ define(['underscore',
                         if (r.flag == 1) {
                             if (r.data && r.data.length > 0) {
                                 obj.addClass("clicked-open");
-                                var tableHtml = _.template(groupListTpl, {data: r.data,parentData:groupinfo});
+                                var tableHtml = _.template(groupListTpl, {data: r.data, parentData: groupinfo});
                                 console.info(tableHtml);
                                 console.info($(tableHtml));
                                 //嵌套内容渲染
@@ -295,7 +295,7 @@ define(['underscore',
                                             reserveField1: groupid,
                                             createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(), 'yyyy-MM-dd'),
                                             creator: top.userId,
-                                            content:"hah"
+                                            content: "hah"
                                         };
                                         specialCaseGroupAjax.addChatLog(chatParam, function () {
 
@@ -514,7 +514,11 @@ define(['underscore',
         },
         handleRelationCase: function (groupInfo) {
             _self = this;
-            $(".form-content-block").empty().html(_.template(relationCaseTpl, {isOperation: true,groupcreator: groupInfo.creator,pgroupid:groupInfo.pgroupid}));
+            $(".form-content-block").empty().html(_.template(relationCaseTpl, {
+                isOperation: true,
+                groupcreator: groupInfo.creator,
+                pgroupid: groupInfo.pgroupid
+            }));
             $(".form-btn-block").addClass("hide");
 
             $("#relationCase #chooseCaseType").on('click', function () {
@@ -580,7 +584,7 @@ define(['underscore',
                     selectUtils.clearQueryValue();
                     return false;
                 });
-                $("#caseListDiv #queryBtn").on("click",  function () {
+                $("#caseListDiv #queryBtn").on("click", function () {
                     console.info("案件查询按钮");
                     _self.queryCaseList(groupInfo);
                     return false;
@@ -595,7 +599,7 @@ define(['underscore',
             _self = this;
             var param = {
                 isInGroup: true,
-                groupId: groupInfo.pgroupid?groupInfo.pgroupid:groupInfo.id,
+                groupId: groupInfo.pgroupid ? groupInfo.pgroupid : groupInfo.id,
                 ab: $.trim($("#ab").val()),
                 ajbh: $("#ajbh").val(),
                 ajmc: $.trim($("#ajmc").val()),
@@ -612,7 +616,7 @@ define(['underscore',
                         isOperation: isGraphOperation == false ? false : true,
                         groupid: groupInfo.id,
                         groupcreator: groupInfo.creator,
-                        pgroupid:groupInfo.pgroupid
+                        pgroupid: groupInfo.pgroupid
                     }));
                     $('.span').span();
 
@@ -653,9 +657,9 @@ define(['underscore',
                         // $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
                         _self.showCaseInfo($(this).attr("ajid"));
                     });
-                    $(".ab").each(function (i,o) {
+                    $(".ab").each(function (i, o) {
                         var title = $(this).find("span").text();
-                        $(this).attr("title",title);
+                        $(this).attr("title", title);
                     });
                 }
             });
@@ -701,7 +705,7 @@ define(['underscore',
         showCaseInfo: function (ajid) {
             _self = this;
             var param = {
-                id:ajid
+                id: ajid
             };
             $.ajax({
                 url: top.servicePath_xz + '/asjAj/getById',
@@ -709,9 +713,9 @@ define(['underscore',
                 contentType: "application/x-www-form-urlencoded",
                 data: param,
                 success: function (r) {
-                    if(r.flag == 1){
+                    if (r.flag == 1) {
                         $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
-                        $("#userListDiv .panel-container").empty().html(_.template(caseInfoTpl,{data:r.data}));
+                        $("#userListDiv .panel-container").empty().html(_.template(caseInfoTpl, {data: r.data}));
                         $("#userListDiv").off("click").on('click', "#closeBtn", function () {
                             $('#userListDiv').$close();
                         });
@@ -720,14 +724,14 @@ define(['underscore',
                 }
             });
         },
-        delCase: function (groupInfo, id, ajbh,ajmc) {
+        delCase: function (groupInfo, id, ajbh, ajmc) {
             _self = this;
             $confirm('确定移除案件【' + ajbh + '】吗？', function (bol) {
                 if (bol) {
                     var param = [{
                         id: id,
-                        groupid:groupInfo.id,
-                        creator:top.userId,
+                        groupid: groupInfo.id,
+                        creator: top.userId,
                         caseName: ajmc
                     }];
                     specialCaseGroupAjax.removeAjGroupList(param, function (r) {
@@ -800,7 +804,7 @@ define(['underscore',
                     $("#staffTable tbody").empty().html(_.template(groupStaffTrTpl, {
                         data: data,
                         groupcreator: groupInfo.creator,
-                        isOperation :true
+                        isOperation: true
                     }));
                     $('.span').span();
 
@@ -816,10 +820,10 @@ define(['underscore',
             debugger
             var orgParam = str2obj($("#userListDiv #orgName").attr("paramattr"));
             var param = {
-                excludeGroupId:groupInfo.pgroupid? groupInfo.id: "",
-                isInGroup: groupInfo.pgroupid? true: false,
-                groupId: groupInfo.pgroupid?groupInfo.pgroupid:groupInfo.id,
-                orgId:orgParam?orgParam.orgId:"",
+                excludeGroupId: groupInfo.pgroupid ? groupInfo.id : "",
+                groupId: groupInfo.pgroupid ? groupInfo.pgroupid : groupInfo.id,
+                isInGroup: groupInfo.pgroupid ? true : false,
+                orgId: orgParam ? orgParam.orgId : "",
                 userName: $.trim($("#userListDiv #userName").val()),
                 policeId: $.trim($("#userListDiv #policeId").val())
             };
@@ -831,7 +835,7 @@ define(['underscore',
                     $("#userTable tbody").empty().html(_.template(userListTrTpl, {
                         data: data,
                         checkboxMulti: isCheckboxMulti,
-                        taskInfoFqr:null
+                        taskInfoFqr: null
                     }));
                     $('.span').span();
                 }
