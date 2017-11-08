@@ -145,6 +145,7 @@ define(['underscore',
                 if($("#jsrLxfs").length > 0){
                     $("#jsrLxfs").val($(this).find("span").attr("phone"));
                 }
+                debugger
                 opener.$close();
             });
             opener.find("#queryBtn").off("click").on("click",function(){
@@ -162,7 +163,7 @@ define(['underscore',
             userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:""},function (r) {
                 if (r.flag == 1) {
                     $.each(r.data, function (i, o) {
-                        tpl+='<div class="item-value"><u><span paramattr="'+ obj2str(o) +'" val="'+o.userId+'" phone="'+o.phone+'">'+o.userName+','+o.orgName+'</span></div></u>';
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                 }

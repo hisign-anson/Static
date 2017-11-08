@@ -41,18 +41,9 @@
         </div>
 
         <div class="query-block-row">
-            <div class="fl qc-group-xl">
+            <div class="fl qc-group-full">
                 <span class="qc-label-xl">案件状态：</span>
                 <dict dict-id="ajstate" dict-name="ajstate" dict-type="radio" dict-root="56" class="dictInLineSelect" ></dict>
-
-                <!--<span class="option" id="changeCaseSta">-->
-                    <!--<u class="active default " val="">全部</u>-->
-                    <!--<u class="  " val="0">已受理</u>-->
-                    <!--<u class="  " val="1">已立案</u>-->
-                    <!--<u class="  " val="0">已破案</u>-->
-                    <!--<u class="  " val="1">已结案</u>-->
-                    <!--<u class="  " val="1">已撤销</u>-->
-                <!--</span>-->
             </div>
         </div>
         <div class="query-widget-wrap">
@@ -67,7 +58,7 @@
         <div class="new-color-bar">
             <i class="icon-search fs14 mr10"></i>
             <span class="title">查询结果（共找到<span class="total-count"></span>条数据）</span>
-            <%if(top.userId == groupcreator){%>
+            <%if(top.userId == groupcreator && !pgroupid){%>
             <div class="bar-btn-div">
                 <b id="linkNewCase" class="cm-add-btn cm-btn-icon h-add orange-btn">关联新案件</b>
             </div>

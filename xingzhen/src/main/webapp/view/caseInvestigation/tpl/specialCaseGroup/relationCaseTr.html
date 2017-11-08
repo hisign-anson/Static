@@ -17,7 +17,7 @@
     <td><%=item.ajzbry%></td>
     <%if(isOperation == true){%>
     <td>
-        <%if(top.userId == groupcreator){%>
+        <%if(top.userId == groupcreator && !pgroupid){%>
         <a class="into-delete icon-delete" id="<%=item.id%>" ajbh="<%=item.ajbh%>" ajmc="<%=item.ajmc%>" title="移除案件"></a>
         <%}%>
     </td>

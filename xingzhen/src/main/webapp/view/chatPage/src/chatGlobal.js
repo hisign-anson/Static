@@ -12,8 +12,8 @@ var masterSecret = '670180c73e6152cf44918e2e';
 // //签名，10 分钟后失效, 签名生成算法: signature = md5(appkey=appkey&timestamp=timestamp&random_str=random_str&key=secret)
 var across_signature = md5("appkey=" + across_appkey + "&timestamp=" + across_timestamp + "&random_str=" + across_random_str + "&key=" + masterSecret);
 window.JIM = new JMessage({
-    // debug: true
-    debug: false
+    debug: true
+    // debug: false
 });
 //设置JIM 全局变量
 localData.set('across_appkey', across_appkey);
@@ -46,7 +46,7 @@ JIM.onDisconnect(function () {
     });
     JIM.loginOut();//极光退出登录
 });
-
+var onSyncConversation_res;
 // alert($("#main-frame").contents().find(".into-communication").attr("class"));
 var jchatGloabal = {
     init: function () {
@@ -74,10 +74,12 @@ var jchatGloabal = {
 
             //离线消息同步监听
             JIM.onSyncConversation(function (data) {
-                localData.set('onSyncConversation_res', data);
+                onSyncConversation_res = data;
+                // localData.set('onSyncConversation_res', data);
             });
             //聊天消息实时监听
             JIM.onMsgReceive(function (data) {
+                debugger
                 localData.set('onMsgReceive_res', data);
             });
 
@@ -222,54 +224,62 @@ var jchatGloabal = {
         });
     },
     onSyncConversation: function () {
-        var data = localData.get('onSyncConversation_res');
+        // var data = localData.get('onSyncConversation_res');
+        var data = onSyncConversation_res;
+        debugger
         if (data && data.length > 0) {
+            debugger
             var message_list = str2obj(data)[0].msgs;
+            // var message_list = data;
             var list = '';
             $.each(message_list, function (i, e) {
-                var message_list_content = message_list[i].content;
-                var time = clickHandle.getLocalTime(message_list_content.create_time);
-                var from_name = message_list_content.from_name;
-                var from_id = message_list_content.from_id;
-                var login_user_name = top.trueName;
-                var login_userId = top.userId;
+                if(e.msg_type == 4){
+                    debugger
+                    var message_list_content = message_list[i].content;
+                    var time = clickHandle.getLocalTime(message_list_content.create_time);
+                    var from_name = message_list_content.from_name;
+                    var from_id = message_list_content.from_id;
+                    var login_user_name = top.trueName;
+                    var login_userId = top.userId;
 
-                var content_text = message_list_content.msg_body.text;
-                var msg_type = message_list_content.msg_type;
-                var msg_id = message_list[i].msg_id
-                if (from_id == login_userId) {
-                    if (msg_type == "file" || msg_type == "image") {
-                        //文件消息 图片消息
-                        jchatGloabal.getResourceMessage(".message-list", message_list_content, true, msg_type,msg_id);
-                    } else {
-                        //单聊文字消息 群聊文字消息
-                        list += '<li>' +
-                            '<div class="time"><span>' + time + '</span></div>' +
-                            '<div class="main self">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            '<div class="text-wrap"><div class="from-name">' + login_user_name + '</div><div class="text">' + content_text + '</div>' +
-                            '</div></div>' +
-                            '</li>';
-                        $("#main-frame").contents().find(".message-list").append(list);
-                        clickHandle.scrollBottom();
-                    }
+                    var content_text = message_list_content.msg_body.text;
+                    var msg_type = message_list_content.msg_type;
+                    var msg_id = message_list[i].msg_id
+                    if (from_id == login_userId) {
+                        if (msg_type == "file" || msg_type == "image") {
+                            //文件消息 图片消息
+                            jchatGloabal.getResourceMessage(".message-list", message_list_content, true, msg_type,msg_id);
+                        } else {
+                            //单聊文字消息 群聊文字消息
+                            list += '<li>' +
+                                '<div class="time"><span>' + time + '</span></div>' +
+                                '<div class="main self">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap"><div class="from-name">' + login_user_name + '</div><div class="text">' + content_text + '</div>' +
+                                '</div></div>' +
+                                '</li>';
+                            $("#main-frame").contents().find(".message-list").append(list);
+                            clickHandle.scrollBottom();
+                        }
 
-                } else {
-                    if (msg_type == "file" || msg_type == "image") {
-                        //文件消息 图片消息
-                        jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
                     } else {
-                        //单聊文字消息 群聊文字消息
-                        list += '<li>' +
-                            '<div class="time"><span>' + time + '</span></div>' +
-                            '<div class="main">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
-                            '</div></div>' +
+                        if (msg_type == "file" || msg_type == "image") {
+                            //文件消息 图片消息
+                            jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
+                        } else {
+                            //单聊文字消息 群聊文字消息
+                            list += '<li>' +
+                                '<div class="time"><span>' + time + '</span></div>' +
+                                '<div class="main">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
+                                '</div></div>' +
+                                '</li>';
                             '</li>';
-                        '</li>';
-                        $("#main-frame").contents().find(".message-list").append(list);
-                        clickHandle.scrollBottom();
+                            $("#main-frame").contents().find(".message-list").append(list);
+                            clickHandle.scrollBottom();
+                        }
+
                     }
 
                 }
@@ -349,6 +359,7 @@ var jchatGloabal = {
         return fd;
     },
     onMsgReceive: function () {
+        debugger
         var data = localData.get('onMsgReceive_res');
         if (data && data.length > 0) {
             var msg_type = data.messages[0].content.msg_type;
@@ -408,7 +419,8 @@ var jchatGloabal = {
     sendGroupMsg: function (textContent, gid) {
         JIM.sendGroupMsg({
             'target_gid': gid,
-            'content': textContent
+            'content': textContent,
+            'at_list':[]
         }).onSuccess(function (data, msg) {
             clickHandle.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
         }).onFail(function (data) {
@@ -494,6 +506,15 @@ var clickHandle = {
             $("#main-frame").contents().find("#messageContent").html("");
             //发送群聊消息
             jchatGloabal.sendGroupMsg(textContent, gid);
+        }
+    },
+    sendBroadcastText: function (gid,broadcastContent) {
+        if (broadcastContent == "") {
+            toast("不能发送空白消息！");
+        } else {
+            console.info("发送消息！");
+            //发送群聊消息
+            jchatGloabal.sendGroupMsg(broadcastContent, gid);
         }
     },
     showMessageList: function (message) {

@@ -91,7 +91,6 @@ define(['underscore',
                 endTime: $("#endTime").val(),
                 startTime: $("#startTime").val(),
                 userId: top.userId
-
             };
             $('#specialGroupListResult').pagingList({
                 action: top.servicePath_xz + '/group/getGroupPage',
@@ -166,7 +165,7 @@ define(['underscore',
                         // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
                     });
                     $(".into-group").on('click', function () {
-                        _self.showGroupOfGroup($(this), $(this).attr("groupid"), $(this).attr("jmgid"));
+                        _self.showGroupOfGroup($(this), $(this).attr("groupid"), $(this).attr("jmgid"), $(this).attr("groupinfo"));
                     });
 
                 }
@@ -207,8 +206,9 @@ define(['underscore',
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
             $("#archiveBlock").on("click", "#saveBtn", function () {
+                var broadcastContent = $("#broadcastContent").val();
                 //调用极光接口
-                window.parent.clickHandle.sendText(jmgid);
+                window.parent.clickHandle.sendBroadcastText(jmgid,broadcastContent);
                 $("#archiveBlock").$close();
             });
 
@@ -216,9 +216,12 @@ define(['underscore',
                 $("#archiveBlock").$close();
             });
         },
-        showGroupOfGroup: function (obj, groupid, jmgid) {
+        showGroupOfGroup: function (obj, groupid, jmgid,groupinfo) {
             _self = this;
+
+            debugger;
             //嵌套表格的实现--------------------------------------------------------------------------------------------
+            var groupinfo = str2obj(groupinfo);
             var isOpen = obj.hasClass("clicked-open");
             var currentTr = obj.parents("tr");
             var userParam = str2obj($("#membername").attr("paramattr"));
@@ -227,8 +230,9 @@ define(['underscore',
                 currentTr.next().remove();
             } else {
                 var param = {
+                    userId:top.userId,
                     groupId: groupid,
-                    memberName: $.trim($("#membername").val())
+                    memberName: userParam ? userParam.userName : ""
                 };
                 $.ajax({
                     url: top.servicePath_xz + '/group/getChildGroupList',
@@ -239,7 +243,7 @@ define(['underscore',
                         if (r.flag == 1) {
                             if (r.data && r.data.length > 0) {
                                 obj.addClass("clicked-open");
-                                var tableHtml = _.template(groupListTpl, {data: r.data});
+                                var tableHtml = _.template(groupListTpl, {data: r.data,parentData:groupinfo});
                                 console.info(tableHtml);
                                 console.info($(tableHtml));
                                 //嵌套内容渲染
@@ -297,23 +301,9 @@ define(['underscore',
 
                                         })
                                     });
-                                    // console.info("进入聊天界面！");
-                                    // // // $("#mainDiv").empty().html(_.template(chatPageTpl));
-                                    // // $open('#archiveBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-                                    // // // $("#archiveBlock .form-content").empty().html(_.template(chatPageTpl));
-                                    // // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-                                    // // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
-                                    // window.open("/view/chatPage/chatPage.html","nw","width=840,height=640");
                                 });
                             } else {
                                 toast("该专案组没有小组！", 600).warn();
-                                // currentTr.next().attr("colspan","11").empty().html(_.template(emptyDataPage));
-                                // byid("empty-container").style.width = window.innerWidth * 0.8 + 'px';
-                                // byid("empty-container").style.height = (window.innerHeight - 340) + 'px';
-                                // window.onresize = function () {
-                                //     byid("empty-container").style.width = window.innerWidth * 0.8 + 'px';
-                                //     byid("empty-container").style.height = (window.innerHeight - 340) + 'px';
-                                // }
                             }
                         }
                     }
@@ -524,7 +514,7 @@ define(['underscore',
         },
         handleRelationCase: function (groupInfo) {
             _self = this;
-            $(".form-content-block").empty().html(_.template(relationCaseTpl, {isOperation: true,groupcreator: groupInfo.creator}));
+            $(".form-content-block").empty().html(_.template(relationCaseTpl, {isOperation: true,groupcreator: groupInfo.creator,pgroupid:groupInfo.pgroupid}));
             $(".form-btn-block").addClass("hide");
 
             $("#relationCase #chooseCaseType").on('click', function () {
@@ -552,13 +542,12 @@ define(['underscore',
                 _self.queryRelationCaseList(groupInfo);
                 return false;
             });
-
             //加载已关联案件列表
             _self.queryRelationCaseList(groupInfo);
             //关联新案件
             $("#relationCase #linkNewCase").on("click", function () {
                 console.info("涉及案件关联新案件按钮");
-                $open('#caseListDiv', {width: 800, title: '&nbsp案件查询'});
+                $open('#caseListDiv', {width: 960, title: '&nbsp案件查询'});
                 $("#caseListDiv .panel-container").empty().html(_.template(caseListTpl, {groupid: groupInfo.id}));
 
                 //点击选择时间范围（当天当月当季当年）
@@ -581,11 +570,6 @@ define(['underscore',
                 }, function (start, end, label) {
                     $('#slStartTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                     $('#slEndTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
-                });
-
-                $("#caseListDiv #chooseAcceptUint").on('click', "",function () {
-                    //dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
-                    dictOpener.openUnitChoosePort($(this));
                 });
                 //点击多选案件状态
                 $(".dictInLineSelect").dictInLineSelect();
@@ -611,17 +595,11 @@ define(['underscore',
             _self = this;
             var param = {
                 isInGroup: true,
-                groupId: groupInfo.id,
+                groupId: groupInfo.pgroupid?groupInfo.pgroupid:groupInfo.id,
                 ab: $.trim($("#ab").val()),
                 ajbh: $("#ajbh").val(),
                 ajmc: $.trim($("#ajmc").val()),
                 ajstate: $("#ajstate").val(),
-
-                // fadd:"",
-                // slEndTime:"",
-                // slStartTime:"",
-                // sljsdw:"",
-
                 endTime: $("#endTime").val(),
                 startTime: $("#startTime").val()
             };
@@ -633,7 +611,8 @@ define(['underscore',
                         data: data,
                         isOperation: isGraphOperation == false ? false : true,
                         groupid: groupInfo.id,
-                        groupcreator: groupInfo.creator
+                        groupcreator: groupInfo.creator,
+                        pgroupid:groupInfo.pgroupid
                     }));
                     $('.span').span();
 
@@ -661,8 +640,7 @@ define(['underscore',
                 endTime: $("#caseListDiv #endTime").val(),
                 startTime: $("#caseListDiv #startTime").val(),
                 slEndTime: $("#caseListDiv #slEndTime").val(),
-                slStartTime: $("#caseListDiv #slStartTime").val(),
-                sljsdw: $("#caseListDiv #sljsdw").val()
+                slStartTime: $("#caseListDiv #slStartTime").val()
             };
             $('#caseListDiv #caseListResult').pagingList({
                 action: top.servicePath_xz + '/asjAj/getAjGroupPage',
@@ -675,7 +653,10 @@ define(['underscore',
                         // $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
                         _self.showCaseInfo($(this).attr("ajid"));
                     });
-
+                    $(".ab").each(function (i,o) {
+                        var title = $(this).find("span").text();
+                        $(this).attr("title",title);
+                    });
                 }
             });
             $("#caseTable #selectAll").on('click', function () {
