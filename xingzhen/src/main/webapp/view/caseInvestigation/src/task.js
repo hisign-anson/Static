@@ -886,7 +886,7 @@ define(['underscore',
                 }
             }
             $("#mainDiv").empty().html(_.template(taskAddTpl, {taskInfo: taskinfo, text: text}));
-            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false});
+            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false,minDate:rangeUtil.formatDate(new Date(),'yyyy-MM-dd')});
 
             $("#chooseGroup").on('click', function () {
                 dictOpener.openChoosePort($(this), null, null, {userId: top.userId});

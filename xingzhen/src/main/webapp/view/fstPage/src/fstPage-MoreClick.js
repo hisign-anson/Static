@@ -86,6 +86,7 @@ define([
                     toast(r.msg,600).err();
                 }
             });
+            $(".span").span();
         },
         getGroupMemberList:function(groupId){//平台成果展示(点击更多--获取所有组内成员)
             _self=this;

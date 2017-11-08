@@ -164,7 +164,8 @@ define(['underscore',
             userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:""},function (r) {
                 if (r.flag == 1) {
                     $.each(r.data, function (i, o) {
-                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
+                        //加三目去除当前人
+                        o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                 }
@@ -283,7 +284,7 @@ define(['underscore',
                     var target = $("#dict-wrap-group");
                     var tpl='';
                     $.each(r.data, function (i, o) {
-                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                        o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                     var opener = $(".panel #dict-block-group");
@@ -326,9 +327,9 @@ define(['underscore',
                         case "user":
                             $.each(r.data, function (i, o) {
                                 if(o.userId == top.userId){
-                                    tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                                    o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
                                 }else {
-                                    tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                                    o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
 
                                 }
                             });

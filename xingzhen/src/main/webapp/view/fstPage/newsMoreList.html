@@ -13,8 +13,8 @@
         <span class="qc-label w80px">时间：</span>
         <span class="text-time">
             <input id="query-date" readonly="readonly" class="common-input w190px" placeholder="请输入时间范围" tabindex="-1">
-            <input type="hidden" name="startTime" id="queryDateBegin" />
-            <input type="hidden" name="endTime" id="queryDateEnd" />
+            <input type="hidden" name="queryDateBegin" id="queryDateBegin" value=""/>
+            <input type="hidden" name="queryDateEnd" id="queryDateEnd" value=""/>
         </span>
         <!--<input id="startTime" type="text" class="query-date"/>~<input id="endTime" type="text" class="query-date mr15"/>-->
         <p class="query-reset">
@@ -79,11 +79,12 @@
         </div>
     </div>
 </script>
-<script src="../../../js/base.js?version=0.99"></script>
-<script src="../../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
-<script src="../../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
-<script src="../../../plugin/daterangepicker/moment.js?version=0.99"></script>
-<script src="../../../js/sys.js?version=0.99"></script>
+<script src="../../js/base.js?version=0.99"></script>
+<script src="../../plugin/dict/dict.js?version=0.99"></script>
+<script src="../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+<script src="../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
+<script src="../../plugin/daterangepicker/moment.js?version=0.99"></script>
+<script src="../../js/sys.js?version=0.99"></script>
 <script>
     var id = $('.tabs-selected', window.parent.document).find('em').attr('data-id');
     var type = $('.tabs-selected', window.parent.document).find('em').attr('msg-type');

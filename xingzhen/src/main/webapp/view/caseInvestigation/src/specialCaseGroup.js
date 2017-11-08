@@ -596,7 +596,7 @@ define(['underscore',
             var param = {
                 isInGroup: true,
                 groupId: groupInfo.pgroupid?groupInfo.pgroupid:groupInfo.id,
-                ab: $.trim($("#ab").val()),
+                ab: $.trim($("#abCode").val()),
                 ajbh: $("#ajbh").val(),
                 ajmc: $.trim($("#ajmc").val()),
                 ajstate: $("#ajstate").val(),
