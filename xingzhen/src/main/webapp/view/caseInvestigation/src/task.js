@@ -80,7 +80,9 @@ define(['underscore',
                     var overdue=$($(item).find("a")[0]).attr('overdue');
                     if(fkqrzt){
                         $("#changeConfirmStatus u").eq(1).click();
-                        $("#creatname").val(top.userName);
+                        //$("#creatname").val(top.currentUser.userInfo.userName);
+                        //$("#creator").val(top.currentUser.userInfo.userId);
+                        $("#changeTaskType u").eq(2).click();
                     }else if(taskType){
                         $("#changeTaskType u").eq(1).click();
                         $("#changeRece u").eq(1).click();
