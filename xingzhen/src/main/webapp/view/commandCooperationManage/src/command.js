@@ -141,9 +141,9 @@ define(['underscore',
             window.parent.jchatGloabal.getGroupInfo(jmgid);
             window.parent.jchatGloabal.getGroupMembers(jmgid);
             //离线消息同步监听
-            window.parent.jchatGloabal.onSyncConversation();
+            window.parent.jchatGloabal.onSyncConversation(jmgid);
             //聊天消息实时监听
-            window.parent.jchatGloabal.onMsgReceive();
+            window.parent.jchatGloabal.onMsgReceive(jmgid);
             $("#sendFileBtn").on("click", function () {
                 window.parent.clickHandle.sendFile(jmgid);
             });

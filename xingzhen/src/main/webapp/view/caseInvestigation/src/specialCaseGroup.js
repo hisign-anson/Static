@@ -265,9 +265,9 @@ define(['underscore',
                                     window.parent.jchatGloabal.getGroupInfo(jmgid);
                                     window.parent.jchatGloabal.getGroupMembers(jmgid);
                                     //离线消息同步监听
-                                    window.parent.jchatGloabal.onSyncConversation();
+                                    window.parent.jchatGloabal.onSyncConversation(jmgid);
                                     //聊天消息实时监听
-                                    window.parent.jchatGloabal.onMsgReceive();
+                                    window.parent.jchatGloabal.onMsgReceive(jmgid);
                                     $("#sendFileBtn").on("click", function () {
                                         window.parent.clickHandle.sendFile(jmgid);
                                     });
@@ -310,7 +310,7 @@ define(['underscore',
                 });
             }
         },
-        showAdd: function (pgroupid) {
+        showAdd: function (pgroupid,pgroupname) {
             _self = this;
             $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl, {data: null}));
             $('#addGroupTab a').click(function (e) {
@@ -320,7 +320,8 @@ define(['underscore',
                     if (groupinfo) {
                         _self.showBaseInfo(groupinfo);
                     } else {
-                        _self.handleBaseInfo(pgroupid);
+                        debugger;
+                        _self.handleBaseInfo(pgroupid,pgroupname);
                     }
                 } else if ($(this).attr("id") == "navRelationCase") {
                     var groupinfo = str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
@@ -361,14 +362,15 @@ define(['underscore',
             var checkbox = [];
             $('#specialGroupListTable').find('tbody input:checkbox[name=group]:checked').each(function (i, e) {
                 var groupInfo = {
-                    groupnum: $(e).attr('groupnum'),
+                    groupname: $(e).attr('groupname'),
                     groupid: $(e).attr('groupid')
                 };
                 checkbox.push(groupInfo);
             });
             if (checkbox.length > 0) {
                 //do something
-                _self.showAdd(checkbox[0].groupid);
+                debugger;
+                _self.showAdd(checkbox[0].groupid,checkbox[0].groupname);
             } else {
                 toast("请选择一个专案组！", 600).warn()
             }
@@ -408,33 +410,38 @@ define(['underscore',
                 }
             });
         },
-        handleBaseInfo: function (pgroupid) {
+        handleBaseInfo: function (pgroupid,pgroupname) {
             _self = this;
             $(".form-content-block").empty().html(_.template(baseInfoTpl));
             $(".form-btn-block").removeClass("hide");
             $("#chooseGroupType").on('click', function () {
                 dictOpener.openChooseDict($(this));
             });
+            //显示父专案组名字
+            var html = '<div class="dict-opener"><input class="common-input" type="text" value="'+pgroupname+'" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
+            $("#groupname-span").next().remove();
+            $("#groupname-span").parents(".equal-col-4").append(html);
             $("#btnBaseInfo #saveBtn").on("click", function () {
-                _self.saveGroupInfo(pgroupid);
+                _self.saveGroupInfo(pgroupid,pgroupname);
             });
             $("#btnBaseInfo #exitBtn").off("click").on("click", function () {
                 _self.showList();
             });
         },
-        saveGroupInfo: function (pgroupid) {
+        saveGroupInfo: function (pgroupid,pgroupname) {
             _self = this;
             $('.field-valid').validatebox();
             if ($('.validatebox-invalid').length > 0) {
                 return false;
             }
+            debugger
             var param = {
                 createname: top.trueName,
                 createtime: $("#createtime").val(),
                 creator: top.userId,
                 deparmentcode: top.orgCode,
                 deparmentname: top.orgName,
-                groupname: $.trim($("#groupname").val()),
+                groupname: pgroupname+$.trim($("#groupname").val()),
                 grouptype: $("#grouptype").val(),
                 pgroupid: pgroupid ? pgroupid : ""
             };

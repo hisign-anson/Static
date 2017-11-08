@@ -80,7 +80,7 @@ define(['underscore',
                     var overdue=$($(item).find("a")[0]).attr('overdue');
                     if(fkqrzt){
                         $("#changeConfirmStatus u").eq(1).click();
-                        $("#creatname").val(top.userName);
+                        $("#fqrname").val(top.userName);
                     }else if(taskType){
                         $("#changeTaskType u").eq(1).click();
                         $("#changeRece u").eq(1).click();
@@ -136,7 +136,8 @@ define(['underscore',
                 taskName: $.trim($("#taskName").val()),
                 taskNo: $.trim($("#taskNo").val()),
                 groupid: $.trim($("#groupid").val()),
-                creator: $.trim($("#creator").val()),
+                groupTaskNo: $.trim($("#groupTaskNo").val()),
+                fqr: $.trim($("#fqr").val()),
                 jsr: $.trim($("#jsr").val()),
                 startTime: $.trim($("#startTime").val()),
                 endTime: $.trim($("#endTime").val()),
@@ -145,10 +146,10 @@ define(['underscore',
                 fkzt: $.trim($("#fkzt").val()),
                 yjzt: $.trim($("#yjzt").val()),
                 overdue: $.trim($("#overdue").val()),
-                deparmentcode: $.trim($("#deparmentcode").val()),
+                fqrDeptCode: $.trim($("#fqrDeptCode").val()),
                 fkjzstartTime: $.trim($("#fkjzstartTime").val()),
                 fkjzendTime: $.trim($("#fkjzendTime").val()),
-                orderBy:"createtime",
+                orderBy:"fq_time",
                 isDesc:true
             };
             $('#taskListResult').pagingList({
@@ -412,7 +413,7 @@ define(['underscore',
                         // taskid: id,
                         taskid: id,
                         userId: top.userId,
-                        deparmentcode: top.orgCode
+                        fqrDeptCode: top.orgCode
                     };
                     taskAjax.addCb(param, function (r) {
                         if (r.flag == 1) {
@@ -827,9 +828,9 @@ define(['underscore',
             console.info(taskFkFiles);
             var param = {
                 bz: $.trim($("#bz").val()),
-                createname: top.trueName,
-                creator: top.userId,
-                deparmentcode: top.orgCode,
+                fqrname: top.trueName,
+                fqr: top.userId,
+                fqrDeptCode: top.orgCode,
                 fkTime: $("#fkTime").val(),
                 fkr: top.userId,
                 fkrname: top.trueName,
@@ -925,10 +926,10 @@ define(['underscore',
                     jsrname = taskParam.jsrname;
                 }
                 $.extend(param, {
-                    creator: top.userId,
-                    createname: top.trueName,
-                    deparmentcode: top.orgCode,
-                    deparmentname: top.orgName,
+                    fqr: top.userId,
+                    fqrname: top.trueName,
+                    fqrDeptCode: top.orgCode,
+                    fqrDeptName: top.orgName,
                     bcrwid: bcrwid ? bcrwid : "",
                     fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
@@ -939,7 +940,7 @@ define(['underscore',
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
                     fkjzTime: $.trim($("#fkjzTime").val()),
-                    createtime: $.trim($("#createtime").val())
+                    fqTime: $.trim($("#createtime").val())
                 });
                 taskAjax.addTask(param, function (r) {
                     if (r.flag == 1) {
@@ -1007,9 +1008,9 @@ define(['underscore',
                         jsrname: checkbox[0].jsrname
                     };
                     $.extend(param, {
-                        createname: top.trueName,
-                        creator: top.userId,
-                        deparmentcode: top.orgCode,
+                        fqrname: top.trueName,
+                        fqr: top.userId,
+                        fqrDeptCode: top.orgCode,
                         id: taskId
                     });
                     taskAjax.moveTask(param, function (r) {

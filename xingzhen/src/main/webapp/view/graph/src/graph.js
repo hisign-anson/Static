@@ -282,14 +282,13 @@ define(['underscore',
                                 menuByTaskType.push(urge);
                             }
                             taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
-                                // $(document).on("contextmenu", function (e) {
-                                //     e.preventDefault();
-                                // })
-
+                                debugger
                                 if (r.flag == 1) {
+                                    debugger
                                     var taskinfo = r.data;
                                     if (taskinfo.jsr == top.userId) {
-                                        //显示反馈任务  移交任务  补充任务
+                                        console.info(taskinfo)
+                                        //显示反馈任务(反馈次数小于3)  移交任务  补充任务
                                         var feedback = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>反馈任务</span>"};
                                         var transfer = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>移交任务</span>"};
                                         var append_bc = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>补充任务</span>"};
@@ -299,6 +298,8 @@ define(['underscore',
                                     }
                                 }
                             });
+                            debugger
+
                         }
 
                         var menuByFeedbackType = [];
@@ -690,8 +691,8 @@ define(['underscore',
                 var jsrParam = str2obj($("#jsr").attr("paramattr"));
                 var groupParam = groupInfo;
                 $.extend(param, {
-                    creator: top.userId,
-                    createname: top.trueName,
+                    fqr: top.userId,
+                    fqrname: top.trueName,
                     deparmentcode: top.orgCode,
                     deparmentname: top.orgName,
                     bcrwid: bcrwid ? bcrwid : "",
@@ -704,7 +705,7 @@ define(['underscore',
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
                     fkjzTime: $.trim($("#fkjzTime").val()),
-                    createtime: $.trim($("#createtime").val())
+                    fqTime: $.trim($("#createtime").val())
                 });
                 taskAjax.addTask(param, function (r) {
                     if (r.flag == 1) {
@@ -785,8 +786,8 @@ define(['underscore',
                                     }
                                     debugger;
                                     $.extend(param, {
-                                        creator: top.userId,
-                                        createname: top.trueName,
+                                        fqr: top.userId,
+                                        fqrname: top.trueName,
                                         deparmentcode: top.orgCode,
                                         deparmentname: top.orgName,
                                         bcrwid: bcrwid ? bcrwid : "",
@@ -799,7 +800,7 @@ define(['underscore',
                                         jsrLxfs: $.trim($("#jsrLxfs").val()),
                                         taskContent: $.trim($("#taskContent").val()),
                                         fkjzTime: $.trim($("#fkjzTime").val()),
-                                        createtime: $.trim($("#createtime").val())
+                                        fqTime: $.trim($("#createtime").val())
                                     });
                                     taskAjax.addTask(param, function (r) {
                                         if (r.flag == 1) {
@@ -1103,6 +1104,7 @@ define(['underscore',
             });
             //专案组小组
             var param = {
+                userId:top.userId,
                 groupId: groupid,
                 memberName: ""
             };
@@ -1210,7 +1212,6 @@ define(['underscore',
                 // }
                 $.each(json.nodes, function (index, value) {
                     var isInTimeRange = _selfGraph.isInTimeRange(param.startTime, param.endTime, value.taskCreateTime);
-                    debugger;
                     console.info(value.id+"status"+param.sponsor);
                     console.info(value.id+"value"+value.taskCreatorUserId);
                     if ((param.startTime && param.endTime && value.taskCreateTime && isInTimeRange == false)
@@ -1221,71 +1222,7 @@ define(['underscore',
                         console.info(value);
                         _selfGraph.removeNode(index);
                     }
-
-                    // if ((param.sponsor && !value.taskCreatorUserId) || (param.feedBackUserId && !value.feedbackUser) || (param.taskStatus && !value.taskStatus) || (!( (value.taskCreatorUserId == param.sponsor) &&
-                    //         (value.feedbackUser == param.feedBackUserId) &&
-                    //         (isInTimeRange == true) &&
-                    //         (value.taskStatus == param.taskStatus)
-                    //     ))) {
-                    //     debugger
-                    //     console.info(value);
-                    //     _selfGraph.removeNode(index);
-                    // }
-
-
-                    // _selfGraph.updateGraphJSON(json);
-                    //     //下发人
-                    //     if (param.sponsor) {
-                    //         if (value.taskCreatorUserId) {
-                    //             if (value.taskCreatorUserId == param.sponsor) {
-                    //                 console.info("发起人满足" + value);
-                    //                 nodes.push(value);
-                    //             }
-                    //         }
-                    //     }
-                    //     //反馈人
-                    //     if (param.feedBackUserId) {
-                    //         if (value.feedbackUser) {
-                    //             if (value.feedbackUser == param.feedBackUserId) {
-                    //                 console.info("反馈人满足" + value);
-                    //                 nodes.push(value);
-                    //             }
-                    //         }
-                    //     }
-                    //     //时间段
-                    //     if (isInTimeRange == true) {
-                    //         console.info("时间段满足" + value);
-                    //         nodes.push(value);
-                    //     }
-                    //     //任务状态
-                    //     if (param.taskStatus) {
-                    //         if (value.taskStatus) {
-                    //             if (value.taskStatus == param.taskStatus) {
-                    //                 console.info("任务状态满足" + value);
-                    //                 nodes.push(value);
-                    //             }
-                    //         }
-                    //     }
-                    // });
-
-                    // console.info(json)
-
-                    // var inEdges = nodes.inEdges;
-                    // var outEdges = nodes.outEdges;
-                    // var nodeIndex = nodes.index;
-                    //
-                    // $.each(json.edges, function (index, value){
-                    //     $.each(inEdges, function (i, v){
-                    //         if(value.source == v.index){
-                    //
-                    //         }
-                    //     });
-                    //     $.each(outEdges, function (i, v){
-                    //         if(value.target == v.index){
-                    //
-                    //         }
                 });
-                // });
                 // conditionDiv.add(conditionDiv.children()).addClass("hide");
                 // conditionDiv.addClass("hide");
                 return false;

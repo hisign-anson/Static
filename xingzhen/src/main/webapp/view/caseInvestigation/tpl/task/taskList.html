@@ -31,11 +31,11 @@
 
         <div class="query-block-row">
             <div class="fl qc-group-l">
-                <span class="qc-label-xl">创建人：</span>
+                <span class="qc-label-xl">下发人：</span>
                 <div class="dict-opener">
-                    <input type="hidden" id="creator">
-                    <input class="common-input" type="text" id="creatname" name="" placeholder="请输入创建人姓名" readonly>
-                    <i id="chooseCreateName" class="icon-list cur-p button steelblue" title="创建人"></i>
+                    <input type="hidden" id="fqr">
+                    <input class="common-input" type="text" id="fqrname" name="" placeholder="请输入下发人姓名" readonly>
+                    <i id="chooseCreateName" class="icon-list cur-p button steelblue" title="下发人"></i>
                 </div>
             </div>
             <div class="fl qc-group-l">
@@ -50,7 +50,7 @@
         </div>
         <div class="query-block-row">
             <div class="fl qc-group-xxl">
-                <span class="qc-label-xl hook-label">创建时间：</span>
+                <span class="qc-label-xl hook-label">下发时间：</span>
                 <div class="text-time">
                     <input class="cm-input date-range-picker" type="text" id="createDate" placeholder="请输入时间范围" readonly>
                     <i class="icon-calendar icon-time"></i>
@@ -86,6 +86,12 @@
                     </span>
                     <input type="hidden" id="qszt" />
                 </div>
+
+
+                <div class="fl qc-group-l">
+                    <span class="qc-label-xl">专案组任务流水：</span>
+                    <input class="common-input" type="text" id="groupTaskNo" name="" placeholder="请输入专案组任务流水"/>
+                </div>
             </div>
             <div class="query-block-row">
                 <div class="fl qc-group-xl">
@@ -106,7 +112,7 @@
                 <div class="fl qc-group-l">
                     <span class="qc-label-xl">所属单位：</span>
                     <div class="dict-opener">
-                        <input type="hidden" id="deparmentcode">
+                        <input type="hidden" id="fqrDeptCode">
                         <input class="common-input" type="text" id="deparmentname" name="" placeholder="请输入所属单位" readonly>
                         <i id="chooseBelongUnit" class="icon-list cur-p button steelblue" title="所属单位"></i>
                     </div>
@@ -160,8 +166,9 @@
                 <th>任务名称</th>
                 <th>任务内容</th>
                 <th>所属专案组</th>
-                <th>创建人</th>
-                <th>创建时间</th>
+                <th>专案组任务流水</th>
+                <th>下发人</th>
+                <th>下发时间</th>
                 <th>接收人</th>
                 <th>任务状态</th>
                 <th>接收状态</th>
