@@ -816,6 +816,7 @@ define(['underscore',
             debugger
             var orgParam = str2obj($("#userListDiv #orgName").attr("paramattr"));
             var param = {
+                excludeGroupId:groupInfo.pgroupid? groupInfo.id: "",
                 isInGroup: groupInfo.pgroupid? true: false,
                 groupId: groupInfo.pgroupid?groupInfo.pgroupid:groupInfo.id,
                 orgId:orgParam?orgParam.orgId:"",

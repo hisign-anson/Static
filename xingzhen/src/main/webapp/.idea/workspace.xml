@@ -18,8 +18,8 @@
       <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="123" column="75" lean-forward="false" selection-start-line="123" selection-start-column="70" selection-end-line="123" selection-end-column="75" />
+            <state relative-caret-position="331">
+              <caret line="818" column="68" lean-forward="true" selection-start-line="818" selection-start-column="68" selection-end-line="818" selection-end-column="68" />
               <folding>
                 <element signature="e#9075#10335#0" expanded="false" />
                 <element signature="e#10387#11039#0" expanded="false" />
@@ -29,14 +29,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+            <state relative-caret-position="277">
+              <caret line="706" column="21" lean-forward="false" selection-start-line="705" selection-start-column="21" selection-end-line="706" selection-end-column="21" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#3214#4231#0" expanded="false" />
+                <element signature="e#4301#4863#0" expanded="false" />
+                <element signature="e#5505#7352#0" expanded="false" />
+                <element signature="e#7383#7746#0" expanded="false" />
+                <element signature="e#7781#8232#0" expanded="false" />
+                <element signature="e#8270#9044#0" expanded="false" />
+                <element signature="e#9087#18022#0" expanded="false" />
+                <element signature="e#20719#21016#0" expanded="false" />
+                <element signature="e#22683#22970#0" expanded="false" />
+                <element signature="e#23006#23148#0" expanded="false" />
+                <element signature="e#23189#23423#0" expanded="false" />
+                <element signature="e#23471#23815#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chartPage.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/chatPage/css/chartPage.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="309" column="16" lean-forward="false" selection-start-line="309" selection-start-column="12" selection-end-line="309" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,12 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>relationCaseTpl</find>
-      <find>parentKey</find>
-      <find>成员</find>
-      <find>orgId</find>
-      <find>getDictTreeByParentKey</find>
-      <find>getDictListByParentKey</find>
       <find>orgName</find>
       <find>level</find>
       <find>getUsergroupPage</find>
@@ -128,8 +144,14 @@
       <find>relationCaseTrTpl</find>
       <find>download-text</find>
       <find>onSyncConversation</find>
-      <find>onMsgReceive_res</find>
       <find>userListDiv</find>
+      <find>imgHover</find>
+      <find>message-image</find>
+      <find>getConversation</find>
+      <find>成员</find>
+      <find>全部</find>
+      <find>preview-JIM-img</find>
+      <find>onMsgReceive_res</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -150,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/view/graph/js/graph.js" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/commandCooperation.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/dat/specialCaseGroup.js" />
@@ -201,6 +222,7 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
         <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
+        <option value="$PROJECT_DIR$/view/chatPage/css/chartPage.css" />
       </list>
     </option>
   </component>
@@ -459,6 +481,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="chatPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="caseInvestigation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -687,12 +731,12 @@
       <workItem from="1509353153759" duration="72936000" />
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
-      <workItem from="1510017010991" duration="43123000" />
+      <workItem from="1510017010991" duration="49574000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="484081000" />
+    <option name="totallyTimeSpent" value="490532000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -724,19 +768,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="22" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/graph/js/require.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/graph/js/graph.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -975,17 +1011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/dict/dict.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="132" column="15" lean-forward="false" selection-start-line="132" selection-start-column="15" selection-end-line="132" selection-end-column="15" />
-          <folding>
-            <marker date="1509179088651" expanded="true" signature="15326:15332" ph=" " />
-            <marker date="1509179088651" expanded="true" signature="15332:15338" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1218,10 +1243,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/dict/dict.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="91" column="47" lean-forward="false" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
+          <folding>
+            <marker date="1510108553853" expanded="true" signature="15334:15340" ph=" " />
+            <marker date="1510108553853" expanded="true" signature="15340:15346" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="123" column="75" lean-forward="false" selection-start-line="123" selection-start-column="70" selection-end-line="123" selection-end-column="75" />
+        <state relative-caret-position="331">
+          <caret line="818" column="68" lean-forward="true" selection-start-line="818" selection-start-column="68" selection-end-line="818" selection-end-column="68" />
           <folding>
             <element signature="e#9075#10335#0" expanded="false" />
             <element signature="e#10387#11039#0" expanded="false" />
@@ -1232,11 +1268,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        <state relative-caret-position="277">
+          <caret line="706" column="21" lean-forward="false" selection-start-line="705" selection-start-column="21" selection-end-line="706" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#3214#4231#0" expanded="false" />
+            <element signature="e#4301#4863#0" expanded="false" />
+            <element signature="e#5505#7352#0" expanded="false" />
+            <element signature="e#7383#7746#0" expanded="false" />
+            <element signature="e#7781#8232#0" expanded="false" />
+            <element signature="e#8270#9044#0" expanded="false" />
+            <element signature="e#9087#18022#0" expanded="false" />
+            <element signature="e#20719#21016#0" expanded="false" />
+            <element signature="e#22683#22970#0" expanded="false" />
+            <element signature="e#23006#23148#0" expanded="false" />
+            <element signature="e#23189#23423#0" expanded="false" />
+            <element signature="e#23471#23815#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/css/chartPage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="309" column="16" lean-forward="false" selection-start-line="309" selection-start-column="12" selection-end-line="309" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>

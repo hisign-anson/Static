@@ -1,0 +1,62 @@
+<div class="form-content">
+    <form id="taskEditForm" >
+        <%if(data.fkzt && data.fkzt == 1 && data.taskFks.length > 0 ){%>
+        <div class="form-content-block">
+            <div class="form-header">
+                <h5 class="form-title"><i class="left-line"></i>
+                    <span>查看反馈信息</span>
+                    <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length > 3){%>
+                    <span>已反馈3次不能再反馈</span>
+                    <%}%>
+                </h5>
+            </div>
+            <div class="form-body wrapper-fluid">
+                <div class="div-table-wrap">
+                    <table id="feedbackTable" class="feedbackList-table typical-tb">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>反馈线索</th>
+                            <th>音视频资料下载</th>
+                            <th>反馈时间</th>
+                            <th>反馈人</th>
+                            <th>反馈确认状态</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% _.each(data.taskFks, function(item,i){%>
+                        <tr>
+                            <td><%=(i+1)%></td>
+                            <td><%=item.fkxs%></td>
+                            <td>
+                                <%if(item.taskFkFiles && item.taskFkFiles !=''){%>
+                                    <% _.each(item.taskFkFiles, function(itemFile,i){%>
+                                        <% var path = top.ftpServer+itemFile.filePath; %>
+                                        <a class="download-text" href="<%=path%>" download="<%=itemFile.fileName%>" path="<%=path%>" id="<%=itemFile.id%>" title="<%=path%>"><%=itemFile.fileName%></a><br>
+                                    <%})%>
+                                <%}%>
+                            <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd')%></td>
+                            <td><%=item.fkrname%></td>
+                            <td>
+                                <%if(item.qrzt && item.qrzt == 0){%>
+                                未确认
+                                <%}else{%>
+                                已确认
+                                <%}%>
+                            </td>
+                            <td><%=item.bz%></td>
+                        </tr>
+                        <%})%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <%}%>
+    </form>
+    <div class="form-btn-block">
+        <button id="cancelBtn" class="cm-cancel-btn">取 消</button>
+    </div>
+
+</div>

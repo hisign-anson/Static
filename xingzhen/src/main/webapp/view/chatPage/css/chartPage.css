@@ -168,6 +168,15 @@
     border-right: 10px solid transparent;
     border-left-width: 0;
 }
+.all {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.all .text-wrap {
+    background: #dcdcdc;
+    padding: 5px 10px;
+}
 .message-image {
     max-width: 180px;
     max-height: 100px;
@@ -285,15 +294,18 @@ img.emoji {
 .m-btn {
     float: right;
 }
-.imgHover{
+.main .imgHover {
     width: 300px;
     height: 100%;
     background-color: #ddd;
     position: absolute;
     top: 0px;
-    left: -300px;
+    right: -300px;
     z-index: 999999999;
-    display: none;
+     display: none;
+}
+.self .imgHover{
+    left: -300px;
 }
 .text-wrap .text:hover .imgHover{
     display: block;

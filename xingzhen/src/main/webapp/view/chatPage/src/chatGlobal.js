@@ -5,10 +5,10 @@
 // AppKey:a15c1e9bb38c1607b9571eea
 // Master Secret:bd4d826e1e49340aac2d05e2
 
-var across_appkey = '13c78e9ee2ac862f30ce0b17';
+var across_appkey = 'a15c1e9bb38c1607b9571eea';
 var across_random_str = '022cd9fd995849b58b3ef0e943421ed9';//20-36 长度的随机字符串
 var across_timestamp = new Date().getTime();
-var masterSecret = '670180c73e6152cf44918e2e';
+var masterSecret = 'bd4d826e1e49340aac2d05e2';
 // //签名，10 分钟后失效, 签名生成算法: signature = md5(appkey=appkey&timestamp=timestamp&random_str=random_str&key=secret)
 var across_signature = md5("appkey=" + across_appkey + "&timestamp=" + across_timestamp + "&random_str=" + across_random_str + "&key=" + masterSecret);
 window.JIM = new JMessage({
@@ -76,13 +76,13 @@ var jchatGloabal = {
             //离线消息同步监听
             JIM.onSyncConversation(function (data) {
                 onSyncConversation_res = data;
-                // localData.set('onSyncConversation_res', data);
             });
             //聊天消息实时监听
             JIM.onMsgReceive(function (data) {
                 debugger
+                toast(data);
                 onMsgReceive_res = data;
-                localData.set('onMsgReceive_res', data);
+                // localData.set('onMsgReceive_res', data);
             });
 
             //业务事件监听
@@ -125,6 +125,7 @@ var jchatGloabal = {
             });
             //会话未读数变更监听（多端在线）
             JIM.onMutiUnreadMsgUpdate(function (data) {
+                debugger
                 // data.type 会话类型
                 // data.gid 群 id
                 // data.appkey 所属 appkey
@@ -234,8 +235,8 @@ var jchatGloabal = {
             debugger
             $.each(data, function (dataIndex, dataValue) {
                 debugger
-                if (dataValue.from_gid == jmgid) {
-                    if (dataValue.msg_type == 4) {
+                if (dataValue.msg_type == 4) {
+                    if (dataValue.from_gid == jmgid) {
                         $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
                             debugger
                             var message_list_content = msgsValue.content;
@@ -246,13 +247,38 @@ var jchatGloabal = {
                             var login_userId = top.userId;
 
                             var content_text = message_list_content.msg_body.text;
+                            if(message_list_content.from_platform == "api"){
+                                var objText = str2obj(message_list_content.msg_body.text);
+                                var type = objText.msgType;
+                                switch (type){
+                                    case "send_connect_case_info":
+                                        content_text = objText.createName+""+objText.title;
+                                        break;
+                                    case "send_remove_case_info":
+                                        content_text = objText.createName+""+objText.title;
+                                        break;
+                                    case "send_group_backup_info":
+                                        content_text = objText.createName+"将"+objText.title;
+                                        break;
+                                }
+                            } else if (message_list_content.from_platform == "web"){
+                                content_text = message_list_content.msg_body.text;
+                            }
                             var msg_type = message_list_content.msg_type;
                             var msg_id = msgsValue.msg_id
                             if (from_id == login_userId) {
                                 if (msg_type == "file" || msg_type == "image") {
                                     //文件消息 图片消息
                                     jchatGloabal.getResourceMessage(".message-list", message_list_content, true, msg_type, msg_id);
-                                } else {
+                                } else if(msg_type =="custom"){
+                                    //自动发的消息
+                                    list += '<li>' +
+                                        '<div class="time"><span>' + time + '</span></div>' +
+                                        '<div class="all">' +
+                                        '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                                        '</div></div>' +
+                                        '</li>';
+                                }else {
                                     //单聊文字消息 群聊文字消息
                                     list += '<li>' +
                                         '<div class="time"><span>' + time + '</span></div>' +
@@ -403,23 +429,6 @@ var jchatGloabal = {
                 // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
                 window.open($(this).attr("src"));
             });
-            //图片预览
-            // $("#main-frame").contents().find(".preview-JIM-img").imgbox({
-            //     speedIn: 0,
-            //     speedOut: 0,
-            //     alignment: 'center', // auto OR center
-            //     allowMultiple: false,
-            //     autoScale: false,
-            //     zoomOpacity: true,
-            //     overlayShow: true,
-            //     overlayOpacity: 0.5,
-            //     hideOnOverlayClick: true,
-            //     hideOnContentClick: true
-            // });
-            //$("#main-frame").contents().find(".preview-JIM-img").click(function(){
-            //    $("#main-frame").contents().find("div.imgHover").css("display","none");
-            //    $(this).siblings("div.imgHover").css("display","block");
-            //});
             clickHandle.scrollBottom();
         }).onFail(function (data) {
             toast('success:' + JSON.stringify(data));
@@ -439,6 +448,8 @@ var jchatGloabal = {
         debugger
         // var data = localData.get('onMsgReceive_res');
         var data = onMsgReceive_res
+        console.info(obj2str(data))
+        alert(obj2str(data));
         if (data && data.length > 0) {
             var msg_type = data.messages[0].content.msg_type;
             var msg_id = data.messages[0].msg_id;
@@ -506,11 +517,13 @@ var jchatGloabal = {
         });
     },
     getConversation: function () {
+        debugger
         JIM.getConversation().onSuccess(function (data) {
             debugger
             var conversations = data.conversations;
             var li = '';
             $.each(conversations, function (index, value) {
+                debugger
                 //只展示群会话
                 if (value.type == 4) {
                     li += '<li class="conversations-li"><img class="jim-avatar" src="../../img/pc-avatar.png" />' +
@@ -626,6 +639,7 @@ var clickHandle = {
         if (obj.find(".conversation").is(":visible")) {
             $conversation.addClass("hide");
         } else {
+            debugger
             $conversation.removeClass("hide");
             jchatGloabal.getConversation();
         }

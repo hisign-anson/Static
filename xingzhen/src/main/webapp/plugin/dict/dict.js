@@ -89,7 +89,7 @@ function initDictInLineSelect(target,data){
     }
     var tpl='<span class="date-select">';
     if(isShowAll == "true" || isShowAll == true){
-        tpl+='<u class="active" val="">全部</u>';
+        tpl+='<u class="active default" val="">全部</u>';
     } else{
         tpl+='';
     }
