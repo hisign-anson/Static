@@ -33,7 +33,7 @@
     <%if(isOperation == true){%>
     <td>
         <%if(item.yjzt == 0){%>
-            <% if(item.creator == top.userId){%>
+            <% if(item.creator == top.userId && item.fkzt == 0){%>
             <a class="into-urge icon-urge" id="<%=item.id%>" title="催办"></a>
             <%}%>
 

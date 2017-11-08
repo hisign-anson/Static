@@ -161,7 +161,7 @@
                                 <%if(item.taskFkFiles && item.taskFkFiles !=''){%>
                                     <% _.each(item.taskFkFiles, function(itemFile,i){%>
                                         <% var path = top.ftpServer+itemFile.filePath; %>
-                                        <a class="download-text" href="<%=path%>" download="<%=itemFile.fileName%>" path="<%=path%>" id="<%=itemFile.id%>" title="<%=path%>"><%=itemFile.fileName%>.<%=itemFile.fileType%></a><br>
+                                        <a class="download-text" href="<%=path%>" download="<%=itemFile.fileName%>" path="<%=path%>" id="<%=itemFile.id%>" title="<%=path%>"><%=itemFile.fileName%></a><br>
                                     <%})%>
                                 <%}%>
                             <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd')%></td>
