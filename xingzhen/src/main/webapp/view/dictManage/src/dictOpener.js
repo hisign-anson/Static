@@ -282,7 +282,12 @@ define(['underscore',
                     var target = $("#dict-wrap-group");
                     var tpl='';
                     $.each(r.data, function (i, o) {
-                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                        if(o.userId == top.userId){
+                            tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                        }else {
+                            tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+
+                        }
                     });
                     target.html(tpl);
                     var opener = $(".panel #dict-block-group");
