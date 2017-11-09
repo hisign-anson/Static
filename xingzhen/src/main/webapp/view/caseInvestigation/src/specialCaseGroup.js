@@ -590,9 +590,9 @@ define(['underscore',
                     $('#slEndTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
                 });
                 //点击多选案件状态
-                $(".dictInLineSelect").dictInLineSelect();
+                $("#caseListDiv .dictInLineSelect").dictInLineSelect();
                 // selectUtils.selectTextMultiOpt("#changeCaseSta", "caseSta");
-                selectUtils.selectTextMultiOpt("#caseListDiv [dict-id='ajstate']", "ajstate");
+                // selectUtils.selectTextMultiOpt("#caseListDiv [dict-id='ajstate']", "ajstate");
 
                 $("#caseListDiv #chooseCaseType").on('click', function () {
                     dictOpener.openChooseDict($(this));
@@ -656,7 +656,7 @@ define(['underscore',
                 ab: $("#caseListDiv #abCode").val(),
                 ajbh: $.trim($("#caseListDiv #ajbh").val()),
                 ajmc: $.trim($("#caseListDiv #ajmc").val()),
-                ajstate: $("#caseListDiv #ajstate").val(),
+                ajstate: $("#caseListDiv #ajstateAll").val(),
                 fadd: $.trim($("#caseListDiv #fadd").val()),
                 endTime: $("#caseListDiv #endTime").val(),
                 startTime: $("#caseListDiv #startTime").val(),
