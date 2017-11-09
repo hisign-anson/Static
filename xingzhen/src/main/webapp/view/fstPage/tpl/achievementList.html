@@ -1,14 +1,16 @@
 <div class="col-panel-block daiban">
     <h3 class="col-panel-header"><i class="left-line"></i><span>平台成果展示</span> <a class="more-link" href="javascript:void(0)" >更多</a></h3>
     <div class="col-panel-body contentDiv" id="achieveContent">
-        <%_.each(data, function(item){%>
+        <%_.each(data, function(item,i){%>
+        <%if(i < 8){%>
         <div>
             <a href="#" data-groupid="<%=item.groupId%>" class="listOne">
                 <span class="dot-decoration ml15 vam"></span>
                 <span class="text-record ml15" title="<%=item.msgTitle%>"><%=item.name%></span>
-                <span class="span-time"><%=rangeUtil.formatDate(item.createTime,'yyyy-MM-dd hh:mm')%></span>
+                <span class="span-time"><%=rangeUtil.formatDate(item.backupTime,'yyyy-MM-dd hh:mm')%></span>
             </a>
         </div>
+        <%}%>
         <%})%>
     </div>
 </div>
