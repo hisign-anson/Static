@@ -417,10 +417,16 @@ define(['underscore',
                 $("#chooseGroupType").on('click', function () {
                     dictOpener.openChooseDict($(this));
                 });
+                if(pgroupname){
+                    //显示父专案组名字
+                    var html = '<div class="dict-opener"><input class="common-input" type="text" value="' + pgroupname + '" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
+                    $("#groupname-span").next().remove();
+                    $("#groupname-span").parents(".equal-col-4").append(html);
+                }
                 //显示父专案组名字
-                var html = '<div class="dict-opener"><input class="common-input" type="text" value="'+pgroupname+'" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
-                $("#groupname-span").next().remove();
-                $("#groupname-span").parents(".equal-col-4").append(html);
+                //var html = '<div class="dict-opener"><input class="common-input" type="text" value="'+pgroupname+'" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
+                //$("#groupname-span").next().remove();
+                //$("#groupname-span").parents(".equal-col-4").append(html);
                 $("#btnBaseInfo #saveBtn").on("click", function () {
                     _self.saveGroupInfo(pgroupid,pgroupname);
                 });
@@ -441,7 +447,7 @@ define(['underscore',
                     creator: top.userId,
                     deparmentcode: top.orgCode,
                     deparmentname: top.orgName,
-                    groupname: pgroupname+$.trim($("#groupname").val()),
+                    groupname: pgroupname?pgroupname + "-" + $.trim($("#groupname").val()):$.trim($("#groupname").val()),
                     grouptype: $("#grouptype").val(),
                     pgroupid: pgroupid ? pgroupid : ""
                 };

@@ -838,9 +838,9 @@ define(['underscore',
             console.info(taskFkFiles);
             var param = {
                 bz: $.trim($("#bz").val()),
-                fqrname: top.trueName,
-                fqr: top.userId,
-                fqrDeptCode: top.orgCode,
+                createname: top.trueName,
+                creator: top.userId,
+                deparmentcode: top.orgCode,
                 fkTime: $("#fkTime").val(),
                 fkr: top.userId,
                 fkrname: top.trueName,
@@ -1018,9 +1018,9 @@ define(['underscore',
                         jsrname: checkbox[0].jsrname
                     };
                     $.extend(param, {
-                        fqrname: top.trueName,
-                        fqr: top.userId,
-                        fqrDeptCode: top.orgCode,
+                        createname: top.trueName,
+                        creator: top.userId,
+                        deparmentcode: top.orgCode,
                         id: taskId
                     });
                     taskAjax.moveTask(param, function (r) {
