@@ -1008,9 +1008,9 @@ define(['underscore',
                         jsrname: checkbox[0].jsrname
                     };
                     $.extend(param, {
-                        fqrname: top.trueName,
-                        fqr: top.userId,
-                        fqrDeptCode: top.orgCode,
+                        createname: top.trueName,
+                        creator: top.userId,
+                        deparmentcode: top.orgCode,
                         id: taskId
                     });
                     taskAjax.moveTask(param, function (r) {
