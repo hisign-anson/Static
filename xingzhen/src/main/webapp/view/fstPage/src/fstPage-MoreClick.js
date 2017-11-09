@@ -82,7 +82,7 @@ define([
             _self=this;
             fstPageAjax.getAjGroupPage({groupId:groupId},function(r){
                 if(r.flag==1){
-                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));debugger
+                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
                     $(".span").span();
                 }else{
                     toast(r.msg,600).err();
