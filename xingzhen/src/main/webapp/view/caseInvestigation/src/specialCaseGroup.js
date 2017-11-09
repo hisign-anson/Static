@@ -567,7 +567,6 @@ define(['underscore',
                 console.info("涉及案件关联新案件按钮");
                 $open('#caseListDiv', {width: 960, title: '&nbsp案件查询'});
                 $("#caseListDiv .panel-container").empty().html(_.template(caseListTpl, {groupid: groupInfo.id}));
-
                 //点击选择时间范围（当天当月当季当年）
                 selectUtils.selectTimeRangeOption("#caseListDiv #changeTimeScope", "#caseListDiv #occurrenceDate", "#caseListDiv #startTime", "#caseListDiv #endTime");
                 $("#caseListDiv #occurrenceDate").daterangepicker({
@@ -636,7 +635,6 @@ define(['underscore',
                         pgroupid: groupInfo.pgroupid
                     }));
                     $('.span').span();
-
                     $("#relationCaseTable").off("click").on("click", ".link-text", function () {
                         console.info("案件详情按钮");
                         _self.showCaseInfo($(this).attr("ajid"));
@@ -663,13 +661,12 @@ define(['underscore',
                 slEndTime: $("#caseListDiv #slEndTime").val(),
                 slStartTime: $("#caseListDiv #slStartTime").val()
             };
-            debugger
             $('#caseListDiv #caseListResult').pagingList({
                 action: top.servicePath_xz + '/asjAj/getAjGroupPage',
                 jsonObj: param,
-                callback: function (data) {
+                callback: function (data) {debugger
                     $("#caseTable tbody").empty().html(_.template(caseListTrTpl, {data: data}));
-                    $(".span").span();
+                    //$(".span").span();
                     $("#caseTable").on("click", ".link-text", function () {
                         console.info("案件详情按钮");
                         // $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
