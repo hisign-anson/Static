@@ -18,8 +18,8 @@ define(['underscore',
     return {
         showList: function () {
             _self = this;
-             //关闭没有关闭的弹框
-             dictOpener.closeOpenerDiv();
+            //关闭没有关闭的弹框
+            dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(taskListTpl, {isOperation: true}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#fkqrzt");
@@ -80,7 +80,7 @@ define(['underscore',
                     var overdue=$($(item).find("a")[0]).attr('overdue');
                     if(fkqrzt){
                         $("#changeConfirmStatus u").eq(1).click();
-                        $("#fqrname").val(top.userName);
+                        $("#changeTaskType u").eq(2).click();
                     }else if(taskType){
                         $("#changeTaskType u").eq(1).click();
                         $("#changeRece u").eq(1).click();
@@ -448,7 +448,7 @@ define(['underscore',
         handleFeedback: function (taskId) {
             _self = this;
             if (taskId) {
-                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
+                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {debugger
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
                         var fileInfoArr = []; //传入后台参数的文件数组...
@@ -507,6 +507,7 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
+                                            $(".progressV b").css('width','50%');
                                             // var $progressActive = $slide.find('.progress>span');
                                             //
                                             // $slide.find('.state').html('上传中...');
@@ -525,6 +526,7 @@ define(['underscore',
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
                                                 if(filesArr){
+                                                    var html=""
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
                                                             fileName: value.responseName,
@@ -533,10 +535,13 @@ define(['underscore',
                                                             fileSize: value.size,
                                                             fileType: value.type
                                                         }
+                                                        html+='<span>'+value.fileName+'</span>';
                                                         fileInfoArr.push(item);
                                                     });
+                                                    $('.upload-block .state').html(html)
+                                                    $('[href="#uploadMat"]').text("查看")
                                                 }
-
+                                                $(".progressV b").css('width','100%');
                                             } else {
                                                 console.info(res);
                                             }
@@ -551,7 +556,7 @@ define(['underscore',
                         });
 
                         $("#addImg").siblings("input[type='file']").val("");
-                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {
+                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {debugger
                             var $this = $(this)[0];
                             //未上传前，在展示区域显示要上传内容的图片
                             var fileList = $this.files;
@@ -602,7 +607,8 @@ define(['underscore',
                                         processData: false,
                                         contentType: false,
                                         beforeSend: function () {
-                                            $('.state').html('上传中...');
+                                            //$('.state').html('上传中...');
+                                            $(".progressI b").css('width','50%');
                                         },
                                         success: function (res) {
                                             $('.state').html('');
@@ -614,6 +620,7 @@ define(['underscore',
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
                                                 if(filesArr){
+                                                    var html="";
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
                                                             fileName: value.responseName,
@@ -622,10 +629,13 @@ define(['underscore',
                                                             fileSize: value.size,
                                                             fileType: value.type
                                                         }
+                                                        html+='<span>'+value.fileName+'</span>';
                                                         fileInfoArr.push(item);
                                                     });
+                                                    $('.upload-block .state').html(html)
+                                                    $('[href="#uploadMat"]').text("查看")
                                                 }
-
+                                                $(".progressI b").css('width','100%');
                                             } else {
                                                 console.info(res);
                                             }
@@ -828,9 +838,9 @@ define(['underscore',
             console.info(taskFkFiles);
             var param = {
                 bz: $.trim($("#bz").val()),
-                createname: top.trueName,
-                creator : top.userId,
-                deparmentcode : top.orgCode,
+                fqrname: top.trueName,
+                fqr: top.userId,
+                fqrDeptCode: top.orgCode,
                 fkTime: $("#fkTime").val(),
                 fkr: top.userId,
                 fkrname: top.trueName,
@@ -860,9 +870,9 @@ define(['underscore',
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#userListDiv #queryBtn").on("click", function (e) {
+            $("#userListDiv #queryBtn").on("click", function () {
                 _self.queryUserList(false, taskId, taskInfo);
-                e.stopPropagation();
+                return false;
             });
 
             //加载用户列表
@@ -885,7 +895,7 @@ define(['underscore',
                 }
             }
             $("#mainDiv").empty().html(_.template(taskAddTpl, {taskInfo: taskinfo, text: text}));
-            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false});
+            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false,minDate:rangeUtil.formatDate(new Date(),'yyyy-MM-dd')});
 
             $("#chooseGroup").on('click', function () {
                 dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
@@ -990,7 +1000,7 @@ define(['underscore',
                     $(this).prop("checked", false);
                 }
             });
-            $("#userListDiv #transferBtn").off("click").on("click",function () {
+            $("#userListDiv").on("click", "#transferBtn", function () {
                 var checkbox = [];
                 $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
                     var jsrInfo = {
@@ -1008,9 +1018,9 @@ define(['underscore',
                         jsrname: checkbox[0].jsrname
                     };
                     $.extend(param, {
-                        createname: top.trueName,
-                        creator: top.userId,
-                        deparmentcode: top.orgCode,
+                        fqrname: top.trueName,
+                        fqr: top.userId,
+                        fqrDeptCode: top.orgCode,
                         id: taskId
                     });
                     taskAjax.moveTask(param, function (r) {
