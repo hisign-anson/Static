@@ -749,7 +749,7 @@ define(['underscore',
                     if (r.flag == 1) {
                         toast('保存成功！', 600, function () {
                             openerDiv.$close();
-                            _selfGraph.showList(id, "groupid");
+                            _selfGraph.showList(id, "pgroupid");
                         }).ok();
                     } else {
                         toast(r.msg, 600).err()
@@ -843,7 +843,7 @@ define(['underscore',
                                     taskAjax.addTask(param, function (r) {
                                         if (r.flag == 1) {
                                             toast('保存成功！', 600, function () {
-                                                _selfGraph.showList(taskinfo.groupid, "groupid");
+                                                _selfGraph.showList(taskinfo.groupid, "pgroupid");
                                             }).ok();
                                         } else {
                                             toast(r.msg, 600).err()
@@ -1233,7 +1233,7 @@ define(['underscore',
                 var groupid  = $form.find("#smallGroup option:selected").attr("val");
                 if(groupid){
                     //选择小组
-                    _selfGraph.showList(groupid,"pgroupid");
+                    _selfGraph.showList(groupid,"groupid");
                 }
                 // else {
                 //     //选择大组

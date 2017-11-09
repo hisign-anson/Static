@@ -1,7 +1,11 @@
 <%_.each(data, function(item){%>
 <tr>
     <td><%=item.rownum%></td>
-    <td><%=item.userName%></td>
+    <td>
+        <%=item.userName%>
+        <%if(item.userId == groupcreator){%>(组长)<%}%>
+
+    </td>
     <td><%=item.policeId%></td>
     <td><%=item.phone%></td>
     <td><%=item.orgName%></td>

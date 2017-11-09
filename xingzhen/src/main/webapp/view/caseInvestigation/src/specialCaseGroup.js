@@ -664,7 +664,7 @@ define(['underscore',
             $('#caseListDiv #caseListResult').pagingList({
                 action: top.servicePath_xz + '/asjAj/getAjGroupPage',
                 jsonObj: param,
-                callback: function (data) {debugger
+                callback: function (data) {
                     $("#caseTable tbody").empty().html(_.template(caseListTrTpl, {data: data}));
                     //$(".span").span();
                     $("#caseTable").on("click", ".link-text", function () {
@@ -723,7 +723,7 @@ define(['underscore',
                 id: ajid
             };
             $.ajax({
-                url: top.servicePath_xz + '/asjAj/getById',
+                url: top.servicePath_xz + '/asjAj/getCaseById',
                 type: "post",
                 contentType: "application/x-www-form-urlencoded",
                 data: param,

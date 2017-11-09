@@ -230,9 +230,9 @@ var jchatGloabal = {
         if (data && data.length > 0) {
             var list = '';
             $.each(data, function (dataIndex, dataValue) {
-                if (dataValue.msg_type == 4) {
-                    if (dataValue.from_gid == jmgid) {
+                if (dataValue.msg_type == 4 && dataValue.from_gid == jmgid) {
                         $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
+                            debugger
                             var message_list_content = msgsValue.content;
                             var time ;
                             var from_name = message_list_content.from_name;
@@ -261,64 +261,100 @@ var jchatGloabal = {
                             }
                             var msg_type = message_list_content.msg_type;
                             var msg_id = msgsValue.msg_id;
-                            if (from_id == login_userId) {
-                                if (msg_type == "file" || msg_type == "image") {
-                                    //文件消息 图片消息
-                                    jchatGloabal.getResourceMessage(".message-list", message_list_content, true, msg_type, msg_id);
-                                } else if(msg_type =="custom"){
-                                    //自动发的消息
-                                    list += '<li>' +
-                                        '<div class="time"><span>' + time + '</span></div>' +
-                                        '<div class="all">' +
-                                        '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                                        '</div></div>' +
-                                        '</li>';
-                                }else {
-                                    //单聊文字消息 群聊文字消息
-                                    list += '<li>' +
-                                        '<div class="time"><span>' + time + '</span></div>' +
-                                        '<div class="main self">' +
-                                        '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                        '<div class="text-wrap"><div class="from-name">' + login_user_name + '</div><div class="text">' + content_text + '</div>' +
-                                        '</div></div>' +
-                                        '</li>';
-                                    $("#main-frame").contents().find(".message-list").append(list);
-                                    clickHandle.scrollBottom();
-                                }
+                            var media_id = message_list_content.msg_body.media_id;
+                            var selfHtml = from_id == login_userId ? "self" : "";
+                            var msgContetHtml;
+                            var nameHtml = from_id == login_userId?login_user_name:from_name;
+                            if(msg_type == "file"){
+                                msgContetHtml = "文件信息";
 
-                            } else {
-                                if (msg_type == "file" || msg_type == "image") {
-                                    //文件消息 图片消息
-                                    jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
-                                } else if(msg_type =="custom"){
-                                    //自动发的消息
-                                    list += '<li>' +
-                                        '<div class="time"><span>' + time + '</span></div>' +
-                                        '<div class="all">' +
-                                        '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                                        '</div></div>' +
-                                        '</li>';
-                                } else {
-                                    //单聊文字消息 群聊文字消息
-                                    list += '<li>' +
-                                        '<div class="time"><span>' + time + '</span></div>' +
-                                        '<div class="main">' +
-                                        '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                        '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
-                                        '</div></div>' +
-                                        '</li>';
-                                    '</li>';
-                                }
+                            } else if( msg_type == "image"){
+                                debugger
+                                var fileDiv = '<a class="message-image preview-JIM-img" media_id="'+media_id+'" id="file_' + msg_id + '" href="javascript:;">' +
+                                    '<img class="message-image" alt="" src="" />' +
+                                    '</a>' +
+                                    '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
 
+                                msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                    '<div class="text-wrap">' +
+                                    '<div class="from-name">' + nameHtml + '</div>' +
+                                    '<div class="text">' + fileDiv + '</div>' +
+                                    '</div>' +
+                                    '</div>';
+                            } else if(msg_type =="custom"){
+                                msgContetHtml = '<div class="all">' +
+                                    '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                                    '</div></div>';
+                            }else {
+                                msgContetHtml = '<div class="main '+selfHtml+'">' +
+                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                    '<div class="text-wrap">' +
+                                    '<div class="from-name">' + nameHtml + '</div>' +
+                                    '<div class="text">' + content_text + '</div>' +
+                                    '</div>'+
+                                    '</div>';
                             }
+                            list += '<li>' +
+                                '<div class="time"><span>' + time + '</span></div>' +
+                                msgContetHtml+
+                                '</li>';
+
+                            // if (from_id == login_userId) {
+                            //     if (msg_type == "file" || msg_type == "image") {
+                            //         //文件消息 图片消息
+                            //         jchatGloabal.getResourceMessage(".message-list", message_list_content, true, msg_type, msg_id);
+                            //     } else if(msg_type =="custom"){
+                            //         //自动发的消息
+                            //         list += '<li>' +
+                            //             '<div class="time"><span>' + time + '</span></div>' +
+                            //             '<div class="all">' +
+                            //             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                            //             '</div></div>' +
+                            //             '</li>';
+                            //     }else {
+                            //         //单聊文字消息 群聊文字消息
+                            //         list += '<li>' +
+                            //             '<div class="time"><span>' + time + '</span></div>' +
+                            //             '<div class="main self">' +
+                            //             '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            //             '<div class="text-wrap"><div class="from-name">' + login_user_name + '</div><div class="text">' + content_text + '</div>' +
+                            //             '</div></div>' +
+                            //             '</li>';
+                            //         // $("#main-frame").contents().find(".message-list").append(list);
+                            //         // clickHandle.scrollBottom();
+                            //     }
+                            //
+                            // } else {
+                            //     if (msg_type == "file" || msg_type == "image") {
+                            //         //文件消息 图片消息
+                            //         jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
+                            //     } else if(msg_type =="custom"){
+                            //         //自动发的消息
+                            //         list += '<li>' +
+                            //             '<div class="time"><span>' + time + '</span></div>' +
+                            //             '<div class="all">' +
+                            //             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                            //             '</div></div>' +
+                            //             '</li>';
+                            //     } else {
+                            //         //单聊文字消息 群聊文字消息
+                            //         list += '<li>' +
+                            //             '<div class="time"><span>' + time + '</span></div>' +
+                            //             '<div class="main">' +
+                            //             '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            //             '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
+                            //             '</div></div>' +
+                            //             '</li>';
+                            //         '</li>';
+                            //     }
+                            // }
 
                         });
-
-                    }
                 }
-            })
-
+            });
             $("#main-frame").contents().find(".message-list").append(list);
+            // jchatGloabal.getResourceMessageHtml();
             clickHandle.scrollBottom();
 
 
@@ -358,8 +394,6 @@ var jchatGloabal = {
                 '</div></div>' +
                 '</li>';
             '</li>';
-            console.info("1:"+messageList)
-
             ulHtml.append(messageList);
             //文件查看
             $("#main-frame").contents().find(".not-images-file").off("click").on("click", function () {
@@ -370,10 +404,25 @@ var jchatGloabal = {
         }).onFail(function (data) {
             toast('success:' + JSON.stringify(data));
         });
-        console.info("2:"+messageList)
-        debugger
-
-        return messageList;
+    },
+    getResourceMessageHtml:function () {
+        $("#main-frame").contents().find(".preview-JIM-img").each(function (index, element) {
+            var media_id = $(element).attr("media_id");
+            JIM.getResource({'media_id': media_id}).onSuccess(function (data) {
+                var path_file_or_images = data.url;
+                console.info("haha:"+path_file_or_images);
+                console.info($(element).attr("media_id"));
+                $(element).find(".message-image").attr("src",path_file_or_images);
+                $(element).siblings(".imgHover").find(".center-block").attr("src",path_file_or_images);
+            }).onFail(function (data) {
+                toast('onFail:' + JSON.stringify(data));
+            });
+        })
+        //文件查看
+        $("#main-frame").contents().find(".not-images-file").off("click").on("click", function () {
+            // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
+            window.open($(this).attr("src"));
+        });
     },
     getFile: function (element) {
         var fd = new FormData();
@@ -391,32 +440,83 @@ var jchatGloabal = {
         console.info(obj2str(data))
         if (data && data.length > 0) {
             debugger
-            // var msg_type = data.messages[0].content.msg_type;
-            // var msg_id = data.messages[0].msg_id;
-            // var message_content = data.messages[0].content;
-            // var time = clickHandle.getLocalTime(message_content.create_time);
-            // var from_name = message_content.from_name;
-            // var from_id = message_content.from_id;
-            // var content_text = message_content.msg_body.text;
-            // var file_or_images = message_content.msg_body.media_id;
-            // var list = '';
-            // if (msg_type == "file" || msg_type == "image") {
-            //     //文件消息 图片消息
-            //     jchatGloabal.getResourceMessage(".message-list", message_content, false, msg_type, msg_id);
-            // } else {
-            //     //单聊文字消息 群聊文字消息
-            //     list += '<li>' +
-            //         '<div class="time"><span>' + time + '</span></div>' +
-            //         '<div class="main">' +
-            //         '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-            //         '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
-            //         '</div></div>' +
-            //         '</li>';
-            //     '</li>';
-            //     $("#main-frame").contents().find(".message-list").append(list);
-            //     clickHandle.scrollBottom();
-            //
-            // }
+            var list = '';
+            $.each(data, function (dataIndex, dataValue) {
+                $.each(dataValue.messages, function (msgsIndex, msgsValue) {
+                    debugger
+                    if (msgsValue.msg_type == 4 && msgsValue.from_gid == jmgid) {
+                        var message_list_content = msgsValue.content;
+                        var time ;
+                        var from_name = message_list_content.from_name;
+                        var from_id = message_list_content.from_id;
+                        var login_user_name = top.trueName;
+                        var login_userId = top.userId;
+
+                        var content_text;
+                        if(message_list_content.from_platform == "api"){
+                            var objText = str2obj(message_list_content.msg_body.text);
+                            var type = objText.msgType;
+                            switch (type){
+                                case "send_connect_case_info":
+                                    content_text = objText.createName+""+objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);break;
+                                case "send_remove_case_info":
+                                    content_text = objText.createName+""+objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);break;
+                                case "send_group_backup_info":
+                                    content_text = objText.createName+"将"+objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);break;
+                            }
+                        } else if (message_list_content.from_platform == "web"){
+                            content_text = message_list_content.msg_body.text;
+                            time = clickHandle.getLocalTime(message_list_content.create_time);
+                        }
+                        var msg_type = message_list_content.msg_type;
+                        var msg_id = msgsValue.msg_id;
+                        var media_id = message_list_content.msg_body.media_id;
+
+                        var selfHtml = from_id == login_userId ? "self" : "";
+                        var msgContetHtml;
+                        var nameHtml = from_id == login_userId?login_user_name:from_name;
+                        if(msg_type == "file"){
+                            msgContetHtml = "文件信息";
+
+                        } else if( msg_type == "image"){
+                            var fileDiv = '<a class="message-image preview-JIM-img" media_id="'+media_id+'" id="file_' + msg_id + '" href="javascript:;">' +
+                                '<img class="message-image" alt="" src="" />' +
+                                '</a>' +
+                                '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
+
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + fileDiv + '</div>' +
+                                '</div>' +
+                                '</div>';
+                        } else if(msg_type =="custom"){
+                            msgContetHtml = '<div class="all">' +
+                                '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                                '</div></div>';
+                        }else {
+                            msgContetHtml = '<div class="main '+selfHtml+'">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + content_text + '</div>' +
+                                '</div>'+
+                                '</div>';
+                        }
+                        list += '<li>' +
+                            '<div class="time"><span>' + time + '</span></div>' +
+                            msgContetHtml+
+                            '</li>';
+                    }
+                });
+            });
+            $("#main-frame").contents().find(".message-list").append(list);
+            jchatGloabal.getResourceMessageHtml();
+            clickHandle.scrollBottom();
         }
     },
     onMsgReceiptChange: function () {
