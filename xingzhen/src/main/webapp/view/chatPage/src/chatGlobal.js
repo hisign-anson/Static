@@ -7,9 +7,9 @@
 // Master Secret:bd4d826e1e49340aac2d05e2
 
 var across_appkey = '13c78e9ee2ac862f30ce0b17';
-var across_random_str = '670180c73e6152cf44918e2e';//20-36 长度的随机字符串
+var across_random_str = '022cd9fd995849b58b3ef0e943421ed9';//20-36 长度的随机字符串
 var across_timestamp = new Date().getTime();
-var masterSecret = 'bd4d826e1e49340aac2d05e2';
+var masterSecret = '670180c73e6152cf44918e2e';
 // //签名，10 分钟后失效, 签名生成算法: signature = md5(appkey=appkey&timestamp=timestamp&random_str=random_str&key=secret)
 var across_signature = md5("appkey=" + across_appkey + "&timestamp=" + across_timestamp + "&random_str=" + across_random_str + "&key=" + masterSecret);
 window.JIM = new JMessage({
