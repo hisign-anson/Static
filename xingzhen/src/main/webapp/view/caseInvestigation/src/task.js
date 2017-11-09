@@ -870,8 +870,9 @@ define(['underscore',
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#userListDiv #queryBtn").on("click", function () {
+            $("#userListDiv #queryBtn").on("click", function (e) {
                 _self.queryUserList(false, taskId, taskInfo);
+                e.stopPropagation();
                 return false;
             });
 

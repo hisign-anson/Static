@@ -72,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="369">
@@ -80,12 +80,20 @@
               <folding>
                 <element signature="e#9392#9742#0" expanded="false" />
                 <element signature="e#9813#10165#0" expanded="false" />
-                <element signature="e#29383#29518#0" expanded="false" />
-                <element signature="e#31866#32928#0" expanded="false" />
-                <marker date="1510211932242" expanded="true" signature="74:93" ph="[...]" />
-                <marker date="1510211932242" expanded="true" signature="21822:21856" ph="..." />
-                <marker date="1510211932242" expanded="true" signature="21992:22025" ph="..." />
+                <marker date="1510213103988" expanded="true" signature="74:93" ph="[...]" />
+                <marker date="1510213103988" expanded="true" signature="21822:21856" ph="..." />
+                <marker date="1510213103988" expanded="true" signature="21992:22025" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="groupStaffTr.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="47" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,12 +123,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="task.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="31" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="21" selection-end-column="31" />
-              <folding />
+            <state relative-caret-position="217">
+              <caret line="872" column="63" lean-forward="false" selection-start-line="872" selection-start-column="63" selection-end-line="872" selection-end-column="63" />
+              <folding>
+                <element signature="e#50624#50902#0" expanded="false" />
+                <element signature="e#50947#51970#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,11 +169,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create</find>
-      <find>由追加任务 补充任务跳转过来</find>
-      <find>dict-block-group</find>
-      <find>add</find>
-      <find>oneChoose</find>
       <find>pgroupname</find>
       <find>#chooseReceive</find>
       <find>deparment</find>
@@ -188,6 +194,11 @@
       <find>=i</find>
       <find>=</find>
       <find>专案组群聊</find>
+      <find>移交</find>
+      <find>e.</find>
+      <find>saveTransfer</find>
+      <find>queryUserList</find>
+      <find>e.st</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -212,7 +223,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaff.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html" />
         <option value="$PROJECT_DIR$/view/home.html" />
         <option value="$PROJECT_DIR$/script/selectUtils.js" />
@@ -257,11 +267,12 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupListTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseList.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
         <option value="$PROJECT_DIR$/view/graph/src/graph.js" />
         <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/src/command.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
       </list>
     </option>
   </component>
@@ -697,12 +708,12 @@
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
       <workItem from="1510017010991" duration="92141000" />
-      <workItem from="1510197160531" duration="10205000" />
+      <workItem from="1510197160531" duration="11583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="543304000" />
+    <option name="totallyTimeSpent" value="544682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -989,14 +1000,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/fstPage/tpl/moreList/achievementMoreListTr.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1118,14 +1121,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="31" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="21" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/graph/src/graph.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="490">
@@ -1189,11 +1184,28 @@
           <folding>
             <element signature="e#9392#9742#0" expanded="false" />
             <element signature="e#9813#10165#0" expanded="false" />
-            <element signature="e#29383#29518#0" expanded="false" />
-            <element signature="e#31866#32928#0" expanded="false" />
-            <marker date="1510211932242" expanded="true" signature="74:93" ph="[...]" />
-            <marker date="1510211932242" expanded="true" signature="21822:21856" ph="..." />
-            <marker date="1510211932242" expanded="true" signature="21992:22025" ph="..." />
+            <marker date="1510213103988" expanded="true" signature="74:93" ph="[...]" />
+            <marker date="1510213103988" expanded="true" signature="21822:21856" ph="..." />
+            <marker date="1510213103988" expanded="true" signature="21992:22025" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="47" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="872" column="63" lean-forward="false" selection-start-line="872" selection-start-column="63" selection-end-line="872" selection-end-column="63" />
+          <folding>
+            <element signature="e#50624#50902#0" expanded="false" />
+            <element signature="e#50947#51970#0" expanded="false" />
           </folding>
         </state>
       </provider>
