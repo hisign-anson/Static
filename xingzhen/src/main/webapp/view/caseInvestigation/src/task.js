@@ -18,8 +18,8 @@ define(['underscore',
     return {
         showList: function () {
             _self = this;
-             //关闭没有关闭的弹框
-             dictOpener.closeOpenerDiv();
+             // //关闭没有关闭的弹框
+             // dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(taskListTpl, {isOperation: true}));
             selectUtils.selectTextOption("#changeTaskType", "#taskType");
             selectUtils.selectTextOption("#changeConfirmStatus", "#fkqrzt");
