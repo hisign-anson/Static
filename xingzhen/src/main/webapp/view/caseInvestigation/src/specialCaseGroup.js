@@ -73,8 +73,6 @@ define(['underscore',
                 _self.addGroupOfGroup();
             });
             _self.queryList();
-            // init();
-            // login();
         },
         //查询功能
         queryList: function () {
@@ -177,7 +175,7 @@ define(['underscore',
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组归档'});
             $("#archiveBlock .panel-container").empty().html(_.template(archivePageTpl));
             $(".dict").dict();
-            $("#archiveBlock").on("click", "#saveBtn", function () {
+            $("#archiveBlock #saveBtn").on("click",function (e) {
                 var param = {
                     backupStatus: 1,
                     backupReason: $.trim($("#backupReason").val()),
@@ -197,6 +195,7 @@ define(['underscore',
                         toast(r.msg, 600).err();
                     }
                 });
+                e.stopPropagation();
             });
             $("#archiveBlock").on("click", "#cancelBtn", function () {
                 $("#archiveBlock").$close();
@@ -206,11 +205,12 @@ define(['underscore',
             _self = this;
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
-            $("#archiveBlock").on("click", "#saveBtn", function () {
+            $("#archiveBlock #saveBtn").on("click", function (e) {
                 var broadcastContent = $("#broadcastContent").val();
                 //调用极光接口
                 window.parent.clickHandle.sendBroadcastText(jmgid, broadcastContent);
                 $("#archiveBlock").$close();
+                e.stopPropagation();
             });
 
             $("#archiveBlock").on("click", "#cancelBtn", function () {

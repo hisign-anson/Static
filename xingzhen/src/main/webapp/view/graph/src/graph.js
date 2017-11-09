@@ -1193,9 +1193,7 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
-            // selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
             // 任务状态
-            // task.selectTaskStaOption("#changeTaskStatus");
             selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
             $("#searchBtn", parent.document).off("click").on("click", function () {
                 if (conditionDiv.is(":visible")) {
@@ -1232,11 +1230,12 @@ define(['underscore',
                     endTime: $form.find("#endTime").val(),
                     taskStatus: $form.find("#taskStatus").val()
                 };
-                // var groupid  = $form.find("#smallGroup option:selected").attr("val");
-                // if(groupid){
-                //     //选择小组
-                //     _selfGraph.showList(groupid,"pgroupid");
-                // } else {
+                var groupid  = $form.find("#smallGroup option:selected").attr("val");
+                if(groupid){
+                    //选择小组
+                    _selfGraph.showList(groupid,"pgroupid");
+                }
+                // else {
                 //     //选择大组
                 //     _selfGraph.showList(groupid,"groupid");
                 //
