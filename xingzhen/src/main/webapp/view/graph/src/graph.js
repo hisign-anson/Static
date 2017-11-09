@@ -270,9 +270,9 @@ define(['underscore',
 
                         var menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
                         if (d.type == "taskid") {
-                            if (d.taskCreatorUserId == top.userId) {
+                            if (d.taskCreatorUserId == top.userId && d.taskStatus == 0) {
                                 //显示催办任务
-                                var urge = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='4'>下发人催办任务</span>"};
+                                var urge = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='4'>催办任务</span>"};
                                 menuByTaskType.push(urge);
                             }
                             taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
@@ -284,9 +284,9 @@ define(['underscore',
                                     var taskinfo = r.data;
                                     if (taskinfo.jsr == top.userId) {
                                         //显示反馈任务  移交任务  补充任务
-                                        var feedback = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>接收人反馈任务</span>"};
-                                        var transfer = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>接收人移交任务</span>"};
-                                        var append_bc = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>接收人补充任务</span>"};
+                                        var feedback = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>反馈任务</span>"};
+                                        var transfer = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>移交任务</span>"};
+                                        var append_bc = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>补充任务</span>"};
                                         menuByTaskType.push(feedback);
                                         menuByTaskType.push(transfer);
                                         menuByTaskType.push(append_bc);
@@ -319,7 +319,7 @@ define(['underscore',
                             var feedbackInfo= {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='2'>反馈信息详情</span>"};
                             menuByFeedbackType.push(feedbackInfo);
                             if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
-                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>下发人追加任务</span>"};
+                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>追加任务</span>"};
                                 menuByFeedbackType.push(append_zj);
                             }
                         }

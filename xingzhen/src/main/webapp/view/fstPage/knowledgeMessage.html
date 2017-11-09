@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>通知公告</title>
+    <title>知识库</title>
     <link rel="stylesheet" href="../../../css/base.css?version=0.99">
     <link rel="stylesheet" href="../../../css/message.css?version=0.99">
 </head>
 <body>
 
-<div class="query-block" id="query-condition">
+<div class="query-block">
     <div class="query-condition-p">
         <span class="qc-label w80px">时间：</span>
         <span class="text-time">
             <input id="query-date" readonly="readonly" class="common-input w190px" placeholder="请输入时间范围" tabindex="-1">
-            <input type="hidden" name="queryDateBegin" id="queryDateBegin" value=""/>
-            <input type="hidden" name="queryDateEnd" id="queryDateEnd" value=""/>
+            <input type="hidden" name="queryDateBegin" id="queryDateBegin" />
+            <input type="hidden" name="queryDateEnd" id="queryDateEnd" />
         </span>
         <!--<input id="startTime" type="text" class="query-date"/>~<input id="endTime" type="text" class="query-date mr15"/>-->
         <p class="query-reset">
@@ -25,7 +25,7 @@
 </div>
 <div id="msg-main-box">
     <div class="new-color-bar">
-        <span class="title">通知公告（共 <span class="total-count"></span> 条消息）</span>
+        <span class="title">知识库中（共 <span class="total-count"></span> 条消息）</span>
         <div class="bar-btn-div">
             <!--<b id="receive-remove-btn" class="cm-remove-btn"></b>-->
         </div>
@@ -57,7 +57,7 @@
             <tr>
                 <td class="cx">{rownum}</td>
                 <td class="cc" paramId="{id}" rownum="{rownum}">
-                    <div class="c-title"><div class="sender-name ellipsis" title="{rev1}">{rev1}</div><div class="msg-time">{msgDateTxt}</div></div>
+                    <div class="c-title"><div class="sender-name ellipsis" title="{subject}">{subject}</div><div class="msg-time">{msgDateTxt}</div></div>
                 </td>
                 <td><div param="{id}" class="c-remove hideplus" title="删除"><i class="icon-remove"></i></div></td>
             </tr>
@@ -70,23 +70,19 @@
         <h2>{subject}</h2>
         <!--<div><span>发件人：</span><span class="tcolor">{rev2}</span></div>-->
         <div class="hide{senderUnit}"><span>发件人单位：</span><span class="tcolor">{senderUnit}</span></div>
-        <div><span>时间：{rev3}</span></div>
-        <!--<div><span>附件：<a href="#" id="attachment"></a></span></div>-->
+        <div><span>时间：{msgDetailDate}</span></div>
+        <div><span>附件：<a href="#" id="attachment"></a></span></div>
     </div>
     <div class="read-content has-table-wrapper">
         <div>
-            {}
+
         </div>
     </div>
 </script>
-<script src="../../js/base.js?version=0.99"></script>
-<script src="../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
-<script src="../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
-<script src="../../plugin/daterangepicker/moment.js?version=0.99"></script>
-<script src="../../js/sys.js?version=0.99"></script>
-<script>
-    var id = $('.tabs-selected', window.parent.document).find('em').attr('data-id');
-    var type = $('.tabs-selected', window.parent.document).find('em').attr('msg-type');
-    typeof newsMoreFn(id,type)=='function' && newsMoreFn(id,type);
-</script>
+<script src="../../../js/base.js?version=0.99"></script>
+<script src="../../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+<script src="../../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
+<script src="../../../plugin/daterangepicker/moment.js?version=0.99"></script>
+<script src="../../../js/sys.js?version=0.99"></script>
+<script>typeof knowledgeMessageFn=='function' && knowledgeMessageFn();</script>
 </html>

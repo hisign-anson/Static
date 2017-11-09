@@ -48,6 +48,7 @@ define([
                             }
                         });
                         $('#myTabMinor a:first').click();
+                        $(".span").span();
                     });
                 }
             })
@@ -81,12 +82,12 @@ define([
             _self=this;
             fstPageAjax.getAjGroupPage({groupId:groupId},function(r){
                 if(r.flag==1){
-                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));debugger
+                    $(".span").span();
                 }else{
                     toast(r.msg,600).err();
                 }
             });
-            $(".span").span();
         },
         getGroupMemberList:function(groupId){//平台成果展示(点击更多--获取所有组内成员)
             _self=this;
@@ -169,6 +170,7 @@ define([
                             $("#panelDiv").$close();
                         });
                     });
+                    $(".span").span();
                 }
             });
 

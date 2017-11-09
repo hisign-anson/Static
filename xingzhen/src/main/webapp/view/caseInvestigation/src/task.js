@@ -449,7 +449,7 @@ define(['underscore',
         handleFeedback: function (taskId) {
             _self = this;
             if (taskId) {
-                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
+                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {debugger
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
                         var fileInfoArr = []; //传入后台参数的文件数组...
@@ -508,6 +508,7 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
+                                            $(".progressV b").css('width','50%');
                                             // var $progressActive = $slide.find('.progress>span');
                                             //
                                             // $slide.find('.state').html('上传中...');
@@ -526,6 +527,7 @@ define(['underscore',
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
                                                 if(filesArr){
+                                                    var html=""
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
                                                             fileName: value.responseName,
@@ -534,10 +536,13 @@ define(['underscore',
                                                             fileSize: value.size,
                                                             fileType: value.type
                                                         }
+                                                        html+='<span>'+value.fileName+'</span>';
                                                         fileInfoArr.push(item);
                                                     });
+                                                    $('.upload-block .state').html(html)
+                                                    $('[href="#uploadMat"]').text("查看")
                                                 }
-
+                                                $(".progressV b").css('width','100%');
                                             } else {
                                                 console.info(res);
                                             }
@@ -552,7 +557,7 @@ define(['underscore',
                         });
 
                         $("#addImg").siblings("input[type='file']").val("");
-                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {
+                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {debugger
                             var $this = $(this)[0];
                             //未上传前，在展示区域显示要上传内容的图片
                             var fileList = $this.files;
@@ -603,7 +608,8 @@ define(['underscore',
                                         processData: false,
                                         contentType: false,
                                         beforeSend: function () {
-                                            $('.state').html('上传中...');
+                                            //$('.state').html('上传中...');
+                                            $(".progressI b").css('width','50%');
                                         },
                                         success: function (res) {
                                             $('.state').html('');
@@ -615,6 +621,7 @@ define(['underscore',
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
                                                 if(filesArr){
+                                                    var html="";
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
                                                             fileName: value.responseName,
@@ -623,10 +630,13 @@ define(['underscore',
                                                             fileSize: value.size,
                                                             fileType: value.type
                                                         }
+                                                        html+='<span>'+value.fileName+'</span>';
                                                         fileInfoArr.push(item);
                                                     });
+                                                    $('.upload-block .state').html(html)
+                                                    $('[href="#uploadMat"]').text("查看")
                                                 }
-
+                                                $(".progressI b").css('width','100%');
                                             } else {
                                                 console.info(res);
                                             }

@@ -72,6 +72,9 @@
                                                     <input type="file" class="sr-only" multiple="multiple" accept=".mp4,.aiff,.avi,.mpg,.mpeg,.wmv,.mkv">
                                                     <span id="addVideo" class="cm-btn-icon h-add orange-btn upload-btn">视频上传</span>
                                                 </label>
+                                                 <span class="progressV" >
+                                                 <b style="width:0%;"></b>
+                                                 </span>
                                             </div>
 
                                             <div class="avatar-upload">
@@ -79,9 +82,14 @@
                                                     <input type="file" class="sr-only" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
                                                     <span id="addImg" class="cm-btn-icon h-add orange-btn upload-btn">图片上传</span>
                                                 </label>
+                                                 <span class="progressI" >
+                                                 <b style="width:0%;"></b>
+                                                 </span>
                                             </div>
-                                            <span class="state"></span>
-                                            <span class="red">调查过程材料上传</span>
+                                            <div id="uploadMat" class="collapse">
+                                                <span class="state"></span>
+                                            </div>
+                                            <span class="red">调查过程材料上传 <a href="#uploadMat" data-toggle="collapse"></a></span>
                                         </div>
                                     </div>
                                 </div>
@@ -146,9 +154,7 @@
                             <th>备注</th>
                             <%if(isOperation == false){%>
                             <%}else{%>
-                                <%if(data.fqr == top.userId && data.taskFks && data.taskFks.length < 3){%>
                                 <th>操作</th>
-                                <%}%>
                             <%}%>
                         </tr>
                         </thead>
@@ -177,11 +183,9 @@
                             <%if(isOperation == false){%>
                             <%}else{%>
                                 <%if(data.fqr == top.userId){%>
-                                    <%if(!data.taskFks || (data.taskFks && data.taskFks.length < 3)){%>
-                                        <td>
-                                            <a class="into-appendTaskBtn fa fa-plus-square" fkid="<%=item.id%>" taskinfo='<%=obj2str(data)%>' title="追加任务"></a>
-                                        </td>
-                                    <%}%>
+                                    <td>
+                                        <a class="into-appendTaskBtn fa fa-plus-square" fkid="<%=item.id%>" taskinfo='<%=obj2str(data)%>' title="追加任务"></a>
+                                    </td>
                                 <%}%>
                             <%}%>
                         </tr>

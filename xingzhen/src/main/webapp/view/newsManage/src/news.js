@@ -324,7 +324,7 @@ define(['underscore',
 					rev1:$("#rev1").val(),
 					msgVest:msgVest,
 					rev2:top.trueName,
-					userId:top.userName,
+					userId:top.userId,
 					rev4:rev4,
 					orgId:top.orgId
 				});
@@ -694,7 +694,7 @@ define(['underscore',
 								rev1:rev1,
 								msgVest:msgVest,
 								rev2:top.trueName,
-								userId:top.userName,
+								userId:top.userId,
 								rev4:rev4,
 								orgId:top.orgId
 							});

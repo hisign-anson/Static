@@ -335,13 +335,21 @@ define([
                     }
                     //知识库点击更多
                     $('#knowledgeDiv .more-link').on('click', function () {
-                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
-                            if ("tzgg" == $(item).attr("page-no")) {
-                                $(item).find('a')[0].click();
-                                $(item).find("li a")[0].click();
-                                $('.tabs-selected', window.parent.document).find('span.tabs-title').attr('data-noticeid',"02");
-                            }
-                        });
+                        //$('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                        //    if ("tzgg" == $(item).attr("page-no")) {
+                        //        $(item).find('a')[0].click();
+                        //        $(item).find("li a")[0].click();
+                        //        $('.tabs-selected', window.parent.document).find('span.tabs-title').attr('data-noticeid',"02");
+                        //    }
+                        //});
+                        _self = this;
+                        //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                        //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                        if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                            $openOnce(getViewPath('fstPage/knowledgeMessage.html'), '知识库')
+                        } else {
+                            window.msgTab = $open(getViewPath('fstPage/knowledgeMessage.html'), '知识库');
+                        }
                     });
                 }else{
                     toast(r.msg,600).err();
@@ -373,20 +381,27 @@ define([
         },
         showToolDownloadList:function () {
             _self = this;
-            fstPageAjax.findPage({type: 3, end: 5}, function (r) {//表格下载
+            fstPageAjax.findPage({type: 3, end: 5}, function (r) {//系统工具下载
                 if (r.flag == 1) {
                     $("#toolDownloadDiv").empty().html(_.template(toolDownloadListTpl, {data: r.data}));
                     if(r.data && r.data.length<=0){
                         $("#toolDownloadDiv .tabledown").empty().html("<img src='../../../img/no-data-table.png' class='standMiddle'>");
                     }
                     $('#toolDownloadDiv .more-link').on('click', function () {
-                        $('#root-menu', window.parent.document).find('li').each(function (i, item) {
-                            if ("tzgg" == $(item).attr("page-no")) {
-                                $(item).find('a')[0].click();
-                                $(item).find("li a")[0].click();
-                                $('.tabs-selected', window.parent.document).find('span.tabs-title').attr('data-noticeid',"03");
-                            }
-                        });
+                        //$('#root-menu', window.parent.document).find('li').each(function (i, item) {
+                        //    if ("tzgg" == $(item).attr("page-no")) {
+                        //        $(item).find('a')[0].click();
+                        //        $(item).find("li a")[0].click();
+                        //        $('.tabs-selected', window.parent.document).find('span.tabs-title').attr('data-noticeid',"03");
+                        //    }
+                        //});
+                        _self = this;
+                        //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
+                        if (typeof window.msgTab == 'object' && window.msgTab.children().length > 0) {
+                            $openOnce(getViewPath('fstPage/tableMessage.html'), '系统工具下载')
+                        } else {
+                            window.msgTab = $open(getViewPath('fstPage/tableMessage.html'), '系统工具下载');
+                        }
                     });
                 }
             });
@@ -506,7 +521,6 @@ define([
             if (!dateType) {
                 var dateType = 0;
             }
-
 
             //切换月度，季度，年度
             $("#getSolveCaseInfoQuest").on("click", "li", function () {

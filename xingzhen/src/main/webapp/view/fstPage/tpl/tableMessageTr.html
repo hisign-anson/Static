@@ -1,0 +1,23 @@
+<%_.each(data, function(item){%>
+<tr>
+    <td><%=item.rownum%></td>
+    <td><%=item.subject%></td>
+    <td><%=item.content%></td>
+    <td><%=item.createDate%></td>
+    <!--<td><%=item.rev2%></td>-->
+    <% if(item.type==1){%>
+    <% if(item.msgLevel==1){%>
+    <td>紧急</td>
+    <%  }else if (item.msgLevel==2){%>
+    <td>普通</td>
+    <%  }%>
+    <% }else if(item.type==2||item.type==3){%>
+
+    <%}%>
+    <td>
+        <a href="<%=top.ftpServer%><%=item.rev1%>"  id="<%=item.id%>" class="icon-download-alt" download="<%=item.rev1%>" title="下载"></a>
+    </td>
+</tr>
+
+<%})%>
+
