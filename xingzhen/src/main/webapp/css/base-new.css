@@ -9967,3 +9967,21 @@ Copyright (c) 2013 Daniel Eden
 .tabs li a.tabs-inner {
   border-radius: 0!important;
 }
+/*进度条*/
+.progressI,.progressV {
+  width:150px;
+  height:10px;
+  background-color:transparent;
+  display:inline-block;
+  text-align:center;
+  /*border:1px solid #000;*/
+  margin:5px auto 0;
+}
+.progressI b,.progressV b{
+  height:10px;
+  background-color:#3879D9;
+  display:block;
+}
+.state span{
+  padding-right:10px;
+}

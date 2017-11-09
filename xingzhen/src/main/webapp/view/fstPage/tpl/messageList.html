@@ -1,7 +1,8 @@
 <div class="col-panel-block my-notice">
     <h3 class="col-panel-header"><i class="left-line"></i><span>信息提醒</span> <a class="more-link" href="javascript:void(0)" id="messageMore">更多</a></h3>
     <div class="col-panel-body notice" id="messageContent">
-        <%_.each(data, function(item){%>
+        <%_.each(data, function(item,i){%>
+        <%if(i < 5){%>
         <div>
             <a href="#" data-id="<%=item.id%>" class=" new-column">
                 <span class="icon-notice ml15 vam"></span><i class="animate-up"></i><i class="animate-middle"></i><i class="animate-down"></i>
@@ -9,6 +10,7 @@
                 <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
             </a>
         </div>
+        <%}%>
         <%})%>
     </div>
 </div>

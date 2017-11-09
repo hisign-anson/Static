@@ -48,6 +48,7 @@ define([
                             }
                         });
                         $('#myTabMinor a:first').click();
+                        $(".span").span();
                     });
                 }
             })
@@ -81,7 +82,8 @@ define([
             _self=this;
             fstPageAjax.getAjGroupPage({groupId:groupId},function(r){
                 if(r.flag==1){
-                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));
+                    $("#caseTable tbody").empty().html(_.template(achievementInfoAjTrTpl,{data: r.data}));debugger
+                    $(".span").span();
                 }else{
                     toast(r.msg,600).err();
                 }
@@ -168,6 +170,7 @@ define([
                             $("#panelDiv").$close();
                         });
                     });
+                    $(".span").span();
                 }
             });
 

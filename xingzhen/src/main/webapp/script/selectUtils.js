@@ -58,5 +58,8 @@ var selectUtils = {
         $("span.option").each(function () {
             $(this).children("u").removeClass("active").eq(0).addClass("active");
         });
+        $("span.date-select").each(function () {
+            $(this).children("u").removeClass("active").eq(0).addClass("active");
+        });
     }
 };

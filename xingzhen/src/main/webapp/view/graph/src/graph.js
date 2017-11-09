@@ -326,7 +326,7 @@ define(['underscore',
                             var feedbackInfo = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='2'>反馈信息详情</span>"};
                             menuByFeedbackType.push(feedbackInfo);
                             if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
-                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='1'>\追加任务</span>"};
+                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>追加任务</span>"};
                                 menuByFeedbackType.push(append_zj);
                             }
                         }
@@ -673,8 +673,7 @@ define(['underscore',
             });
             $("#chooseReceive").on('click', function () {
                 if ($("#groupid").val()) {
-                    // dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,}, "user");
-                    dictOpener.getUserByGroupIdPortList($(this),{groupId: id,isInGroup: true})
+                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,}, "user");
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }

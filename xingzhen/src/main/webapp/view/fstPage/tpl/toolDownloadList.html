@@ -1,7 +1,8 @@
 <div class="col-panel-block my-tabledown">
     <h3 class="col-panel-header"><i class="left-line"></i><span>系统工具下载</span> <a class="more-link" href="javascript:void(0)" id="tablesMore">更多</a></h3>
     <div class="col-panel-body tabledown">
-        <%_.each(data, function(item){%>
+        <%_.each(data, function(item,i){%>
+        <%if(i < 5){%>
         <div>
             <a href="<%=top.ftpServer%><%=item.rev1%>" id="<%=item.id%>" class="tableOne" download="<%=item.rev1%>" title="下载">
                 <%var fileType = item.fileType;%>
@@ -24,7 +25,7 @@
                 <span class="span-time"><%=rangeUtil.formatDate(item.createDate,'yyyy-MM-dd hh:mm')%></span>
             </a>
         </div>
+        <%}%>
         <%})%>
-
     </div>
 </div>

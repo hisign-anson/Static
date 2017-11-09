@@ -212,7 +212,7 @@ define(['underscore',
                 jsonObj: param,
                 callback: function (data) {
                     $("#userInfoList-table tbody").empty().html(_.template(userInfoListTrTpl, {data: data}));
-                    $("span").span();
+                    $(".span").span();
                     $(".into-edit").on('click', function () {
                         _self.editUserInfo($(this).attr('id'), $(this).attr('orgId'), $(this).attr('orgName'));
                     });

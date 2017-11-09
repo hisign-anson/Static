@@ -14,6 +14,7 @@ define(['underscore',
             window.newwin=$open('#dict-block-type',{width:600,height:400,top:100, title:'选择'+title});
             _selfDict.getDictListByParentKey(dictVal);
             var opener = $(".panel #dict-block-type");
+            $(".panel #dict-block-type .query-block-row input").val("");
             opener.find("#dict-wrap-type").attr('dictVal',dictVal);
             opener.find("#dict-wrap-type").off("click").on("click","div",function(){
                 var input = obj.prev();//页面上需要填入的input
@@ -132,7 +133,7 @@ define(['underscore',
             window.newwin=$open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
             _selfDict.getUserPortList();
             var opener = $(".panel #dict-block");
-            opener.find(".query-block-row input").val("");
+            $(".panel #dict-block .query-block-row input").val("");
             opener.find("#dict-wrap").off("click").on("click",".item-value",function(){
                 // var input = obj.prev();//页面上需要填入的input
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
@@ -163,7 +164,8 @@ define(['underscore',
             userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:""},function (r) {
                 if (r.flag == 1) {
                     $.each(r.data, function (i, o) {
-                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
+                        //加三目去除当前人
+                        o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                 }
@@ -176,7 +178,7 @@ define(['underscore',
             window.newwin=$open('#dict-block-unit',{width:400,height:300,top:100, title:'选择'+title});
             _selfDict.getUnitPortList();
             var opener = $(".panel #dict-block-unit");
-            opener.find(".query-block-row input").val("");
+            $(".panel #dict-block-unit .query-block-row input").val("");
             opener.find("#dict-wrap-unit").off("click").on("click",".item-value",function(){
                 // var input = obj.prev();//页面上需要填入的input
                 var input = obj.siblings("input[type='text']");//页面上需要填入的input
@@ -204,7 +206,7 @@ define(['underscore',
                     var tpl='';
                     $.each(r.data, function (i, o) {
                         // tpl+='<div class="item-value"><u><span val="'+o.orgId+'">'+o.orgName+'</span></div></u>';
-                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgCode+"'>"+o.orgName+"</span></div></u>";
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgId+"'>"+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                 }
@@ -220,7 +222,7 @@ define(['underscore',
                 _selfDict.getGroupByIdPortList(param);
             }
             var opener = $(".panel #dict-block-group");
-            $(".query-block-row input").val("");
+            $(".panel #dict-block-group .query-block-row input").val("");
             opener.find("#dict-wrap-group").off("click").on("click","div:not(.disabled)",function(){
                 toast("不能选择自己！",600).warn();
             });
@@ -277,18 +279,13 @@ define(['underscore',
             var title = obj.attr("title");
             debugger
             window.newwin=$open('#dict-block-group',{width:400,height:300,top:100, title:'选择'+title});
-            $(".dict-container").find(".query-block-row").empty();
+            $("#dict-block-group .dict-container").find(".query-block-row").empty();
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {
                 if (r.flag == 1) {
                     var target = $("#dict-wrap-group");
                     var tpl='';
                     $.each(r.data, function (i, o) {
-                        if(o.userId == top.userId){
-                            tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
-                        }else {
-                            tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
-
-                        }
+                        o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                     var opener = $(".panel #dict-block-group");
@@ -331,9 +328,9 @@ define(['underscore',
                         case "user":
                             $.each(r.data, function (i, o) {
                                 if(o.userId == top.userId){
-                                    tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                                    o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value disabled'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
                                 }else {
-                                    tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                                    o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
 
                                 }
                             });

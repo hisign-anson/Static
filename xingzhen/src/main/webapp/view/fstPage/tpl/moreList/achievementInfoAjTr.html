@@ -3,9 +3,15 @@
     <td><%=item.rn%></td>
     <td><%=item.ajbh%></td>
     <td><%=item.ajmc%></td>
-    <td><%=item.ajlx%></td>
-    <td><%=item.ajstate%></td>
-    <td><%=item.ab%></td>
+    <td>
+        <span class="span" dict-root="AJLX" return-value="<%=item.ajlx%>"></span>
+    </td>
+    <td>
+        <span class="span" dict-root="AJZT" return-value="<%=item.ajstate%>"></span>
+    </td>
+    <td>
+        <span class="span" dict-root="AJLB" return-value="<%=item.ab%>"></span>
+    </td>
     <td><%=item.zyaq%></td>
     <td><%=item.fadd%></td>
     <td><%=item.ajzbry%></td>

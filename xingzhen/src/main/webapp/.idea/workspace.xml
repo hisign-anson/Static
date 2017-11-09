@@ -58,8 +58,12 @@
               <caret line="44" column="135" lean-forward="false" selection-start-line="44" selection-start-column="135" selection-end-line="44" selection-end-column="135" />
               <folding>
                 <element signature="n#div#5;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#6;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#7;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
+                <marker date="1510194229033" expanded="true" signature="10910:11006" ph="..." />
+                <marker date="1510194229033" expanded="true" signature="10910:11070" ph="..." />
+                <marker date="1510194229033" expanded="true" signature="10910:11099" ph="..." />
+                <marker date="1510194229033" expanded="true" signature="10910:11122" ph="..." />
+                <marker date="1510194229033" expanded="true" signature="10910:11141" ph="..." />
+                <marker date="1510194229033" expanded="true" signature="10910:11156" ph="..." />
               </folding>
             </state>
           </provider>
@@ -78,10 +82,10 @@
       <file leaf-file-name="graph.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/graph/src/graph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="283" column="39" lean-forward="false" selection-start-line="283" selection-start-column="39" selection-end-line="283" selection-end-column="39" />
+            <state relative-caret-position="293">
+              <caret line="676" column="24" lean-forward="true" selection-start-line="676" selection-start-column="24" selection-end-line="676" selection-end-column="24" />
               <folding>
-                <element signature="e#31502#31862#0" expanded="false" />
+                <element signature="e#10680#11107#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -90,11 +94,9 @@
       <file leaf-file-name="task.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="830" column="18" lean-forward="true" selection-start-line="830" selection-start-column="18" selection-end-line="830" selection-end-column="18" />
-              <folding>
-                <element signature="e#4757#5917#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="179">
+              <caret line="1012" column="43" lean-forward="true" selection-start-line="1012" selection-start-column="43" selection-end-line="1012" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,9 +104,25 @@
       <file leaf-file-name="dictOpener.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/dictManage/src/dictOpener.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="277" column="20" lean-forward="false" selection-start-line="277" selection-start-column="20" selection-end-line="277" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="341">
+              <caret line="279" column="20" lean-forward="false" selection-start-line="279" selection-start-column="20" selection-end-line="279" selection-end-column="20" />
+              <folding>
+                <marker date="1510194229122" expanded="true" signature="243:17610" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="256:17608" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="310:672" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16672:16861" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16672:16891" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16672:16928" ph="..." />
+                <marker date="1510194229122" expanded="true" signature="16672:17268" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16672:17324" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16672:17338" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16672:17359" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="16965:17246" ph="..." />
+                <marker date="1510194229122" expanded="true" signature="17025:17209" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="17397:17602" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="17480:17590" ph="{...}" />
+                <marker date="1510194229122" expanded="true" signature="17522:17576" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,7 +131,7 @@
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/task.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="84" column="6" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="84" selection-end-column="6" />
+              <caret line="84" column="6" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="84" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -132,14 +150,11 @@
       <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="437" column="13" lean-forward="true" selection-start-line="437" selection-start-column="13" selection-end-line="437" selection-end-column="13" />
+            <state relative-caret-position="217">
+              <caret line="423" column="74" lean-forward="false" selection-start-line="423" selection-start-column="74" selection-end-line="423" selection-end-column="74" />
               <folding>
-                <element signature="e#9076#10336#0" expanded="false" />
-                <element signature="e#10388#11041#0" expanded="false" />
-                <element signature="e#28280#30486#0" expanded="false" />
-                <marker date="1510193994415" expanded="true" signature="21759:21793" ph="..." />
-                <marker date="1510193994415" expanded="true" signature="21929:21962" ph="..." />
+                <marker date="1510195392019" expanded="true" signature="21759:21793" ph="..." />
+                <marker date="1510195392019" expanded="true" signature="21929:21962" ph="..." />
               </folding>
             </state>
           </provider>
@@ -158,7 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>showList</find>
       <find>ack</find>
       <find>node_textSVG</find>
       <find>height</find>
@@ -174,7 +188,6 @@
       <find>saveTransfer</find>
       <find>queryUserList</find>
       <find>onMsgReceive</find>
-      <find>deparment</find>
       <find>Fk</find>
       <find>移交</find>
       <find>login</find>
@@ -185,9 +198,11 @@
       <find>由追加任务 补充任务跳转过来</find>
       <find>dict-block-group</find>
       <find>add</find>
-      <find>#chooseReceive</find>
-      <find>lay</find>
+      <find>oneChoose</find>
       <find>pgroupname</find>
+      <find>#chooseReceive</find>
+      <find>deparment</find>
+      <find>lay</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -257,11 +272,11 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskList.html" />
         <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
-        <option value="$PROJECT_DIR$/view/graph/src/graph.js" />
         <option value="$PROJECT_DIR$/view/graph/d3graphView.html" />
         <option value="$PROJECT_DIR$/view/dictManage/src/dictOpener.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
+        <option value="$PROJECT_DIR$/view/graph/src/graph.js" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
       </list>
     </option>
   </component>
@@ -668,12 +683,12 @@
       <workItem from="1509353153759" duration="72936000" />
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
-      <workItem from="1510017010991" duration="89305000" />
+      <workItem from="1510017010991" duration="91896000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="530263000" />
+    <option name="totallyTimeSpent" value="532854000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -714,10 +729,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="160" column="125" lean-forward="false" selection-start-line="160" selection-start-column="114" selection-end-line="160" selection-end-column="125" />
-          <folding>
-            <element signature="e#3135#4086#0" expanded="false" />
-            <element signature="e#4128#4492#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,17 +1082,13 @@
           <caret line="44" column="135" lean-forward="false" selection-start-line="44" selection-start-column="135" selection-end-line="44" selection-end-column="135" />
           <folding>
             <element signature="n#div#5;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#6;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#7;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1510194229033" expanded="true" signature="10910:11006" ph="..." />
+            <marker date="1510194229033" expanded="true" signature="10910:11070" ph="..." />
+            <marker date="1510194229033" expanded="true" signature="10910:11099" ph="..." />
+            <marker date="1510194229033" expanded="true" signature="10910:11122" ph="..." />
+            <marker date="1510194229033" expanded="true" signature="10910:11141" ph="..." />
+            <marker date="1510194229033" expanded="true" signature="10910:11156" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="81" column="81" lean-forward="false" selection-start-line="81" selection-start-column="81" selection-end-line="81" selection-end-column="81" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1095,7 +1103,7 @@
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/task.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="84" column="6" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="84" selection-end-column="6" />
+          <caret line="84" column="6" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="84" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1110,9 +1118,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/dictManage/src/dictOpener.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="277" column="20" lean-forward="false" selection-start-line="277" selection-start-column="20" selection-end-line="277" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="341">
+          <caret line="279" column="20" lean-forward="false" selection-start-line="279" selection-start-column="20" selection-end-line="279" selection-end-column="20" />
+          <folding>
+            <marker date="1510194229122" expanded="true" signature="243:17610" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="256:17608" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="310:672" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16672:16861" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16672:16891" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16672:16928" ph="..." />
+            <marker date="1510194229122" expanded="true" signature="16672:17268" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16672:17324" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16672:17338" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16672:17359" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="16965:17246" ph="..." />
+            <marker date="1510194229122" expanded="true" signature="17025:17209" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="17397:17602" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="17480:17590" ph="{...}" />
+            <marker date="1510194229122" expanded="true" signature="17522:17576" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1140,37 +1164,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/src/graph.js">
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="283" column="39" lean-forward="false" selection-start-line="283" selection-start-column="39" selection-end-line="283" selection-end-column="39" />
+        <state relative-caret-position="217">
+          <caret line="423" column="74" lean-forward="false" selection-start-line="423" selection-start-column="74" selection-end-line="423" selection-end-column="74" />
           <folding>
-            <element signature="e#31502#31862#0" expanded="false" />
+            <marker date="1510195392019" expanded="true" signature="21759:21793" ph="..." />
+            <marker date="1510195392019" expanded="true" signature="21929:21962" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="437" column="13" lean-forward="true" selection-start-line="437" selection-start-column="13" selection-end-line="437" selection-end-column="13" />
+        <state relative-caret-position="358">
+          <caret line="81" column="81" lean-forward="false" selection-start-line="81" selection-start-column="81" selection-end-line="81" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/graph/src/graph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="676" column="24" lean-forward="true" selection-start-line="676" selection-start-column="24" selection-end-line="676" selection-end-column="24" />
           <folding>
-            <element signature="e#9076#10336#0" expanded="false" />
-            <element signature="e#10388#11041#0" expanded="false" />
-            <element signature="e#28280#30486#0" expanded="false" />
-            <marker date="1510193994415" expanded="true" signature="21759:21793" ph="..." />
-            <marker date="1510193994415" expanded="true" signature="21929:21962" ph="..." />
+            <element signature="e#10680#11107#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="830" column="18" lean-forward="true" selection-start-line="830" selection-start-column="18" selection-end-line="830" selection-end-column="18" />
-          <folding>
-            <element signature="e#4757#5917#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="179">
+          <caret line="1012" column="43" lean-forward="true" selection-start-line="1012" selection-start-column="43" selection-end-line="1012" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

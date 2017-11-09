@@ -1709,14 +1709,108 @@ function noticeMessageFn(){
     });
 
 }
+//首页点击知识库--更多
+function knowledgeMessageFn() {
+    importing('dict', 'datepicker', function(){
+        var thisYear = Date.format('YYYY');
+        var weeks = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        $('.dict').dict();
 
+        $("#query-date").daterangepicker({
+            separator: ' 至 ',
+            showWeekNumbers : true,
+            pickTime:true
+        },function(start, end, label) {
+            $('#queryDateBegin').val(start.format('YYYY-MM-DD'));
+            $('#queryDateEnd').val(end.format('YYYY-MM-DD'));
+        });
+        // $('.query-date').datepicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});
+        //设定默认ajax开始和结束时的loading遮罩效果(#post自带,paginglist没有自带)
+        $.ajaxSetup({
+            beforeSend:showLoading,
+            complete:hideLoading
+        });
+        //查询列表
+        function queryForMessage(){
+            //listData
+            top.registry.global.messageList = [];
+            $('#msg-left').pagingList({
+                action:top.servicePath+'/sys/message/findPage',
+                currentPage:$('.paging').data('currentPage'),
+                jsonObj:{
+                    startTime:$('#queryDateBegin').val(),
+                    endTime:$('#queryDateEnd').val(),
+                    type:2
+                },
+                callback:function(data,t, n, u, o, a, r){
+                    var temp_date, queryData = [];
+                    //查询消息数量
+                    $('.total-count').text(r);
+                    if(r < 16) {$('.paging').hide()}else{$('.paging').show();}
+                    $('#msg-left-content').template(data, function(item, i){
+                        //左边 列表 时间格式
+                        temp_date = new Date(item.createDate);
+                        item.msgDateTxt = thisYear == temp_date.format('YYYY') ? temp_date.format('M月D日 hh:mm') : temp_date.format('YYYY/MM/DD')
+                        //消息已读or未读样式定义 0:未读
+                        item.readLi = item.msgState == '0' ? 'unread' : 'read';
+                        //右边 详细 时间格式
+                        item.msgDetailDate = temp_date.format('YYYY年M月D日') + '('+weeks[temp_date.getDay()]+') ' + temp_date.format('hh:mm');
+
+                        queryData.push(item);
+                    });
+
+                    top.registry.global.messageList = queryData;
+                }
+            });
+            $('.selected-detail-div').hide();
+            $('.un-selected-detail-div').show();
+
+        }
+        queryForMessage();
+        //点击进行查询
+        $('#msg-receive-query').on('click',function(){
+            if($('.sort-arrow')) $('.sort-arrow').remove();
+            //执行查询
+            queryForMessage();
+        });
+        //点击重置
+        $('#msg-receive-reset').on('click',function(){
+            $('.query-block input').val('');
+            $('.query-block select').val('');
+        });
+        $('#msg-left').on('click', 'div.li .cc:not(.c-remove-hover)', function(){
+            //右侧阅读窗口 样式修改
+            $('.un-selected-detail-div').hide();
+            $('.selected-detail-div').show();
+
+            var msg_id = this.getAttribute('paramId');
+            var thisLi = $(this).parents('.li');
+            //样式修改
+            $('#msg-left-content div.li').removeClass('selected');
+            thisLi.addClass('selected');//div .li 添加selected类
+            //点击对应列
+            top.registry.global.messageList.each(function(o ,i){
+                var detailObj = $('#msg-right .selected-detail-div');
+                if(msg_id == o.id){
+                    o.msgState = '1';
+                    detailObj.template(o);
+                    detailObj.find('.read-content').html(o.content);
+                    $get(top.servicePath+'/sys/message/findById',{id:msg_id},function(res){
+                        $("#attachment").text(res.data.rev1);
+                        $("#attachment").attr("download",res.data.rev1);
+                        $("#attachment").attr("href",top.ftpServer+res.data.rev1)
+                    });
+                }
+            })
+        })
+    });
+}
 //首页点击通知公告--更多
 function newsMoreFn(vId,vType) {
     importing('dict', 'datepicker', function(){
         var thisYear = Date.format('YYYY');
         var weeks = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
         $('.dict').dict();
-
         $("#query-date").daterangepicker({
             separator: ' 至 ',
             showWeekNumbers : true,
