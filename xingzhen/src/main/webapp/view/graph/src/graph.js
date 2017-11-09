@@ -749,7 +749,7 @@ define(['underscore',
                     if (r.flag == 1) {
                         toast('保存成功！', 600, function () {
                             openerDiv.$close();
-                            _selfGraph.showList(id, "groupid");
+                            _selfGraph.showList(id, "pgroupid");
                         }).ok();
                     } else {
                         toast(r.msg, 600).err()
@@ -843,7 +843,7 @@ define(['underscore',
                                     taskAjax.addTask(param, function (r) {
                                         if (r.flag == 1) {
                                             toast('保存成功！', 600, function () {
-                                                _selfGraph.showList(taskinfo.groupid, "groupid");
+                                                _selfGraph.showList(taskinfo.groupid, "pgroupid");
                                             }).ok();
                                         } else {
                                             toast(r.msg, 600).err()
@@ -1193,9 +1193,7 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
-            // selectUtils.selectTextOption("#changeYesOrNo", "#yesOrNo");
             // 任务状态
-            // task.selectTaskStaOption("#changeTaskStatus");
             selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
             $("#searchBtn", parent.document).off("click").on("click", function () {
                 if (conditionDiv.is(":visible")) {
@@ -1232,11 +1230,12 @@ define(['underscore',
                     endTime: $form.find("#endTime").val(),
                     taskStatus: $form.find("#taskStatus").val()
                 };
-                // var groupid  = $form.find("#smallGroup option:selected").attr("val");
-                // if(groupid){
-                //     //选择小组
-                //     _selfGraph.showList(groupid,"pgroupid");
-                // } else {
+                var groupid  = $form.find("#smallGroup option:selected").attr("val");
+                if(groupid){
+                    //选择小组
+                    _selfGraph.showList(groupid,"groupid");
+                }
+                // else {
                 //     //选择大组
                 //     _selfGraph.showList(groupid,"groupid");
                 //

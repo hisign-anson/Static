@@ -177,12 +177,6 @@ define(['underscore',
 
                 })
             });
-            // _selfCommand = this;
-            //
-            // // $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
-            // // var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-            // // $("#taskListDiv .panel-container").css("margin","0px").empty().html(_.template(iframe));
-            // window.open("/view/chatPage/chatPage.html", "nw", "width=840,height=640");
         },
         intoTaskList: function (groupinfo) {
             _selfCommand = this;
