@@ -225,9 +225,9 @@ var jchatGloabal = {
             toast(obj2str(data), 600).err();
         });
     },
-    onSyncConversation: function (jmgid) {
+    onSyncConversation: function (jmgid) {//离线消息
         var data = onSyncConversation_res;
-        if (data && data.length > 0) {
+        if (data && data.length > 0) {debugger
             var list = '';
             $.each(data, function (dataIndex, dataValue) {
                 if (dataValue.msg_type == 4) {
@@ -289,7 +289,8 @@ var jchatGloabal = {
                             } else {
                                 if (msg_type == "file" || msg_type == "image") {
                                     //文件消息 图片消息
-                                    jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
+                                    jchatGloabal.getResourceMessage("[data-img="+
+                                    message_list_content.msg_body.media_id+"]", message_list_content, false, msg_type);
                                 } else if(msg_type =="custom"){
                                     //自动发的消息
                                     list += '<li>' +
@@ -327,13 +328,12 @@ var jchatGloabal = {
     getResourceMessage: function (element, message_content, isSelf, fileType, index) {
         var file_or_images = message_content.msg_body.media_id;
         var ulHtml = $("#main-frame").contents().find(element);
-        var messageList = "";
         var time = clickHandle.getLocalTime(message_content.create_time);
         var from_name = isSelf ? top.trueName : message_content.from_name;
         var from_id = isSelf ? top.userId : message_content.from_id;
         var file_name = message_content.msg_body.fname;
         var file_size = message_content.msg_body.fsize >= 1024 ? (message_content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message_content.msg_body.fsize + '字节';
-        var fileDiv = '';
+        var html = '';
         var isSelfDiv = isSelf ? "self" : "";
 
         JIM.getResource({'media_id': file_or_images}).onSuccess(function (data) {
@@ -347,17 +347,29 @@ var jchatGloabal = {
                     '</span></a>';
             } else if (fileType == "image") {
                 //图片消息
-                fileDiv = '<a class="message-image preview-JIM-img" id="file_' + index + '" href="javascript:;"><img class="message-image" alt="" src="' + path_file_or_images + '" /></a><div class="imgHover"><img class="img-responsive center-block" src="'+path_file_or_images+'" alt=""/></div>';
-            }
-            messageList = '<li>' +
+                imageList = '<li>' +
                 '<div class="time"><span>' + time + '</span></div>' +
                 '<div class="main ' + isSelfDiv + '">' +
                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
                 '<div class="text-wrap"><div class="from-name">' + from_name + '</div>' +
-                '<div class="text">' + fileDiv + '</div>' +
+                '<div class="text">'+
+                '<a class="message-image preview-JIM-img" id="file_' + index + '" href="javascript:;">' +
+                '<img class="message-image" data-img="'+
+                message_list_content.msg_body.media_id+'" alt="" src="" /></a>' +
+                '<div class="imgHover"><img class="img-responsive center-block" src="'+
+                path_file_or_images+'" alt=""/></div></div>' +
                 '</div></div>' +
                 '</li>';
-            '</li>';
+            }
+            //messageList = '<li>' +
+            //    '<div class="time"><span>' + time + '</span></div>' +
+            //    '<div class="main ' + isSelfDiv + '">' +
+            //    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+            //    '<div class="text-wrap"><div class="from-name">' + from_name + '</div>' +
+            //    '<div class="text">' + fileDiv + '</div>' +
+            //    '</div></div>' +
+            //    '</li>';
+            //'</li>';
             console.info("1:"+messageList)
 
             ulHtml.append(messageList);

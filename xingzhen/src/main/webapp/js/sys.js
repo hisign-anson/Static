@@ -1836,7 +1836,7 @@ function newsMoreFn(vId,vType) {
                     startTime:$('#queryDateBegin').val(),
                     endTime:$('#queryDateEnd').val(),
                     type:1,
-                    receiverId: top.userName
+                    receiverId: top.userId
                 },
                 callback:function(data,t, n, u, o, a, r){
                     var temp_date, queryData = [];
