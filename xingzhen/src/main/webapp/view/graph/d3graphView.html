@@ -26,14 +26,14 @@
             <select class="common-select" id="feedbackUser">
             </select>
         </div>
-        <div class="qc-group-l">
-            <span class="qc-label-m">是否隐藏：</span>
-            <span class="option" id="changeYesOrNo">
-                <u class="default active" val="0">否</u>
-                <u class="" val="1">是</u>
-            </span>
-            <input type="hidden" id="yesOrNo" value="0">
-        </div>
+        <!--<div class="qc-group-l">-->
+            <!--<span class="qc-label-m">是否隐藏：</span>-->
+            <!--<span class="option" id="changeYesOrNo">-->
+                <!--<u class="default active" val="0">否</u>-->
+                <!--<u class="" val="1">是</u>-->
+            <!--</span>-->
+            <!--<input type="hidden" id="yesOrNo" value="0">-->
+        <!--</div>-->
         <div class="qc-group-l">
             <span class="qc-label-m">根据时间段过滤：</span>
             <input class="common-input" type="text" id="dateRange">
@@ -46,10 +46,9 @@
                         <u class="active default " val="">全部</u>
                         <u class="" val="1">已反馈</u>
                         <u class="" val="0">未反馈</u>
-                        <u class="" val="1">超期</u>
+                        <u class="" val="2">超期</u>
                     </span>
-            <input type="hidden" id="overdue" />
-            <input type="hidden" id="fkzt" />
+            <input type="hidden" id="taskStatus" />
         </div>
     </form>
     <div class="form-btn-block">

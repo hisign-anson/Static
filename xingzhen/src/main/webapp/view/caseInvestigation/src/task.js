@@ -80,9 +80,7 @@ define(['underscore',
                     var overdue=$($(item).find("a")[0]).attr('overdue');
                     if(fkqrzt){
                         $("#changeConfirmStatus u").eq(1).click();
-                        //$("#creatname").val(top.currentUser.userInfo.userName);
-                        //$("#creator").val(top.currentUser.userInfo.userId);
-                        $("#changeTaskType u").eq(2).click();
+                        $("#fqrname").val(top.userName);
                     }else if(taskType){
                         $("#changeTaskType u").eq(1).click();
                         $("#changeRece u").eq(1).click();
@@ -138,7 +136,8 @@ define(['underscore',
                 taskName: $.trim($("#taskName").val()),
                 taskNo: $.trim($("#taskNo").val()),
                 groupid: $.trim($("#groupid").val()),
-                creator: $.trim($("#creator").val()),
+                groupTaskNo: $.trim($("#groupTaskNo").val()),
+                fqr: $.trim($("#fqr").val()),
                 jsr: $.trim($("#jsr").val()),
                 startTime: $.trim($("#startTime").val()),
                 endTime: $.trim($("#endTime").val()),
@@ -147,10 +146,10 @@ define(['underscore',
                 fkzt: $.trim($("#fkzt").val()),
                 yjzt: $.trim($("#yjzt").val()),
                 overdue: $.trim($("#overdue").val()),
-                deparmentcode: $.trim($("#deparmentcode").val()),
+                fqrDeptCode: $.trim($("#fqrDeptCode").val()),
                 fkjzstartTime: $.trim($("#fkjzstartTime").val()),
                 fkjzendTime: $.trim($("#fkjzendTime").val()),
-                orderBy:"createtime",
+                orderBy:"fq_time",
                 isDesc:true
             };
             $('#taskListResult').pagingList({
@@ -414,7 +413,7 @@ define(['underscore',
                         // taskid: id,
                         taskid: id,
                         userId: top.userId,
-                        deparmentcode: top.orgCode
+                        fqrDeptCode: top.orgCode
                     };
                     taskAjax.addCb(param, function (r) {
                         if (r.flag == 1) {
@@ -449,7 +448,7 @@ define(['underscore',
         handleFeedback: function (taskId) {
             _self = this;
             if (taskId) {
-                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {debugger
+                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
                         var fileInfoArr = []; //传入后台参数的文件数组...
@@ -508,7 +507,6 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
-                                            $(".progressV b").css('width','50%');
                                             // var $progressActive = $slide.find('.progress>span');
                                             //
                                             // $slide.find('.state').html('上传中...');
@@ -527,7 +525,6 @@ define(['underscore',
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
                                                 if(filesArr){
-                                                    var html=""
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
                                                             fileName: value.responseName,
@@ -536,13 +533,10 @@ define(['underscore',
                                                             fileSize: value.size,
                                                             fileType: value.type
                                                         }
-                                                        html+='<span>'+value.fileName+'</span>';
                                                         fileInfoArr.push(item);
                                                     });
-                                                    $('.upload-block .state').html(html)
-                                                    $('[href="#uploadMat"]').text("查看")
                                                 }
-                                                $(".progressV b").css('width','100%');
+
                                             } else {
                                                 console.info(res);
                                             }
@@ -557,7 +551,7 @@ define(['underscore',
                         });
 
                         $("#addImg").siblings("input[type='file']").val("");
-                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {debugger
+                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {
                             var $this = $(this)[0];
                             //未上传前，在展示区域显示要上传内容的图片
                             var fileList = $this.files;
@@ -608,8 +602,7 @@ define(['underscore',
                                         processData: false,
                                         contentType: false,
                                         beforeSend: function () {
-                                            //$('.state').html('上传中...');
-                                            $(".progressI b").css('width','50%');
+                                            $('.state').html('上传中...');
                                         },
                                         success: function (res) {
                                             $('.state').html('');
@@ -621,7 +614,6 @@ define(['underscore',
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
                                                 if(filesArr){
-                                                    var html="";
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
                                                             fileName: value.responseName,
@@ -630,13 +622,10 @@ define(['underscore',
                                                             fileSize: value.size,
                                                             fileType: value.type
                                                         }
-                                                        html+='<span>'+value.fileName+'</span>';
                                                         fileInfoArr.push(item);
                                                     });
-                                                    $('.upload-block .state').html(html)
-                                                    $('[href="#uploadMat"]').text("查看")
                                                 }
-                                                $(".progressI b").css('width','100%');
+
                                             } else {
                                                 console.info(res);
                                             }
@@ -840,8 +829,8 @@ define(['underscore',
             var param = {
                 bz: $.trim($("#bz").val()),
                 createname: top.trueName,
-                creator: top.userId,
-                deparmentcode: top.orgCode,
+                creator : top.userId,
+                deparmentcode : top.orgCode,
                 fkTime: $("#fkTime").val(),
                 fkr: top.userId,
                 fkrname: top.trueName,
@@ -871,9 +860,9 @@ define(['underscore',
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#userListDiv #queryBtn").on("click", function () {
+            $("#userListDiv #queryBtn").on("click", function (e) {
                 _self.queryUserList(false, taskId, taskInfo);
-                return false;
+                e.stopPropagation();
             });
 
             //加载用户列表
@@ -896,7 +885,7 @@ define(['underscore',
                 }
             }
             $("#mainDiv").empty().html(_.template(taskAddTpl, {taskInfo: taskinfo, text: text}));
-            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false,minDate:rangeUtil.formatDate(new Date(),'yyyy-MM-dd')});
+            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false});
 
             $("#chooseGroup").on('click', function () {
                 dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
@@ -937,10 +926,10 @@ define(['underscore',
                     jsrname = taskParam.jsrname;
                 }
                 $.extend(param, {
-                    creator: top.userId,
-                    createname: top.trueName,
-                    deparmentcode: top.orgCode,
-                    deparmentname: top.orgName,
+                    fqr: top.userId,
+                    fqrname: top.trueName,
+                    fqrDeptCode: top.orgCode,
+                    fqrDeptName: top.orgName,
                     bcrwid: bcrwid ? bcrwid : "",
                     fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
@@ -951,7 +940,7 @@ define(['underscore',
                     jsrLxfs: $.trim($("#jsrLxfs").val()),
                     taskContent: $.trim($("#taskContent").val()),
                     fkjzTime: $.trim($("#fkjzTime").val()),
-                    createtime: $.trim($("#createtime").val())
+                    fqTime: $.trim($("#createtime").val())
                 });
                 taskAjax.addTask(param, function (r) {
                     if (r.flag == 1) {
@@ -1001,7 +990,7 @@ define(['underscore',
                     $(this).prop("checked", false);
                 }
             });
-            $("#userListDiv").on("click", "#transferBtn", function () {
+            $("#userListDiv #transferBtn").off("click").on("click",function () {
                 var checkbox = [];
                 $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
                     var jsrInfo = {
