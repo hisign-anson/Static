@@ -102,6 +102,7 @@ define(['underscore',
                     }));
                     _self.oneChoose();//限制单选
 
+                    $(".span").span();
                     $(".link-text").on("click", function () {
                         _self.showEdit($(this).attr("groupid"));
                     });
@@ -549,7 +550,7 @@ define(['underscore',
             });
             //点击多选案件状态
             $(".dictInLineSelect").dictInLineSelect();
-            selectUtils.selectTextMultiOpt("#changeCaseSta", "caseSta");
+            // selectUtils.selectTextMultiOpt("#relationCase [dict-id='ajstate']", "ajstate");
 
             $("#relationCase #resetBtn").on("click", function () {
                 selectUtils.clearQueryValue();
@@ -590,6 +591,9 @@ define(['underscore',
                 });
                 //点击多选案件状态
                 $(".dictInLineSelect").dictInLineSelect();
+                // selectUtils.selectTextMultiOpt("#changeCaseSta", "caseSta");
+                selectUtils.selectTextMultiOpt("#caseListDiv [dict-id='ajstate']", "ajstate");
+
                 $("#caseListDiv #chooseCaseType").on('click', function () {
                     dictOpener.openChooseDict($(this));
                 });
@@ -659,6 +663,7 @@ define(['underscore',
                 slEndTime: $("#caseListDiv #slEndTime").val(),
                 slStartTime: $("#caseListDiv #slStartTime").val()
             };
+            debugger
             $('#caseListDiv #caseListResult').pagingList({
                 action: top.servicePath_xz + '/asjAj/getAjGroupPage',
                 jsonObj: param,

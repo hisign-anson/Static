@@ -1,10 +1,10 @@
 <%_.each(data, function(item,i){%>
 <tr>
     <td><input type="checkbox" name="group" groupid="<%=item.id%>" groupname="<%=item.groupname%>" value="<%=item.id%>"></td>
-    <td><%=i+1%></td>
+    <td><%=item.rn%></td>
     <td><a class="link-text" groupid="<%=item.id%>"><%=item.groupnum%></a></td>
     <td><%=item.groupname%></td>
-    <td><%=item.grouptype%></td>
+    <td><span class="span" dict-root="24"  return-value="<%=item.grouptype%>"></span></td>
     <td><%=item.caseNum%></td>
     <td><%=item.createname%></td>
     <td><%=item.memberNum%></td>
