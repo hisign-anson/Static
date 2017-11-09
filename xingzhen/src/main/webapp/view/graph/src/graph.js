@@ -672,8 +672,46 @@ define(['underscore',
                 }
             });
             $("#chooseReceive").on('click', function () {
+                debugger;
                 if ($("#groupid").val()) {
-                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,}, "user");
+                    // dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id}, "user");
+                    // _selfGraph.getUserByGroupIdPortList($(this),{groupId: id,isInGroup: true})
+                    var param = {groupId: id,isInGroup: true};
+                    var obj =$(this);
+                    var title = obj.attr("title");
+                    $open('#dict-block',{width:400,height:300,top:100, title:'选择'+title});
+                    $("#dict-block .dict-container").find(".query-block-row").empty();
+                    $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {
+                        if (r.flag == 1) {
+                            var target = $("#dict-wrap");
+                            var tpl='';
+                            $.each(r.data, function (i, o) {
+                                o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+','+o.orgName+"</span></div></u>";
+                            });
+                            target.html(tpl);
+                            var opener = $(".panel #dict-block");
+                            $(".query-block-row input").val("");
+                            opener.find("#dict-wrap").off("click").on("click","div:not(.disabled)",function(){
+                                toast("不能选择自己！",600).warn();
+                            });
+                            opener.find("#dict-wrap").off("click").on("click","div:not(.disabled)",function(){
+                                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                                input.val($(this).find("span").text());
+                                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                                inputHidden.val($(this).find("span").attr("val"));
+
+                                var paramAttr = $(this).find("span").attr("paramattr");
+                                input.attr("paramattr",paramAttr);
+                                if($("#jsrLxfs").length > 0){
+                                    $("#jsrLxfs").val($(this).find("span").attr("phone"));
+                                }
+                                opener.$close();
+                            });
+                        }
+                    },true);
+
+
+
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }

@@ -6,8 +6,8 @@
 // AppKey:a15c1e9bb38c1607b9571eea
 // Master Secret:bd4d826e1e49340aac2d05e2
 
-var across_appkey = 'a15c1e9bb38c1607b9571eea';
-var across_random_str = '022cd9fd995849b58b3ef0e943421ed9';//20-36 长度的随机字符串
+var across_appkey = '13c78e9ee2ac862f30ce0b17';
+var across_random_str = '670180c73e6152cf44918e2e';//20-36 长度的随机字符串
 var across_timestamp = new Date().getTime();
 var masterSecret = 'bd4d826e1e49340aac2d05e2';
 // //签名，10 分钟后失效, 签名生成算法: signature = md5(appkey=appkey&timestamp=timestamp&random_str=random_str&key=secret)
@@ -22,7 +22,6 @@ localData.set('across_random_str', across_random_str);
 localData.set('across_timestamp', across_timestamp);
 localData.set('masterSecret', masterSecret);
 localData.set('across_signature', across_signature);
-// localData.set('JIM', window.JIM);
 
 top.across_appkey = localData.get('across_appkey');
 top.across_random_str = localData.get('across_random_str');
@@ -49,7 +48,6 @@ JIM.onDisconnect(function () {
 });
 var onSyncConversation_res;
 var onMsgReceive_res = [];
-// alert($("#main-frame").contents().find(".into-communication").attr("class"));
 var jchatGloabal = {
     init: function () {
         JIM.init({
@@ -236,13 +234,13 @@ var jchatGloabal = {
                     if (dataValue.from_gid == jmgid) {
                         $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
                             var message_list_content = msgsValue.content;
-                            var time ;//= clickHandle.getLocalTime(message_list_content.create_time);
+                            var time ;
                             var from_name = message_list_content.from_name;
                             var from_id = message_list_content.from_id;
                             var login_user_name = top.trueName;
                             var login_userId = top.userId;
 
-                            var content_text; //= message_list_content.msg_body.text;
+                            var content_text;
                             if(message_list_content.from_platform == "api"){
                                 var objText = str2obj(message_list_content.msg_body.text);
                                 var type = objText.msgType;
@@ -262,7 +260,7 @@ var jchatGloabal = {
                                 time = clickHandle.getLocalTime(message_list_content.create_time);
                             }
                             var msg_type = message_list_content.msg_type;
-                            var msg_id = msgsValue.msg_id
+                            var msg_id = msgsValue.msg_id;
                             if (from_id == login_userId) {
                                 if (msg_type == "file" || msg_type == "image") {
                                     //文件消息 图片消息

@@ -732,6 +732,8 @@ showCaseInfo: function (ajid) {
                 $("#userListDiv").off("click").on('click', "#closeBtn", function () {
                     $('#userListDiv').$close();
                 });
+                $(".dict").dict();
+                $(".dict select").attr("disabled","disabled");
             }
 
         }
