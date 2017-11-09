@@ -673,7 +673,8 @@ define(['underscore',
             });
             $("#chooseReceive").on('click', function () {
                 if ($("#groupid").val()) {
-                    dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,}, "user");
+                    // dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: id,}, "user");
+                    dictOpener.getUserByGroupIdPortList($(this),{groupId: id,isInGroup: true})
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }
@@ -693,8 +694,8 @@ define(['underscore',
                 $.extend(param, {
                     fqr: top.userId,
                     fqrname: top.trueName,
-                    deparmentcode: top.orgCode,
-                    deparmentname: top.orgName,
+                    fqrDeptCode: top.orgCode,
+                    fqrDeptName: top.orgName,
                     bcrwid: bcrwid ? bcrwid : "",
                     fkid: fkid ? fkid : "",
                     taskName: $.trim($("#taskName").val()),
@@ -788,8 +789,8 @@ define(['underscore',
                                     $.extend(param, {
                                         fqr: top.userId,
                                         fqrname: top.trueName,
-                                        deparmentcode: top.orgCode,
-                                        deparmentname: top.orgName,
+                                        fqrDeptCode: top.orgCode,
+                                        fqrDeptName: top.orgName,
                                         bcrwid: bcrwid ? bcrwid : "",
                                         fkid: fkid ? fkid : "",
                                         taskName: $.trim($("#taskName").val()),
