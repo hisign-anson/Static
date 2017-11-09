@@ -310,7 +310,7 @@ define(['underscore',
                 });
             }
         },
-        showAdd: function (pgroupid,pgroupname) {
+        showAdd: function (pgroupid, pgroupname) {
             _self = this;
             $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl, {data: null}));
             $('#addGroupTab a').click(function (e) {
@@ -321,7 +321,7 @@ define(['underscore',
                         _self.showBaseInfo(groupinfo);
                     } else {
                         debugger;
-                        _self.handleBaseInfo(pgroupid,pgroupname);
+                        _self.handleBaseInfo(pgroupid, pgroupname);
                     }
                 } else if ($(this).attr("id") == "navRelationCase") {
                     var groupinfo = str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
@@ -370,7 +370,7 @@ define(['underscore',
             if (checkbox.length > 0) {
                 //do something
                 debugger;
-                _self.showAdd(checkbox[0].groupid,checkbox[0].groupname);
+                _self.showAdd(checkbox[0].groupid, checkbox[0].groupname);
             } else {
                 toast("请选择一个专案组！", 600).warn()
             }
@@ -410,7 +410,7 @@ define(['underscore',
                 }
             });
         },
-        handleBaseInfo: function (pgroupid,pgroupname) {
+        handleBaseInfo: function (pgroupid, pgroupname) {
             _self = this;
             $(".form-content-block").empty().html(_.template(baseInfoTpl));
             $(".form-btn-block").removeClass("hide");
@@ -418,17 +418,17 @@ define(['underscore',
                 dictOpener.openChooseDict($(this));
             });
             //显示父专案组名字
-            var html = '<div class="dict-opener"><input class="common-input" type="text" value="'+pgroupname+'" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
+            var html = '<div class="dict-opener"><input class="common-input" type="text" value="' + pgroupname + '" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
             $("#groupname-span").next().remove();
             $("#groupname-span").parents(".equal-col-4").append(html);
             $("#btnBaseInfo #saveBtn").on("click", function () {
-                _self.saveGroupInfo(pgroupid,pgroupname);
+                _self.saveGroupInfo(pgroupid, pgroupname);
             });
             $("#btnBaseInfo #exitBtn").off("click").on("click", function () {
                 _self.showList();
             });
         },
-        saveGroupInfo: function (pgroupid,pgroupname) {
+        saveGroupInfo: function (pgroupid, pgroupname) {
             _self = this;
             $('.field-valid').validatebox();
             if ($('.validatebox-invalid').length > 0) {
@@ -441,7 +441,7 @@ define(['underscore',
                 creator: top.userId,
                 deparmentcode: top.orgCode,
                 deparmentname: top.orgName,
-                groupname: pgroupname+$.trim($("#groupname").val()),
+                groupname: pgroupname + $.trim($("#groupname").val()),
                 grouptype: $("#grouptype").val(),
                 pgroupid: pgroupid ? pgroupid : ""
             };

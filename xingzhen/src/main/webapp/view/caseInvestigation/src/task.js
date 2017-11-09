@@ -828,9 +828,9 @@ define(['underscore',
             console.info(taskFkFiles);
             var param = {
                 bz: $.trim($("#bz").val()),
-                fqrname: top.trueName,
-                fqr: top.userId,
-                fqrDeptCode: top.orgCode,
+                createname: top.trueName,
+                creator : top.userId,
+                deparmentcode : top.orgCode,
                 fkTime: $("#fkTime").val(),
                 fkr: top.userId,
                 fkrname: top.trueName,
@@ -860,9 +860,9 @@ define(['underscore',
                 selectUtils.clearQueryValue();
                 return false;
             });
-            $("#userListDiv #queryBtn").on("click", function () {
+            $("#userListDiv #queryBtn").on("click", function (e) {
                 _self.queryUserList(false, taskId, taskInfo);
-                return false;
+                e.stopPropagation();
             });
 
             //加载用户列表
@@ -990,7 +990,7 @@ define(['underscore',
                     $(this).prop("checked", false);
                 }
             });
-            $("#userListDiv").on("click", "#transferBtn", function () {
+            $("#userListDiv #transferBtn").off("click").on("click",function () {
                 var checkbox = [];
                 $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
                     var jsrInfo = {
