@@ -320,8 +320,8 @@ var jchatGloabal = {
                 }
             })
 
-            // $("#main-frame").contents().find(".message-list").append(list);
-            // clickHandle.scrollBottom();
+            $("#main-frame").contents().find(".message-list").append(list);
+            clickHandle.scrollBottom();
 
 
         }
