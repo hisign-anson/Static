@@ -340,14 +340,21 @@ var jchatGloabal = {
             var path_file_or_images = data.url;
             if (fileType == "file") {
                 //文件消息
-                fileDiv = '<a class="not-images-file" src="' + path_file_or_images + '" target="_blank" title="' + file_name + '">' +
-                    '<span class="icon-file-noType"></span>' +
-                    '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
-                    '<span class="file-size">' + file_size + '</span>' +
-                    '</span></a>';
+                html = '<li>' +
+                '<div class="time"><span>' + time + '</span></div>' +
+                '<div class="main ' + isSelfDiv + '">' +
+                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                '<div class="text-wrap"><div class="from-name">' + from_name + '</div>' +
+                '<a class="not-images-file" src="' + path_file_or_images + '" target="_blank" title="' + file_name + '">' +
+                '<span class="icon-file-noType"></span>' +
+                '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
+                '<span class="file-size">' + file_size + '</span>' +
+                '</span></a>'
+                '</div></div>' +
+                '</li>';
             } else if (fileType == "image") {
                 //图片消息
-                imageList = '<li>' +
+                html = '<li>' +
                 '<div class="time"><span>' + time + '</span></div>' +
                 '<div class="main ' + isSelfDiv + '">' +
                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
@@ -370,9 +377,9 @@ var jchatGloabal = {
             //    '</div></div>' +
             //    '</li>';
             //'</li>';
-            console.info("1:"+messageList)
+            console.info("1:"+html)
 
-            ulHtml.append(messageList);
+            ulHtml.append(html);
             //文件查看
             $("#main-frame").contents().find(".not-images-file").off("click").on("click", function () {
                 // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
