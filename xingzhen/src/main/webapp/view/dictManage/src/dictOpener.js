@@ -277,7 +277,6 @@ define(['underscore',
         getUserByGroupIdPortList:function (obj,param) {//单独新增的方法（vince）
             _selfDict = this;
             var title = obj.attr("title");
-            debugger
             window.newwin=$open('#dict-block-group',{width:400,height:300,top:100, title:'选择'+title});
             $("#dict-block-group .dict-container").find(".query-block-row").empty();
             $post(top.servicePath_xz + '/usergroup/getUsergroupPage',param,function(r) {

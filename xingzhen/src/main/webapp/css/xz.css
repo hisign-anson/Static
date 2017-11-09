@@ -521,6 +521,7 @@ input[disabled], textarea[disabled], select[disabled] {
 @media (min-width: 768px) {
     .wrapper-fluid [class|="equal-col"] > .common-input,
     .wrapper-fluid [class|="equal-col"] > .common-select,
+    .wrapper-fluid [class|="equal-col"] >  .dict >.common-select,
     .wrapper-fluid [class|="equal-col"] > .common-textarea,
     .wrapper-fluid [class|="equal-col"] > .radio,
     .wrapper-fluid [class|="equal-col"] > .textarea-group {
@@ -546,6 +547,7 @@ input[disabled], textarea[disabled], select[disabled] {
 @media (max-width: 804px) {
     .wrapper-fluid [class|="equal-col"] > .common-input,
     .wrapper-fluid [class|="equal-col"] > .common-select,
+    .wrapper-fluid [class|="equal-col"] >  .dict >.common-select,
     .wrapper-fluid [class|="equal-col"] > .radio {
         display: inline-block;
         width: calc(100% - 80px);

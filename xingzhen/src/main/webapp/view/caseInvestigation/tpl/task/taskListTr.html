@@ -50,7 +50,7 @@
             <%}%>
         <%}else{%>
             <%if(item.yjrwid){%>
-                <% if(item.fqr == top.userId){%>
+                <% if(item.fqr == top.userId && item.fkzt == 0){%>
                 <a class="into-urge icon-urge" id="<%=item.id%>" taskinfo='<%=obj2str(item)%>' title="催办"></a>
                 <%}%>
 
