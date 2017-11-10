@@ -15,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="582" column="55" lean-forward="true" selection-start-line="582" selection-start-column="55" selection-end-line="582" selection-end-column="55" />
+            <state relative-caret-position="313">
+              <caret line="772" column="100" lean-forward="false" selection-start-line="772" selection-start-column="100" selection-end-line="772" selection-end-column="100" />
               <folding>
                 <element signature="e#2063#2595#0" expanded="false" />
                 <element signature="e#5707#5900#0" expanded="false" />
@@ -33,24 +33,33 @@
                 <element signature="e#30032#35679#0" expanded="false" />
                 <element signature="e#30822#31859#0" expanded="false" />
                 <element signature="e#32739#33666#0" expanded="false" />
-                <element signature="e#36058#42120#0" expanded="false" />
-                <element signature="e#42358#42609#0" expanded="false" />
-                <element signature="e#42947#43028#0" expanded="false" />
-                <element signature="e#43068#43148#0" expanded="false" />
-                <element signature="e#43974#45124#0" expanded="false" />
-                <element signature="e#45504#47534#0" expanded="false" />
-                <element signature="e#47575#50768#0" expanded="false" />
-                <marker date="1510300807207" expanded="false" signature="1490:1890" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="3971:4988" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="5058:5620" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="6262:8109" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="8140:8503" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="8538:8989" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="9027:9801" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="20225:20522" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="26703:26990" ph="{...}" />
-                <marker date="1510300807207" expanded="false" signature="27209:27443" ph="{...}" />
+                <element signature="e#43599#43850#0" expanded="false" />
+                <element signature="e#44188#44269#0" expanded="false" />
+                <element signature="e#44309#44389#0" expanded="false" />
+                <element signature="e#45215#46365#0" expanded="false" />
+                <element signature="e#46745#48775#0" expanded="false" />
+                <element signature="e#48816#52009#0" expanded="false" />
+                <marker date="1510306278174" expanded="false" signature="1490:1890" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="3971:4988" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="5058:5620" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="6262:8109" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="8140:8503" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="8538:8989" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="9027:9801" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="20225:20522" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="26703:26990" ph="{...}" />
+                <marker date="1510306278174" expanded="false" signature="27209:27443" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="taskListTr.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="48" column="26" lean-forward="false" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,21 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="caseListTr.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="caseListTr.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseListTr.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
               <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="68" column="67" lean-forward="false" selection-start-line="68" selection-start-column="67" selection-end-line="68" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -195,8 +194,8 @@
       <find>user-name</find>
       <find>showTable</find>
       <find>relationCaseTr</find>
-      <find>msgAll</find>
       <find>.ab</find>
+      <find>msgAll</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -233,7 +232,6 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskList.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html" />
         <option value="$PROJECT_DIR$/view/dictManage/src/dictOpener.js" />
         <option value="$PROJECT_DIR$/view/graph/d3graphView.html" />
         <option value="$PROJECT_DIR$/css/xz.css" />
@@ -264,13 +262,14 @@
         <option value="$PROJECT_DIR$/view/fstPage/fstPage.html" />
         <option value="$PROJECT_DIR$/view/fstPage/toolDownloadMoreList.html" />
         <option value="$PROJECT_DIR$/view/fstPage/newsMoreList.html" />
-        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
         <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/view/graph/showGraph.html" />
         <option value="$PROJECT_DIR$/view/graph/showGraph.js" />
         <option value="$PROJECT_DIR$/view/graph/src/showGraph.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseListTr.html" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html" />
+        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
       </list>
     </option>
   </component>
@@ -410,6 +409,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tpl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="task" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -612,12 +615,12 @@
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
       <workItem from="1510017010991" duration="92141000" />
-      <workItem from="1510197160531" duration="47337000" />
+      <workItem from="1510197160531" duration="49583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="580436000" />
+    <option name="totallyTimeSpent" value="582682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -649,19 +652,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-mock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupListTr.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -1024,44 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="582" column="55" lean-forward="true" selection-start-line="582" selection-start-column="55" selection-end-line="582" selection-end-column="55" />
-          <folding>
-            <element signature="e#2063#2595#0" expanded="false" />
-            <element signature="e#5707#5900#0" expanded="false" />
-            <element signature="e#9926#15909#0" expanded="false" />
-            <element signature="e#16002#18582#0" expanded="false" />
-            <element signature="e#18624#20191#0" expanded="false" />
-            <element signature="e#20559#26665#0" expanded="false" />
-            <element signature="e#27026#27168#0" expanded="false" />
-            <element signature="e#29196#29584#0" expanded="false" />
-            <element signature="e#29620#30001#0" expanded="false" />
-            <element signature="e#30032#35679#0" expanded="false" />
-            <element signature="e#30822#31859#0" expanded="false" />
-            <element signature="e#32739#33666#0" expanded="false" />
-            <element signature="e#36058#42120#0" expanded="false" />
-            <element signature="e#42358#42609#0" expanded="false" />
-            <element signature="e#42947#43028#0" expanded="false" />
-            <element signature="e#43068#43148#0" expanded="false" />
-            <element signature="e#43974#45124#0" expanded="false" />
-            <element signature="e#45504#47534#0" expanded="false" />
-            <element signature="e#47575#50768#0" expanded="false" />
-            <marker date="1510300807207" expanded="false" signature="1490:1890" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="3971:4988" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="5058:5620" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="6262:8109" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="8140:8503" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="8538:8989" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="9027:9801" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="20225:20522" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="26703:26990" ph="{...}" />
-            <marker date="1510300807207" expanded="false" signature="27209:27443" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1292">
@@ -1164,6 +1121,51 @@
         <state relative-caret-position="152">
           <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="48" column="26" lean-forward="false" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="772" column="100" lean-forward="false" selection-start-line="772" selection-start-column="100" selection-end-line="772" selection-end-column="100" />
+          <folding>
+            <element signature="e#2063#2595#0" expanded="false" />
+            <element signature="e#5707#5900#0" expanded="false" />
+            <element signature="e#9926#15909#0" expanded="false" />
+            <element signature="e#16002#18582#0" expanded="false" />
+            <element signature="e#18624#20191#0" expanded="false" />
+            <element signature="e#20559#26665#0" expanded="false" />
+            <element signature="e#27026#27168#0" expanded="false" />
+            <element signature="e#29196#29584#0" expanded="false" />
+            <element signature="e#29620#30001#0" expanded="false" />
+            <element signature="e#30032#35679#0" expanded="false" />
+            <element signature="e#30822#31859#0" expanded="false" />
+            <element signature="e#32739#33666#0" expanded="false" />
+            <element signature="e#43599#43850#0" expanded="false" />
+            <element signature="e#44188#44269#0" expanded="false" />
+            <element signature="e#44309#44389#0" expanded="false" />
+            <element signature="e#45215#46365#0" expanded="false" />
+            <element signature="e#46745#48775#0" expanded="false" />
+            <element signature="e#48816#52009#0" expanded="false" />
+            <marker date="1510306278174" expanded="false" signature="1490:1890" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="3971:4988" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="5058:5620" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="6262:8109" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="8140:8503" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="8538:8989" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="9027:9801" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="20225:20522" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="26703:26990" ph="{...}" />
+            <marker date="1510306278174" expanded="false" signature="27209:27443" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
