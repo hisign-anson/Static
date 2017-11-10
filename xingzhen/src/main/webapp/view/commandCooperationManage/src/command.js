@@ -1,6 +1,7 @@
 /**
  * Created by dell on 2017/9/28.
  */
+importing('currentDate','fullscreen');
 define(['underscore',
     'd3',
     'text!/view/commandCooperationManage/tpl/commandPage.html',
