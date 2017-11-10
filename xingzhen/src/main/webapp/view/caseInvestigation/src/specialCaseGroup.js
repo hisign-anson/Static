@@ -672,15 +672,11 @@ define(['underscore',
                 jsonObj: param,
                 callback: function (data) {
                     $("#caseTable tbody").empty().html(_.template(caseListTrTpl, {data: data}));
-                    //$(".span").span();
+                    $(".span").span();
                     $("#caseTable").on("click", ".link-text", function () {
                         console.info("案件详情按钮");
                         // $open('#userListDiv', {width: 900, title: '&nbsp案件详情'});
                         _self.showCaseInfo($(this).attr("ajid"));
-                    });
-                    $(".ab").each(function (i, o) {
-                        var title = $(this).find("span").text();
-                        $(this).attr("title", title);
                     });
                 }
             });
