@@ -1,6 +1,7 @@
 .group-content {
     margin: 10px;
 }
+
 .group-list {
     float: left;
     width: 200px;
@@ -16,11 +17,13 @@
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
-.new-color-bar.head .bar-btn-div{
+
+.new-color-bar.head .bar-btn-div {
     margin-top: 5px;
     height: 35px;
     line-height: normal;
 }
+
 .new-color-bar.head {
     font-size: 13px;
     border-top-width: 0;
@@ -30,6 +33,7 @@
     border-bottom-color: #E1E7E9;
     font-weight: 600;
 }
+
 .new-color-bar.head .bar-btn-div b {
     margin-right: 8px;
     font-weight: normal;
@@ -37,6 +41,7 @@
     height: auto;
     line-height: normal;
 }
+
 #toggleGroup {
     position: absolute;
     top: 8px;
@@ -45,12 +50,15 @@
     color: #0d8ccf;
     font-size: 16px;
 }
+
 #toggleGroup:hover {
     opacity: 0.5;
 }
-.all-group-list{
+
+.all-group-list {
     position: relative;
 }
+
 .choose-group {
     font-size: 12px;
     font-weight: 600;
@@ -60,21 +68,32 @@
     margin-bottom: 0;
     cursor: pointer;
 }
+
+.choose-group i {
+    font-size: 18px;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+
 .all-group-list ul {
     position: absolute;
     cursor: pointer;
     width: 100%;
     background: #ffffff;
 }
+
 .all-group-list ul li {
     line-height: 40px;
     height: 40px;
     border-bottom: 1px solid #dddddd;
 }
+
 .all-group-list ul li:hover {
     background-color: #22a0e2;
     color: #ffffff;
 }
+
 .common-group-tile {
     display: block;
     margin-top: 10px;
@@ -84,6 +103,7 @@
     height: 30px;
     border-bottom: 1px solid #dddddd;
 }
+
 .common-group-ul li {
     display: inline-block;
     width: 75px;
@@ -95,19 +115,22 @@
     cursor: pointer;
 }
 
-.common-group-ul li:hover,.common-group-ul li:active,
-.common-group-ul li.active{
+.common-group-ul li:hover, .common-group-ul li:active,
+.common-group-ul li.active {
     background-color: #22a0e2;
     color: #ffffff;
 }
+
 .common-group-tile:before {
     margin-right: 5px;
     color: #22a0e2;
 }
+
 .group-btn-div {
 
 }
-.orange-btn{
+
+.orange-btn {
     color: #FF8C00;
     border: 1px solid #FF8C00;
     border-radius: 3px;
@@ -117,11 +140,13 @@
     cursor: pointer;
     margin-bottom: 10px;
 }
-.orange-btn:hover,.orange-btn:active,
-.orange-btn.active{
+
+.orange-btn:hover, .orange-btn:active,
+.orange-btn.active {
     background-color: #f07f03;
     color: #FFFFFF;
 }
+
 .full-actived {
     position: absolute;
     top: 0;
@@ -135,15 +160,19 @@
     margin-right: 10px;
     padding: 3px;
 }
+
 .group-list-s .group-list {
     width: 45px;
 }
-.group-list-s .map-list{
+
+.group-list-s .map-list {
     margin-left: 55px;
 }
+
 .group-list-s .group-list #toggleGroup {
     right: 17px;
 }
+
 .group-list-s .group-list .left-line,
 .group-list-s .group-list .left-line + span,
 .group-list-s .group-list .all-group-list,
@@ -151,6 +180,7 @@
 .group-list-s .group-list .title-icon {
     display: none;
 }
+
 #fullscreenBtn {
     font-size: 15px;
 }

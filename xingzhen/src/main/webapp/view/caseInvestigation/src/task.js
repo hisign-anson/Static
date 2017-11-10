@@ -425,7 +425,7 @@ define(['underscore',
                         // taskid: id,
                         taskid: id,
                         userId: top.userId,
-                        fqrDeptCode: top.orgCode
+                        deparmentcode: top.orgCode
                     };
                     taskAjax.addCb(param, function (r) {
                         if (r.flag == 1) {
@@ -884,13 +884,19 @@ define(['underscore',
             });
             $("#userListDiv #queryBtn").on("click", function (e) {
                 _self.queryUserList(false, taskId, taskInfo);
-                debugger
-                e.stopPropagation();
                 return false;
             });
 
             //加载用户列表
             _self.queryUserList(false, taskId, taskInfo);
+
+
+            //任务移交给用户
+            _self.saveTransfer(taskId);
+            $("#userListDiv").on('click', "#cancelBtn", function () {
+                $('#userListDiv').$close();
+                return false;
+            });
         },
         showAdd: function (taskinfo, text,fkid) {
             debugger
@@ -997,11 +1003,6 @@ define(['underscore',
                         taskInfoFqr:taskInfo.fqr
                     }));
                     $(".span").span();
-                    //任务移交给用户
-                    _self.saveTransfer(taskId);
-                    $("#userListDiv").on('click', "#cancelBtn", function () {
-                        $('#userListDiv').$close();
-                    });
                 }
             }, true);
         },
@@ -1014,7 +1015,7 @@ define(['underscore',
                     $(this).prop("checked", false);
                 }
             });
-            $("#userListDiv #transferBtn").on("click", function (e) {
+            $("#userListDiv #transferBtn").on("click", function (event) {
                 var checkbox = [];
                 $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
                     var jsrInfo = {
@@ -1053,7 +1054,6 @@ define(['underscore',
                 } else {
                     toast("请选择一个用户！", 600).warn()
                 }
-                e.stopPropagation();
                 return false;
             });
         }

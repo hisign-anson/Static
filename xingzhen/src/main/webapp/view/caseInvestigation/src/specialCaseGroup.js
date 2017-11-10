@@ -110,19 +110,23 @@ define(['underscore',
                     $(".into-broadcast").on("click", function () {
                         _self.groupBroadcast($(this).attr("groupid"), $(this).attr("jmgid"));
                     });
-                    $(".into-communication").on("click", function () {//发起聊天
+                    $(".into-communication").on("click", function () {
                         var groupid = $(this).attr("groupid");
                         var jmgid = $(this).attr("jmgid");
 
                         $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
                         $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
-                        window.parent.jchatGloabal.getUserInfo();//获取进入人信息
-                        window.parent.jchatGloabal.getGroupInfo(jmgid);//获取当前组信息
-                        window.parent.jchatGloabal.getGroupMembers(jmgid);//获取组内成员信息
-                        //离线消息同步监听
-                        window.parent.jchatGloabal.onSyncConversation(jmgid);
-                        //聊天消息实时监听
-                        window.parent.jchatGloabal.onMsgReceive(jmgid);
+                        window.parent.jchatGloabal.getUserInfo();
+                        window.parent.jchatGloabal.getGroupInfo(jmgid);
+                        window.parent.jchatGloabal.getGroupMembers(jmgid);
+                        // //离线消息同步监听
+                        // window.parent.jchatGloabal.onSyncConversation(jmgid);
+                        // //聊天消息实时监听
+                        // window.parent.jchatGloabal.onMsgReceive(jmgid);
+                        // //打开弹框显示自己的聊天消息
+                        // window.parent.jchatGloabal.showSelf(jmgid);
+                        //打开弹框显示所有聊天消息
+                        window.parent.jchatGloabal.showAllMsg(jmgid);
 
                         $("#sendFileBtn").on("click", function () {
                             window.parent.clickHandle.sendFile(jmgid);
@@ -139,9 +143,6 @@ define(['underscore',
                         $("#sendBtn").on("click", function () {
                             window.parent.clickHandle.sendText(jmgid);
                         });
-                        //$("#chartBotesBtn").on("click", function () {//打开聊天记录的窗口
-                        //    window.parent.clickHandle.chartBotesBtn();
-                        //});
 
                         $("#messageContent").on('keyup', function (event) {
                             var e = event || window.event;
@@ -209,9 +210,9 @@ define(['underscore',
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
             $("#archiveBlock #saveBtn").on("click", function (e) {
-                var broadcastContent = $("#broadcastContent").val();
+                var broadcastContent = "广播："+$("#broadcastContent").val();
                 //调用极光接口
-                window.parent.clickHandle.sendBroadcastText(jmgid, broadcastContent);
+                window.parent.clickHandle.sendBroadcastText(jmgid, broadcastContent,"atAll");
                 $("#archiveBlock").$close();
                 e.stopPropagation();
             });
@@ -268,10 +269,12 @@ define(['underscore',
                                     window.parent.jchatGloabal.getUserInfo();
                                     window.parent.jchatGloabal.getGroupInfo(jmgid);
                                     window.parent.jchatGloabal.getGroupMembers(jmgid);
-                                    //离线消息同步监听
-                                    window.parent.jchatGloabal.onSyncConversation(jmgid);
-                                    //聊天消息实时监听
-                                    window.parent.jchatGloabal.onMsgReceive(jmgid);
+                                    // //离线消息同步监听
+                                    // window.parent.jchatGloabal.onSyncConversation(jmgid);
+                                    // //聊天消息实时监听
+                                    // window.parent.jchatGloabal.onMsgReceive(jmgid);
+                                    //打开弹框显示所有聊天消息
+                                    window.parent.jchatGloabal.showAllMsg(jmgid);
                                     $("#sendFileBtn").on("click", function () {
                                         window.parent.clickHandle.sendFile(jmgid);
                                     });

@@ -120,29 +120,10 @@ define([
         },
         showTable: function (groupId) {//显示表
             _self = this;
-            // var param = $("#query-condition").serializeObject();
-            // $.extend(param, {
-            //     startTime: $.trim($("#startTime").val()),
-            //     endTime: $.trim($("#endTime").val())
-            // });
-            // expenseStatAjax.getExesApplyStatList(param, function (r) {
+            debugger
             var param = {
-                userId:top.userId,
-                //taskType:$.trim($("#taskType").val()),
-                //taskName:$.trim($("#taskName").val()),
-                //taskNo:$.trim($("#taskNo").val()),
-                groupid:$.trim($("#groupid").val()) || groupId,
-                //creator:$.trim($("#creator").val()),
-                //jsr:$.trim($("#jsr").val()),
-                //startTime:$.trim($("#startTime").val()),
-                //endTime:$.trim($("#endTime").val()),
-                //fkqrzt:$.trim($("#fkqrzt").val()),
-                //fkzt:$.trim($("#fkzt").val()),
-                //yjzt:$.trim($("#yjzt").val()),
-                //overdue:$.trim($("#overdue").val()),
-                //deparmentcode:$.trim($("#deparmentcode").val()),
-                //fkstartTime:$.trim($("#fkstartTime").val()),
-                //fkendTime:$.trim($("#fkendTime").val())
+                // userId:top.userId,
+                groupid:groupId
             };
             $('#taskListResult').pagingList({
                 action:top.servicePath_xz+'/task/getTaskPage',
