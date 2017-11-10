@@ -18,8 +18,8 @@
       <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+            <state relative-caret-position="418">
+              <caret line="22" column="44" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="978" selection-end-column="3" />
               <folding>
                 <element signature="e#2063#2595#0" expanded="false" />
                 <element signature="e#5645#5838#0" expanded="false" />
@@ -763,12 +763,12 @@
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
       <workItem from="1510017010991" duration="92141000" />
-      <workItem from="1510197160531" duration="32765000" />
+      <workItem from="1510197160531" duration="32825000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="565864000" />
+    <option name="totallyTimeSpent" value="565924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -1247,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+        <state relative-caret-position="418">
+          <caret line="22" column="44" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="978" selection-end-column="3" />
           <folding>
             <element signature="e#2063#2595#0" expanded="false" />
             <element signature="e#5645#5838#0" expanded="false" />

@@ -185,7 +185,7 @@ define([
         },
         showNewsList:function () {//通知公告
             _self = this;
-            fstPageAjax.findRePage({type: 1, receiverId: top.userName, end: 8}, function (r) {//通知公告
+            fstPageAjax.findRePage({type: 1, receiverId: top.userId, end: 8}, function (r) {//通知公告
                 if (r.flag == 1) {
                     $("#newsDiv").empty().html(_.template(newsListTpl, {data: r.data}));
                     if(r.data && r.data.length<=0){

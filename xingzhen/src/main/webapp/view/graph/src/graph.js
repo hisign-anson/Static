@@ -656,7 +656,7 @@ define(['underscore',
             $open('#userListDiv', {width: 800, title: '&nbsp下发任务'});
             var openerDiv = $("#userListDiv");
             openerDiv.find(".panel-container").empty().html(_.template(taskAddTpl, {text: text}));
-            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false});
+            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false,minDate:rangeUtil.formatDate(new Date(),'yyyy-MM-dd')});
 
             $("#groupid").siblings("i#chooseGroup").remove();
             var groupInfo = {};
