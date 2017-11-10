@@ -592,7 +592,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                     var param = {
                         userId:top.currentUser.userInfo.userId
                     };
-                    getUserInfo(param,function(r){debugger
+                    getUserInfo(param,function(r){
                         if (r.flag == 1) {
                             var data = r.data;
                             if(data.avatar && data.avatar !=''){

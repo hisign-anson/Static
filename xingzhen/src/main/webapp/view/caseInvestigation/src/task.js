@@ -460,7 +460,7 @@ define(['underscore',
         handleFeedback: function (taskId) {
             _self = this;
             if (taskId) {
-                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {debugger
+                taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
                         $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
                         var fileInfoArr = []; //传入后台参数的文件数组...
