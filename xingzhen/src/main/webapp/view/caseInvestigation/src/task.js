@@ -47,6 +47,12 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
+            //时间插件确定按钮点击事件
+            $('#createDate').on('apply.daterangepicker', function (e, picker) {
+                $('#startTime').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+                $('#endTime').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+                $("#changeTimeScope u").removeClass("active");
+            });
             //点击选择时间范围（当天当月当季当年）
             selectUtils.selectTimeRangeOption("#changeCreateDate", "#createDate", "#startTime", "#endTime");
 
@@ -57,6 +63,12 @@ define(['underscore',
             }, function (start, end, label) {
                 $('#fkjzstartTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#fkjzendTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
+            });
+            //时间插件确定按钮点击事件
+            $('#submitDate').on('apply.daterangepicker', function (e, picker) {
+                $('#fkjzstartTime').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+                $('#fkjzendTime').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+                $("#changeTimeScope u").removeClass("active");
             });
             //点击选择时间范围（当天当月当季当年）
             selectUtils.selectTimeRangeOption("#changeSubmitDate", "#submitDate", "#fkjzstartTime", "#fkjzendTime");

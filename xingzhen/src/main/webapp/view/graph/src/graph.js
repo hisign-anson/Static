@@ -1198,6 +1198,12 @@ define(['underscore',
                 $('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
+            //时间插件确定按钮点击事件
+            $('#dateRange').on('apply.daterangepicker', function (e, picker) {
+                $('#startTime').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+                $('#endTime').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+                $("#changeTimeScope u").removeClass("active");
+            });
             // 任务状态
             selectUtils.selectTextOption("#changeTaskStatus", "#taskStatus");
             $("#searchBtn", parent.document).off("click").on("click", function () {

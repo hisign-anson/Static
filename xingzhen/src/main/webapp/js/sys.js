@@ -1261,7 +1261,18 @@ function newsMessageFn(vId,vType){
             $('#queryDateEnd').val(end.format('YYYY-MM-DD'));
         });
         // $('.query-date').datepicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});
-
+        //时间插件确定按钮点击事件
+        $('#query-date').on('apply.daterangepicker', function (e, picker) {
+            $('#queryDateBegin').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+            $('#queryDateEnd').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+            $("#changeTimeScope u").removeClass("active");
+        });
+        //时间插件确定按钮点击事件
+        $('#query-date').on('apply.daterangepicker', function (e, picker) {
+            $('#queryDateBegin').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+            $('#queryDateEnd').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+            $("#changeTimeScope u").removeClass("active");
+        });
         //设定默认ajax开始和结束时的loading遮罩效果(#post自带,paginglist没有自带)
         $.ajaxSetup({
             beforeSend:showLoading,
@@ -1724,6 +1735,12 @@ function knowledgeMessageFn() {
             $('#queryDateBegin').val(start.format('YYYY-MM-DD'));
             $('#queryDateEnd').val(end.format('YYYY-MM-DD'));
         });
+        //时间插件确定按钮点击事件
+        $('#query-date').on('apply.daterangepicker', function (e, picker) {
+            $('#queryDateBegin').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+            $('#queryDateEnd').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+            $("#changeTimeScope u").removeClass("active");
+        });
         // $('.query-date').datepicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});
         //设定默认ajax开始和结束时的loading遮罩效果(#post自带,paginglist没有自带)
         $.ajaxSetup({
@@ -1820,6 +1837,12 @@ function newsMoreFn(vId,vType) {
             $('#queryDateEnd').val(end.format('YYYY-MM-DD'));
         });
         // $('.query-date').datepicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});
+        //时间插件确定按钮点击事件
+        $('#query-date').on('apply.daterangepicker', function (e, picker) {
+            $('#queryDateBegin').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+            $('#queryDateEnd').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+            $("#changeTimeScope u").removeClass("active");
+        });
         //设定默认ajax开始和结束时的loading遮罩效果(#post自带,paginglist没有自带)
         $.ajaxSetup({
             beforeSend:showLoading,
