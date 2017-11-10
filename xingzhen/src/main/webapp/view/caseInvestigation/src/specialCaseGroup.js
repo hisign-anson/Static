@@ -110,15 +110,15 @@ define(['underscore',
                     $(".into-broadcast").on("click", function () {
                         _self.groupBroadcast($(this).attr("groupid"), $(this).attr("jmgid"));
                     });
-                    $(".into-communication").on("click", function () {
+                    $(".into-communication").on("click", function () {//发起聊天
                         var groupid = $(this).attr("groupid");
                         var jmgid = $(this).attr("jmgid");
 
                         $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
                         $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
-                        window.parent.jchatGloabal.getUserInfo();
-                        window.parent.jchatGloabal.getGroupInfo(jmgid);
-                        window.parent.jchatGloabal.getGroupMembers(jmgid);
+                        window.parent.jchatGloabal.getUserInfo();//获取进入人信息
+                        window.parent.jchatGloabal.getGroupInfo(jmgid);//获取当前组信息
+                        window.parent.jchatGloabal.getGroupMembers(jmgid);//获取组内成员信息
                         //离线消息同步监听
                         window.parent.jchatGloabal.onSyncConversation(jmgid);
                         //聊天消息实时监听
@@ -139,6 +139,9 @@ define(['underscore',
                         $("#sendBtn").on("click", function () {
                             window.parent.clickHandle.sendText(jmgid);
                         });
+                        //$("#chartBotesBtn").on("click", function () {//打开聊天记录的窗口
+                        //    window.parent.clickHandle.chartBotesBtn();
+                        //});
 
                         $("#messageContent").on('keyup', function (event) {
                             var e = event || window.event;

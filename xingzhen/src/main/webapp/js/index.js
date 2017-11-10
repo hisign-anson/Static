@@ -183,7 +183,7 @@ if(!top.token || !top.limits ||!top.trueName){
     var param = {
         userId:top.currentUser.userInfo.userId
     };
-    getUserInfo(param,function(r){
+    getUserInfo(param,function(r){debugger
         if (r.flag == 1) {
             var data = r.data;
             if(data.avatar && data.avatar !=''){
@@ -592,7 +592,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                     var param = {
                         userId:top.currentUser.userInfo.userId
                     };
-                    getUserInfo(param,function(r){
+                    getUserInfo(param,function(r){debugger
                         if (r.flag == 1) {
                             var data = r.data;
                             if(data.avatar && data.avatar !=''){

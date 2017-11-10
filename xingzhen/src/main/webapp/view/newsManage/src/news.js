@@ -23,6 +23,12 @@ define(['underscore',
 				$('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
 				$('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
 			});
+			//时间插件确定按钮点击事件
+			$('#createDate').on('apply.daterangepicker', function (e, picker) {
+				$('#startTime').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+				$('#endTime').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+				$("#changeTimeScope u").removeClass("active");
+			});
 			var type=1;
 			_self.queryNoticeList(type);
 			$('#add-btn').on('click',function () {
@@ -87,6 +93,12 @@ define(['underscore',
 				$('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
 				$('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
 			});
+			//时间插件确定按钮点击事件
+			$('#createDate').on('apply.daterangepicker', function (e, picker) {
+				$('#startTime').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+				$('#endTime').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+				$("#changeTimeScope u").removeClass("active");
+			});
 			var type=2;
 			_self.queryNoticeList(type);
 			$('#add-btn').on('click',function () {
@@ -119,6 +131,12 @@ define(['underscore',
 			},function(start, end, label) {
 				$('#startTime').val(start.format('YYYY-MM-DD HH:mm:ss'));
 				$('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
+			});
+			//时间插件确定按钮点击事件
+			$('#createDate').on('apply.daterangepicker', function (e, picker) {
+				$('#startTime').val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+				$('#endTime').val(picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
+				$("#changeTimeScope u").removeClass("active");
 			});
 			var type=3;
 			_self.queryNoticeList(type);
