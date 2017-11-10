@@ -48,23 +48,6 @@
             <%if(item.jsr == top.userId && item.fkzt == 0){%>
             <a class="into-transfer icon-transfer" taskinfo='<%=obj2str(item)%>' id="<%=item.id%>" fqrname="<%=item.fqrname%>" fqr="<%=item.fqr%>" deparmentcode="<%=item.deparmentcode%>" title="移交"></a>
             <%}%>
-        <%}else{%>
-            <%if(item.yjrwid){%>
-                <% if(item.fqr == top.userId && item.fkzt == 0){%>
-                <a class="into-urge icon-urge" id="<%=item.id%>" taskinfo='<%=obj2str(item)%>' title="催办"></a>
-                <%}%>
-
-                <%if(item.fqr == top.userId && item.qszt == 0 && item.fkzt == 0){%>
-                <a class="into-delete icon-delete" id="<%=item.id%>" taskNo="<%=item.taskNo%>" title="删除"></a>
-                <%}%>
-
-                <%if(item.jsr == top.userId && item.fkCount < 3){%>
-                <a class="into-feedback icon-feedback" id="<%=item.id%>" title="反馈"></a>
-                <%}%>
-                <%if(item.jsr == top.userId && item.fkzt == 0){%>
-                <a class="into-transfer icon-transfer" taskinfo='<%=obj2str(item)%>' id="<%=item.id%>" fqrname="<%=item.fqrname%>" fqr="<%=item.fqr%>" deparmentcode="<%=item.deparmentcode%>" title="移交"></a>
-                <%}%>
-            <%}%>
         <%}%>
 
     </td>

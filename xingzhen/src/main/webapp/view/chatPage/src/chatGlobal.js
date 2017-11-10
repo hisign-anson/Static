@@ -6,10 +6,10 @@
 // AppKey:a15c1e9bb38c1607b9571eea
 // Master Secret:bd4d826e1e49340aac2d05e2
 
-var across_appkey = 'a15c1e9bb38c1607b9571eea';
+var across_appkey = '13c78e9ee2ac862f30ce0b17';
 var across_random_str = '022cd9fd995849b58b3ef0e943421ed9';//20-36 长度的随机字符串
 var across_timestamp = new Date().getTime();
-var masterSecret = 'bd4d826e1e49340aac2d05e2';
+var masterSecret = '670180c73e6152cf44918e2e';
 // //签名，10 分钟后失效, 签名生成算法: signature = md5(appkey=appkey&timestamp=timestamp&random_str=random_str&key=secret)
 var across_signature = md5("appkey=" + across_appkey + "&timestamp=" + across_timestamp + "&random_str=" + across_random_str + "&key=" + masterSecret);
 window.JIM = new JMessage({
@@ -745,15 +745,32 @@ var jchatGloabal = {
                         var type = objText.msgType;
                         switch (type) {
                             case "send_connect_case_info":
-                                content_text = objText.createName + "" + objText.title;
+                                content_text = objText.createName + objText.title;
                                 time = clickHandle.getLocalTime(objText.createTime);
                                 break;
                             case "send_remove_case_info":
-                                content_text = objText.createName + "" + objText.title;
+                                content_text = objText.createName + objText.title;
                                 time = clickHandle.getLocalTime(objText.createTime);
                                 break;
                             case "send_group_backup_info":
                                 content_text = objText.createName + "将" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+
+                            case "send_task_info":
+                                content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_task_move_info":
+                                content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_task_urge_info":
+                                content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_task_feedback_info":
+                                content_text = objText.createName + objText.title + "【"+objText.fkxs + "】给" + objText.jsrName;
                                 time = clickHandle.getLocalTime(objText.createTime);
                                 break;
                         }
@@ -803,7 +820,7 @@ var jchatGloabal = {
                             '</div></div>';
                     } else {
                         debugger
-                        if (message_list_content.at_list&&message_list_content.at_list.length == 0) {
+                        if (message_list_content.at_list && message_list_content.at_list.length == 0) {
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
                                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
                                 '<div class="text-wrap">' +

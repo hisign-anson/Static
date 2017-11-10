@@ -1,4 +1,3 @@
-
 top.path=localData.get('path');
 top.servicePath=localData.get('servicePath');
 top.servicePath_xz=localData.get('servicePath_xz');
