@@ -140,10 +140,12 @@ define(['underscore',
             window.parent.jchatGloabal.getUserInfo();
             window.parent.jchatGloabal.getGroupInfo(jmgid);
             window.parent.jchatGloabal.getGroupMembers(jmgid);
-            //离线消息同步监听
-            window.parent.jchatGloabal.onSyncConversation(jmgid);
-            //聊天消息实时监听
-            window.parent.jchatGloabal.onMsgReceive(jmgid);
+            // //离线消息同步监听
+            // window.parent.jchatGloabal.onSyncConversation(jmgid);
+            // //聊天消息实时监听
+            // window.parent.jchatGloabal.onMsgReceive(jmgid);
+            //打开弹框显示所有聊天消息
+            window.parent.jchatGloabal.showAllMsg(jmgid);
             $("#sendFileBtn").on("click", function () {
                 window.parent.clickHandle.sendFile(jmgid);
             });

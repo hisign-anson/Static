@@ -48,6 +48,9 @@ JIM.onDisconnect(function () {
 });
 var onSyncConversation_res;
 var onMsgReceive_res = [];
+var selfSendMsg = [];
+
+var msgAll = [];
 var jchatGloabal = {
     init: function () {
         JIM.init({
@@ -74,15 +77,32 @@ var jchatGloabal = {
 
             //离线消息同步监听
             JIM.onSyncConversation(function (data) {
+                if (data && data.length > 0) {
+                    $.each(data, function (dataIndex, dataValue) {
+                        $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
+                            msgAll.push(msgsValue.content);
+
+                        });
+                    });
+                }
+
                 onSyncConversation_res = data;
             });
             //聊天消息实时监听
             JIM.onMsgReceive(function (data) {
                 debugger
-                console.info("聊天消息实时监听:"+obj2str(data));
+                if (data && data.length > 0) {
+                    $.each(data, function (dataIndex, dataValue) {
+                        $.each(dataValue.messages, function (msgsIndex, msgsValue) {
+                            debugger
+                            var content = msgsValue.content;
+                            msgAll.push(content);
+                        })
+                    });
+                }
+
                 onMsgReceive_res.push(data);
             });
-
 
             //业务事件监听
             JIM.onEventNotification(function (data) {
@@ -231,133 +251,95 @@ var jchatGloabal = {
             var list = '';
             $.each(data, function (dataIndex, dataValue) {
                 if (dataValue.msg_type == 4 && dataValue.from_gid == jmgid) {
-                        $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
-                            debugger
-                            var message_list_content = msgsValue.content;
-                            var time ;
-                            var from_name = message_list_content.from_name;
-                            var from_id = message_list_content.from_id;
-                            var login_user_name = top.trueName;
-                            var login_userId = top.userId;
+                    $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
+                        var message_list_content = msgsValue.content;
+                        var time;
+                        var from_name = message_list_content.from_name;
+                        var from_id = message_list_content.from_id;
+                        var login_user_name = top.trueName;
+                        var login_userId = top.userId;
 
-                            var content_text;
-                            if(message_list_content.from_platform == "api"){
-                                var objText = str2obj(message_list_content.msg_body.text);
-                                var type = objText.msgType;
-                                switch (type){
-                                    case "send_connect_case_info":
-                                        content_text = objText.createName+""+objText.title;
-                                        time = clickHandle.getLocalTime(objText.createTime);break;
-                                    case "send_remove_case_info":
-                                        content_text = objText.createName+""+objText.title;
-                                        time = clickHandle.getLocalTime(objText.createTime);break;
-                                    case "send_group_backup_info":
-                                        content_text = objText.createName+"将"+objText.title;
-                                        time = clickHandle.getLocalTime(objText.createTime);break;
-                                }
-                            } else if (message_list_content.from_platform == "web"){
-                                content_text = message_list_content.msg_body.text;
-                                time = clickHandle.getLocalTime(message_list_content.create_time);
+                        var content_text;
+                        if (message_list_content.from_platform == "api") {
+                            var objText = str2obj(message_list_content.msg_body.text);
+                            var type = objText.msgType;
+                            switch (type) {
+                                case "send_connect_case_info":
+                                    content_text = objText.createName + "" + objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    break;
+                                case "send_remove_case_info":
+                                    content_text = objText.createName + "" + objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    break;
+                                case "send_group_backup_info":
+                                    content_text = objText.createName + "将" + objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    break;
                             }
-                            var msg_type = message_list_content.msg_type;
-                            var msg_id = msgsValue.msg_id;
-                            var media_id = message_list_content.msg_body.media_id;
-                            var selfHtml = from_id == login_userId ? "self" : "";
-                            var msgContetHtml;
-                            var nameHtml = from_id == login_userId?login_user_name:from_name;
-                            if(msg_type == "file"){
-                                msgContetHtml = "文件信息";
+                        } else if (message_list_content.from_platform == "web") {
+                            content_text = message_list_content.msg_body.text;
+                            time = clickHandle.getLocalTime(message_list_content.create_time);
+                        }
+                        var msg_type = message_list_content.msg_type;
+                        var msg_id = msgsValue.msg_id;
+                        var media_id = message_list_content.msg_body.media_id;
+                        var file_size = message_list_content.msg_body.fsize >= 1024 ? (message_list_content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message_list_content.msg_body.fsize + '字节';
+                        var file_name = message_list_content.msg_body.fname;
 
-                            } else if( msg_type == "image"){
-                                debugger
-                                var fileDiv = '<a class="message-image preview-JIM-img" media_id="'+media_id+'" id="file_' + msg_id + '" href="javascript:;">' +
-                                    '<img class="message-image" alt="" src="" />' +
-                                    '</a>' +
-                                    '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
+                        var selfHtml = from_id == login_userId ? "self" : "";
+                        var msgContetHtml;
+                        var nameHtml = from_id == login_userId ? login_user_name : from_name;
+                        if (msg_type == "file") {
+                            var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
+                                '<span class="icon-file-noType"></span>' +
+                                '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
+                                '<span class="file-size">' + file_size + '</span>' +
+                                '</span></a>';
 
-                                msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                    '<div class="text-wrap">' +
-                                    '<div class="from-name">' + nameHtml + '</div>' +
-                                    '<div class="text">' + fileDiv + '</div>' +
-                                    '</div>' +
-                                    '</div>';
-                            } else if(msg_type =="custom"){
-                                msgContetHtml = '<div class="all">' +
-                                    '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                                    '</div></div>';
-                            }else {
-                                msgContetHtml = '<div class="main '+selfHtml+'">' +
-                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                    '<div class="text-wrap">' +
-                                    '<div class="from-name">' + nameHtml + '</div>' +
-                                    '<div class="text">' + content_text + '</div>' +
-                                    '</div>'+
-                                    '</div>';
-                            }
-                            list += '<li>' +
-                                '<div class="time"><span>' + time + '</span></div>' +
-                                msgContetHtml+
-                                '</li>';
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + fileDiv + '</div>' +
+                                '</div>' +
+                                '</div>';
+                        } else if (msg_type == "image") {
+                            var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" id="file_' + msg_id + '" href="javascript:;">' +
+                                '<img class="message-image" alt="" src="" />' +
+                                '</a>' +
+                                '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
 
-                            // if (from_id == login_userId) {
-                            //     if (msg_type == "file" || msg_type == "image") {
-                            //         //文件消息 图片消息
-                            //         jchatGloabal.getResourceMessage(".message-list", message_list_content, true, msg_type, msg_id);
-                            //     } else if(msg_type =="custom"){
-                            //         //自动发的消息
-                            //         list += '<li>' +
-                            //             '<div class="time"><span>' + time + '</span></div>' +
-                            //             '<div class="all">' +
-                            //             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                            //             '</div></div>' +
-                            //             '</li>';
-                            //     }else {
-                            //         //单聊文字消息 群聊文字消息
-                            //         list += '<li>' +
-                            //             '<div class="time"><span>' + time + '</span></div>' +
-                            //             '<div class="main self">' +
-                            //             '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            //             '<div class="text-wrap"><div class="from-name">' + login_user_name + '</div><div class="text">' + content_text + '</div>' +
-                            //             '</div></div>' +
-                            //             '</li>';
-                            //         // $("#main-frame").contents().find(".message-list").append(list);
-                            //         // clickHandle.scrollBottom();
-                            //     }
-                            //
-                            // } else {
-                            //     if (msg_type == "file" || msg_type == "image") {
-                            //         //文件消息 图片消息
-                            //         jchatGloabal.getResourceMessage(".message-list", message_list_content, false, msg_type);
-                            //     } else if(msg_type =="custom"){
-                            //         //自动发的消息
-                            //         list += '<li>' +
-                            //             '<div class="time"><span>' + time + '</span></div>' +
-                            //             '<div class="all">' +
-                            //             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                            //             '</div></div>' +
-                            //             '</li>';
-                            //     } else {
-                            //         //单聊文字消息 群聊文字消息
-                            //         list += '<li>' +
-                            //             '<div class="time"><span>' + time + '</span></div>' +
-                            //             '<div class="main">' +
-                            //             '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            //             '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
-                            //             '</div></div>' +
-                            //             '</li>';
-                            //         '</li>';
-                            //     }
-                            // }
-
-                        });
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + fileDiv + '</div>' +
+                                '</div>' +
+                                '</div>';
+                        } else if (msg_type == "custom") {
+                            msgContetHtml = '<div class="all">' +
+                                '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                                '</div></div>';
+                        } else {
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + content_text + '</div>' +
+                                '</div>' +
+                                '</div>';
+                        }
+                        list += '<li>' +
+                            '<div class="time"><span>' + time + '</span></div>' +
+                            msgContetHtml +
+                            '</li>';
+                    });
                 }
             });
             $("#main-frame").contents().find(".message-list").append(list);
-            // jchatGloabal.getResourceMessageHtml();
+            jchatGloabal.getResourceMessageHtml();
             clickHandle.scrollBottom();
-
-
         }
     },
     getResourceMessage: function (element, message_content, isSelf, fileType, index) {
@@ -383,7 +365,7 @@ var jchatGloabal = {
                     '</span></a>';
             } else if (fileType == "image") {
                 //图片消息
-                fileDiv = '<a class="message-image preview-JIM-img" id="file_' + index + '" href="javascript:;"><img class="message-image" alt="" src="' + path_file_or_images + '" /></a><div class="imgHover"><img class="img-responsive center-block" src="'+path_file_or_images+'" alt=""/></div>';
+                fileDiv = '<a class="message-image preview-JIM-img" id="file_' + index + '" href="javascript:;"><img class="message-image" alt="" src="' + path_file_or_images + '" /></a><div class="imgHover"><img class="img-responsive center-block" src="' + path_file_or_images + '" alt=""/></div>';
             }
             messageList = '<li>' +
                 '<div class="time"><span>' + time + '</span></div>' +
@@ -405,19 +387,31 @@ var jchatGloabal = {
             toast('success:' + JSON.stringify(data));
         });
     },
-    getResourceMessageHtml:function () {
+    getResourceMessageHtml: function () {
         $("#main-frame").contents().find(".preview-JIM-img").each(function (index, element) {
             var media_id = $(element).attr("media_id");
             JIM.getResource({'media_id': media_id}).onSuccess(function (data) {
                 var path_file_or_images = data.url;
-                console.info("haha:"+path_file_or_images);
+                console.info("haha:" + path_file_or_images);
                 console.info($(element).attr("media_id"));
-                $(element).find(".message-image").attr("src",path_file_or_images);
-                $(element).siblings(".imgHover").find(".center-block").attr("src",path_file_or_images);
+                $(element).find(".message-image").attr("src", path_file_or_images);
+                $(element).siblings(".imgHover").find(".center-block").attr("src", path_file_or_images);
             }).onFail(function (data) {
                 toast('onFail:' + JSON.stringify(data));
             });
-        })
+        });
+
+        $("#main-frame").contents().find(".not-images-file").each(function (index, element) {
+            var media_id = $(element).attr("media_id");
+            JIM.getResource({'media_id': media_id}).onSuccess(function (data) {
+                var path_file_or_images = data.url;
+                console.info("haha:" + path_file_or_images);
+                console.info($(element).attr("media_id"));
+                $(element).attr("src", path_file_or_images);
+            }).onFail(function (data) {
+                toast('onFail:' + JSON.stringify(data));
+            });
+        });
         //文件查看
         $("#main-frame").contents().find(".not-images-file").off("click").on("click", function () {
             // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
@@ -435,54 +429,68 @@ var jchatGloabal = {
         return fd;
     },
     onMsgReceive: function (jmgid) {
-        debugger
         var data = onMsgReceive_res;
         console.info(obj2str(data))
         if (data && data.length > 0) {
-            debugger
             var list = '';
             $.each(data, function (dataIndex, dataValue) {
                 $.each(dataValue.messages, function (msgsIndex, msgsValue) {
-                    debugger
                     if (msgsValue.msg_type == 4 && msgsValue.from_gid == jmgid) {
                         var message_list_content = msgsValue.content;
-                        var time ;
+                        var time;
                         var from_name = message_list_content.from_name;
                         var from_id = message_list_content.from_id;
                         var login_user_name = top.trueName;
                         var login_userId = top.userId;
 
                         var content_text;
-                        if(message_list_content.from_platform == "api"){
+                        if (message_list_content.from_platform == "api") {
                             var objText = str2obj(message_list_content.msg_body.text);
                             var type = objText.msgType;
-                            switch (type){
+                            switch (type) {
                                 case "send_connect_case_info":
-                                    content_text = objText.createName+""+objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);break;
+                                    content_text = objText.createName + "" + objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    break;
                                 case "send_remove_case_info":
-                                    content_text = objText.createName+""+objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);break;
+                                    content_text = objText.createName + "" + objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    break;
                                 case "send_group_backup_info":
-                                    content_text = objText.createName+"将"+objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);break;
+                                    content_text = objText.createName + "将" + objText.title;
+                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    break;
                             }
-                        } else if (message_list_content.from_platform == "web"){
+                        } else if (message_list_content.from_platform == "web") {
                             content_text = message_list_content.msg_body.text;
                             time = clickHandle.getLocalTime(message_list_content.create_time);
                         }
                         var msg_type = message_list_content.msg_type;
                         var msg_id = msgsValue.msg_id;
                         var media_id = message_list_content.msg_body.media_id;
+                        var file_size = message_list_content.msg_body.fsize >= 1024 ? (message_list_content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message_list_content.msg_body.fsize + '字节';
+                        var file_name = message_list_content.msg_body.fname;
 
                         var selfHtml = from_id == login_userId ? "self" : "";
                         var msgContetHtml;
-                        var nameHtml = from_id == login_userId?login_user_name:from_name;
-                        if(msg_type == "file"){
-                            msgContetHtml = "文件信息";
+                        var nameHtml = from_id == login_userId ? login_user_name : from_name;
+                        if (msg_type == "file") {
+                            var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
+                                '<span class="icon-file-noType"></span>' +
+                                '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
+                                '<span class="file-size">' + file_size + '</span>' +
+                                '</span></a>';
 
-                        } else if( msg_type == "image"){
-                            var fileDiv = '<a class="message-image preview-JIM-img" media_id="'+media_id+'" id="file_' + msg_id + '" href="javascript:;">' +
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + fileDiv + '</div>' +
+                                '</div>' +
+                                '</div>';
+
+                        } else if (msg_type == "image") {
+                            var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" id="file_' + msg_id + '" href="javascript:;">' +
                                 '<img class="message-image" alt="" src="" />' +
                                 '</a>' +
                                 '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
@@ -494,22 +502,22 @@ var jchatGloabal = {
                                 '<div class="text">' + fileDiv + '</div>' +
                                 '</div>' +
                                 '</div>';
-                        } else if(msg_type =="custom"){
+                        } else if (msg_type == "custom") {
                             msgContetHtml = '<div class="all">' +
                                 '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
                                 '</div></div>';
-                        }else {
-                            msgContetHtml = '<div class="main '+selfHtml+'">' +
+                        } else {
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
                                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
                                 '<div class="text-wrap">' +
                                 '<div class="from-name">' + nameHtml + '</div>' +
                                 '<div class="text">' + content_text + '</div>' +
-                                '</div>'+
+                                '</div>' +
                                 '</div>';
                         }
                         list += '<li>' +
                             '<div class="time"><span>' + time + '</span></div>' +
-                            msgContetHtml+
+                            msgContetHtml +
                             '</li>';
                     }
                 });
@@ -545,13 +553,17 @@ var jchatGloabal = {
             // data.username 会话 username
         });
     },
-    sendGroupMsg: function (textContent, gid) {
+    sendGroupMsg: function (textContent, gid, at) {
         JIM.sendGroupMsg({
+            'at_list': at == "atAll" ? [] : "",
+            'target_name': "群名称",
             'target_gid': gid,
-            'content': textContent,
-            'at_list': []
+            'content': textContent
         }).onSuccess(function (data, msg) {
             clickHandle.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
+            selfSendMsg.push(msg);
+            msgAll.push(msg.content);
+            // clickHandle.showMessageList(selfSendMsg);
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
@@ -603,6 +615,209 @@ var jchatGloabal = {
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
+    },
+    showSelf: function (gid) {
+        var data = selfSendMsg;
+        debugger
+        var ulHtml = $("#main-frame").contents().find(".message-list");
+        var list = '';
+        if (data && data.length > 0) {
+            debugger;
+            $.each(data, function (dataIndex, dataValue) {
+                if (dataValue.target_gid == gid) {
+                    debugger;
+                    var message_list_content = dataValue.content;
+                    var time;
+                    var from_name = message_list_content.from_name;
+                    var from_id = message_list_content.from_id;
+                    var login_user_name = top.trueName;
+                    var login_userId = top.userId;
+
+                    var content_text;
+                    if (message_list_content.from_platform == "api") {
+                        var objText = str2obj(message_list_content.msg_body.text);
+                        var type = objText.msgType;
+                        switch (type) {
+                            case "send_connect_case_info":
+                                content_text = objText.createName + "" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_remove_case_info":
+                                content_text = objText.createName + "" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_group_backup_info":
+                                content_text = objText.createName + "将" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                        }
+                    } else if (message_list_content.from_platform == "web") {
+                        content_text = message_list_content.msg_body.text;
+                        time = clickHandle.getLocalTime(message_list_content.create_time);
+                    }
+                    var msg_type = message_list_content.msg_type;
+                    var msg_id = dataValue.msg_id;
+                    var media_id = message_list_content.msg_body.media_id;
+                    var file_size = message_list_content.msg_body.fsize >= 1024 ? (message_list_content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message_list_content.msg_body.fsize + '字节';
+                    var file_name = message_list_content.msg_body.fname;
+
+                    var selfHtml = "self";
+                    var msgContetHtml;
+                    var nameHtml = login_user_name;
+                    if (msg_type == "file") {
+                        var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
+                            '<span class="icon-file-noType"></span>' +
+                            '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
+                            '<span class="file-size">' + file_size + '</span>' +
+                            '</span></a>';
+
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+
+                    } else if (msg_type == "image") {
+                        var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" id="file_' + msg_id + '" href="javascript:;">' +
+                            '<img class="message-image" alt="" src="" />' +
+                            '</a>' +
+                            '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
+
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                    } else if (msg_type == "custom") {
+                        msgContetHtml = '<div class="all">' +
+                            '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                            '</div></div>';
+                    } else {
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + content_text + '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    list += '<li>' +
+                        '<div class="time"><span>' + time + '</span></div>' +
+                        msgContetHtml +
+                        '</li>';
+                }
+
+            });
+            ulHtml.append(list);
+            jchatGloabal.getResourceMessageHtml();
+            clickHandle.scrollBottom();
+        }
+    },
+
+    showAllMsg: function (jmgid) {
+        var data = msgAll;
+        debugger
+        if (data && data.length > 0) {
+            var list = '';
+            data.sort(function (a, b) {
+                return (a.create_time) - (b.create_time);//时间正序
+            });
+            var dataSort = data;
+            debugger
+            $.each(data, function (dataIndex, dataValue) {
+                if (dataValue.target_type == "group" && dataValue.target_id == jmgid) {
+                    var message_list_content = dataValue;
+                    var time;
+                    var from_name = message_list_content.from_name//?message_list_content.from_name:message_list_content.from_type;
+                    var from_id = message_list_content.from_id;
+                    var login_user_name = top.trueName;
+                    var login_userId = top.userId;
+
+                    var content_text;
+                    if (message_list_content.from_platform == "api") {
+                        var objText = str2obj(message_list_content.msg_body.text);
+                        var type = objText.msgType;
+                        switch (type) {
+                            case "send_connect_case_info":
+                                content_text = objText.createName + "" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_remove_case_info":
+                                content_text = objText.createName + "" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                            case "send_group_backup_info":
+                                content_text = objText.createName + "将" + objText.title;
+                                time = clickHandle.getLocalTime(objText.createTime);
+                                break;
+                        }
+                    } else if (message_list_content.from_platform == "web") {
+                        content_text = message_list_content.msg_body.text;
+                        time = clickHandle.getLocalTime(message_list_content.create_time);
+                    }
+                    var msg_type = message_list_content.msg_type;
+                    var msg_id = dataValue.msg_id;
+                    var media_id = message_list_content.msg_body.media_id;
+                    var file_size = message_list_content.msg_body.fsize >= 1024 ? (message_list_content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message_list_content.msg_body.fsize + '字节';
+                    var file_name = message_list_content.msg_body.fname;
+
+                    var selfHtml = from_id == login_userId ? "self" : "";
+                    var msgContetHtml;
+                    var nameHtml = from_id == login_userId ? login_user_name : from_name;
+                    if (msg_type == "file") {
+                        var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
+                            '<span class="icon-file-noType"></span>' +
+                            '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
+                            '<span class="file-size">' + file_size + '</span>' +
+                            '</span></a>';
+
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                    } else if (msg_type == "image") {
+                        var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" href="javascript:;">' +
+                            '<img class="message-image" alt="" src="" />' +
+                            '</a>' +
+                            '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
+
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                    } else if (msg_type == "custom") {
+                        msgContetHtml = '<div class="all">' +
+                            '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                            '</div></div>';
+                    } else {
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + content_text + '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    list += '<li>' +
+                        '<div class="time"><span>' + time + '</span></div>' +
+                        msgContetHtml +
+                        '</li>';
+                }
+            });
+            $("#main-frame").contents().find(".message-list").append(list);
+            jchatGloabal.getResourceMessageHtml();
+            clickHandle.scrollBottom();
+        }
     }
 };
 var clickHandle = {
@@ -629,6 +844,7 @@ var clickHandle = {
         clickHandle.showDiv(contrlDiv);
     },
     sendText: function (gid) {
+        $("#main-frame").contents().find("#messageContent").find("br").remove();//去掉回车换行
         var textContent = $("#main-frame").contents().find("#messageContent").html();
         if (textContent == "") {
             toast("不能发送空白消息！");
@@ -636,21 +852,21 @@ var clickHandle = {
             console.info("发送消息！");
             $("#main-frame").contents().find("#messageContent").html("");
             //发送群聊消息
-            jchatGloabal.sendGroupMsg(textContent, gid);
+            jchatGloabal.sendGroupMsg(textContent, gid, "");
         }
     },
-    sendBroadcastText: function (gid, broadcastContent) {
+    sendBroadcastText: function (gid, broadcastContent, at) {
         if (broadcastContent == "") {
             toast("不能发送空白消息！");
         } else {
             console.info("发送消息！");
             //发送群聊消息
-            jchatGloabal.sendGroupMsg(broadcastContent, gid);
+            jchatGloabal.sendGroupMsg(broadcastContent, gid, "");
         }
     },
     showMessageList: function (message) {
         var ulHtml = $("#main-frame").contents().find(".message-list");
-        var messageList = "";
+        var messageList = '';
         var msg_type = message.content.msg_type;
         var msg_id = message.msg_id;
         var time = clickHandle.getLocalTime(message.content.create_time);
