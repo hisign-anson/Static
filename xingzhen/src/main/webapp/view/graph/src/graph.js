@@ -33,9 +33,14 @@ define(['underscore',
 
 // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
     var setting = {
+        data:{
+
+        },
         view: {
             //可以允许节点名称支持 HTML 内容
-            nameIsHTML: true
+            nameIsHTML: true,
+            //是否允许节点显示title属性
+            showTitle:false
         },
         callback: {
             //单击菜单节点之前的事件回调函数

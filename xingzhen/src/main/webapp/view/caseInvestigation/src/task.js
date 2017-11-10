@@ -413,7 +413,7 @@ define(['underscore',
                         // taskid: id,
                         taskid: id,
                         userId: top.userId,
-                        fqrDeptCode: top.orgCode
+                        deparmentcode: top.orgCode
                     };
                     taskAjax.addCb(param, function (r) {
                         if (r.flag == 1) {
