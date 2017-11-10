@@ -15,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="772" column="100" lean-forward="false" selection-start-line="772" selection-start-column="100" selection-end-line="772" selection-end-column="100" />
+            <state relative-caret-position="209">
+              <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
               <folding>
                 <element signature="e#2063#2595#0" expanded="false" />
                 <element signature="e#5707#5900#0" expanded="false" />
@@ -39,37 +39,17 @@
                 <element signature="e#45215#46365#0" expanded="false" />
                 <element signature="e#46745#48775#0" expanded="false" />
                 <element signature="e#48816#52009#0" expanded="false" />
-                <marker date="1510306278174" expanded="false" signature="1490:1890" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="3971:4988" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="5058:5620" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="6262:8109" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="8140:8503" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="8538:8989" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="9027:9801" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="20225:20522" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="26703:26990" ph="{...}" />
-                <marker date="1510306278174" expanded="false" signature="27209:27443" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="1490:1890" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="3971:4988" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="5058:5620" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="6262:8109" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="8140:8503" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="8538:8989" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="9027:9801" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="20225:20522" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="26703:26990" ph="{...}" />
+                <marker date="1510310279355" expanded="false" signature="27209:27443" ph="{...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="taskListTr.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="48" column="26" lean-forward="false" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fstPage-MoreClick.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="125" column="31" lean-forward="true" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -94,11 +74,33 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="taskAdd.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="449">
+              <caret line="61" column="66" lean-forward="true" selection-start-line="61" selection-start-column="66" selection-end-line="61" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="showGraph.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/graph/src/showGraph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+            <state relative-caret-position="266">
+              <caret line="339" column="55" lean-forward="false" selection-start-line="339" selection-start-column="41" selection-end-line="339" selection-end-column="55" />
+              <folding>
+                <element signature="e#1149#1824#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fstPage-MoreClick.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1862">
+              <caret line="110" column="103" lean-forward="false" selection-start-line="110" selection-start-column="103" selection-end-line="110" selection-end-column="103" />
               <folding />
             </state>
           </provider>
@@ -110,19 +112,6 @@
             <state relative-caret-position="152">
               <caret line="8" column="29" lean-forward="false" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1510302111839" expanded="false" signature="22705:22805" ph="{...}" />
-                <marker date="1510302111839" expanded="false" signature="23049:23807" ph="{...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -140,9 +129,10 @@
       <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="678" column="59" lean-forward="true" selection-start-line="678" selection-start-column="59" selection-end-line="678" selection-end-column="59" />
+            <state relative-caret-position="331">
+              <caret line="294" column="39" lean-forward="false" selection-start-line="294" selection-start-column="39" selection-end-line="294" selection-end-column="39" />
               <folding>
+                <element signature="e#5722#8992#0" expanded="false" />
                 <element signature="e#9597#10453#0" expanded="false" />
                 <element signature="e#9627#9977#0" expanded="false" />
                 <marker date="1510303357831" expanded="true" signature="74:93" ph="[...]" />
@@ -166,10 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>showMessageList</find>
-      <find>at_list</find>
-      <find>//离线消息同步监听</find>
-      <find>onSyncConversation(jmgid);</find>
       <find>onSyncConversation</find>
       <find>broadcastContent</find>
       <find>setTimeout</find>
@@ -194,8 +180,12 @@
       <find>user-name</find>
       <find>showTable</find>
       <find>relationCaseTr</find>
-      <find>.ab</find>
+      <find>show</find>
+      <find>fra</find>
+      <find>fram</find>
+      <find>groupHandle</find>
       <find>msgAll</find>
+      <find>.ab</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -229,7 +219,6 @@
         <option value="$PROJECT_DIR$/view/chatPage/css/chartPage.css" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskEdit.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskInfo.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskList.html" />
         <option value="$PROJECT_DIR$/view/dictManage/src/dictOpener.js" />
@@ -246,7 +235,6 @@
         <option value="$PROJECT_DIR$/view/commandCooperationManage/tpl/commandPage.html" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/css/command.css" />
         <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/groupTaskList.html" />
-        <option value="$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js" />
         <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/achievementInfoGroupMemberTr.html" />
         <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/achievementInfoGroupMemberChildTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCaseTr.html" />
@@ -265,11 +253,13 @@
         <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/view/graph/showGraph.html" />
         <option value="$PROJECT_DIR$/view/graph/showGraph.js" />
-        <option value="$PROJECT_DIR$/view/graph/src/showGraph.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseListTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html" />
+        <option value="$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js" />
+        <option value="$PROJECT_DIR$/view/graph/src/showGraph.js" />
         <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html" />
       </list>
     </option>
   </component>
@@ -364,11 +354,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
+              <option name="myItemId" value="fstPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fstPage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chatPage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -435,10 +461,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tpl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="specialCaseGroup" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -615,12 +637,12 @@
       <workItem from="1509537755546" duration="39688000" />
       <workItem from="1509671416316" duration="100393000" />
       <workItem from="1510017010991" duration="92141000" />
-      <workItem from="1510197160531" duration="49583000" />
+      <workItem from="1510197160531" duration="52448000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="582682000" />
+    <option name="totallyTimeSpent" value="585547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -657,33 +679,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupListTr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="41" lean-forward="false" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/dict/dict.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="38" column="27" lean-forward="false" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="27" />
-          <folding>
-            <marker date="1510108553853" expanded="true" signature="15334:15340" ph=" " />
-            <marker date="1510108553853" expanded="true" signature="15340:15346" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="46" column="105" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseList.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -705,17 +700,6 @@
         <state relative-caret-position="114">
           <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="439" column="0" lean-forward="false" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
-          <folding>
-            <element signature="e#3877#6683#0" expanded="false" />
-            <element signature="e#8991#9257#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1046,42 +1030,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="125" column="31" lean-forward="true" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/graph/d3graphView.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="491">
           <caret line="63" column="37" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="108" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/showGraph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/showGraph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/src/showGraph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1102,20 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="678" column="59" lean-forward="true" selection-start-line="678" selection-start-column="59" selection-end-line="678" selection-end-column="59" />
-          <folding>
-            <element signature="e#9597#10453#0" expanded="false" />
-            <element signature="e#9627#9977#0" expanded="false" />
-            <marker date="1510303357831" expanded="true" signature="74:93" ph="[...]" />
-            <marker date="1510303357831" expanded="true" signature="22216:22250" ph="..." />
-            <marker date="1510303357831" expanded="true" signature="22386:22419" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseListTr.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1124,18 +1062,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="449" column="8" lean-forward="false" selection-start-line="449" selection-start-column="4" selection-end-line="449" selection-end-column="8" />
+          <folding>
+            <element signature="e#3877#6683#0" expanded="false" />
+            <element signature="e#8991#9257#0" expanded="false" />
+            <element signature="e#20131#23169#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
+        <state relative-caret-position="425">
           <caret line="48" column="26" lean-forward="false" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view/graph/showGraph.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/graph/showGraph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-mock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="17" column="44" lean-forward="false" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1862">
+          <caret line="110" column="103" lean-forward="false" selection-start-line="110" selection-start-column="103" selection-end-line="110" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/graph/src/showGraph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="339" column="55" lean-forward="false" selection-start-line="339" selection-start-column="41" selection-end-line="339" selection-end-column="55" />
+          <folding>
+            <element signature="e#1149#1824#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="772" column="100" lean-forward="false" selection-start-line="772" selection-start-column="100" selection-end-line="772" selection-end-column="100" />
+        <state relative-caret-position="209">
+          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
           <folding>
             <element signature="e#2063#2595#0" expanded="false" />
             <element signature="e#5707#5900#0" expanded="false" />
@@ -1155,17 +1155,40 @@
             <element signature="e#45215#46365#0" expanded="false" />
             <element signature="e#46745#48775#0" expanded="false" />
             <element signature="e#48816#52009#0" expanded="false" />
-            <marker date="1510306278174" expanded="false" signature="1490:1890" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="3971:4988" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="5058:5620" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="6262:8109" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="8140:8503" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="8538:8989" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="9027:9801" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="20225:20522" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="26703:26990" ph="{...}" />
-            <marker date="1510306278174" expanded="false" signature="27209:27443" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="1490:1890" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="3971:4988" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="5058:5620" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="6262:8109" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="8140:8503" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="8538:8989" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="9027:9801" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="20225:20522" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="26703:26990" ph="{...}" />
+            <marker date="1510310279355" expanded="false" signature="27209:27443" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="294" column="39" lean-forward="false" selection-start-line="294" selection-start-column="39" selection-end-line="294" selection-end-column="39" />
+          <folding>
+            <element signature="e#5722#8992#0" expanded="false" />
+            <element signature="e#9597#10453#0" expanded="false" />
+            <element signature="e#9627#9977#0" expanded="false" />
+            <marker date="1510303357831" expanded="true" signature="74:93" ph="[...]" />
+            <marker date="1510303357831" expanded="true" signature="22216:22250" ph="..." />
+            <marker date="1510303357831" expanded="true" signature="22386:22419" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="61" column="66" lean-forward="true" selection-start-line="61" selection-start-column="66" selection-end-line="61" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>
