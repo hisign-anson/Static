@@ -800,13 +800,25 @@ var jchatGloabal = {
                             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
                             '</div></div>';
                     } else {
-                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            '<div class="text-wrap">' +
-                            '<div class="from-name">' + nameHtml + '</div>' +
-                            '<div class="text">' + content_text + '</div>' +
-                            '</div>' +
-                            '</div>';
+                        debugger
+                        if (message_list_content.at_list&&message_list_content.at_list.length == 0) {
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text"> @所有人' + content_text + '</div>' +
+                                '</div>' +
+                                '</div>';
+
+                        } else {
+                            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + content_text + '</div>' +
+                                '</div>' +
+                                '</div>';
+                        }
                     }
                     list += '<li>' +
                         '<div class="time"><span>' + time + '</span></div>' +
@@ -861,7 +873,7 @@ var clickHandle = {
         } else {
             console.info("发送消息！");
             //发送群聊消息
-            jchatGloabal.sendGroupMsg(broadcastContent, gid, "");
+            jchatGloabal.sendGroupMsg(broadcastContent, gid, at);
         }
     },
     showMessageList: function (message) {
