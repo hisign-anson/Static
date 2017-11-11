@@ -182,13 +182,18 @@ if(!top.token || !top.limits ||!top.trueName){
     var param = {
         userId:top.currentUser.userInfo.userId
     };
-    getUserInfo(param,function(r){debugger
+    getUserInfo(param,function(r){
         if (r.flag == 1) {
             var data = r.data;
             if(data.avatar && data.avatar !=''){
-                //var avatar = data.avatar;
-                //byid('img-responsive').src=top.ftpServer + avatar;
-                //byid('confirm-logout-img').src=top.ftpServer + avatar;
+                // var obj = str2obj(data.avatar);
+                // var avatar;
+                // if(data.avatar.indexOf("source")>-1){
+                //     avatar = obj.source
+                // } else {
+                //     avatar = data.avatar
+                // }
+
                 var obj = eval('(' + data.avatar + ')');
                 $("#img-responsive").attr("src",top.ftpServer+obj.source);
                 $("#confirm-logout-img").attr("src",top.ftpServer+obj.source);

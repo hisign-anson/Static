@@ -269,13 +269,7 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
-                                            // var $progressActive = $slide.find('.progress>span');
-                                            //
-                                            // $slide.find('.state').html('上传中...');
-                                            // $slide.find('.progress').show();
-                                            //
-                                            // //添加css3动画
-                                            // $progressActive.addClass('progress-bar-animate');
+                                            $(".progressV b").css('width','50%');
 
                                         },
                                         success: function (res) {
@@ -366,13 +360,7 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
-                                            // var $progressActive = $slide.find('.progress>span');
-                                            //
-                                            // $slide.find('.state').html('上传中...');
-                                            // $slide.find('.progress').show();
-                                            //
-                                            // //添加css3动画
-                                            // $progressActive.addClass('progress-bar-animate');
+                                            $(".progressV b").css('width','50%');
 
                                         },
                                         success: function (res) {
@@ -519,14 +507,6 @@ define(['underscore',
                                             debugger
                                             //设置进度条
                                             $(".progressV b").css('width','50%');
-                                            // var $progressActive = $slide.find('.progress>span');
-                                            //
-                                            // $slide.find('.state').html('上传中...');
-                                            // $slide.find('.progress').show();
-                                            //
-                                            // //添加css3动画
-                                            // $progressActive.addClass('progress-bar-animate');
-
                                         },
                                         success: function (res) {
                                             debugger
@@ -641,7 +621,6 @@ define(['underscore',
                                         processData: false,
                                         contentType: false,
                                         beforeSend: function () {
-                                            //$('.state').html('上传中...');
                                             $(".progressI b").css('width','50%');
                                         },
                                         success: function (res) {
@@ -786,13 +765,7 @@ define(['underscore',
                         beforeSend: function () {
                             debugger
                             //设置进度条
-                            // var $progressActive = $slide.find('.progress>span');
-                            //
-                            // $slide.find('.state').html('上传中...');
-                            // $slide.find('.progress').show();
-                            //
-                            // //添加css3动画
-                            // $progressActive.addClass('progress-bar-animate');
+                            $(".progressV b").css('width','50%');
 
                         },
                         success: function (res) {

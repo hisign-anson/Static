@@ -324,7 +324,6 @@ define(['underscore',
                         }
                         var menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
 
-debugger
                         switch (d.type) {
                             case "groupid":
                                 zNodes = menuByGroupType;
@@ -609,9 +608,10 @@ debugger
                             specialCaseGroup.queryAddedStaffList(groupInfo);
                             return false;
                         });
+                        debugger
                         //加载已添加的成员
                         specialCaseGroup.queryAddedStaffList(groupInfo);
-                        $("#addStaff").removeClass("hide");
+                        $("#userListDiv #addStaff").addClass("hide");
                     }
                 }
             });
