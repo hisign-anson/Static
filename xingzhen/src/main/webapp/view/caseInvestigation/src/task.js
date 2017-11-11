@@ -486,7 +486,6 @@ define(['underscore',
                                 tpObj.fileName = file.name;
                                 tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
                                 tpObj.type = fileType.substr(fileType.indexOf('/') + 1);
-
                                 filesArr.push(tpObj);
                             }
                             var picWrap = $('#pics-wrap');
@@ -580,11 +579,34 @@ define(['underscore',
                                 tpObj.fileName = file.name;
                                 tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
                                 tpObj.type = fileType.substr(fileType.indexOf('/') + 1);
-
                                 filesArr.push(tpObj);
+
                             }
                             var picWrap = $('#pics-wrap');
                             //h5表单文件上传
+                            //将对象元素转换成字符串以作比较
+                            function obj2key(obj, keys){
+                                var n = keys.length,
+                                    key = [];
+                                while(n--){
+                                    key.push(obj[keys[n]]);
+                                }
+                                return key.join('|');
+                            }
+                            //去重操作
+                            function uniqeByKeys(array,keys){
+                                var arr = [];
+                                var hash = {};
+                                for (var i = 0, j = array.length; i < j; i++) {
+                                    var k = obj2key(array[i], keys);
+                                    if (!(k in hash)) {
+                                        hash[k] = true;
+                                        arr .push(array[i]);
+                                    }
+                                }
+                                return arr ;
+                            }
+                            filesArr=uniqeByKeys(filesArr,['fileName']);
                             filesArr.forEach(function (item, i) {
                                 if (item.file) {
                                     var data = new FormData();
@@ -610,7 +632,7 @@ define(['underscore',
                                                 item.responseName = res.data.source.substring(12);
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
-                                                if(filesArr){
+                                                if(filesArr){debugger
                                                     var html="";
                                                     $.each(filesArr,function (index,value) {
                                                         var item = {
@@ -703,6 +725,29 @@ define(['underscore',
                 filesArr.push(tpObj);
             }
             var picWrap = $('#pics-wrap');
+            //将对象元素转换成字符串以作比较
+            function obj2key(obj, keys){
+                var n = keys.length,
+                    key = [];
+                while(n--){
+                    key.push(obj[keys[n]]);
+                }
+                return key.join('|');
+            }
+            //去重操作
+            function uniqeByKeys(array,keys){
+                var arr = [];
+                var hash = {};
+                for (var i = 0, j = array.length; i < j; i++) {
+                    var k = obj2key(array[i], keys);
+                    if (!(k in hash)) {
+                        hash[k] = true;
+                        arr .push(array[i]);
+                    }
+                }
+                return arr ;
+            }
+            filesArr=uniqeByKeys(filesArr,['fileName']);
             //h5表单文件上传
             filesArr.forEach(function (item, i) {
                 if (item.file) {
