@@ -1,3 +1,36 @@
+var width = 1200,
+    height = 900;
+
+var img_w = 48,
+    img_h = 48;
+
+var zTreeObj;
+var jsonContext, edges_line, edges_text, node_img, node_text;
+
+// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+var setting = {
+    data:{
+
+    },
+    view: {
+        //可以允许节点名称支持 HTML 内容
+        nameIsHTML: true,
+        //是否允许节点显示title属性
+        showTitle:false
+    },
+    callback: {
+        //单击菜单节点之前的事件回调函数
+        beforeClick: function (treeId, treeNode, clickFlag) {
+            console.info("[ beforeClick ]:" + treeNode.name);
+            return (treeNode.click != false);
+        },
+        //菜单节点被点击的事件回调函数
+        onClick: function (event, treeId, treeNode, clickFlag) {
+            _selfGraph.menuHanle(event, treeId, treeNode, clickFlag);
+            return (treeNode.click != false);
+        }
+    }
+};
 importing('currentDate');
 define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html',
@@ -13,40 +46,6 @@ define(['underscore',
     '../../dictManage/src/dictOpener.js'], function (_, baseInfoTpl, groupStaffTpl, groupStaffTrTpl, taskEditTpl, taskInfoTpl, feedBackInfoTpl,
                                                      specialCaseGroupAjax, specialCaseGroup, taskAjax, task, dictOpener) {
 
-    var width = 1200,
-        height = 900;
-
-    var img_w = 48,
-        img_h = 48;
-
-    var zTreeObj;
-    var jsonContext, edges_line, edges_text, node_img, node_text;
-
-    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-    var setting = {
-        data:{
-
-        },
-        view: {
-            //可以允许节点名称支持 HTML 内容
-            nameIsHTML: true,
-            //是否允许节点显示title属性
-            showTitle:false
-        },
-        callback: {
-            //单击菜单节点之前的事件回调函数
-            beforeClick: function (treeId, treeNode, clickFlag) {
-                console.info("[ beforeClick ]:" + treeNode.name);
-                return (treeNode.click != false);
-            },
-            //菜单节点被点击的事件回调函数
-            onClick: function (event, treeId, treeNode, clickFlag) {
-                _selfGraph.menuHanle(event, treeId, treeNode, clickFlag);
-                return (treeNode.click != false);
-            }
-        }
-    };
-    //菜单数据
 
     return {
         showList: function (groupid, type) {
@@ -263,13 +262,10 @@ define(['underscore',
                         console.info(d);
                         //获取节点id（专案组id，任务id，反馈id，案件id）  d.id
                         //根据id和type显示不同的菜单
-                        // var zNodes = [];
                         var menuByGroupType = [];
                         var menuByTaskType = [];
                         var menuByFeedbackType = [];
                         var menuByCaseType = [];
-
-
                         if(d.type == "groupid"){//专案组右键菜单
                             menuByGroupType = [
                                 {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>专案组详情</span>"},
