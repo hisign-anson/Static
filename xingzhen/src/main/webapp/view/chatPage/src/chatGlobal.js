@@ -81,9 +81,7 @@ var jchatGloabal = {
                 if (data && data.length > 0) {
                     $.each(data, function (dataIndex, dataValue) {
                         $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
-                            debugger
                             msgAll.push(msgsValue.content);
-
                         });
                     });
                 }
@@ -722,14 +720,19 @@ var jchatGloabal = {
 
     showAllMsg: function (jmgid) {
         var data = msgAll;
-        debugger
         if (data && data.length > 0) {
+            for(var i=0;i<data.length;i++){
+                var year=clickHandle.getLocalYear(data[i].create_time);
+                if(year<2000){
+                    data[i].create_time=new Date(data[i].create_time*1000);
+                }else{
+                    data[i].create_time=new Date(data[i].create_time);
+                }
+            }
             var list = '';
             data.sort(function (a, b) {
-                return (a.create_time) - (b.create_time);//时间正序
+                return a.create_time-b.create_time;//时间正序
             });
-            var dataSort = data;
-            debugger
             $.each(data, function (dataIndex, dataValue) {
                 if (dataValue.target_type == "group" && dataValue.target_id == jmgid) {
                     var message_list_content = dataValue;
@@ -774,8 +777,12 @@ var jchatGloabal = {
                                 time = clickHandle.getLocalTime(objText.createTime);
                                 break;
                         }
-                    } else if (message_list_content.from_platform == "web") {
-                        content_text = message_list_content.msg_body.text;
+                    } else if (message_list_content.from_platform == "web" || message_list_content.from_platform == "a") {
+                        // content_text = message_list_content.msg_body.text;
+                        // time = clickHandle.getLocalTime(message_list_content.create_time);
+                        var msgBody = str2obj(message_list_content.msg_body);
+                        var objText = msgBody.text;
+                        content_text = objText;
                         time = clickHandle.getLocalTime(message_list_content.create_time);
                     }
                     var msg_type = message_list_content.msg_type;
@@ -787,7 +794,7 @@ var jchatGloabal = {
                     var selfHtml = from_id == login_userId ? "self" : "";
                     var msgContetHtml;
                     var nameHtml = from_id == login_userId ? login_user_name : from_name;
-                    if (msg_type == "file") {
+                    if (msg_type == "file" ) {
                         var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
                             '<span class="icon-file-noType"></span>' +
                             '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
@@ -801,12 +808,29 @@ var jchatGloabal = {
                             '<div class="text">' + fileDiv + '</div>' +
                             '</div>' +
                             '</div>';
-                    } else if (msg_type == "image") {
-                        var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" href="javascript:;">' +
-                            '<img class="message-image" alt="" src="" />' +
-                            '</a>' +
-                            '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
+                    } else if(msg_type == "voice"){
+                        var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
+                            '<span class="fa fa-volume-up"></span>' +
+                            '<span class="file-info"><span class="file-name">语音消息</span>' +
+                            '<span class="file-size">' + file_size + '</span>' +
+                            '</span></a>';
 
+                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }else if (msg_type == "image") {
+                        // var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" href="javascript:;">' +
+                        //     '<img class="message-image" alt="" src="" />' +
+                        //     '</a>' +
+                        //     '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
+
+                        var fileDiv = '<a class="not-images-file message-image preview-JIM-img" media_id="' + media_id + '" target="_blank">' +
+                            '<img class="message-image" alt="" src="" />' +
+                            '</a>';
                         msgContetHtml = '<div class="main ' + selfHtml + '">' +
                             '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
                             '<div class="text-wrap">' +
@@ -819,7 +843,6 @@ var jchatGloabal = {
                             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
                             '</div></div>';
                     } else {
-                        debugger
                         if (message_list_content.at_list && message_list_content.at_list.length == 0) {
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
                                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
@@ -988,6 +1011,9 @@ var clickHandle = {
     //将时间戳转化为时间格式
     getLocalTime: function (nS) {
         return new Date(nS).format('YYYY/M/D hh:mm');
+    },
+    getLocalYear: function (nS) {
+        return new Date(nS).format('YYYY');
     },
     scrollBottom: function () {
         var height = $("#main-frame").contents().find(".message-list").height();

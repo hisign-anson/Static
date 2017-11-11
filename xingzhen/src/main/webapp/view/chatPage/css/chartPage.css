@@ -185,7 +185,8 @@
 .not-images-file{
     display: block;
 }
-.not-images-file .icon-file-noType {
+.not-images-file .icon-file-noType,
+.not-images-file .fa-volume-up{
     color: #f39f00;
     font-size: 30px;
     vertical-align: middle;
