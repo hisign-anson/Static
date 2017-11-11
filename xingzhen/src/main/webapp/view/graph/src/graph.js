@@ -278,7 +278,6 @@ define(['underscore',
                             {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"},
                             {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>任务下发</span>"}
                         ];
-
                         var menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
                         if (d.type == "taskid") {
                             if (d.taskCreatorUserId == top.userId && d.taskStatus == 0) {
@@ -287,7 +286,6 @@ define(['underscore',
                                 menuByTaskType.push(urge);
                             }
                             taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
-                                debugger
                                 if (r.flag == 1) {
                                     debugger
                                     var taskinfo = r.data;
@@ -297,13 +295,21 @@ define(['underscore',
                                         var feedback = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>反馈任务</span>"};
                                         var transfer = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>移交任务</span>"};
                                         var append_bc = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>补充任务</span>"};
-                                        menuByTaskType.push(feedback);
-                                        menuByTaskType.push(transfer);
-                                        menuByTaskType.push(append_bc);
+                                        if(taskinfo.yjzt==0 && taskinfo.fkCount<3){
+                                            menuByTaskType.push(feedback);
+                                        }
+                                        if(taskinfo.yjzt==0 && taskinfo.fkzt==0){
+                                            menuByTaskType.push(transfer);
+                                            menuByTaskType.push(append_bc);
+                                        }
+                                        zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByTaskType);
+                                    }else{
+                                        zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByTaskType);
                                     }
+                                }else{
+                                    toast(r.msg,600).err();
                                 }
                             });
-                            debugger
 
                         }
 
@@ -342,9 +348,9 @@ define(['underscore',
                             case "groupid":
                                 zNodes = menuByGroupType;
                                 break;
-                            case "taskid":
-                                zNodes = menuByTaskType;
-                                break;
+                            //case "taskid":
+                            //    zNodes = menuByTaskType;
+                            //    break;
                             case "fkid":
                                 zNodes = menuByFeedbackType;
                                 break;
