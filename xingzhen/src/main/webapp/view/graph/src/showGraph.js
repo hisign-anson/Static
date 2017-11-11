@@ -263,83 +263,54 @@ define(['underscore',
                         console.info(d);
                         //获取节点id（专案组id，任务id，反馈id，案件id）  d.id
                         //根据id和type显示不同的菜单
-                        var zNodes;
-                        var menuByGroupType = [
-                            {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>专案组详情</span>"},
-                            {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"},
-                        ];
-
-                        var menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
-                        if (d.type == "taskid") {
-                            if (d.taskCreatorUserId == top.userId && d.taskStatus == 0) {
-                                //显示催办任务
-                                var urge = {};
-                                // menuByTaskType.push(urge);
-                            }
-                            taskAjax.taskDetail({id: d.id, userId: top.userId}, function (r) {
-                                if (r.flag == 1) {
-                                    var taskinfo = r.data;
-                                    if (taskinfo.jsr == top.userId) {
-                                        console.info(taskinfo)
-                                        //显示反馈任务(反馈次数小于3)  移交任务  补充任务
-                                        var feedback = {};
-                                        var transfer = {};
-                                        var append_bc = {};
-                                        // menuByTaskType.push(feedback);
-                                        // menuByTaskType.push(transfer);
-                                        // menuByTaskType.push(append_bc);
-                                    }
-                                }
-                            });
-
-                        }
-
+                        // var zNodes = [];
+                        var menuByGroupType = [];
+                        var menuByTaskType = [];
                         var menuByFeedbackType = [];
-                        var inEdgesIndex = d.index;
-                        if (!node_img[0][inEdgesIndex]) {
-                            return;
-                        }
-                        var node = node_img[0];
-                        var edgesArray = node[inEdgesIndex].attributes["edges"];
-                        if (!edgesArray) {
-                            return;
-                        }
-                        var edgesStr = edgesArray.value;
-                        var edges = edgesStr.split(",");
-                        var edgeIndex;
-                        for (var index = 0; index < edges.length; index++) {
-                            //节点的上一条线
-                            edgeIndex = edges[0];
-                        }
-                        if (edgeIndex != "") {
-                            //线的上一个节点
-                            var findLine = json.edges[edgeIndex]
-                            var lineSource = findLine.source;
-                            var feedbackInfo = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='2'>反馈信息详情</span>"};
-                            menuByFeedbackType.push(feedbackInfo);
-                            if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
-                                var append_zj = {};
-                                // menuByFeedbackType.push(append_zj);
+                        var menuByCaseType = [];
+
+
+                        if(d.type == "groupid"){//专案组右键菜单
+                            menuByGroupType = [
+                                {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>专案组详情</span>"},
+                                {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"}
+                            ];
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByGroupType);
+
+                        } else if(d.type == "taskid"){//任务右键菜单
+                            menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByTaskType);
+
+                        } else if(d.type == "fkid"){//反馈右键菜单
+                            var inEdgesIndex = d.index;
+                            if (!node_img[0][inEdgesIndex]) {
+                                return;
                             }
-                        }
-                        var menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
+                            var node = node_img[0];
+                            var edgesArray = node[inEdgesIndex].attributes["edges"];
+                            if (!edgesArray) {
+                                return;
+                            }
+                            var edgesStr = edgesArray.value;
+                            var edges = edgesStr.split(",");
+                            var edgeIndex;
+                            for (var index = 0; index < edges.length; index++) {
+                                //节点的上一条线
+                                edgeIndex = edges[0];
+                            }
+                            if (edgeIndex != "") {
+                                //线的上一个节点
+                                var findLine = json.edges[edgeIndex];
+                                var lineSource = findLine.source;
+                                var feedbackInfo = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='2'>反馈信息详情</span>"};
+                                menuByFeedbackType.push(feedbackInfo);
+                            }
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByFeedbackType);
 
-                        switch (d.type) {
-                            case "groupid":
-                                zNodes = menuByGroupType;
-                                break;
-                            case "taskid":
-                                zNodes = menuByTaskType;
-                                break;
-                            case "fkid":
-                                zNodes = menuByFeedbackType;
-                                break;
-                            case "ajid":
-                                zNodes = menuByCaseType;
-                                break;
-
+                        } else if(d.type == "ajid"){//案件右键菜单
+                            menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByCaseType);
                         }
-                        zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
 
                         var tooltipCurrent = $("#tooltip" + i);
                         var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
@@ -598,7 +569,40 @@ define(['underscore',
                         var openerDiv = $("#userListDiv");
                         openerDiv.find(".panel-container").empty().html(_.template(groupStaffTpl));
                         $("#userListDiv").on('click', "#chooseUint", function () {
-                            dictOpener.openUnitChoosePort($(this));
+                            var obj= $(this);
+                            var title = obj.attr("title");
+                            window.newwin=$open('#dict-block-unit',{width:400,height:300,top:100, title:'选择'+title});
+                            $post(top.servicePath+'/sys/org/getOrgTreeList',{orgName:"",end:""},function(r) {
+                                if (r.flag == 1) {
+                                    var target = $("#dict-wrap-unit");
+                                    var tpl='';
+                                    $.each(r.data, function (i, o) {
+                                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgId+"'>"+o.orgName+"</span></div></u>";
+                                    });
+                                    target.html(tpl);
+                                }
+                            },true);
+
+                            var opener = $(".panel #dict-block-unit");
+                            $(".panel #dict-block-unit .query-block-row input").val("");
+                            opener.find("#dict-wrap-unit").off("click").on("click",".item-value",function(){
+                                // var input = obj.prev();//页面上需要填入的input
+                                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                                input.val($(this).find("span").text());
+                                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                                inputHidden.val($(this).find("span").attr("val"));
+
+                                var paramAttr = $(this).find("span").attr("paramattr");
+                                input.attr("paramattr",paramAttr);
+                                opener.$close();
+                            });
+                            opener.find("#queryBtnOrgName").off("click").on("click",function(){
+                                var orgName =$.trim(opener.find('#orgName').val());
+                                _selfDict.getUnitPortList(orgName);
+                            });
+                            opener.find("#resetBtnOrgName").off("click").on("click",function(){
+                                opener.find('#orgName').val("");
+                            })
                         });
                         $("#userListDiv").on("click", "#resetBtn", function () {
                             selectUtils.clearQueryValue();
@@ -608,9 +612,9 @@ define(['underscore',
                             specialCaseGroup.queryAddedStaffList(groupInfo);
                             return false;
                         });
-                        debugger
                         //加载已添加的成员
                         specialCaseGroup.queryAddedStaffList(groupInfo);
+                        //隐藏添加成员按钮
                         $("#userListDiv #addStaff").addClass("hide");
                     }
                 }

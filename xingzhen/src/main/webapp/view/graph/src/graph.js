@@ -621,7 +621,42 @@ define(['underscore',
                         var openerDiv = $("#userListDiv");
                         openerDiv.find(".panel-container").empty().html(_.template(groupStaffTpl));
                         $("#userListDiv").on('click', "#chooseUint", function () {
-                            dictOpener.openUnitChoosePort($(this));
+                            // dictOpener.openUnitChoosePort($(this));
+                            var obj= $(this);
+                            var title = obj.attr("title");
+                            window.newwin=$open('#dict-block-unit',{width:400,height:300,top:100, title:'选择'+title});
+                            $post(top.servicePath+'/sys/org/getOrgTreeList',{orgName:"",end:""},function(r) {
+                                if (r.flag == 1) {
+                                    var target = $("#dict-wrap-unit");
+                                    var tpl='';
+                                    $.each(r.data, function (i, o) {
+                                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgId+"'>"+o.orgName+"</span></div></u>";
+                                    });
+                                    target.html(tpl);
+                                }
+                            },true);
+
+                            var opener = $(".panel #dict-block-unit");
+                            $(".panel #dict-block-unit .query-block-row input").val("");
+                            opener.find("#dict-wrap-unit").off("click").on("click",".item-value",function(){
+                                // var input = obj.prev();//页面上需要填入的input
+                                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                                input.val($(this).find("span").text());
+                                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                                inputHidden.val($(this).find("span").attr("val"));
+
+                                var paramAttr = $(this).find("span").attr("paramattr");
+                                input.attr("paramattr",paramAttr);
+                                opener.$close();
+                            });
+                            opener.find("#queryBtnOrgName").off("click").on("click",function(){
+                                var orgName =$.trim(opener.find('#orgName').val());
+                                _selfDict.getUnitPortList(orgName);
+                            });
+                            opener.find("#resetBtnOrgName").off("click").on("click",function(){
+                                opener.find('#orgName').val("");
+                            })
+
                         });
                         $("#userListDiv").on("click", "#resetBtn", function () {
                             selectUtils.clearQueryValue();
