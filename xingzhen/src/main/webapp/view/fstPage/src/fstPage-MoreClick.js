@@ -108,7 +108,7 @@ define([
         },
         showChart: function (groupId) {//显示图
             _self = this;
-            var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/graph/d3graphView.html"></iframe>';
+            var iframe = '<iframe id="mapSvgFrame" class="tab-content-frame" src="/view/graph/showGraph.html"></iframe>';
             $(".tab-content.content-minor").empty().html(_.template(iframe));
             $("#taskListResult").addClass("hide").siblings(".tab-content.content-minor").removeClass("hide");
             $("#mapSvgFrame").attr("groupid",groupId);

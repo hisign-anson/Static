@@ -179,7 +179,7 @@ define(['underscore',
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组归档'});
             $("#archiveBlock .panel-container").empty().html(_.template(archivePageTpl));
             $(".dict").dict();
-            $("#archiveBlock #saveBtn").on("click",function (e) {
+            $("#archiveBlock #saveBtn").on("click", function (e) {
                 var param = {
                     backupStatus: 1,
                     backupReason: $.trim($("#backupReason").val()),
@@ -200,6 +200,7 @@ define(['underscore',
                     }
                 });
                 e.stopPropagation();
+                return false;
             });
             $("#archiveBlock").on("click", "#cancelBtn", function () {
                 $("#archiveBlock").$close();
@@ -210,11 +211,27 @@ define(['underscore',
             $open('#archiveBlock', {width: 800, top: 180, title: '&nbsp专案组广播'});
             $("#archiveBlock .panel-container").empty().html(_.template(broadcastPageTpl));
             $("#archiveBlock #saveBtn").on("click", function (e) {
-                var broadcastContent = "广播："+$("#broadcastContent").val();
-                //调用极光接口
-                window.parent.clickHandle.sendBroadcastText(jmgid, broadcastContent,"atAll");
-                $("#archiveBlock").$close();
+                var broadcastContent = $("#broadcastContent").val();
+                var param = {
+                    userId: top.userId,
+                    groupId: groupid,
+                    msgContent: broadcastContent
+                };
+                $.ajax({
+                    url: top.servicePath_xz + '/group/sendBroadcast',
+                    type: "post",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: param,
+                    success: function (r) {
+                        if (r.flag == 1) {
+                            //调用极光接口
+                            window.parent.clickHandle.sendBroadcastText(jmgid, "广播：" + broadcastContent, "atAll");
+                            $("#archiveBlock").$close();
+                        }
+                    }
+                });
                 e.stopPropagation();
+                return false;
             });
 
             $("#archiveBlock").on("click", "#cancelBtn", function () {
@@ -249,11 +266,11 @@ define(['underscore',
                             if (r.data && r.data.length > 0) {
                                 obj.addClass("clicked-open");
                                 var tableHtml = _.template(groupListTpl, {data: r.data, parentData: groupinfo});
-                                console.info(tableHtml);
-                                console.info($(tableHtml));
+
                                 //嵌套内容渲染
                                 var appendTr = currentTr.after('<tr class="tr-inner-table"><td colspan="12"></td></tr>');
                                 currentTr.next().find("td").empty().html(tableHtml);
+                                $(".span").span();
                                 $(".link-text").on("click", function () {
                                     _self.showEdit($(this).attr("groupid"));
                                 });

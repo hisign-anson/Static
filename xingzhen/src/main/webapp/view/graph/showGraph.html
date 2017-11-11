@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>d3graph-demo</title>
+    <link rel="stylesheet" href="../../css/base-plus-xz.css">
+    <link rel="stylesheet" href="plugins/ztree/ztree.css">
+    <link rel="stylesheet" href="css/graph.css">
+
+    <script src="../../plugin/d3/d3.3.5.17.js"></script>
+    <script src="../../js/base.js"></script>
+    <script src="../../plugin/dict/dict.js?version=0.99"></script>
+    <script src="../../plugin/daterangepicker/daterangepicker.js?version=0.99"></script>
+    <script src="../../plugin/daterangepicker/datetimepicker.js?version=0.99"></script>
+    <script src="../../plugin/daterangepicker/moment.js?version=0.99"></script>
+    <script src="../../plugin/slick/slick.min.js"></script>
+    <script src="../../plugin/timeScope.js"></script>
+    <script src="../../script/selectUtils.js"></script>
+    <script src="plugins/ztree/ztree.js"></script>
+</head>
+<body>
+<div class="map-condition hide" id="mapConditionWrap">
+    <h5 class="title" id="groupName"></h5>
+    <form class="form-content-block">
+        <div class="qc-group-l">
+            <span class="qc-label-m">根据专案组小组过滤：</span>
+            <select class="common-select" id="smallGroup">
+            </select>
+        </div>
+        <div class="qc-group-l">
+            <span class="qc-label-m">根据下发人过滤：</span>
+            <select class="common-select" id="sponsor">
+            </select>
+        </div>
+        <div class="qc-group-l">
+            <span class="qc-label-m">根据反馈人过滤：</span>
+            <select class="common-select" id="feedbackUser">
+            </select>
+        </div>
+        <div class="qc-group-l">
+            <span class="qc-label-m">根据时间段过滤：</span>
+            <input class="common-input" type="text" id="dateRange">
+            <input type="hidden" name="startTime" id="startTime">
+            <input type="hidden" name="endTime" id="endTime">
+        </div>
+        <div class="qc-group-l">
+            <span class="qc-label-m">任务状态：</span>
+            <span class="option" id="changeTaskStatus">
+                <u class="active default " val="">全部</u>
+                <u class="" val="1">已反馈</u>
+                <u class="" val="0">未反馈</u>
+                <u class="" val="2">超期</u>
+            </span>
+            <input type="hidden" id="taskStatus" />
+        </div>
+    </form>
+    <div class="form-btn-block">
+        <button id="closeBtn" class="cm-close-btn">关 闭</button>
+        <button id="okBtn" class="cm-ok-btn">确 定</button>
+    </div>
+</div>
+
+<div id="dict-block" class="hide">
+    <div class="dict-container">
+        <div class="ml15 mb10">
+            <div class="date-select" id="dict-wrap"> </div>
+        </div>
+    </div>
+</div>
+<div id="caseListDiv" class="hide">
+    <div class="panel-container"></div>
+</div>
+<div id="userListDiv" class="hide">
+    <div class="panel-container"></div>
+</div>
+<script data-main="showGraph.js" src="/plugin/require.js" type="text/javascript"></script>
+
+</body>
+</html>
