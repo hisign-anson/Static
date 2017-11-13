@@ -917,7 +917,6 @@ define(['underscore',
             });
         },
         showAdd: function (taskinfo, text,fkid) {
-            debugger
             _self = this;
             var bcrwid, fkid;
             var taskinfo = str2obj(taskinfo);

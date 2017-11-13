@@ -184,7 +184,7 @@ define(['underscore',
         intoTaskList: function (groupinfo) {
             _selfCommand = this;
             var groupinfo = str2obj(groupinfo);
-            $open('#taskListDiv', {width: 800, title: '&nbsp任务清单'});
+            $open('#taskListDiv', {width: 960, title: '&nbsp任务清单'});
 
             var fullActivedCheck = $(".map-list").hasClass("full-panel");
             if(fullActivedCheck){

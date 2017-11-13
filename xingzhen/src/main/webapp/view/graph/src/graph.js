@@ -1,4 +1,38 @@
 importing('currentDate');
+
+var width = 1200,
+    height = 900;
+
+var img_w = 48,
+    img_h = 48;
+
+var zTreeObj;
+var jsonContext, edges_line, edges_text, node_img, node_text;
+
+// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+var setting = {
+    data:{
+
+    },
+    view: {
+        //可以允许节点名称支持 HTML 内容
+        nameIsHTML: true,
+        //是否允许节点显示title属性
+        showTitle:false
+    },
+    callback: {
+        //单击菜单节点之前的事件回调函数
+        beforeClick: function (treeId, treeNode, clickFlag) {
+            console.info("[ beforeClick ]:" + treeNode.name);
+            return (treeNode.click != false);
+        },
+        //菜单节点被点击的事件回调函数
+        onClick: function (event, treeId, treeNode, clickFlag) {
+            _selfGraph.menuHanle(event, treeId, treeNode, clickFlag);
+            return (treeNode.click != false);
+        }
+    }
+};
 define(['underscore',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html',
     'text!/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html',
@@ -17,45 +51,6 @@ define(['underscore',
     '../../dictManage/src/dictOpener.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl, taskAddTpl, taskEditTpl, taskInfoTpl, feedBackInfoTpl,
                                                      specialCaseGroupAjax, specialCaseGroup, taskAjax, task, dictOpener) {
 
-    var width = 1200,
-        height = 900;
-
-    var img_w = 48,
-        img_h = 48;
-
-    var zTreeObj;
-    var jsonContext, edges_line, edges_text, node_img, node_text;
-
-    // var edges_lineSVG;
-    // var edges_textSVG;
-    // var node_imgSVG;
-    // var node_textSVG;
-
-// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-    var setting = {
-        data:{
-
-        },
-        view: {
-            //可以允许节点名称支持 HTML 内容
-            nameIsHTML: true,
-            //是否允许节点显示title属性
-            showTitle:false
-        },
-        callback: {
-            //单击菜单节点之前的事件回调函数
-            beforeClick: function (treeId, treeNode, clickFlag) {
-                console.info("[ beforeClick ]:" + treeNode.name);
-                return (treeNode.click != false);
-            },
-            //菜单节点被点击的事件回调函数
-            onClick: function (event, treeId, treeNode, clickFlag) {
-                _selfGraph.menuHanle(event, treeId, treeNode, clickFlag);
-                return (treeNode.click != false);
-            }
-        }
-    };
-    //菜单数据
 
     return {
         showList: function (groupid, type) {
@@ -272,14 +267,21 @@ define(['underscore',
                         console.info(d);
                         //获取节点id（专案组id，任务id，反馈id，案件id）  d.id
                         //根据id和type显示不同的菜单
-                        var zNodes;
-                        var menuByGroupType = [
-                            {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>专案组详情</span>"},
-                            {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"},
-                            {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>任务下发</span>"}
-                        ];
-                        var menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
-                        if (d.type == "taskid") {
+                        var menuByGroupType = [];
+                        var menuByTaskType = [];
+                        var menuByFeedbackType = [];
+                        var menuByCaseType = [];
+                        if(d.type == "groupid"){//专案组右键菜单
+                            menuByGroupType = [
+                                {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>专案组详情</span>"},
+                                {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='2'>专案组成员</span>"},
+                                {name: "<span class='groupHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='3'>任务下发</span>"}
+                                ];
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByGroupType);
+
+                        } else if(d.type == "taskid"){//任务右键菜单
+                            menuByTaskType = [{name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='5'>任务详情</span>"}];
+
                             if (d.taskCreatorUserId == top.userId && d.taskStatus == 0) {
                                 //显示催办任务
                                 var urge = {name: "<span class='taskHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='4'>催办任务</span>"};
@@ -310,56 +312,40 @@ define(['underscore',
                                     toast(r.msg,600).err();
                                 }
                             });
-
-                        }
-
-                        var menuByFeedbackType = [];
-                        var inEdgesIndex = d.index;
-                        if (!node_img[0][inEdgesIndex]) {
-                            return;
-                        }
-                        var node = node_img[0];
-                        var edgesArray = node[inEdgesIndex].attributes["edges"];
-                        if (!edgesArray) {
-                            return;
-                        }
-                        var edgesStr = edgesArray.value;
-                        var edges = edgesStr.split(",");
-                        var edgeIndex;
-                        for (var index = 0; index < edges.length; index++) {
-                            //节点的上一条线
-                            edgeIndex = edges[0];
-                        }
-                        if (edgeIndex != "") {
-                            //线的上一个节点
-                            var findLine = json.edges[edgeIndex]
-                            var lineSource = findLine.source;
-                            var feedbackInfo = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='2'>反馈信息详情</span>"};
-                            menuByFeedbackType.push(feedbackInfo);
-                            if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
-                                var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>追加任务</span>"};
-                                menuByFeedbackType.push(append_zj);
+                        } else if(d.type == "fkid"){//反馈右键菜单
+                            var inEdgesIndex = d.index;
+                            if (!node_img[0][inEdgesIndex]) {
+                                return;
                             }
+                            var node = node_img[0];
+                            var edgesArray = node[inEdgesIndex].attributes["edges"];
+                            if (!edgesArray) {
+                                return;
+                            }
+                            var edgesStr = edgesArray.value;
+                            var edges = edgesStr.split(",");
+                            var edgeIndex;
+                            for (var index = 0; index < edges.length; index++) {
+                                //节点的上一条线
+                                edgeIndex = edges[0];
+                            }
+                            if (edgeIndex != "") {
+                                //线的上一个节点
+                                var findLine = json.edges[edgeIndex]
+                                var lineSource = findLine.source;
+                                var feedbackInfo = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='" + lineSource.id + "' val='2'>反馈信息详情</span>"};
+                                menuByFeedbackType.push(feedbackInfo);
+                                if (d.type == "fkid" && lineSource.taskCreatorUserId == top.userId) {//反馈的上一条任务的下发人
+                                    var append_zj = {name: "<span class='feedbackHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' taskid='"+lineSource.id+"' val='1'>追加任务</span>"};
+                                    menuByFeedbackType.push(append_zj);
+                                }
+                            }
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByFeedbackType);
+
+                        } else if(d.type == "ajid"){//案件右键菜单
+                            menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
+                            zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, menuByCaseType);
                         }
-                        var menuByCaseType = [{name: "<span class='caseHandle' infoattr='" + obj2str(d) + "' id='" + d.id + "' val='1'>查看案件详情</span>"}];
-
-
-                        switch (d.type) {
-                            case "groupid":
-                                zNodes = menuByGroupType;
-                                break;
-                            //case "taskid":
-                            //    zNodes = menuByTaskType;
-                            //    break;
-                            case "fkid":
-                                zNodes = menuByFeedbackType;
-                                break;
-                            case "ajid":
-                                zNodes = menuByCaseType;
-                                break;
-
-                        }
-                        zTreeObj = $.fn.zTree.init($("#menuTree" + i), setting, zNodes);
 
                         var tooltipCurrent = $("#tooltip" + i);
                         var tooltipSiblings = tooltipCurrent.siblings(".tooltip-box");
@@ -478,15 +464,19 @@ define(['underscore',
 
             switch (className) {
                 case "groupHandle":
+                    //专案组右键菜单处理
                     _selfGraph.groupHandle(id, val, infoattr);
                     break;
                 case "taskHandle":
+                    //任务右键菜单处理
                     _selfGraph.taskHandle(id, val, infoattr, taskid);
                     break;
                 case "feedbackHandle":
+                    //反馈右键菜单处理
                     _selfGraph.feedbackHandle(id, val, taskid);
                     break;
                 case "caseHandle":
+                    //案件右键菜单处理
                     _selfGraph.caseHandle(id, val, infoattr);
                     break;
             }
@@ -495,12 +485,15 @@ define(['underscore',
             _selfGraph = this;
             switch (val) {
                 case "1":
+                    //查看专案组基本信息
                     _selfGraph.showGroupInfo(id, infoattr);
                     break;
                 case "2":
+                    //查看专案组成员
                     _selfGraph.showGroupStaff(id, infoattr);
                     break;
                 case "3":
+                    //在专案组上新增任务
                     _selfGraph.addTask(id, infoattr);
                     break;
             }
@@ -509,18 +502,23 @@ define(['underscore',
             _selfGraph = this;
             switch (val) {
                 case "1":
+                    //接收人在任务上反馈任务
                     _selfGraph.feedbackTask(id);
                     break;
                 case "2":
+                    //接收人移交任务
                     _selfGraph.transferTask(id);
                     break;
                 case "3":
+                    //接收人在任务上补充任务
                     _selfGraph.addTaskHandle(id, "补充任务");
                     break;
                 case "4":
+                    //下发人催办任务
                     _selfGraph.urgeTask(id);
                     break;
                 case "5":
+                    //查看任务基本信息
                     _selfGraph.showTaskInfo(id);
                     break;
             }
@@ -529,9 +527,11 @@ define(['underscore',
             _selfGraph = this;
             switch (val) {
                 case "1":
+                    //下发人在反馈上追加任务
                     _selfGraph.addTaskHandle(id, "追加任务", taskid);
                     break;
                 case "2":
+                    //查看反馈信息
                     _selfGraph.feedbackInfo(id, taskid);
                     break;
             }
@@ -545,38 +545,6 @@ define(['underscore',
                     break;
             }
         },
-        showTaskInfo: function (id) {
-            _selfGraph = this;
-            taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
-                if (r.flag == 1) {
-                    $open('#userListDiv', {width: 800, title: '&nbsp任务详情'});
-                    $("#userListDiv .panel-container").empty().html(_.template(taskInfoTpl, {
-                        data: r.data,
-                        isOperation: true
-                    }));
-
-                    $("#cancelBtn").on("click", function () {
-                        $("#userListDiv").$close();
-                    });
-                }
-            });
-        },
-        feedbackInfo: function (id, taskid) {
-            _selfGraph = this;
-            debugger
-            taskAjax.taskDetail({id: taskid, userId: top.userId}, function (r) {
-                if (r.flag == 1) {
-                    $open('#userListDiv', {width: 800, title: '&nbsp反馈详情'});
-                    $("#userListDiv .panel-container").empty().html(_.template(feedBackInfoTpl, {data: r.data}));
-
-
-                    $("#cancelBtn").on("click", function () {
-                        $("#userListDiv").$close();
-                    });
-                }
-            });
-        },
-        //查看专案组基本信息
         showGroupInfo: function (id, infoattr) {
             _selfGraph = this;
             var groupInfo;
@@ -606,7 +574,6 @@ define(['underscore',
                 }
             });
         },
-        //查看专案组成员
         showGroupStaff: function (id, infoattr) {
             _selfGraph = this;
             $.ajax({
@@ -621,7 +588,42 @@ define(['underscore',
                         var openerDiv = $("#userListDiv");
                         openerDiv.find(".panel-container").empty().html(_.template(groupStaffTpl));
                         $("#userListDiv").on('click', "#chooseUint", function () {
-                            dictOpener.openUnitChoosePort($(this));
+                            // dictOpener.openUnitChoosePort($(this));
+                            var obj= $(this);
+                            var title = obj.attr("title");
+                            window.newwin=$open('#dict-block-unit',{width:400,height:300,top:100, title:'选择'+title});
+                            $post(top.servicePath+'/sys/org/getOrgTreeList',{orgName:"",end:""},function(r) {
+                                if (r.flag == 1) {
+                                    var target = $("#dict-wrap-unit");
+                                    var tpl='';
+                                    $.each(r.data, function (i, o) {
+                                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.orgId+"'>"+o.orgName+"</span></div></u>";
+                                    });
+                                    target.html(tpl);
+                                }
+                            },true);
+
+                            var opener = $(".panel #dict-block-unit");
+                            $(".panel #dict-block-unit .query-block-row input").val("");
+                            opener.find("#dict-wrap-unit").off("click").on("click",".item-value",function(){
+                                // var input = obj.prev();//页面上需要填入的input
+                                var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                                input.val($(this).find("span").text());
+                                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                                inputHidden.val($(this).find("span").attr("val"));
+
+                                var paramAttr = $(this).find("span").attr("paramattr");
+                                input.attr("paramattr",paramAttr);
+                                opener.$close();
+                            });
+                            opener.find("#queryBtnOrgName").off("click").on("click",function(){
+                                var orgName =$.trim(opener.find('#orgName').val());
+                                _selfDict.getUnitPortList(orgName);
+                            });
+                            opener.find("#resetBtnOrgName").off("click").on("click",function(){
+                                opener.find('#orgName').val("");
+                            })
+
                         });
                         $("#userListDiv").on("click", "#resetBtn", function () {
                             selectUtils.clearQueryValue();
@@ -657,6 +659,37 @@ define(['underscore',
                             specialCaseGroup.queryUserList(true, groupInfo);
                         });
                     }
+                }
+            });
+        },
+        showTaskInfo: function (id) {
+            _selfGraph = this;
+            taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
+                if (r.flag == 1) {
+                    $open('#userListDiv', {width: 800, title: '&nbsp任务详情'});
+                    $("#userListDiv .panel-container").empty().html(_.template(taskInfoTpl, {
+                        data: r.data,
+                        isOperation: true
+                    }));
+
+                    $("#cancelBtn").on("click", function () {
+                        $("#userListDiv").$close();
+                    });
+                }
+            });
+        },
+        feedbackInfo: function (id, taskid) {
+            _selfGraph = this;
+            debugger
+            taskAjax.taskDetail({id: taskid, userId: top.userId}, function (r) {
+                if (r.flag == 1) {
+                    $open('#userListDiv', {width: 800, title: '&nbsp反馈详情'});
+                    $("#userListDiv .panel-container").empty().html(_.template(feedBackInfoTpl, {data: r.data}));
+
+
+                    $("#cancelBtn").on("click", function () {
+                        $("#userListDiv").$close();
+                    });
                 }
             });
         },
@@ -815,58 +848,58 @@ define(['underscore',
                                         toast("请先选择专案组！", 600).warn();
                                     }
                                 });
-                                //绑定返回事件
-                                $("#cancelBtn").on("click", function () {
-                                    openerDiv.$close();
-                                });
-                                $("#saveBtn").on("click", function () {
-                                    $('.task-valid').validatebox();
-                                    if ($('.validatebox-invalid').length > 0) {
-                                        return false;
-                                    }
-                                    var param = $("#taskAddForm").serializeObject();
-                                    var jsrParam = str2obj($("#jsr").attr("paramattr"));
-                                    var groupParam = groupinfo;
-                                    var taskParam;
-                                    //由追加任务 补充任务跳转过来
-                                    if (text) {
-                                        taskParam = taskinfo;
-                                        debugger;
-                                    }
-                                    debugger;
-                                    $.extend(param, {
-                                        fqr: top.userId,
-                                        fqrname: top.trueName,
-                                        fqrDeptCode: top.orgCode,
-                                        fqrDeptName: top.orgName,
-                                        bcrwid: bcrwid ? bcrwid : "",
-                                        fkid: fkid ? fkid : "",
-                                        taskName: $.trim($("#taskName").val()),
-                                        groupid: text ? taskParam.groupid : groupParam.id,
-                                        jsr: text ? taskParam.jsr : jsrParam.userId,
-                                        jsrname: text ? taskParam.jsrname : jsrParam.userName,
-                                        fqrLxfs: top.phone,
-                                        jsrLxfs: $.trim($("#jsrLxfs").val()),
-                                        taskContent: $.trim($("#taskContent").val()),
-                                        fkjzTime: $.trim($("#fkjzTime").val()),
-                                        fqTime: $.trim($("#createtime").val())
-                                    });
-                                    taskAjax.addTask(param, function (r) {
-                                        if (r.flag == 1) {
-                                            toast('保存成功！', 600, function () {
-                                                _selfGraph.showList(taskinfo.groupid, "pgroupid");
-                                            }).ok();
-                                        } else {
-                                            toast(r.msg, 600).err()
-                                        }
-                                    });
-                                });
                             }
                         }
                     });
 
 
                 }
+            });
+            //绑定返回事件
+            $("#cancelBtn").on("click", function () {
+                openerDiv.$close();
+            });
+            $("#saveBtn").on("click", function () {
+                $('.task-valid').validatebox();
+                if ($('.validatebox-invalid').length > 0) {
+                    return false;
+                }
+                var param = $("#taskAddForm").serializeObject();
+                var jsrParam = str2obj($("#jsr").attr("paramattr"));
+                var groupParam = groupinfo;
+                var taskParam;
+                //由追加任务 补充任务跳转过来
+                if (text) {
+                    taskParam = taskinfo;
+                    debugger;
+                }
+                debugger;
+                $.extend(param, {
+                    fqr: top.userId,
+                    fqrname: top.trueName,
+                    fqrDeptCode: top.orgCode,
+                    fqrDeptName: top.orgName,
+                    bcrwid: bcrwid ? bcrwid : "",
+                    fkid: fkid ? fkid : "",
+                    taskName: $.trim($("#taskName").val()),
+                    groupid: text ? taskParam.groupid : groupParam.id,
+                    jsr: text ? taskParam.jsr : jsrParam.userId,
+                    jsrname: text ? taskParam.jsrname : jsrParam.userName,
+                    fqrLxfs: top.phone,
+                    jsrLxfs: $.trim($("#jsrLxfs").val()),
+                    taskContent: $.trim($("#taskContent").val()),
+                    fkjzTime: $.trim($("#fkjzTime").val()),
+                    fqTime: $.trim($("#createtime").val())
+                });
+                taskAjax.addTask(param, function (r) {
+                    if (r.flag == 1) {
+                        toast('保存成功！', 600, function () {
+                            _selfGraph.showList(taskinfo.groupid, "pgroupid");
+                        }).ok();
+                    } else {
+                        toast(r.msg, 600).err()
+                    }
+                });
             });
 
         },
@@ -897,7 +930,7 @@ define(['underscore',
                                 $alert('单个视频大小超过10M， 上传速度将过慢，请重新上传');
                                 break;
                             }
-                            tpObj.fileMd5 = _self.getGuid();//图片对应fileMd5
+                            tpObj.fileMd5 = task.getGuid();//图片对应fileMd5
                             if (file.type.indexOf('image') > -1) {
                                 tpObj.src = '../../../img/tp-img.png';
                             } else {
@@ -910,7 +943,7 @@ define(['underscore',
                             tpObj.createTime = new Date().format('yyyy-mm-dd hh:mm:ss');//时间
 
                             var fileType = file.type;
-                            tpObj.fileMd5 = _self.getGuid();
+                            tpObj.fileMd5 = task.getGuid();
                             tpObj.fileName = file.name;
                             tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
                             tpObj.type = fileType.substr(fileType.indexOf('/') + 1);
@@ -994,7 +1027,7 @@ define(['underscore',
                                 $alert('单张图片大小超过10M， 上传速度将过慢，请压缩后重新上传');
                                 break;
                             }
-                            tpObj.fileMd5 = _self.getGuid();//图片对应fileMd5
+                            tpObj.fileMd5 = task.getGuid();//图片对应fileMd5
                             if (file.type.indexOf('image') > -1) {
                                 tpObj.src = '../../../img/tp-img.png';
                             } else {
@@ -1007,7 +1040,7 @@ define(['underscore',
                             tpObj.createTime = new Date().format('yyyy-mm-dd hh:mm:ss');//时间
 
                             var fileType = file.type;
-                            tpObj.fileMd5 = _self.getGuid();
+                            tpObj.fileMd5 = task.getGuid();
                             tpObj.fileName = file.name;
                             tpObj.fileSuffix = fileType.substr(fileType.indexOf('/') + 1);
                             tpObj.type = fileType.substr(fileType.indexOf('/') + 1);
@@ -1112,6 +1145,12 @@ define(['underscore',
 
                     //加载用户列表
                     task.queryUserList(false, id, taskInfo);
+                    //任务移交给用户
+                    task.saveTransfer(id);
+                    $("#userListDiv").on('click', "#cancelBtn", function () {
+                        $('#userListDiv').$close();
+                        return false;
+                    });
                 }
             });
         },

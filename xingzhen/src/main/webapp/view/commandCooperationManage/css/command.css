@@ -69,7 +69,7 @@
     cursor: pointer;
 }
 
-.choose-group i {
+.all-group-list i {
     font-size: 18px;
     position: absolute;
     top: 5px;
@@ -113,6 +113,9 @@
     margin-bottom: 5px;
     margin-left: 5px;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .common-group-ul li:hover, .common-group-ul li:active,

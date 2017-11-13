@@ -172,6 +172,9 @@ input[disabled], textarea[disabled], select[disabled] {
     overflow-x: auto;
     border-bottom: 1px solid #cccccc;
 }
+.typical-tb > tbody tr td a[class*="icon-"] {
+    font-size: 14px;
+}
 .paging div .prev, .paging div .next {
     width: auto;
 }
