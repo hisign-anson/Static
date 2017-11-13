@@ -11,7 +11,7 @@
     <td><%=item.groupName%></td>
     <td><%=item.groupTaskNo%></td>
     <td><%=item.fqrname%></td>
-    <td><%=rangeUtil.formatDate(item.fqTime,'yyyy-MM-dd')%></td>
+    <td><%=rangeUtil.formatDate(item.fqTime,'yyyy-MM-dd hh:mm:ss')%></td>
     <td><%=item.jsrname%></td>
     <td>
         <%if(item.fkzt==0){%>
@@ -28,8 +28,8 @@
         <%}%>
     </td>
     <td><%=item.noFkqrCount%></td>
-    <td><%=rangeUtil.formatDate(item.fkjzTime,'yyyy-MM-dd')%></td>
-    <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd')%></td>
+    <td><%=rangeUtil.formatDate(item.fkjzTime,'yyyy-MM-dd hh:mm:ss')%></td>
+    <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd hh:mm:ss')%></td>
 
     <%if(isOperation == true){%>
     <td>

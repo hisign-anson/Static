@@ -932,7 +932,13 @@ define(['underscore',
                 }
             }
             $("#mainDiv").empty().html(_.template(taskAddTpl, {taskInfo: taskinfo, text: text}));
-            $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false,minDate:rangeUtil.formatDate(new Date(),'yyyy-MM-dd')});
+            $("#fkjzTime").datetimepicker({
+                format: "yyyy-mm-dd hh:ii:ss",
+                autoclose: true,
+                startDate: rangeUtil.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+                minuteStep: 10,
+                language: 'zh-CN'
+            });
 
             $("#chooseGroup").on('click', function () {
                 dictOpener.openChoosePort($(this), null, null, {userId: top.userId});

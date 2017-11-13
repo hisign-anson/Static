@@ -42,7 +42,7 @@
                     </div>
                     <div class="equal-col-6">
                         <span class="common-field">下发时间：</span>
-                        <input class="common-input" type="text"  name="" id="distributeDate" value="<%=rangeUtil.formatDate(data.fqTime,'yyyy-MM-dd')%>" readonly/>
+                        <input class="common-input" type="text"  name="" id="distributeDate" value="<%=rangeUtil.formatDate(data.fqTime,'yyyy-MM-dd hh:mm:ss')%>" readonly/>
                     </div>
                 </div>
                 <div class="form-row block-row">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="equal-col-6">
                         <span class="common-field">反馈截止时间：</span>
-                        <input class="common-input" type="text"  name="" id="dateDue" value="<%=rangeUtil.formatDate(data.fkjzTime,'yyyy-MM-dd')%>" readonly/>
+                        <input class="common-input" type="text"  name="" id="dateDue" value="<%=rangeUtil.formatDate(data.fkjzTime,'yyyy-MM-dd hh:mm:ss')%>" readonly/>
                     </div>
                 </div>
                 <%if(isOperation == false){%>
@@ -104,7 +104,7 @@
                             <div class="form-row block-row">
                                 <div class="equal-col-6">
                                     <span class="common-field">反馈时间：</span>
-                                    <input class="common-input" type="text"  name="" id="fkTime" value="<%=rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd')%>" readonly/>
+                                    <input class="common-input" type="text"  name="" id="fkTime" value="<%=rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd hh:mm:ss')%>" readonly/>
                                 </div>
                                 <div class="equal-col-6">
                                     <span class="common-field">反馈人：</span>
@@ -170,7 +170,7 @@
                                         <a class="download-text" href="<%=path%>" download="<%=itemFile.fileName%>" path="<%=path%>" id="<%=itemFile.id%>" title="<%=path%>"><%=itemFile.fileName%></a><br>
                                     <%})%>
                                 <%}%>
-                            <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd')%></td>
+                            <td><%=rangeUtil.formatDate(item.fkTime,'yyyy-MM-dd hh:mm:ss')%></td>
                             <td><%=item.fkrname%></td>
                             <td>
                                 <%if(item.qrzt && item.qrzt == 0){%>
