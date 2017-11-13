@@ -115,6 +115,46 @@
             </ul>
         </div>
     </div>
+    <!--对话框-->
+    <div id="fixed-chat-block" class="hide">
+        <div class="panel-container" style="margin-top: 0px;">
+            <div class="message-container">
+                <div class="message-main">
+                    <div class="left-sidebar">
+                        <div class="group-name"></div>
+                        <!--<div class="search-wrap"><input type="text" class="common-input" placeholder="请输入关键字搜索"/></div>-->
+                        <ul class="member-list"> </ul>
+                    </div>
+
+                    <div class="right-main">
+                        <div class="m-message">
+                            <ul class="message-list"> </ul>
+                        </div>
+                        <div class="m-emoji">
+                            <b id="sendFileBtn" class="fa fa-folder-o" title="发送文件">
+                                <input type="file" class="file-images" id="fileBox">
+                            </b>
+                            <b id="sendFileImagesBtn" class="fa fa-file-image-o" title="发送图片">
+                                <input type="file" class="file-images" id="fileImagesBox" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                            </b>
+                            <b id="sendEmojiBtn" class="fa fa-meh-o" title="选择表情"></b>
+                            <b id="setTextSizeBtn" class="fa fa-font" title="设置字体大小"></b>
+                            <!--<b id="chartBotesBtn" class="fa fa-bookmark" title="聊天记录"></b>-->
+                            <div class="div-panel"></div>
+                        </div>
+                        <div class="m-text">
+                            <!-- placeholder="按 Enter 发送"-->
+                            <div class="text-content" id="messageContent" contenteditable="true"></div>
+                        </div>
+                        <div class="m-btn">
+                            <button id="sendBtn" class="cm-save-btn">发送</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div><!-- end: Main -->
 <!--个人中心 start-->
 <div id="edit-user-block" class="hide">
@@ -245,6 +285,7 @@
         <button id="logout-cancel" class="cm-cancel-btn"></button>
     </p>
 </div>
+
 </body>
 <script type="text/template" id="main-sidemenu-sec-tp">
     <li class="grade2" sec-count="{items.length}"  default-into="{defaultInto}"  page-no="{pageNo}"  title="{name}">
@@ -266,10 +307,12 @@
 <script src="../plugin/jmessage-sdk-web/md5.min.js"></script>
 <script src="../view/chatPage/src/chatGlobal.js"></script>
 <script src="../view/chatPage/src/chatGlobalHandle.js"></script>
+<script src="../view/chatPage/src/chatGlobalHandleHome.js"></script>
 <script src="../js/index.js"></script>
 <script src="../plugin/dict/dict.js?version=0.99"></script>
 <script src="../plugin/upclick-min.js"></script>
 <script src="../plugin/cropper/cropper.js"></script>
+<script src="../plugin/rangeUtil.js"></script>
 <script>
     $(function() {
         $( "#fixed-chat" ).draggable();

@@ -113,7 +113,8 @@ define(['underscore',
                     $(".into-communication").on("click", function () {
                         var groupid = $(this).attr("groupid");
                         var jmgid = $(this).attr("jmgid");
-
+                        debugger
+                        window.parent.$("#fixed-chat").addClass("hide");//首页右下角的聊天按钮隐藏
                         $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
                         $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
                         window.parent.jchatGloabal.getUserInfo();
@@ -151,6 +152,7 @@ define(['underscore',
                             }
                         });
                         $("#archiveBlock").parents(".window").find(".panel-tool-close").click(function () {
+                            window.parent.$("#fixed-chat").removeClass("hide");//首页右下角的聊天按钮显示
                             var chatParam = {
                                 reserveField1: groupid,
                                 createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(), 'yyyy-MM-dd'),
