@@ -132,7 +132,6 @@ var jchatGloabalHome = {
     //    });
     //},
     onEventNotification: function () {
-        debugger
         var onEventNotification_res = str2obj(localData.get('onEventNotification_res'));
         switch (onEventNotification_res.type) {
             case "1":
@@ -614,7 +613,6 @@ var jchatGloabalHome = {
                             creator: top.userId,
                             content: "hah"
                         };
-                        debugger
                         $post(top.servicePath_xz + '/xzlog/addChatLog', chatParam, function (response) {
                             //callback(response);
                         }, true)
