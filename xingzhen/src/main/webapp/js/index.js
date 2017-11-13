@@ -496,6 +496,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                     $("#avatar-img").attr("src","../img/touxiang.jpg");
                 }
                 $("#cid").val(data.cid);
+                $("#policeId").val(data.policeId);
                 $("#phone").val(data.phone);
                 $("#sex").val(data.sex);
                 var cId = data.cid;

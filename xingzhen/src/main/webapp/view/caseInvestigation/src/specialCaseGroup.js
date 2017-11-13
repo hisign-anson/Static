@@ -126,7 +126,7 @@ define(['underscore',
                         // window.parent.jchatGloabal.onMsgReceive(jmgid);
                         // //打开弹框显示自己的聊天消息
                         // window.parent.jchatGloabal.showSelf(jmgid);
-                        //打开弹框显示所有聊天消息
+                        //打开弹框时显示所有聊天消息
                         window.parent.jchatGloabal.showAllMsg(jmgid);
 
                         $("#sendFileBtn").on("click", function () {
@@ -242,8 +242,6 @@ define(['underscore',
         },
         showGroupOfGroup: function (obj, groupid, jmgid, groupinfo) {
             _self = this;
-
-            debugger;
             //嵌套表格的实现--------------------------------------------------------------------------------------------
             var groupinfo = str2obj(groupinfo);
             var isOpen = obj.hasClass("clicked-open");
