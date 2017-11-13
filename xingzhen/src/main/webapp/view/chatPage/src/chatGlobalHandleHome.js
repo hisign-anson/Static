@@ -234,20 +234,20 @@ var jchatGloabalHome = {
                             switch (type) {
                                 case "send_connect_case_info":
                                     content_text = objText.createName + "" + objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    time = clickHandleHome.getLocalTime(objText.createTime);
                                     break;
                                 case "send_remove_case_info":
                                     content_text = objText.createName + "" + objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    time = clickHandleHome.getLocalTime(objText.createTime);
                                     break;
                                 case "send_group_backup_info":
                                     content_text = objText.createName + "将" + objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    time = clickHandleHome.getLocalTime(objText.createTime);
                                     break;
                             }
                         } else if (message_list_content.from_platform == "web") {
                             content_text = message_list_content.msg_body.text;
-                            time = clickHandle.getLocalTime(message_list_content.create_time);
+                            time = clickHandleHome.getLocalTime(message_list_content.create_time);
                         }
                         var msg_type = message_list_content.msg_type;
                         var msg_id = msgsValue.msg_id;
@@ -307,14 +307,14 @@ var jchatGloabalHome = {
             });
             $("#fixed-chat-block").contents().find(".message-list").append(list);
             jchatGloabalHome.getResourceMessageHtml();
-            clickHandle.scrollBottom();
+            clickHandleHome.scrollBottom();
         }
     },
     getResourceMessage: function (element, message_content, isSelf, fileType, index) {
         var file_or_images = message_content.msg_body.media_id;
         var ulHtml = $("#fixed-chat-block").contents().find(element);
         var messageList = "";
-        var time = clickHandle.getLocalTime(message_content.create_time);
+        var time = clickHandleHome.getLocalTime(message_content.create_time);
         var from_name = isSelf ? top.trueName : message_content.from_name;
         var from_id = isSelf ? top.userId : message_content.from_id;
         var file_name = message_content.msg_body.fname;
@@ -350,7 +350,7 @@ var jchatGloabalHome = {
                 // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
                 window.open($(this).attr("src"));
             });
-            clickHandle.scrollBottom();
+            clickHandleHome.scrollBottom();
         }).onFail(function (data) {
             toast('success:' + JSON.stringify(data));
         });
@@ -418,20 +418,20 @@ var jchatGloabalHome = {
                             switch (type) {
                                 case "send_connect_case_info":
                                     content_text = objText.createName + "" + objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    time = clickHandleHome.getLocalTime(objText.createTime);
                                     break;
                                 case "send_remove_case_info":
                                     content_text = objText.createName + "" + objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    time = clickHandleHome.getLocalTime(objText.createTime);
                                     break;
                                 case "send_group_backup_info":
                                     content_text = objText.createName + "将" + objText.title;
-                                    time = clickHandle.getLocalTime(objText.createTime);
+                                    time = clickHandleHome.getLocalTime(objText.createTime);
                                     break;
                             }
                         } else if (message_list_content.from_platform == "web") {
                             content_text = message_list_content.msg_body.text;
-                            time = clickHandle.getLocalTime(message_list_content.create_time);
+                            time = clickHandleHome.getLocalTime(message_list_content.create_time);
                         }
                         var msg_type = message_list_content.msg_type;
                         var msg_id = msgsValue.msg_id;
@@ -492,7 +492,7 @@ var jchatGloabalHome = {
             });
             $("#fixed-chat-block").contents().find(".message-list").append(list);
             jchatGloabalHome.getResourceMessageHtml();
-            clickHandle.scrollBottom();
+            clickHandleHome.scrollBottom();
         }
     },
     onMsgReceiptChange: function () {
@@ -528,10 +528,10 @@ var jchatGloabalHome = {
             'target_gid': gid,
             'content': textContent
         }).onSuccess(function (data, msg) {
-            clickHandle.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
+            clickHandleHome.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
             selfSendMsg.push(msg);
             msgAll.push(msg.content);
-            // clickHandle.showMessageList(selfSendMsg);
+            // clickHandleHome.showMessageList(selfSendMsg);
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
@@ -573,25 +573,25 @@ var jchatGloabalHome = {
                 jchatGloabalHome.showAllMsg(jmgid);
 
                 $("#sendFileBtn").on("click", function () {
-                    clickHandle.sendFile(jmgid);
+                    clickHandleHome.sendFile(jmgid);
                 });
                 $("#sendFileImagesBtn").on("click", function () {
-                    clickHandle.sendFileImages(jmgid);
+                    clickHandleHome.sendFileImages(jmgid);
                 });
                 $("#sendEmojiBtn").on("click", function (event) {
-                    clickHandle.choseEmoji(this);
+                    clickHandleHome.choseEmoji(this);
                 });
                 $("#setTextSizeBtn").on("click", function (event) {
-                    clickHandle.setTextSize(this);
+                    clickHandleHome.setTextSize(this);
                 });
                 $("#sendBtn").on("click", function () {
-                    clickHandle.sendText(jmgid);
+                    clickHandleHome.sendText(jmgid);
                 });
 
                 $("#messageContent").on('keyup', function (event) {
                     var e = event || window.event;
                     if (e.keyCode === 13) {
-                        clickHandle.sendText(jmgid);
+                        clickHandleHome.sendText(jmgid);
                     }
                 });
                 $("#fixed-chat-block").parents(".window").find(".panel-tool-close").click(function () {
@@ -634,7 +634,7 @@ var jchatGloabalHome = {
             'image': jchatGloabalHome.getFile("#fileImagesBox")
         }).onSuccess(function (data, msg) {
 
-            clickHandle.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
+            clickHandleHome.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
@@ -645,7 +645,7 @@ var jchatGloabalHome = {
             // 'target_gname': target_gname,
             'file': jchatGloabalHome.getFile("#fileBox")
         }).onSuccess(function (data, msg) {
-            clickHandle.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
+            clickHandleHome.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
@@ -674,20 +674,20 @@ var jchatGloabalHome = {
                         switch (type) {
                             case "send_connect_case_info":
                                 content_text = objText.createName + "" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_remove_case_info":
                                 content_text = objText.createName + "" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_group_backup_info":
                                 content_text = objText.createName + "将" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                         }
                     } else if (message_list_content.from_platform == "web") {
                         content_text = message_list_content.msg_body.text;
-                        time = clickHandle.getLocalTime(message_list_content.create_time);
+                        time = clickHandleHome.getLocalTime(message_list_content.create_time);
                     }
                     var msg_type = message_list_content.msg_type;
                     var msg_id = dataValue.msg_id;
@@ -748,7 +748,7 @@ var jchatGloabalHome = {
             });
             ulHtml.append(list);
             jchatGloabalHome.getResourceMessageHtml();
-            clickHandle.scrollBottom();
+            clickHandleHome.scrollBottom();
         }
     },
 
@@ -756,7 +756,7 @@ var jchatGloabalHome = {
         var data = msgAll;
         if (data && data.length > 0) {
             for(var i=0;i<data.length;i++){
-                var year=clickHandle.getLocalYear(data[i].create_time);
+                var year=clickHandleHome.getLocalYear(data[i].create_time);
                 if(year<2000){
                     data[i].create_time=new Date(data[i].create_time*1000);
                 }else{
@@ -783,41 +783,41 @@ var jchatGloabalHome = {
                         switch (type) {
                             case "send_connect_case_info"://
                                 content_text = objText.createName + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_remove_case_info":
                                 content_text = objText.createName + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_group_backup_info":
                                 content_text = objText.createName + "将" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
 
                             case "send_task_info":
                                 content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_task_move_info":
                                 content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_task_urge_info":
                                 content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                             case "send_task_feedback_info":
                                 content_text = objText.createName + objText.title + "【"+objText.fkxs + "】给" + objText.jsrName;
-                                time = clickHandle.getLocalTime(objText.createTime);
+                                time = clickHandleHome.getLocalTime(objText.createTime);
                                 break;
                         }
                     } else if (message_list_content.from_platform == "web" || message_list_content.from_platform == "a") {
                         // content_text = message_list_content.msg_body.text;
-                        // time = clickHandle.getLocalTime(message_list_content.create_time);
+                        // time = clickHandleHome.getLocalTime(message_list_content.create_time);
                         var msgBody = str2obj(message_list_content.msg_body);
                         var objText = msgBody.text;
                         content_text = objText;
-                        time = clickHandle.getLocalTime(message_list_content.create_time);
+                        time = clickHandleHome.getLocalTime(message_list_content.create_time);
                     }
                     var msg_type = message_list_content.msg_type;
                     var msg_id = dataValue.msg_id;
@@ -904,11 +904,11 @@ var jchatGloabalHome = {
             });
             $("#fixed-chat-block").contents().find(".message-list").append(list);
             jchatGloabalHome.getResourceMessageHtml();
-            clickHandle.scrollBottom();
+            clickHandleHome.scrollBottom();
         }
     }
 };
-var clickHandle = {
+var clickHandleHome = {
     sendFile: function (gid) {
         console.info("发送文件！");
         $("#fixed-chat-block").contents().find("#fileBox").val("");
@@ -925,13 +925,13 @@ var clickHandle = {
     },
     choseEmoji: function (contrlDiv) {
         console.info("选择emoji！");
-        clickHandle.showDiv(contrlDiv);
+        clickHandleHome.showDiv(contrlDiv);
     },
     setTextSize: function (contrlDiv) {
         console.info("设置文字大小！");
-        clickHandle.showDiv(contrlDiv);
+        clickHandleHome.showDiv(contrlDiv);
     },
-    sendText: function (gid) {debugger
+    sendText: function (gid) {
         $("#fixed-chat-block").contents().find("#messageContent").find("br").remove();//去掉回车换行
         var textContent = $("#fixed-chat-block").contents().find("#messageContent").html();
         if (textContent == "") {
@@ -957,7 +957,7 @@ var clickHandle = {
         var messageList = '';
         var msg_type = message.content.msg_type;
         var msg_id = message.msg_id;
-        var time = clickHandle.getLocalTime(message.content.create_time);
+        var time = clickHandleHome.getLocalTime(message.content.create_time);
 
         var from_id = message.content.from_id;
         var from_name = top.trueName;
@@ -975,7 +975,7 @@ var clickHandle = {
                 '</li>';
             '</li>';
             ulHtml.append(messageList);
-            clickHandle.scrollBottom();
+            clickHandleHome.scrollBottom();
         }
     },
     showConversationList: function (obj) {
@@ -992,7 +992,7 @@ var clickHandle = {
         var div = $("#fixed-chat-block").contents().find(contrlDiv).siblings(".div-panel");
         div.addClass("emoji-active");
         if ($("#fixed-chat-block").contents().find(contrlDiv).is("#sendEmojiBtn")) {
-            clickHandle.loadEmoji(div);
+            clickHandleHome.loadEmoji(div);
             $("#fixed-chat-block").contents().find(".emoji-container").on("click", ".emoji", function () {
                 var $this = $(this);
                 $("#fixed-chat-block").contents().find("#messageContent").html($this);
@@ -1059,7 +1059,7 @@ var clickHandle = {
 $(function () {
 
     $(".fixed-chat").on("click", function () {
-        clickHandle.showConversationList($(this));
+        clickHandleHome.showConversationList($(this));
     });
     $(".conversations-li").on("click", function (e) {
 
