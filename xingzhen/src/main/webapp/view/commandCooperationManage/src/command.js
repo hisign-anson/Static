@@ -132,19 +132,15 @@ define(['underscore',
             var groupid = groupinfo.id;
             var jmgid =  groupinfo.jmgid;
 
-            $open('#taskListDiv', {width: 840,height: 700, title: '&nbsp专案组群聊'});
+            $open('#chatBlock', {width: 840,height: 700, title: '&nbsp专案组群聊'});
             var fullActivedCheck = $(".map-list").hasClass("full-panel");
             if(fullActivedCheck){
                 $("#top-mask",parent.document).height(0);
             }
-            $("#taskListDiv .panel-container").css("margin-top","0").empty().html(_.template(chatPageTpl));
+            $("#chatBlock .panel-container").attr("jmgid",jmgid).attr("groupid",groupid).css("margin-top","0").empty().html(_.template(chatPageTpl));
             window.parent.jchatGloabal.getUserInfo();
             window.parent.jchatGloabal.getGroupInfo(jmgid);
             window.parent.jchatGloabal.getGroupMembers(jmgid);
-            // //离线消息同步监听
-            // window.parent.jchatGloabal.onSyncConversation(jmgid);
-            // //聊天消息实时监听
-            // window.parent.jchatGloabal.onMsgReceive(jmgid);
             //打开弹框显示所有聊天消息
             window.parent.jchatGloabal.showAllMsg(jmgid);
             $("#sendFileBtn").on("click", function () {
@@ -169,7 +165,7 @@ define(['underscore',
                     window.parent.clickHandle.sendText(jmgid);
                 }
             });
-            $("#taskListDiv").parents(".window").find(".panel-tool-close").click(function () {
+            $("#chatBlock").parents(".window").find(".panel-tool-close").click(function () {
                 var chatParam = {
                     reserveField1 :groupid,
                     createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(),'yyyy-MM-dd'),
