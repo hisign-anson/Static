@@ -202,7 +202,10 @@
         <%if(isOperation == false){%>
         <%}else{%>
             <%if(data.fkzt && data.fkzt == 0 && data.jsr == top.userId){%>
-            <button id="replenishTaskBtn" class="cm-save-btn"  bcrwid="<%=data.id%>" taskinfo='<%=obj2str(data)%>'>补充任务</button>
+                <%if(replenishTaskBtnOper==false){%>
+                <%}else{%>
+                    <button id="replenishTaskBtn" class="cm-save-btn"  bcrwid="<%=data.id%>" taskinfo='<%=obj2str(data)%>'>补充任务</button>
+                <%}%>
             <%}%>
             <%if(data.jsr == top.userId){%>
                 <%if(!data.taskFks || (data.taskFks && data.taskFks.length < 3)){%>

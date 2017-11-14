@@ -755,6 +755,9 @@ debugger
                                                 if (r.flag == 1) {
                                                     toast('反馈成功！', 600, function () {
                                                         _self.showList();
+                                                        if($("#userListDiv")){//如果是从指挥协作的图右键打开还要关闭
+                                                            $("#userListDiv").$close();
+                                                        }
                                                     }).ok();
                                                 } else {
                                                     toast(r.msg, 600).err()
