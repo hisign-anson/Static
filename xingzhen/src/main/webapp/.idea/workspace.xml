@@ -15,22 +15,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
+      <file leaf-file-name="graph.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/graph/css/graph.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="149" column="55" lean-forward="true" selection-start-line="149" selection-start-column="55" selection-end-line="149" selection-end-column="55" />
-              <folding>
-                <marker date="1510566602927" expanded="true" signature="74:93" ph="[...]" />
-                <marker date="1510566602927" expanded="false" signature="8711:10036" ph="{...}" />
-                <marker date="1510566602927" expanded="false" signature="9036:9386" ph="{&quot;creator&quot;: top.userId...}" />
-                <marker date="1510566602927" expanded="false" signature="10088:11422" ph="{...}" />
-                <marker date="1510566602927" expanded="false" signature="10453:10599" ph="{&quot;userId&quot;: top.userId...}" />
-                <marker date="1510566602927" expanded="true" signature="22061:22095" ph="..." />
-                <marker date="1510566602927" expanded="true" signature="22231:22264" ph="..." />
-                <marker date="1510566602927" expanded="true" signature="22567:22586" ph="..." />
-                <marker date="1510566602927" expanded="true" signature="22876:22890" ph="{...}" />
-              </folding>
+            <state relative-caret-position="311">
+              <caret line="159" column="20" lean-forward="false" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -48,29 +38,60 @@
       <file leaf-file-name="graphLayout.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/graph/src/graphLayout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="79" column="24" lean-forward="true" selection-start-line="79" selection-start-column="24" selection-end-line="86" selection-end-column="25" />
+            <state relative-caret-position="1129">
+              <caret line="121" column="16" lean-forward="false" selection-start-line="121" selection-start-column="16" selection-end-line="121" selection-end-column="16" />
               <folding>
-                <element signature="e#4000#4828#0" expanded="false" />
-                <element signature="e#4866#6534#0" expanded="false" />
-                <element signature="e#11666#20096#0" expanded="false" />
-                <element signature="e#20253#21474#0" expanded="false" />
-                <element signature="e#23382#24275#0" expanded="false" />
-                <element signature="e#24328#24409#0" expanded="false" />
-                <element signature="e#24501#25021#0" expanded="false" />
-                <element signature="e#25936#26646#0" expanded="false" />
-                <element signature="e#26701#27184#0" expanded="false" />
+                <element signature="e#181#1143#0" expanded="false" />
+                <element signature="e#10548#11582#0" expanded="false" />
+                <element signature="e#11706#11848#0" expanded="false" />
+                <element signature="e#11950#21952#0" expanded="false" />
+                <element signature="e#22014#22094#0" expanded="false" />
+                <element signature="e#22157#23702#0" expanded="false" />
+                <element signature="e#26567#27475#0" expanded="false" />
+                <element signature="e#26625#26818#0" expanded="false" />
+                <element signature="e#26850#27457#0" expanded="false" />
+                <element signature="e#27758#29400#0" expanded="false" />
+                <element signature="e#31548#32426#0" expanded="false" />
+                <element signature="e#32481#33363#0" expanded="false" />
+                <element signature="e#33471#33589#0" expanded="false" />
+                <element signature="e#33675#42629#0" expanded="false" />
+                <element signature="e#42683#42747#0" expanded="false" />
+                <element signature="e#42802#44131#0" expanded="false" />
+                <element signature="e#46572#53994#0" expanded="false" />
+                <element signature="e#47309#48202#0" expanded="false" />
+                <element signature="e#48255#48336#0" expanded="false" />
+                <element signature="e#48428#48948#0" expanded="false" />
+                <element signature="e#49020#49139#0" expanded="false" />
+                <element signature="e#49170#49329#0" expanded="false" />
+                <element signature="e#49436#49680#0" expanded="false" />
+                <element signature="e#49863#50573#0" expanded="false" />
+                <element signature="e#50628#51111#0" expanded="false" />
+                <element signature="e#51162#53982#0" expanded="false" />
+                <element signature="e#54047#54550#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="huangshijinTest.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/graph/huangshijinTest.json">
+      <file leaf-file-name="chatGlobalHandleHome.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-134">
+              <caret line="192" column="43" lean-forward="false" selection-start-line="192" selection-start-column="35" selection-end-line="192" selection-end-column="43" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#5162#6992#0" expanded="false" />
+                <element signature="e#8672#14773#0" expanded="false" />
+                <element signature="e#14860#17515#0" expanded="false" />
+                <element signature="e#17557#19142#0" expanded="false" />
+                <element signature="e#19176#19479#0" expanded="false" />
+                <element signature="e#19516#25652#0" expanded="false" />
+                <element signature="e#25690#25977#0" expanded="false" />
+                <element signature="e#26013#26155#0" expanded="false" />
+                <element signature="e#26196#26430#0" expanded="false" />
+                <element signature="e#26482#26923#0" expanded="false" />
+                <element signature="e#32165#41820#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,9 +99,21 @@
       <file leaf-file-name="graphAction.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/graph/src/graphAction.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="8246">
               <caret line="434" column="44" lean-forward="false" selection-start-line="434" selection-start-column="36" selection-end-line="434" selection-end-column="44" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="huangshijinTest.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/graph/huangshijinTest.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="408" column="13" lean-forward="false" selection-start-line="408" selection-start-column="7" selection-end-line="408" selection-end-column="13" />
+              <folding>
+                <element signature="e#13#8722#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,12 +121,60 @@
       <file leaf-file-name="task.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="226" column="41" lean-forward="false" selection-start-line="226" selection-start-column="36" selection-end-line="226" selection-end-column="41" />
+            <state relative-caret-position="426">
+              <caret line="281" column="65" lean-forward="false" selection-start-line="281" selection-start-column="53" selection-end-line="281" selection-end-column="65" />
               <folding>
-                <element signature="e#47101#47735#0" expanded="false" />
-                <element signature="e#47913#49944#0" expanded="false" />
-                <element signature="e#51580#51858#0" expanded="false" />
+                <marker date="1510644159350" expanded="true" signature="908:47947" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="921:47945" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="22828:23147" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="22880:23147" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="22965:23147" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="23004:23147" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="39836:39847" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="39901:40895" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="40174:40245" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="40312:40404" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="40472:40579" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="40945:44838" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="41075:41379" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="41106:41365" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="41140:41217" ph="..." />
+                <marker date="1510644159350" expanded="true" signature="41250:41318" ph="..." />
+                <marker date="1510644159350" expanded="true" signature="41520:41765" ph="{&quot;format&quot;: &quot;yyyy-mm-dd hh:ii:ss&quot;...}" />
+                <marker date="1510644159350" expanded="true" signature="41823:41924" ph="{...}" />
+                <marker date="1510644159350" expanded="false" signature="41983:42617" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="42026:42527" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="42533:42603" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="42693:42742" ph="{...}" />
+                <marker date="1510644159350" expanded="false" signature="42795:44826" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="42903:42956" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="43256:43353" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="43434:43545" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="43551:43660" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="43693:44460" ph="{&quot;fqr&quot;: top.userId...}" />
+                <marker date="1510644159350" expanded="true" signature="44516:44810" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="44555:44715" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="44721:44792" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="44908:45828" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="45030:45319" ph="{&quot;groupId&quot;: taskInfo.groupid...}" />
+                <marker date="1510644159350" expanded="true" signature="45411:45810" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="45446:45796" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="45529:45736" ph="{&quot;data&quot;: r.data...}" />
+                <marker date="1510644159350" expanded="true" signature="45870:47939" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="45978:46260" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="46024:46169" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="46175:46246" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="46335:47927" ph="{...}" />
+                <marker date="1510644159350" expanded="false" signature="46462:46740" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="46498:46677" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="46785:47808" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="46819:46995" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="47033:47238" ph="{&quot;id&quot;: taskId...}" />
+                <marker date="1510644159350" expanded="true" signature="47299:47788" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="47342:47624" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="47404:47592" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="47630:47766" ph="{...}" />
+                <marker date="1510644159350" expanded="true" signature="47814:47883" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -112,10 +193,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>var bcrwid, fkid</find>
-      <find>_self.</find>
-      <find>任务</find>
-      <find>graphActionThis = this;</find>
       <find>_selfGraph</find>
       <find>yyy</find>
       <find>year</find>
@@ -140,8 +217,12 @@
       <find>showMessageList</find>
       <find>//graphActionThis = this;</find>
       <find>showCondition</find>
-      <find>tp</find>
       <find>updateGraphJSON</find>
+      <find>layout</find>
+      <find>marker</find>
+      <find>sourceLine</find>
+      <find>tp</find>
+      <find>resolved</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -168,8 +249,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskList.html" />
-        <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/achievementInfoAjTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupListTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseList.html" />
@@ -180,7 +259,6 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCaseTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/userListTr.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html" />
         <option value="$PROJECT_DIR$/view/fstPage/achievementMoreList.html" />
         <option value="$PROJECT_DIR$/view/fstPage/fstPage.html" />
         <option value="$PROJECT_DIR$/view/fstPage/toolDownloadMoreList.html" />
@@ -216,8 +294,11 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/src/command.js" />
         <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js" />
-        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/task.html" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html" />
+        <option value="$PROJECT_DIR$/view/graph/css/graph.css" />
+        <option value="$PROJECT_DIR$/view/graph/huangshijinTest.json" />
+        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
         <option value="$PROJECT_DIR$/view/graph/src/graphLayout.js" />
       </list>
     </option>
@@ -398,6 +479,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="graph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="commandCooperationManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -523,68 +626,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="chatPage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tpl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -761,12 +802,12 @@
       <workItem from="1509671416316" duration="100393000" />
       <workItem from="1510017010991" duration="92141000" />
       <workItem from="1510197160531" duration="60887000" />
-      <workItem from="1510362276851" duration="52634000" />
+      <workItem from="1510362276851" duration="69809000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="646620000" />
+    <option name="totallyTimeSpent" value="663795000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
@@ -803,30 +844,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/fstPage/fstPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2090">
-          <caret line="110" column="103" lean-forward="false" selection-start-line="110" selection-start-column="103" selection-end-line="110" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/dictManage/src/dictOpener.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
@@ -1183,51 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="763" column="69" lean-forward="false" selection-start-line="763" selection-start-column="69" selection-end-line="763" selection-end-column="69" />
-          <folding>
-            <element signature="e#2714#3731#0" expanded="false" />
-            <element signature="e#3801#4363#0" expanded="false" />
-            <element signature="e#4450#4643#0" expanded="false" />
-            <element signature="e#5005#6852#0" expanded="false" />
-            <element signature="e#7281#7732#0" expanded="false" />
-            <element signature="e#7770#8489#0" expanded="false" />
-            <element signature="e#8532#14603#0" expanded="false" />
-            <element signature="e#14690#17321#0" expanded="false" />
-            <element signature="e#17363#18930#0" expanded="false" />
-            <element signature="e#18964#19261#0" expanded="false" />
-            <element signature="e#19298#25404#0" expanded="false" />
-            <element signature="e#25442#25729#0" expanded="false" />
-            <element signature="e#25765#25907#0" expanded="false" />
-            <element signature="e#25948#26182#0" expanded="false" />
-            <element signature="e#26706#27824#0" expanded="false" />
-            <element signature="e#27871#28259#0" expanded="false" />
-            <element signature="e#28295#28676#0" expanded="false" />
-            <element signature="e#28711#38582#0" expanded="false" />
-            <element signature="e#30074#32492#0" expanded="false" />
-            <element signature="e#30247#32466#0" expanded="false" />
-            <element signature="e#38635#38886#0" expanded="false" />
-            <element signature="e#38923#39185#0" expanded="false" />
-            <element signature="e#39224#39305#0" expanded="false" />
-            <element signature="e#39345#39425#0" expanded="false" />
-            <element signature="e#40353#44186#0" expanded="false" />
-            <element signature="e#44229#44530#0" expanded="false" />
-            <element signature="e#44566#46596#0" expanded="false" />
-            <element signature="e#46637#49830#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/src/command.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-153">
@@ -1247,10 +1219,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/src/graphAction.js">
+    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="434" column="44" lean-forward="false" selection-start-line="434" selection-start-column="36" selection-end-line="434" selection-end-column="44" />
+        <state relative-caret-position="323">
+          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="281" column="65" lean-forward="false" selection-start-line="281" selection-start-column="53" selection-end-line="281" selection-end-column="65" />
+          <folding>
+            <marker date="1510644159350" expanded="true" signature="908:47947" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="921:47945" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="22828:23147" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="22880:23147" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="22965:23147" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="23004:23147" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="39836:39847" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="39901:40895" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="40174:40245" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="40312:40404" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="40472:40579" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="40945:44838" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="41075:41379" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="41106:41365" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="41140:41217" ph="..." />
+            <marker date="1510644159350" expanded="true" signature="41250:41318" ph="..." />
+            <marker date="1510644159350" expanded="true" signature="41520:41765" ph="{&quot;format&quot;: &quot;yyyy-mm-dd hh:ii:ss&quot;...}" />
+            <marker date="1510644159350" expanded="true" signature="41823:41924" ph="{...}" />
+            <marker date="1510644159350" expanded="false" signature="41983:42617" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="42026:42527" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="42533:42603" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="42693:42742" ph="{...}" />
+            <marker date="1510644159350" expanded="false" signature="42795:44826" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="42903:42956" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="43256:43353" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="43434:43545" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="43551:43660" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="43693:44460" ph="{&quot;fqr&quot;: top.userId...}" />
+            <marker date="1510644159350" expanded="true" signature="44516:44810" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="44555:44715" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="44721:44792" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="44908:45828" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="45030:45319" ph="{&quot;groupId&quot;: taskInfo.groupid...}" />
+            <marker date="1510644159350" expanded="true" signature="45411:45810" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="45446:45796" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="45529:45736" ph="{&quot;data&quot;: r.data...}" />
+            <marker date="1510644159350" expanded="true" signature="45870:47939" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="45978:46260" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="46024:46169" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="46175:46246" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="46335:47927" ph="{...}" />
+            <marker date="1510644159350" expanded="false" signature="46462:46740" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="46498:46677" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="46785:47808" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="46819:46995" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="47033:47238" ph="{&quot;id&quot;: taskId...}" />
+            <marker date="1510644159350" expanded="true" signature="47299:47788" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="47342:47624" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="47404:47592" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="47630:47766" ph="{...}" />
+            <marker date="1510644159350" expanded="true" signature="47814:47883" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="98" lean-forward="false" selection-start-line="27" selection-start-column="98" selection-end-line="27" selection-end-column="98" />
           <folding />
         </state>
       </provider>
@@ -1273,10 +1313,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/huangshijinTest.json">
+    <entry file="file://$PROJECT_DIR$/view/graph/css/graph.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="311">
+          <caret line="159" column="20" lean-forward="false" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1289,32 +1329,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
+    <entry file="file://$PROJECT_DIR$/view/graph/huangshijinTest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="226" column="41" lean-forward="false" selection-start-line="226" selection-start-column="36" selection-end-line="226" selection-end-column="41" />
+        <state relative-caret-position="112">
+          <caret line="408" column="13" lean-forward="false" selection-start-line="408" selection-start-column="7" selection-end-line="408" selection-end-column="13" />
           <folding>
-            <element signature="e#47101#47735#0" expanded="false" />
-            <element signature="e#47913#49944#0" expanded="false" />
-            <element signature="e#51580#51858#0" expanded="false" />
+            <element signature="e#13#8722#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/graph/src/graphAction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8246">
+          <caret line="434" column="44" lean-forward="false" selection-start-line="434" selection-start-column="36" selection-end-line="434" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-774">
+          <caret line="757" column="16" lean-forward="false" selection-start-line="757" selection-start-column="16" selection-end-line="757" selection-end-column="16" />
+          <folding>
+            <element signature="e#39619#40186#0" expanded="false" />
+            <element signature="e#40248#40474#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-134">
+          <caret line="192" column="43" lean-forward="false" selection-start-line="192" selection-start-column="35" selection-end-line="192" selection-end-column="43" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#5162#6992#0" expanded="false" />
+            <element signature="e#8672#14773#0" expanded="false" />
+            <element signature="e#14860#17515#0" expanded="false" />
+            <element signature="e#17557#19142#0" expanded="false" />
+            <element signature="e#19176#19479#0" expanded="false" />
+            <element signature="e#19516#25652#0" expanded="false" />
+            <element signature="e#25690#25977#0" expanded="false" />
+            <element signature="e#26013#26155#0" expanded="false" />
+            <element signature="e#26196#26430#0" expanded="false" />
+            <element signature="e#26482#26923#0" expanded="false" />
+            <element signature="e#32165#41820#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/graph/src/graphLayout.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="79" column="24" lean-forward="true" selection-start-line="79" selection-start-column="24" selection-end-line="86" selection-end-column="25" />
+        <state relative-caret-position="1129">
+          <caret line="121" column="16" lean-forward="false" selection-start-line="121" selection-start-column="16" selection-end-line="121" selection-end-column="16" />
           <folding>
-            <element signature="e#4000#4828#0" expanded="false" />
-            <element signature="e#4866#6534#0" expanded="false" />
-            <element signature="e#11666#20096#0" expanded="false" />
-            <element signature="e#20253#21474#0" expanded="false" />
-            <element signature="e#23382#24275#0" expanded="false" />
-            <element signature="e#24328#24409#0" expanded="false" />
-            <element signature="e#24501#25021#0" expanded="false" />
-            <element signature="e#25936#26646#0" expanded="false" />
-            <element signature="e#26701#27184#0" expanded="false" />
+            <element signature="e#181#1143#0" expanded="false" />
+            <element signature="e#10548#11582#0" expanded="false" />
+            <element signature="e#11706#11848#0" expanded="false" />
+            <element signature="e#11950#21952#0" expanded="false" />
+            <element signature="e#22014#22094#0" expanded="false" />
+            <element signature="e#22157#23702#0" expanded="false" />
+            <element signature="e#26567#27475#0" expanded="false" />
+            <element signature="e#26625#26818#0" expanded="false" />
+            <element signature="e#26850#27457#0" expanded="false" />
+            <element signature="e#27758#29400#0" expanded="false" />
+            <element signature="e#31548#32426#0" expanded="false" />
+            <element signature="e#32481#33363#0" expanded="false" />
+            <element signature="e#33471#33589#0" expanded="false" />
+            <element signature="e#33675#42629#0" expanded="false" />
+            <element signature="e#42683#42747#0" expanded="false" />
+            <element signature="e#42802#44131#0" expanded="false" />
+            <element signature="e#46572#53994#0" expanded="false" />
+            <element signature="e#47309#48202#0" expanded="false" />
+            <element signature="e#48255#48336#0" expanded="false" />
+            <element signature="e#48428#48948#0" expanded="false" />
+            <element signature="e#49020#49139#0" expanded="false" />
+            <element signature="e#49170#49329#0" expanded="false" />
+            <element signature="e#49436#49680#0" expanded="false" />
+            <element signature="e#49863#50573#0" expanded="false" />
+            <element signature="e#50628#51111#0" expanded="false" />
+            <element signature="e#51162#53982#0" expanded="false" />
+            <element signature="e#54047#54550#0" expanded="false" />
           </folding>
         </state>
       </provider>
