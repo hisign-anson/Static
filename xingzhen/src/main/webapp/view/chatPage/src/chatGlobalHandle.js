@@ -60,7 +60,7 @@ var jchatGloabal = {
             //聊天消息实时监听
             JIM.onMsgReceive(function (data) {
                 debugger
-                if (data && data.length > 0) {
+                if (data && data.messages.length > 0) {
                     $.each(data, function (dataIndex, dataValue) {
                         $.each(dataValue.messages, function (msgsIndex, msgsValue) {
                             debugger
