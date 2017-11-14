@@ -113,19 +113,12 @@ define(['underscore',
                     $(".into-communication").on("click", function () {
                         var groupid = $(this).attr("groupid");
                         var jmgid = $(this).attr("jmgid");
-                        debugger
                         window.parent.$("#fixed-chat").addClass("hide");//首页右下角的聊天按钮隐藏
-                        $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
-                        $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
+                        $open('#chatBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
+                        $("#chatBlock .panel-container").attr("jmgid",jmgid).attr("groupid",groupid).css("margin-top", "0").empty().html(_.template(chatPageTpl));
                         window.parent.jchatGloabal.getUserInfo();
                         window.parent.jchatGloabal.getGroupInfo(jmgid);
                         window.parent.jchatGloabal.getGroupMembers(jmgid);
-                        // //离线消息同步监听
-                        // window.parent.jchatGloabal.onSyncConversation(jmgid);
-                        // //聊天消息实时监听
-                        // window.parent.jchatGloabal.onMsgReceive(jmgid);
-                        // //打开弹框显示自己的聊天消息
-                        // window.parent.jchatGloabal.showSelf(jmgid);
                         //打开弹框时显示所有聊天消息
                         window.parent.jchatGloabal.showAllMsg(jmgid);
 
@@ -151,7 +144,7 @@ define(['underscore',
                                 window.parent.clickHandle.sendText(jmgid);
                             }
                         });
-                        $("#archiveBlock").parents(".window").find(".panel-tool-close").click(function () {
+                        $("#chatBlock").parents(".window").find(".panel-tool-close").click(function () {
                             window.parent.$("#fixed-chat").removeClass("hide");//首页右下角的聊天按钮显示
                             var chatParam = {
                                 reserveField1: groupid,
@@ -163,11 +156,6 @@ define(['underscore',
 
                             })
                         });
-                        // console.info(window.parent.JIM)
-                        // console.info(window.parent.JIM.isLogin())
-                        // console.info("进入聊天界面！");
-                        // var iframe = '<iframe id="chartiFrame" class="tab-content-frame" src="/view/chatPage/chatPage.html" width="100%" height="640"></iframe>';
-                        // $("#archiveBlock .panel-container").css("margin","0px").empty().html(_.template(iframe));
                     });
                     $(".into-group").on('click', function () {
                         _self.showGroupOfGroup($(this), $(this).attr("groupid"), $(this).attr("jmgid"), $(this).attr("groupinfo"));
@@ -281,15 +269,11 @@ define(['underscore',
                                     var groupid = $(this).attr("groupid");
                                     var jmgid = $(this).attr("jmgid");
 
-                                    $open('#archiveBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
-                                    $("#archiveBlock .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
+                                    $open('#chatBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
+                                    $("#chatBlock .panel-container").attr("jmgid",jmgid).attr("groupid",groupid).css("margin-top", "0").empty().html(_.template(chatPageTpl));
                                     window.parent.jchatGloabal.getUserInfo();
                                     window.parent.jchatGloabal.getGroupInfo(jmgid);
                                     window.parent.jchatGloabal.getGroupMembers(jmgid);
-                                    // //离线消息同步监听
-                                    // window.parent.jchatGloabal.onSyncConversation(jmgid);
-                                    // //聊天消息实时监听
-                                    // window.parent.jchatGloabal.onMsgReceive(jmgid);
                                     //打开弹框显示所有聊天消息
                                     window.parent.jchatGloabal.showAllMsg(jmgid);
                                     $("#sendFileBtn").on("click", function () {
@@ -314,7 +298,7 @@ define(['underscore',
                                             window.parent.clickHandle.sendText(jmgid);
                                         }
                                     });
-                                    $("#archiveBlock").parents(".window").find(".panel-tool-close").click(function () {
+                                    $("#chatBlock").parents(".window").find(".panel-tool-close").click(function () {
                                         var chatParam = {
                                             reserveField1: groupid,
                                             createTime: rangeUtil.formatDate(rangeUtil.getCurrentDate(), 'yyyy-MM-dd'),
