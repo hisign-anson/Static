@@ -156,7 +156,20 @@ body {
 .highlight{
     fill: #22A0E2;
 }
+.highlight-stroke{
+    stroke: #22A0E2 !important;
+}
+/*if (param) {*/
+/*if (*/
+/*(param.startTime && param.endTime && value.taskCreateTime && isInTimeRange == false) ||*/
+/*(param.taskStatus && value.taskStatus && param.taskStatus != value.taskStatus) ||*/
+/*(param.feedBackUserId && value.feedbackUser && param.feedBackUserId != value.feedbackUser) ||*/
+/*(param.sponsor && value.taskCreatorUserId && param.sponsor != value.taskCreatorUserId)*/
+/*) {*/
+    /*edges_line.attr("class", "highlight")*/
 
+/*}*/
+/*}*/
 
 .map-condition {
     width: 340px;
