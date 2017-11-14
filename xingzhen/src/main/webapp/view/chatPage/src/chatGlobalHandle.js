@@ -68,7 +68,7 @@ var jchatGloabal = {
                         msgAll.push(content);
                         //追加实时聊天消息
                         var jmgid = $("#main-frame").contents().find("#chatBlock .panel-container").attr("jmgid");
-                        var jmgidHome = window.parent.contents().find("#fixed-chat-block .panel-container").attr("jmgidHome");
+                        var jmgidHome = window.parent.$("#fixed-chat-block .panel-container").attr("jmgidHome");
                         debugger
                         jchatGloabal.showAllMsg(jmgid);
                         jchatGloabalHome.showAllMsg(jmgidHome);

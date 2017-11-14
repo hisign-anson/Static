@@ -206,7 +206,7 @@ var jchatGloabalHome = {
                     '<span class="member">' + value.nickName + '</span>' +
                     '</li>'
                 });
-                $("#main-frame").contents().find('.member-list').html(li);
+                $("#fixed-chat-block").contents().find('.member-list').html(li);
             }).onFail(function (data) {
                 toast(obj2str(data), 600).err();
             });
@@ -557,6 +557,7 @@ var jchatGloabalHome = {
                 var jmgid=$(this).attr("jmgid");
                 debugger
                 $open('#fixed-chat-block', {width: 840, height: 700,top:100, title: '&nbsp专案组群聊'});
+                $("#fixed-chat-block .panel-container").attr("jmgidHome",jmgid);
                 //$("#fixed-chat-block .panel-container").css("margin-top", "0").empty().html(_.template(chatPageTpl));
                 jchatGloabalHome.getUserInfo();
                 jchatGloabalHome.getGroupInfo(jmgid);
@@ -614,6 +615,7 @@ var jchatGloabalHome = {
                         $post(top.servicePath_xz + '/xzlog/addChatLog', chatParam, function (response) {
                             //callback(response);
                         }, true)
+                        window.parent.$("#fixed-chat-block .panel-container").attr("jmgidHome","");//清除弹框上的参数
                     }).onFail(function(data) {
                         //data.code 返回码
                         //data.message 描述
