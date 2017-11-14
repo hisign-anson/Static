@@ -60,14 +60,20 @@ var jchatGloabal = {
             //聊天消息实时监听
             JIM.onMsgReceive(function (data) {
                 debugger
-                if (data && data.messages.length > 0) {
-                    $.each(data, function (dataIndex, dataValue) {
-                        $.each(dataValue.messages, function (msgsIndex, msgsValue) {
-                            debugger
-                            var content = msgsValue.content;
-                            msgAll.push(content);
-                        })
-                    });
+                if (data.messages && data.messages.length > 0) {
+                    debugger
+                    $.each(data.messages, function (msgsIndex, msgsValue) {
+                        debugger
+                        var content = msgsValue.content;
+                        msgAll.push(content);
+                        //追加实时聊天消息
+                        var jmgid = $("#main-frame").contents().find("#chatBlock .panel-container").attr("jmgid");
+                        var jmgidHome = window.parent.contents().find("#fixed-chat-block .panel-container").attr("jmgidHome");
+                        debugger
+                        jchatGloabal.showAllMsg(jmgid);
+                        jchatGloabalHome.showAllMsg(jmgidHome);
+                        // $("#main-frame").contents().find(".message-list").append("聊天消息实时监听");
+                    })
                 }
 
                 onMsgReceive_res.push(data);
@@ -197,22 +203,21 @@ var jchatGloabal = {
         });
     },
     getGroupMembers: function (gid) {debugger
-        JIM.getGroupMembers({'gid': gid}).onSuccess(function (data) {
-            var li = '';
-            $.each(data.member_list, function (index, value) {
-                var avatar = '../../img/pc-avatar.png';
-                // JIM.getResource({'media_id': value.avatar}).onSuccess(function (data) {
-                //     avatar = data.url;
-                // });
-                li += '<li class="">' +
+        setTimeout(function () {
+            JIM.getGroupMembers({'gid': gid}).onSuccess(function (data) {
+                var li = '';
+                $.each(data.member_list, function (index, value) {
+                    var avatar = '../../img/pc-avatar.png';
+                    li += '<li class="">' +
                     '<img class="member-avatar" src="' + avatar + '"/>' +
                     '<span class="member">' + value.nickName + '</span>' +
                     '</li>'
+                });
+                $("#main-frame").contents().find('.member-list').html(li);
+            }).onFail(function (data) {
+                toast(obj2str(data), 600).err();
             });
-            $("#main-frame").contents().find('.member-list').html(li);
-        }).onFail(function (data) {
-            toast(obj2str(data), 600).err();
-        });
+        },300);
     },
     onSyncConversation: function (jmgid) {
         var data = onSyncConversation_res;
@@ -351,6 +356,7 @@ var jchatGloabal = {
                 // window.open($(this).attr("src"),"","width=800,height=600");//新窗口打开
                 window.open($(this).attr("src"));
             });
+            jchatGloabal.getResourceMessageHtml();
             clickHandle.scrollBottom();
         }).onFail(function (data) {
             toast('success:' + JSON.stringify(data));
@@ -530,9 +536,7 @@ var jchatGloabal = {
             'content': textContent
         }).onSuccess(function (data, msg) {
             clickHandle.showMessageList(eval('(' + JSON.stringify(msg) + ')'));
-            selfSendMsg.push(msg);
             msgAll.push(msg.content);
-            // clickHandle.showMessageList(selfSendMsg);
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
@@ -547,11 +551,11 @@ var jchatGloabal = {
                 debugger
                 //只展示群会话
                 if (value.type == 4) {//单聊3群聊4
-                    li += '<li class="conversations-li" jmgid="'+
-                    value.gid+'"><img class="jim-avatar" src="../../img/pc-avatar.png" />' +
-                        '<div class="text-wrap conversations-body"><span class="unread-msg">' + value.unread_msg_count + '</span><div class="name" title="' + value.name + '">' + value.name + '</div>' +
+                    li += '<li class="conversations-li" jmgid="' +
+                    value.gid + '"><img class="jim-avatar" src="../../img/pc-avatar.png" />' +
+                    '<div class="text-wrap conversations-body"><span class="unread-msg">' + value.unread_msg_count + '</span><div class="name" title="' + value.name + '">' + value.name + '</div>' +
                         // '<div class="text-describe">' + obj2str(value.extras) + '</div>' +
-                        '</div></li>'
+                    '</div></li>'
                 }
             });
             $(".conversation").find('ul').html(li);
@@ -586,130 +590,28 @@ var jchatGloabal = {
             toast(obj2str(data), 600).err();
         });
     },
-    showSelf: function (gid) {
-        var data = selfSendMsg;
-        debugger
-        var ulHtml = $("#main-frame").contents().find(".message-list");
-        var list = '';
-        if (data && data.length > 0) {
-            debugger;
-            $.each(data, function (dataIndex, dataValue) {
-                if (dataValue.target_gid == gid) {
-                    debugger;
-                    var message_list_content = dataValue.content;
-                    var time;
-                    var from_name = message_list_content.from_name;
-                    var from_id = message_list_content.from_id;
-                    var login_user_name = top.trueName;
-                    var login_userId = top.userId;
-
-                    var content_text;
-                    if (message_list_content.from_platform == "api") {
-                        var objText = str2obj(message_list_content.msg_body.text);
-                        var type = objText.msgType;
-                        switch (type) {
-                            case "send_connect_case_info":
-                                content_text = objText.createName + "" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
-                                break;
-                            case "send_remove_case_info":
-                                content_text = objText.createName + "" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
-                                break;
-                            case "send_group_backup_info":
-                                content_text = objText.createName + "将" + objText.title;
-                                time = clickHandle.getLocalTime(objText.createTime);
-                                break;
-                        }
-                    } else if (message_list_content.from_platform == "web") {
-                        content_text = message_list_content.msg_body.text;
-                        time = clickHandle.getLocalTime(message_list_content.create_time);
-                    }
-                    var msg_type = message_list_content.msg_type;
-                    var msg_id = dataValue.msg_id;
-                    var media_id = message_list_content.msg_body.media_id;
-                    var file_size = message_list_content.msg_body.fsize >= 1024 ? (message_list_content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message_list_content.msg_body.fsize + '字节';
-                    var file_name = message_list_content.msg_body.fname;
-
-                    var selfHtml = "self";
-                    var msgContetHtml;
-                    var nameHtml = login_user_name;
-                    if (msg_type == "file") {
-                        var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
-                            '<span class="icon-file-noType"></span>' +
-                            '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
-                            '<span class="file-size">' + file_size + '</span>' +
-                            '</span></a>';
-
-                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            '<div class="text-wrap">' +
-                            '<div class="from-name">' + nameHtml + '</div>' +
-                            '<div class="text">' + fileDiv + '</div>' +
-                            '</div>' +
-                            '</div>';
-
-                    } else if (msg_type == "image") {
-                        var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" id="file_' + msg_id + '" href="javascript:;">' +
-                            '<img class="message-image" alt="" src="" />' +
-                            '</a>' +
-                            '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
-
-                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            '<div class="text-wrap">' +
-                            '<div class="from-name">' + nameHtml + '</div>' +
-                            '<div class="text">' + fileDiv + '</div>' +
-                            '</div>' +
-                            '</div>';
-                    } else if (msg_type == "custom") {
-                        msgContetHtml = '<div class="all">' +
-                            '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                            '</div></div>';
-                    } else {
-                        msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                            '<div class="text-wrap">' +
-                            '<div class="from-name">' + nameHtml + '</div>' +
-                            '<div class="text">' + content_text + '</div>' +
-                            '</div>' +
-                            '</div>';
-                    }
-                    list += '<li>' +
-                        '<div class="time"><span>' + time + '</span></div>' +
-                        msgContetHtml +
-                        '</li>';
-                }
-
-            });
-            ulHtml.append(list);
-            jchatGloabal.getResourceMessageHtml();
-            clickHandle.scrollBottom();
-        }
-    },
-
     showAllMsg: function (jmgid) {
-        // setInterval(function () {
-            console.info("msgAll:");
+        setTimeout(function () {
+            $("#main-frame").contents().find(".message-list").empty();
             var data = msgAll;
             if (data && data.length > 0) {
-                for(var i=0;i<data.length;i++){
-                    var year=clickHandle.getLocalYear(data[i].create_time);
-                    if(year<2000){
-                        data[i].create_time=new Date(data[i].create_time*1000);
-                    }else{
-                        data[i].create_time=new Date(data[i].create_time);
+                for (var i = 0; i < data.length; i++) {
+                    var year = clickHandle.getLocalYear(data[i].create_time);
+                    if (year < 2000) {
+                        data[i].create_time = new Date(data[i].create_time * 1000);
+                    } else {
+                        data[i].create_time = new Date(data[i].create_time);
                     }
                 }
                 var list = '';
                 data.sort(function (a, b) {
-                    return a.create_time-b.create_time;//时间正序
+                    return a.create_time - b.create_time;//时间正序
                 });
                 $.each(data, function (dataIndex, dataValue) {
                     if (dataValue.target_type == "group" && dataValue.target_id == jmgid) {
                         var message_list_content = dataValue;
                         var time;
-                        var from_name = message_list_content.from_name//?message_list_content.from_name:message_list_content.from_type;
+                        var from_name = message_list_content.from_name
                         var from_id = message_list_content.from_id;
                         var login_user_name = top.trueName;
                         var login_userId = top.userId;
@@ -733,19 +635,19 @@ var jchatGloabal = {
                                     break;
 
                                 case "send_task_info":
-                                    content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
+                                    content_text = objText.createName + objText.title + "【" + objText.taskContent + "】给" + objText.jsrName;
                                     time = clickHandle.getLocalTime(objText.createTime);
                                     break;
                                 case "send_task_move_info":
-                                    content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
+                                    content_text = objText.createName + objText.title + "【" + objText.taskContent + "】给" + objText.jsrName;
                                     time = clickHandle.getLocalTime(objText.createTime);
                                     break;
                                 case "send_task_urge_info":
-                                    content_text = objText.createName + objText.title + "【"+objText.taskContent + "】给" + objText.jsrName;
+                                    content_text = objText.createName + objText.title + "【" + objText.taskContent + "】给" + objText.jsrName;
                                     time = clickHandle.getLocalTime(objText.createTime);
                                     break;
                                 case "send_task_feedback_info":
-                                    content_text = objText.createName + objText.title + "【"+objText.fkxs + "】给" + objText.jsrName;
+                                    content_text = objText.createName + objText.title + "【" + objText.fkxs + "】给" + objText.jsrName;
                                     time = clickHandle.getLocalTime(objText.createTime);
                                     break;
                             }
@@ -753,8 +655,7 @@ var jchatGloabal = {
                             // content_text = message_list_content.msg_body.text;
                             // time = clickHandle.getLocalTime(message_list_content.create_time);
                             var msgBody = str2obj(message_list_content.msg_body);
-                            var objText = msgBody.text;
-                            content_text = objText;
+                            content_text = msgBody.text;
                             time = clickHandle.getLocalTime(message_list_content.create_time);
                         }
                         var msg_type = message_list_content.msg_type;
@@ -766,7 +667,7 @@ var jchatGloabal = {
                         var selfHtml = from_id == login_userId ? "self" : "";
                         var msgContetHtml;
                         var nameHtml = from_id == login_userId ? login_user_name : from_name;
-                        if (msg_type == "file" ) {
+                        if (msg_type == "file") {
                             var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
                                 '<span class="icon-file-noType"></span>' +
                                 '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
@@ -774,13 +675,13 @@ var jchatGloabal = {
                                 '</span></a>';
 
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                '<div class="text-wrap">' +
-                                '<div class="from-name">' + nameHtml + '</div>' +
-                                '<div class="text">' + fileDiv + '</div>' +
-                                '</div>' +
-                                '</div>';
-                        } else if(msg_type == "voice"){
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                        } else if (msg_type == "voice") {
                             var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
                                 '<span class="fa fa-volume-up"></span>' +
                                 '<span class="file-info"><span class="file-name">语音消息</span>' +
@@ -788,63 +689,59 @@ var jchatGloabal = {
                                 '</span></a>';
 
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                '<div class="text-wrap">' +
-                                '<div class="from-name">' + nameHtml + '</div>' +
-                                '<div class="text">' + fileDiv + '</div>' +
-                                '</div>' +
-                                '</div>';
-                        }else if (msg_type == "image") {
-                            // var fileDiv = '<a class="message-image preview-JIM-img" media_id="' + media_id + '" href="javascript:;">' +
-                            //     '<img class="message-image" alt="" src="" />' +
-                            //     '</a>' +
-                            //     '<div class="imgHover"><img class="img-responsive center-block" src="" alt=""/></div>';
-
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                        } else if (msg_type == "image") {
                             var fileDiv = '<a class="not-images-file message-image preview-JIM-img" media_id="' + media_id + '" target="_blank">' +
                                 '<img class="message-image" alt="" src="" />' +
                                 '</a>';
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="text-wrap">' +
+                            '<div class="from-name">' + nameHtml + '</div>' +
+                            '<div class="text">' + fileDiv + '</div>' +
+                            '</div>' +
+                            '</div>';
+                        } else if (msg_type == "custom") {
+                            msgContetHtml = '<div class="all">' +
+                            '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
+                            '</div></div>';
+                        } else {
+                            debugger
+                            if (message_list_content.at_list && message_list_content.at_list.length == 0) {
+                                msgContetHtml = '<div class="main ' + selfHtml + '">' +
                                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
                                 '<div class="text-wrap">' +
                                 '<div class="from-name">' + nameHtml + '</div>' +
-                                '<div class="text">' + fileDiv + '</div>' +
+                                '<div class="text"> @所有人 ' + content_text + '</div>' +
                                 '</div>' +
                                 '</div>';
-                        } else if (msg_type == "custom") {
-                            msgContetHtml = '<div class="all">' +
-                                '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
-                                '</div></div>';
-                        } else {
-                            if (message_list_content.at_list && message_list_content.at_list.length == 0) {
-                                msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                    '<div class="text-wrap">' +
-                                    '<div class="from-name">' + nameHtml + '</div>' +
-                                    '<div class="text"> @所有人' + content_text + '</div>' +
-                                    '</div>' +
-                                    '</div>';
 
                             } else {
                                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                                    '<div class="text-wrap">' +
-                                    '<div class="from-name">' + nameHtml + '</div>' +
-                                    '<div class="text">' + content_text + '</div>' +
-                                    '</div>' +
-                                    '</div>';
+                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="text-wrap">' +
+                                '<div class="from-name">' + nameHtml + '</div>' +
+                                '<div class="text">' + content_text + '</div>' +
+                                '</div>' +
+                                '</div>';
                             }
                         }
                         list += '<li>' +
-                            '<div class="time"><span>' + time + '</span></div>' +
-                            msgContetHtml +
-                            '</li>';
+                        '<div class="time"><span>' + time + '</span></div>' +
+                        msgContetHtml +
+                        '</li>';
                     }
                 });
                 $("#main-frame").contents().find(".message-list").append(list);
                 jchatGloabal.getResourceMessageHtml();
                 clickHandle.scrollBottom();
             }
-        // },50)
+        }, 300)
     }
 };
 var clickHandle = {
@@ -871,6 +768,8 @@ var clickHandle = {
         clickHandle.showDiv(contrlDiv);
     },
     sendText: function (gid) {
+        // debugger
+        $("#main-frame").contents().find("#messageContent").find("div").remove();
         $("#main-frame").contents().find("#messageContent").find("br").remove();//去掉回车换行
         var textContent = $("#main-frame").contents().find("#messageContent").html();
         if (textContent == "") {
@@ -893,29 +792,79 @@ var clickHandle = {
     },
     showMessageList: function (message) {
         var ulHtml = $("#main-frame").contents().find(".message-list");
-        var messageList = '';
+        var list = '';
         var msg_type = message.content.msg_type;
-        var msg_id = message.msg_id;
         var time = clickHandle.getLocalTime(message.content.create_time);
-
-        var from_id = message.content.from_id;
         var from_name = top.trueName;
         var content_text = message.content.msg_body.text;
-        if (msg_type == "file" || msg_type == "image") {
-            jchatGloabal.getResourceMessage(".message-list", message.content, true, msg_type, msg_id);
+        var media_id = message.content.msg_body.media_id;
+        var file_size = message.content.msg_body.fsize >= 1024 ? (message.content.msg_body.fsize / 1024).toFixed(1) + 'KB' : message.content.msg_body.fsize + '字节';
+        var file_name = message.content.msg_body.fname;
+        var selfHtml = "self";
+        var nameHtml = from_name;
+        var msgContetHtml = '';
+        if (msg_type == "file") {
+            var fileDiv = '<a class="not-images-file" src="" media_id="' + media_id + '" target="_blank" title="' + file_name + '">' +
+                '<span class="icon-file-noType"></span>' +
+                '<span class="file-info"><span class="file-name">' + file_name + '</span>' +
+                '<span class="file-size">' + file_size + '</span>' +
+                '</span></a>';
+
+            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+            '<div class="text-wrap">' +
+            '<div class="from-name">' + nameHtml + '</div>' +
+            '<div class="text">' + fileDiv + '</div>' +
+            '</div>' +
+            '</div>';
+        } else if (msg_type == "image") {
+            var fileDiv = '<a class="not-images-file message-image preview-JIM-img" media_id="' + media_id + '" target="_blank">' +
+                '<img class="message-image" alt="" src="" />' +
+                '</a>';
+            msgContetHtml = '<div class="main ' + selfHtml + '">' +
+            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+            '<div class="text-wrap">' +
+            '<div class="from-name">' + nameHtml + '</div>' +
+            '<div class="text">' + fileDiv + '</div>' +
+            '</div>' +
+            '</div>';
         } else {
-            //单聊文字消息 群聊文字消息
-            messageList = '<li>' +
-                '<div class="time"><span>' + time + '</span></div>' +
-                '<div class="main self">' +
+            if (message.content.at_list && message.content.at_list.length == 0) {
+                msgContetHtml = '<div class="main ' + selfHtml + '">' +
                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
-                '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
-                '</div></div>' +
-                '</li>';
-            '</li>';
-            ulHtml.append(messageList);
-            clickHandle.scrollBottom();
+                '<div class="text-wrap">' +
+                '<div class="from-name">' + nameHtml + '</div>' +
+                '<div class="text"> @所有人 ' + content_text + '</div>' +
+                '</div>' +
+                '</div>';
+
+            } else {
+                msgContetHtml = '<div class="main ' + selfHtml + '">' +
+                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                '<div class="text-wrap">' +
+                '<div class="from-name">' + nameHtml + '</div>' +
+                '<div class="text">' + content_text + '</div>' +
+                '</div>' +
+                '</div>';
+            }
+
+            // //单聊文字消息 群聊文字消息
+            // msgContetHtml = '<li>' +
+            //     '<div class="time"><span>' + time + '</span></div>' +
+            //     '<div class="main self">' +
+            //     '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+            //     '<div class="text-wrap"><div class="from-name">' + from_name + '</div><div class="text">' + content_text + '</div>' +
+            //     '</div></div>' +
+            //     '</li>';
+            // '</li>';
         }
+        list += '<li>' +
+        '<div class="time"><span>' + time + '</span></div>' +
+        msgContetHtml +
+        '</li>';
+        ulHtml.append(list);
+        jchatGloabal.getResourceMessageHtml();
+        clickHandle.scrollBottom();
     },
     showConversationList: function (obj) {
         var $conversation = obj.find(".conversation");
@@ -1003,11 +952,4 @@ $(function () {
     $(".conversations-li").on("click", function (e) {
 
     });
-
-    // $(document).on("click", function (e) {
-    //     if (!$(e.target).is(".fixed-chat")) {
-    //         $(".fixed-chat").find(".conversation").removeClass("hide");
-    //         $(".fixed-chat").find(".conversation").empty();
-    //     }
-    // });
 });
