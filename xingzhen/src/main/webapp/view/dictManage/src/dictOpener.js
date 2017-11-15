@@ -212,7 +212,7 @@ define(['underscore',
                 }
             });
         },
-        openChoosePort:function (obj,portType,portAddress,param,chooseType) {
+        openChoosePort:function (obj,portType,portAddress,param,chooseType) {debugger
             _selfDict = this;
             var title = obj.attr("title");
             window.newwin=$open('#dict-block-group',{width:400,height:300,top:100, title:'选择'+title});

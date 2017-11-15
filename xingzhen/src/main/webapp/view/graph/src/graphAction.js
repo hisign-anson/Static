@@ -394,25 +394,75 @@ define(['underscore',
                                         text: text
                                     }));
                                     $("#fkjzTime").datetimepicker({format: 'YYYY-MM-DD', pickTime: false});
-
+                                    $("#chooseReceive").attr("groupinfo",groupinfo.id).attr("taskinfo",taskinfo.groupid);
                                     $("#chooseGroup").on('click', function () {
                                         dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
                                     });
                                     $("#chooseReceive").on('click', function () {
                                         if ($("#groupid").val()) {
-                                            var groupinfo = groupinfo;
-                                            var taskinfo = taskinfo;
+                                            var groupinfo = $(this).attr("groupinfo");
+                                            var taskinfo = $(this).attr("taskinfo");
                                             debugger
-                                            dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {
-                                                groupId: text ? taskinfo.groupid : groupinfo.id,
-                                                isInGroup: true
-                                            }, "user");
+                                            //dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {
+                                            //    groupId: text ? taskinfo : groupinfo,
+                                            //    isInGroup: true
+                                            //}, "user");
+                                            dictOpener.getUserByGroupIdPortList($(this),{groupId: text ? taskinfo : groupinfo,isInGroup: true})
                                         } else {
                                             toast("请先选择专案组！", 600).warn();
                                         }
                                     });
                                     $("#cancelBtn").on("click", function () {
+                                        $("#chooseReceive").attr("groupinfo","").attr("taskinfo","");
                                         $("#userListDiv").$close();
+                                    });
+                                    $("#saveBtn").on("click", function () {
+                                        $('.task-valid').validatebox();
+                                        if ($('.validatebox-invalid').length > 0) {
+                                            return false;
+                                        }
+                                        var param = $("#taskAddForm").serializeObject();
+                                        var jsrParam = str2obj($("#jsr").attr("paramattr"));
+                                        var groupParam = str2obj($("#groupid").attr("paramattr"));
+                                        var taskParam;
+                                        //由追加任务 补充任务跳转过来
+                                        if (text) {
+                                            taskParam = str2obj($("#groupid").attr("taskparamattr"));
+                                        }
+                                        var jsr,jsrname;
+                                        if($("#jsr").attr("paramattr")){
+                                            jsr = jsrParam.userId;
+                                            jsrname = jsrParam.userName;
+                                        } else {
+                                            jsr = taskParam.jsr;
+                                            jsrname = taskParam.jsrname;
+                                        }
+                                        $.extend(param, {
+                                            fqr: top.userId,
+                                            fqrname: top.trueName,
+                                            fqrDeptCode: top.orgCode,
+                                            fqrDeptName: top.orgName,
+                                            bcrwid: bcrwid ? bcrwid : "",
+                                            fkid: fkid ? fkid : "",
+                                            taskName: $.trim($("#taskName").val()),
+                                            groupid: text ? taskParam.groupid : groupParam.id,
+                                            jsr: jsr,
+                                            jsrname: jsrname,
+                                            fqrLxfs: top.phone,
+                                            jsrLxfs: $.trim($("#jsrLxfs").val()),
+                                            taskContent: $.trim($("#taskContent").val()),
+                                            fkjzTime: $.trim($("#fkjzTime").val()),
+                                            fqTime: $.trim($("#createtime").val())
+                                        });
+                                        taskAjax.addTask(param, function (r) {
+                                            if (r.flag == 1) {
+                                                toast('保存成功！', 600, function () {
+                                                    _self.showList();
+                                                }).ok();
+                                            } else {
+                                                toast(r.msg, 600).err()
+                                            }
+                                        });
                                     });
                                 }
                             }
