@@ -845,7 +845,6 @@ define(['underscore',
         },
         queryUserList: function (isCheckboxMulti, groupInfo) {
             _self = this;
-            debugger
             var orgParam = str2obj($("#userListDiv #orgName").attr("paramattr"));
             var param = {
                 excludeGroupId: groupInfo.pgroupid ? groupInfo.id : "",

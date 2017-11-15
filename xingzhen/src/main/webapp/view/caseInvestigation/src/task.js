@@ -87,26 +87,26 @@ define(['underscore',
             //判断如果点击首页待办进行查询
             $('#root-menu', window.parent.document).find('li').each(function (i, item) {
                 if ($(item).attr("page-no") == 'A0102') {
-                    var fkqrzt=$($(item).find("a")[0]).attr('fkqrzt');
-                    var taskType=$($(item).find("a")[0]).attr('taskType');
-                    var overdue=$($(item).find("a")[0]).attr('overdue');
-                    if(fkqrzt){
+                    var fkqrzt = $($(item).find("a")[0]).attr('fkqrzt');
+                    var taskType = $($(item).find("a")[0]).attr('taskType');
+                    var overdue = $($(item).find("a")[0]).attr('overdue');
+                    if (fkqrzt) {
                         $("#changeConfirmStatus u").eq(1).click();
                         $("#changeTaskType u").eq(2).click();
-                    }else if(taskType){
+                    } else if (taskType) {
                         $("#changeTaskType u").eq(1).click();
                         $("#changeRece u").eq(1).click();
-                    }else if(overdue){
+                    } else if (overdue) {
                         $("#changeTaskStatus u").eq(4).click();
                         $("#changeTaskType u").eq(1).click();
-                    }else{
+                    } else {
                         _self.queryList();
                     }
                     $("#queryBtn").click();
                     //以下清除参数
-                    var fkqrzt=$($(item).find("a")[0]).attr('fkqrzt',"");
-                    var taskType=$($(item).find("a")[0]).attr('taskType',"");
-                    var overdue=$($(item).find("a")[0]).attr('overdue',"");
+                    var fkqrzt = $($(item).find("a")[0]).attr('fkqrzt', "");
+                    var taskType = $($(item).find("a")[0]).attr('taskType', "");
+                    var overdue = $($(item).find("a")[0]).attr('overdue', "");
                 }
             });
 
@@ -161,8 +161,8 @@ define(['underscore',
                 fqrDeptCode: $.trim($("#fqrDeptCode").val()),
                 fkjzstartTime: $.trim($("#fkjzstartTime").val()),
                 fkjzendTime: $.trim($("#fkjzendTime").val()),
-                orderBy:"fq_time",
-                isDesc:true
+                orderBy: "fq_time",
+                isDesc: true
             };
             $('#taskListResult').pagingList({
                 action: top.servicePath_xz + '/task/getTaskPage',
@@ -198,10 +198,14 @@ define(['underscore',
                 }, function (r) {
                     if (r.flag == 1) {
                         //判断是否任务是否反馈
-                        $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
+                        $("#mainDiv").empty().html(_.template(taskEditTpl, {
+                            data: r.data,
+                            isOperation: true,
+                            replenishTaskBtnOper: null
+                        }));
                         //在反馈上追加任务
                         $(".into-appendTaskBtn").on("click", function () {
-                            _self.showAdd($(this).attr("taskinfo"), $(this).attr("title"),$(this).attr("fkid"));
+                            _self.showAdd($(this).attr("taskinfo"), $(this).attr("title"), $(this).attr("fkid"));
                         });
                         $("#cancelBtn").on("click", function () {
                             _self.showList();
@@ -269,7 +273,7 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
-                                            $(".progressV b").css('width','50%');
+                                            $(".progressV b").css('width', '50%');
 
                                         },
                                         success: function (res) {
@@ -280,8 +284,8 @@ define(['underscore',
                                                 item.responseName = res.data.source.substring(12);
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
-                                                if(filesArr){
-                                                    $.each(filesArr,function (index,value) {
+                                                if (filesArr) {
+                                                    $.each(filesArr, function (index, value) {
                                                         var item = {
                                                             fileName: value.responseName,
                                                             fileOldName: value.responseOldName,
@@ -360,7 +364,7 @@ define(['underscore',
                                         beforeSend: function () {
                                             debugger
                                             //设置进度条
-                                            $(".progressV b").css('width','50%');
+                                            $(".progressV b").css('width', '50%');
 
                                         },
                                         success: function (res) {
@@ -371,8 +375,8 @@ define(['underscore',
                                                 item.responseName = res.data.source.substring(12);
                                                 item.responseOldName = res.data.oldName;
                                                 item.responsePath = res.data.source;
-                                                if(filesArr){
-                                                    $.each(filesArr,function (index,value) {
+                                                if (filesArr) {
+                                                    $.each(filesArr, function (index, value) {
                                                         var item = {
                                                             fileName: value.responseName,
                                                             fileOldName: value.responseOldName,
@@ -399,7 +403,7 @@ define(['underscore',
 
                         $("#feedbackBtn").on("click", function () {
                             var taskinfo = $(this).attr("taskinfo");
-                            _self.saveFeedback(str2obj(taskinfo).id,fileInfoArr);
+                            _self.saveFeedback(str2obj(taskinfo).id, fileInfoArr);
                         });
                     }
                 });
@@ -450,7 +454,11 @@ define(['underscore',
             if (taskId) {
                 taskAjax.taskDetail({id: taskId, userId: top.userId}, function (r) {
                     if (r.flag == 1) {
-                        $("#mainDiv").empty().html(_.template(taskEditTpl, {data:r.data,isOperation:true}));
+                        $("#mainDiv").empty().html(_.template(taskEditTpl, {
+                            data: r.data,
+                            isOperation: true,
+                            replenishTaskBtnOper: null
+                        }));
                         var filesArr = []; //存放文件的数组...
                         $("#addVideo").siblings("input[type='file']").val("");
                         $("#addVideo").siblings("input[type='file']").off("change").on("change", function () {
@@ -490,32 +498,34 @@ define(['underscore',
                             var picWrap = $('#pics-wrap');
                             //h5表单文件上传
                             //将对象元素转换成字符串以作比较
-                            function obj2key(obj, keys){
+                            function obj2key(obj, keys) {
                                 var n = keys.length,
                                     key = [];
-                                while(n--){
+                                while (n--) {
                                     key.push(obj[keys[n]]);
                                 }
                                 return key.join('|');
                             }
+
                             //去重操作
-                            function uniqeByKeys(array,keys){
+                            function uniqeByKeys(array, keys) {
                                 var arr = [];
                                 var hash = {};
                                 for (var i = 0, j = array.length; i < j; i++) {
                                     var k = obj2key(array[i], keys);
                                     if (!(k in hash)) {
                                         hash[k] = true;
-                                        arr .push(array[i]);
+                                        arr.push(array[i]);
                                     }
                                 }
-                                return arr ;
+                                return arr;
                             }
-                            filesArr=uniqeByKeys(filesArr,['fileName']);
-                            if(filesArr){
-                                var html="";
-                                $.each(filesArr,function (index,value) {
-                                    html+='<span>'+value.fileName+'</span>';
+
+                            filesArr = uniqeByKeys(filesArr, ['fileName']);
+                            if (filesArr) {
+                                var html = "";
+                                $.each(filesArr, function (index, value) {
+                                    html += '<span>' + value.fileName + '</span>';
                                 });
                                 $('.upload-block .state').html(html);
                                 $('[href="#uploadMat"]').text("查看")
@@ -523,7 +533,8 @@ define(['underscore',
                         });
 
                         $("#addImg").siblings("input[type='file']").val("");
-                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {debugger
+                        $("#addImg").siblings("input[type='file']").off("change").on("change", function () {
+                            debugger
                             var $this = $(this)[0];
                             var fileList = $this.files;
                             if (fileList.length == 0) {
@@ -560,32 +571,34 @@ define(['underscore',
                             var picWrap = $('#pics-wrap');
                             //h5表单文件上传
                             //将对象元素转换成字符串以作比较
-                            function obj2key(obj, keys){
+                            function obj2key(obj, keys) {
                                 var n = keys.length,
                                     key = [];
-                                while(n--){
+                                while (n--) {
                                     key.push(obj[keys[n]]);
                                 }
                                 return key.join('|');
                             }
+
                             //去重操作
-                            function uniqeByKeys(array,keys){
+                            function uniqeByKeys(array, keys) {
                                 var arr = [];
                                 var hash = {};
                                 for (var i = 0, j = array.length; i < j; i++) {
                                     var k = obj2key(array[i], keys);
                                     if (!(k in hash)) {
                                         hash[k] = true;
-                                        arr .push(array[i]);
+                                        arr.push(array[i]);
                                     }
                                 }
-                                return arr ;
+                                return arr;
                             }
-                            filesArr=uniqeByKeys(filesArr,['fileName']);
-                            if(filesArr){
-                                var html="";
-                                $.each(filesArr,function (index,value) {
-                                    html+='<span>'+value.fileName+'</span>';
+
+                            filesArr = uniqeByKeys(filesArr, ['fileName']);
+                            if (filesArr) {
+                                var html = "";
+                                $.each(filesArr, function (index, value) {
+                                    html += '<span>' + value.fileName + '</span>';
                                 });
                                 $('.upload-block .state').html(html);
                                 $('[href="#uploadMat"]').text("查看")
@@ -599,7 +612,7 @@ define(['underscore',
                         //反馈任务
                         $("#feedbackBtn").on("click", function () {
                             console.info(filesArr);
-                            _self.saveFeedback(taskId,filesArr);
+                            _self.saveFeedback(taskId, filesArr);
                         });
                         $("#cancelBtn").on("click", function () {
                             _self.showList();
@@ -619,11 +632,11 @@ define(['underscore',
             return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
         },
         //取出file数组中需要提交至后台的元素
-        getArrParam:function (arr) {
+        getArrParam: function (arr) {
             _self = this;
             var resultArr = [];
-            if(arr){
-                $.each(arr,function (index,value) {
+            if (arr) {
+                $.each(arr, function (index, value) {
                     var item = {
                         fileName: value.responseName,
                         fileOldName: value.responseOldName,
@@ -669,15 +682,16 @@ define(['underscore',
                 });
             }
         },
-        saveFeedback: function (taskId,filesArr) {
+        saveFeedback: function (taskId, filesArr) {
             _self = this;
             $('.feedback-valid').validatebox();
             if ($('.validatebox-invalid').length > 0) {
                 return false;
             }
             var fileInfoArr = []; //传入后台参数的文件数组...
-            if(filesArr && filesArr.length>0){
-                var filesArrProcessed=0;
+            var taskFkFiles = []; //传入后台参数的文件数组...
+            if (filesArr && filesArr.length > 0) {
+                var filesArrProcessed = 0;
                 //图片或视频上传
                 filesArr.forEach(function (item, i) {
                     if (item.file) {
@@ -698,7 +712,7 @@ define(['underscore',
                                 if (res.flag == 1) {
                                     //上传成功后的操作
                                     // $(".pic-info").removeClass("hide");
-debugger
+                                    debugger
                                     var itemObj = {
                                         fileName: res.data.source.substring(12),
                                         fileOldName: res.data.oldName,
@@ -709,33 +723,34 @@ debugger
                                     fileInfoArr.push(itemObj);
                                     filesArrProcessed++;
                                     //遍历循环结束后将反馈参数上传
-                                    if(filesArrProcessed===filesArr.length){
-                                        var taskFkFiles = [];
-                                        if(fileInfoArr && fileInfoArr.length>0){
+                                    if (filesArrProcessed === filesArr.length) {
+                                        if (fileInfoArr && fileInfoArr.length > 0) {
                                             //将对象元素转换成字符串以作比较
-                                            function obj2key(obj, keys){
+                                            function obj2key(obj, keys) {
                                                 var n = keys.length,
                                                     key = [];
-                                                while(n--){
+                                                while (n--) {
                                                     key.push(obj[keys[n]]);
                                                 }
                                                 return key.join('|');
                                             }
+
                                             //去重操作
-                                            function uniqeByKeys(array,keys){
+                                            function uniqeByKeys(array, keys) {
                                                 var arr = [];
                                                 var hash = {};
                                                 for (var i = 0, j = array.length; i < j; i++) {
                                                     var k = obj2key(array[i], keys);
                                                     if (!(k in hash)) {
                                                         hash[k] = true;
-                                                        arr .push(array[i]);
+                                                        arr.push(array[i]);
                                                     }
                                                 }
-                                                return arr ;
+                                                return arr;
                                             }
+
                                             debugger
-                                            fileInfoArr=uniqeByKeys(fileInfoArr,['fileName']);
+                                            fileInfoArr = uniqeByKeys(fileInfoArr, ['fileName']);
                                             taskFkFiles = fileInfoArr;
                                             debugger
                                             console.info(taskFkFiles);
@@ -751,11 +766,12 @@ debugger
                                                 taskFkFiles: taskFkFiles,
                                                 taskid: taskId
                                             };
-                                            taskAjax.addTaskFk(param, function (r) {debugger
+                                            taskAjax.addTaskFk(param, function (r) {
+                                                debugger
                                                 if (r.flag == 1) {
                                                     toast('反馈成功！', 600, function () {
                                                         _self.showList();
-                                                        if($("#userListDiv")){//如果是从指挥协作的图右键打开还要关闭
+                                                        if ($("#userListDiv")) {//如果是从指挥协作的图右键打开还要关闭
                                                             $("#userListDiv").$close();
                                                         }
                                                     }).ok();
@@ -777,10 +793,34 @@ debugger
                     }
                 });
                 //图片或视频上传end
+            } else {
+                var param = {
+                    bz: $.trim($("#bz").val()),
+                    createname: top.trueName,
+                    creator: top.userId,
+                    deparmentcode: top.orgCode,
+                    fkTime: $("#fkTime").val(),
+                    fkr: top.userId,
+                    fkrname: top.trueName,
+                    fkxs: $("#fkxs").val(),
+                    taskFkFiles: taskFkFiles,
+                    taskid: taskId
+                };
+                taskAjax.addTaskFk(param, function (r) {
+                    debugger
+                    if (r.flag == 1) {
+                        toast('反馈成功！', 600, function () {
+                            _self.showList();
+                            if ($("#userListDiv")) {//如果是从指挥协作的图右键打开还要关闭
+                                $("#userListDiv").$close();
+                            }
+                        }).ok();
+                    } else {
+                        toast(r.msg, 600).err()
+                    }
+                });
 
             }
-
-
         },
         handleTransfer: function (taskId, taskInfo) {
             _self = this;
@@ -809,12 +849,12 @@ debugger
                 return false;
             });
         },
-        showAdd: function (taskinfo, text,fkid) {
+        showAdd: function (taskinfo, text, fkid) {
             _self = this;
             var bcrwid, fkid;
             var taskinfo = str2obj(taskinfo);
             if (taskinfo) {
-                switch (text){
+                switch (text) {
                     case "补充任务":
                         bcrwid = taskinfo.id;
                         break;
@@ -841,7 +881,10 @@ debugger
                     var groupinfo = str2obj($("#groupid").attr("paramattr"));
                     var taskinfo = str2obj($("#groupid").attr("taskparamattr"));
                     //dictOpener.openChoosePort($(this), $post, top.servicePath_xz + '/usergroup/getUsergroupPage', {groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true}, "user");
-                    dictOpener.getUserByGroupIdPortList($(this),{groupId: text ? taskinfo.groupid : groupinfo.id,isInGroup: true})
+                    dictOpener.getUserByGroupIdPortList($(this), {
+                        groupId: text ? taskinfo.groupid : groupinfo.id,
+                        isInGroup: true
+                    })
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }
@@ -863,8 +906,8 @@ debugger
                 if (text) {
                     taskParam = str2obj($("#groupid").attr("taskparamattr"));
                 }
-                var jsr,jsrname;
-                if($("#jsr").attr("paramattr")){
+                var jsr, jsrname;
+                if ($("#jsr").attr("paramattr")) {
                     jsr = jsrParam.userId;
                     jsrname = jsrParam.userName;
                 } else {
@@ -904,9 +947,9 @@ debugger
             //获取专案组组内成员
             var taskInfo = str2obj(taskInfo);
             var param = {
-                isInGroup:true,
+                isInGroup: true,
                 groupId: taskInfo.groupid,
-                orgId:$.trim($("#userListDiv #orgId").val()),
+                orgId: $.trim($("#userListDiv #orgId").val()),
                 userName: $.trim($("#userListDiv #userName").val()),
                 policeId: $.trim($("#userListDiv #policeId").val())
             };
@@ -916,7 +959,7 @@ debugger
                         data: r.data,
                         ops: top.opsMap,
                         checkboxMulti: isCheckboxMulti,
-                        taskInfoFqr:taskInfo.fqr
+                        taskInfoFqr: taskInfo.fqr
                     }));
                     $(".span").span();
                 }

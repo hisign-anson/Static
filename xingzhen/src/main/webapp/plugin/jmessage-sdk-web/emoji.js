@@ -70,7 +70,8 @@ var Emoji = {
         fontSize = Math.min(fontSize, Emoji.maxSize);
 
         text = text.replace(Emoji.reg, function(code) {
-            return '<img width=' + fontSize + ' class="emoji" style="vertical-align:middle" src="' + Emoji.emojiPath + Emoji._escapeToUtf32(code) + '.png">';
+            //将code放入标签中，发送消息时使用其值
+            return '<img width=' + fontSize + ' class="emoji" code="'+code+'" style="vertical-align:middle" src="' + Emoji.emojiPath + Emoji._escapeToUtf32(code) + '.png">';
         });
 
         if (isElement) {

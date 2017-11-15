@@ -564,7 +564,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
 //                            $("#avatar-selectedImg").attr('href', top.ftpServer +  r.data.source)//r.data.p160_160
 //                            editavatar(r.data.source);
                         } else {
-                            toast(obj.msg, 600).err();
+                            toast(r.msg, 600).err();
                             $(".progress-bar").css('width','0%');
                         }
                         $(".progress-bar").css('width','100%');

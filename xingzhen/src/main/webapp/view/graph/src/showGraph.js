@@ -833,7 +833,8 @@ define(['underscore',
                     $open('#userListDiv', {width: 800, title: '&nbsp反馈任务'});
                     $("#userListDiv .panel-container").empty().html(_.template(taskEditTpl, {
                         data: r.data,
-                        isOperation: true
+                        isOperation: true,
+                        replenishTaskBtnOper:null
                     }));
                     var fileInfoArr = []; //传入后台参数的文件数组...
                     var filesArr = []; //存放文件的数组...

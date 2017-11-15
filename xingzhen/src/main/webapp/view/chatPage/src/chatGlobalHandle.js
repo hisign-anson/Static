@@ -46,7 +46,6 @@ var jchatGloabal = {
 
             //离线消息同步监听
             JIM.onSyncConversation(function (data) {
-                debugger
                 if (data && data.length > 0) {
                     $.each(data, function (dataIndex, dataValue) {
                         $.each(dataValue.msgs, function (msgsIndex, msgsValue) {
@@ -59,17 +58,13 @@ var jchatGloabal = {
             });
             //聊天消息实时监听
             JIM.onMsgReceive(function (data) {
-                debugger
                 if (data.messages && data.messages.length > 0) {
-                    debugger
                     $.each(data.messages, function (msgsIndex, msgsValue) {
-                        debugger
                         var content = msgsValue.content;
                         msgAll.push(content);
                         //追加实时聊天消息
                         var jmgid = $("#main-frame").contents().find("#chatBlock .panel-container").attr("jmgid");
                         var jmgidHome = window.parent.$("#fixed-chat-block .panel-container").attr("jmgidHome");
-                        debugger
                         jchatGloabal.showAllMsg(jmgid);
                         jchatGloabalHome.showAllMsg(jmgidHome);
                         // $("#main-frame").contents().find(".message-list").append("聊天消息实时监听");
@@ -102,7 +97,6 @@ var jchatGloabal = {
             });
             //同步业务事件监听
             JIM.onSyncEvent(function (data) {
-                debugger
                 //do something
                 switch (data.event_type) {
                     case "1":
@@ -119,7 +113,6 @@ var jchatGloabal = {
             });
             //会话未读数变更监听（多端在线）
             JIM.onMutiUnreadMsgUpdate(function (data) {
-                debugger
                 // data.type 会话类型
                 // data.gid 群 id
                 // data.appkey 所属 appkey
@@ -138,11 +131,9 @@ var jchatGloabal = {
         });
     },
     onEventNotification: function () {
-        debugger
         var onEventNotification_res = str2obj(localData.get('onEventNotification_res'));
         switch (onEventNotification_res.type) {
             case "1":
-                debugger
                 //同时登录，被迫下线示例：event_type = 1
                 //被踢者收到该事件
                 toast("业务事件监听:同时登录，被迫下线", 600).warn();
@@ -160,7 +151,6 @@ var jchatGloabal = {
                 JIM.loginOut();//极光退出登录
                 break;
             case "2":
-                debugger
                 //密码被修改，被迫下线示例：event_type = 2
                 //当前在线者收到该事件
                 toast("业务事件监听:密码被修改，被迫下线", 600).warn();
@@ -202,7 +192,7 @@ var jchatGloabal = {
             toast(obj2str(data), 600).err();
         });
     },
-    getGroupMembers: function (gid) {debugger
+    getGroupMembers: function (gid) {
         setTimeout(function () {
             JIM.getGroupMembers({'gid': gid}).onSuccess(function (data) {
                 var li = '';
@@ -542,13 +532,10 @@ var jchatGloabal = {
         });
     },
     getConversation: function () {
-        debugger
         JIM.getConversation().onSuccess(function (data) {
-            debugger
             var conversations = data.conversations;
             var li = '';
             $.each(conversations, function (index, value) {
-                debugger
                 //只展示群会话
                 if (value.type == 4) {//单聊3群聊4
                     li += '<li class="conversations-li" jmgid="' +
@@ -711,7 +698,6 @@ var jchatGloabal = {
                             '<div class="text-wrap"><div class="all-text">' + content_text + '</div>' +
                             '</div></div>';
                         } else {
-                            debugger
                             if (message_list_content.at_list && message_list_content.at_list.length == 0) {
                                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
                                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
@@ -720,7 +706,6 @@ var jchatGloabal = {
                                 '<div class="text"> @所有人 ' + content_text + '</div>' +
                                 '</div>' +
                                 '</div>';
-
                             } else {
                                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
                                 '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
@@ -738,6 +723,7 @@ var jchatGloabal = {
                     }
                 });
                 $("#main-frame").contents().find(".message-list").append(list);
+                // $("#main-frame").contents().find(".message-list").find(".text-wrap").find(".text").emoji();
                 jchatGloabal.getResourceMessageHtml();
                 clickHandle.scrollBottom();
             }
@@ -768,10 +754,14 @@ var clickHandle = {
         clickHandle.showDiv(contrlDiv);
     },
     sendText: function (gid) {
-        // debugger
         $("#main-frame").contents().find("#messageContent").find("div").remove();
         $("#main-frame").contents().find("#messageContent").find("br").remove();//去掉回车换行
-        var textContent = $("#main-frame").contents().find("#messageContent").html();
+        var textContent;
+        if($("#main-frame").contents().find("#messageContent").find(".emoji").hasClass("emoji")){
+            textContent = $("#main-frame").contents().find("#messageContent").find(".emoji").attr("code");
+        }else {
+            textContent = $("#main-frame").contents().find("#messageContent").html();
+        }
         if (textContent == "") {
             toast("不能发送空白消息！");
         } else {
@@ -863,6 +853,7 @@ var clickHandle = {
         msgContetHtml +
         '</li>';
         ulHtml.append(list);
+        // ulHtml.find(".text-wrap").find(".text").emoji();
         jchatGloabal.getResourceMessageHtml();
         clickHandle.scrollBottom();
     },
@@ -871,7 +862,6 @@ var clickHandle = {
         if (obj.find(".conversation").is(":visible")) {
             $conversation.addClass("hide");
         } else {
-            debugger
             $conversation.removeClass("hide");
             jchatGloabal.getConversation();
         }
