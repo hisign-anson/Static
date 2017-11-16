@@ -1379,13 +1379,8 @@ define(['underscore',
                         }
                     });
 
-                    $('.slick-list').slick({
-                        dots: true
-                    });
-
                     $("#feedbackBtn").on("click", function () {
-                        task.saveFeedback(id, filesArr);
-                        _selfGraphLayout.showList(r.data.groupid, graphType);
+                        _selfGraphLayout.saveFeedback(id, filesArr, graphType);
                     });
                     $("#cancelBtn").on("click", function () {
                         $("#userListDiv").$close();
@@ -1393,6 +1388,146 @@ define(['underscore',
                 }
 
             });
+        },
+        saveFeedback: function (taskId, filesArr, graphType) {
+            _selfGraphLayout = this;
+            $('.feedback-valid').validatebox();
+            if ($('.validatebox-invalid').length > 0) {
+                return false;
+            }
+            var fileInfoArr = []; //传入后台参数的文件数组...
+            var taskFkFiles = []; //传入后台参数的文件数组...
+            if (filesArr && filesArr.length > 0) {
+                var filesArrProcessed = 0;
+                //图片或视频上传
+                filesArr.forEach(function (item, i) {
+                    if (item.file) {
+                        var data = new FormData();
+                        data.append('file', item.file);
+                        //调用远程服务器上传文件
+                        $.ajax({
+                            url: top.servicePath + '/sys/file/upload?isResize=true',
+                            type: 'POST',
+                            data: data,
+                            async: true,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            beforeSend: function () {
+                            },
+                            success: function (res) {
+                                if (res.flag == 1) {
+                                    //上传成功后的操作
+                                    // $(".pic-info").removeClass("hide");
+                                    debugger
+                                    var itemObj = {
+                                        fileName: res.data.source.substring(12),
+                                        fileOldName: res.data.oldName,
+                                        filePath: res.data.source,
+                                        fileSize: filesArr[i].size,
+                                        fileType: filesArr[i].type
+                                    }
+                                    fileInfoArr.push(itemObj);
+                                    filesArrProcessed++;
+                                    //遍历循环结束后将反馈参数上传
+                                    if (filesArrProcessed === filesArr.length) {
+                                        if (fileInfoArr && fileInfoArr.length > 0) {
+                                            //将对象元素转换成字符串以作比较
+                                            function obj2key(obj, keys) {
+                                                var n = keys.length,
+                                                    key = [];
+                                                while (n--) {
+                                                    key.push(obj[keys[n]]);
+                                                }
+                                                return key.join('|');
+                                            }
+
+                                            //去重操作
+                                            function uniqeByKeys(array, keys) {
+                                                var arr = [];
+                                                var hash = {};
+                                                for (var i = 0, j = array.length; i < j; i++) {
+                                                    var k = obj2key(array[i], keys);
+                                                    if (!(k in hash)) {
+                                                        hash[k] = true;
+                                                        arr.push(array[i]);
+                                                    }
+                                                }
+                                                return arr;
+                                            }
+
+                                            debugger
+                                            fileInfoArr = uniqeByKeys(fileInfoArr, ['fileName']);
+                                            taskFkFiles = fileInfoArr;
+                                            debugger
+                                            console.info(taskFkFiles);
+                                            var param = {
+                                                bz: $.trim($("#bz").val()),
+                                                createname: top.trueName,
+                                                creator: top.userId,
+                                                deparmentcode: top.orgCode,
+                                                fkTime: $("#fkTime").val(),
+                                                fkr: top.userId,
+                                                fkrname: top.trueName,
+                                                fkxs: $("#fkxs").val(),
+                                                taskFkFiles: taskFkFiles,
+                                                taskid: taskId
+                                            };
+                                            taskAjax.addTaskFk(param, function (r) {
+                                                debugger
+                                                if (r.flag == 1) {
+                                                    toast('反馈成功！', 600, function () {
+                                                        if ($("#userListDiv")) {//如果是从指挥协作的图右键打开还要关闭
+                                                            $("#userListDiv").$close();
+                                                            _selfGraphLayout.showList(r.data.groupid, graphType);
+                                                        }
+                                                    }).ok();
+                                                } else {
+                                                    toast(r.msg, 600).err()
+                                                }
+                                            });
+                                        }
+                                    }
+                                } else {
+                                    console.info(res);
+                                }
+                            },
+                            error: function () {
+                                //远程调用错误时，调用本地的上传文件接口
+                                //TODO
+                            }
+                        });
+                    }
+                });
+                //图片或视频上传end
+            } else {
+                var param = {
+                    bz: $.trim($("#bz").val()),
+                    createname: top.trueName,
+                    creator: top.userId,
+                    deparmentcode: top.orgCode,
+                    fkTime: $("#fkTime").val(),
+                    fkr: top.userId,
+                    fkrname: top.trueName,
+                    fkxs: $("#fkxs").val(),
+                    taskFkFiles: taskFkFiles,
+                    taskid: taskId
+                };
+                taskAjax.addTaskFk(param, function (r) {
+                    debugger
+                    if (r.flag == 1) {
+                        toast('反馈成功！', 600, function () {
+                            if ($("#userListDiv")) {//如果是从指挥协作的图右键打开还要关闭
+                                $("#userListDiv").$close();
+                                _selfGraphLayout.showList(r.data.groupid, graphType);
+                            }
+                        }).ok();
+                    } else {
+                        toast(r.msg, 600).err()
+                    }
+                });
+
+            }
         },
         transferTask: function (id) {
             _selfGraphLayout = this;

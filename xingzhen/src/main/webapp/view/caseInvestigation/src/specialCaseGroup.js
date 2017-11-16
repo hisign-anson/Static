@@ -115,7 +115,7 @@ define(['underscore',
                         var jmgid = $(this).attr("jmgid");
                         window.parent.$("#fixed-chat").addClass("hide");//首页右下角的聊天按钮隐藏
                         $open('#chatBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
-                        $("#chatBlock .panel-container").attr("jmgid",jmgid).attr("groupid",groupid).css("margin-top", "0").empty().html(_.template(chatPageTpl));
+                        $("#chatBlock .panel-container").attr("jmgid", jmgid).attr("groupid", groupid).css("margin-top", "0").empty().html(_.template(chatPageTpl));
                         window.parent.jchatGloabal.getUserInfo();
                         window.parent.jchatGloabal.getGroupInfo(jmgid);
                         window.parent.jchatGloabal.getGroupMembers(jmgid);
@@ -143,7 +143,18 @@ define(['underscore',
                             if (e.keyCode === 13) {
                                 window.parent.clickHandle.sendText(jmgid);
                             }
+                        }).bind({
+                            copy: function () {
+                                console.info('copy behaviour detected!');
+                            },
+                            paste: function () {
+                                console.info('paste behaviour detected!');
+                            },
+                            cut: function () {
+                                console.info('cut behaviour detected!');
+                            }
                         });
+
                         $("#chatBlock").parents(".window").find(".panel-tool-close").click(function () {
                             window.parent.$("#fixed-chat").removeClass("hide");//首页右下角的聊天按钮显示
                             var chatParam = {
@@ -270,7 +281,7 @@ define(['underscore',
                                     var jmgid = $(this).attr("jmgid");
 
                                     $open('#chatBlock', {width: 840, height: 700, title: '&nbsp专案组群聊'});
-                                    $("#chatBlock .panel-container").attr("jmgid",jmgid).attr("groupid",groupid).css("margin-top", "0").empty().html(_.template(chatPageTpl));
+                                    $("#chatBlock .panel-container").attr("jmgid", jmgid).attr("groupid", groupid).css("margin-top", "0").empty().html(_.template(chatPageTpl));
                                     window.parent.jchatGloabal.getUserInfo();
                                     window.parent.jchatGloabal.getGroupInfo(jmgid);
                                     window.parent.jchatGloabal.getGroupMembers(jmgid);
@@ -318,7 +329,7 @@ define(['underscore',
                 });
             }
         },
-        showAdd: function (pgroupid, pgroupname,grouptype) {
+        showAdd: function (pgroupid, pgroupname, grouptype) {
             _self = this;
             $("#mainDiv").empty().html(_.template(specialCaseGroupAddTpl, {data: null}));
             $('#addGroupTab a').click(function (e) {
@@ -329,7 +340,7 @@ define(['underscore',
                         _self.showBaseInfo(groupinfo);
                     } else {
                         debugger;
-                        _self.handleBaseInfo(pgroupid, pgroupname,grouptype);
+                        _self.handleBaseInfo(pgroupid, pgroupname, grouptype);
                     }
                 } else if ($(this).attr("id") == "navRelationCase") {
                     var groupinfo = str2obj($(this).parents("#addGroupTab").attr("groupinfo"));
@@ -379,7 +390,7 @@ define(['underscore',
             if (checkbox.length > 0) {
                 //do something
                 debugger;
-                _self.showAdd(checkbox[0].groupid, checkbox[0].groupname,checkbox[0].grouptype);
+                _self.showAdd(checkbox[0].groupid, checkbox[0].groupname, checkbox[0].grouptype);
             } else {
                 toast("请选择一个专案组！", 600).warn()
             }
@@ -419,7 +430,7 @@ define(['underscore',
                 }
             });
         },
-        handleBaseInfo: function (pgroupid, pgroupname,grouptype) {
+        handleBaseInfo: function (pgroupid, pgroupname, grouptype) {
             _self = this;
             $(".form-content-block").empty().html(_.template(baseInfoTpl));
             $(".form-btn-block").removeClass("hide");
@@ -433,7 +444,7 @@ define(['underscore',
                 $("#groupname-span").parents(".equal-col-4").append(html);
                 //显示专案组类别
                 $("#grouptype").val(grouptype);//给隐藏的input 赋值
-                var groupTypeHtml='<span class="span" dict-root="24" style="visibility: hidden;"  return-value="'+grouptype+'"></span>';
+                var groupTypeHtml = '<span class="span" dict-root="24" style="visibility: hidden;"  return-value="' + grouptype + '"></span>';
                 $("#grouptype").parents(".dict-opener").append(groupTypeHtml);
                 $(".span").span();
                 $("#grouptypeName").val($('[dict-root="24"]').text());

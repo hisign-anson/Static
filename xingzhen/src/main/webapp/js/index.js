@@ -186,14 +186,6 @@ if(!top.token || !top.limits ||!top.trueName){
         if (r.flag == 1) {
             var data = r.data;
             if(data.avatar && data.avatar !=''){
-                // var obj = str2obj(data.avatar);
-                // var avatar;
-                // if(data.avatar.indexOf("source")>-1){
-                //     avatar = obj.source
-                // } else {
-                //     avatar = data.avatar
-                // }
-
                 var obj = eval('(' + data.avatar + ')');
                 $("#img-responsive").attr("src",top.ftpServer+obj.source);
                 $("#confirm-logout-img").attr("src",top.ftpServer+obj.source);
@@ -241,7 +233,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     localParamsInit(top.molKeys);
 
     //调用极光初始化接口
-    jchatGloabal.init();
+    jchatGloabal.init(top.userId,top.userPassword);
     indexInit();
 
     //顶层属性与供内部frame调用的方法
@@ -284,16 +276,7 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     $filter('iconClass',function(){
         var dic={
             '首页':'glyphicons glyphicons-home',
-            //'我的应用':'glyphicons glyphicons-show_big_thumbnails',
-            //'案件勘验':'glyphicons glyphicons-tags',
-            //'物证保管':'glyphicons glyphicons-sampler',
-            //'系统维护':'glyphicons glyphicons-cogwheels',
-            //'工作监督':'glyphicons glyphicons-imac',
-            //'质量检查':'glyphicons glyphicons-check',
             '系统管理':'glyphicons fa icon-wrench',
-            //'研判分析':'glyphicons fa icon-legal',
-            //'技术管理':'glyphicons fa icon-sitemap',
-            //'统计考核':'glyphicons fa icon-bar-chart',
             '财务管理':'glyphicons glyphicons-usd',
             '物品管理':'glyphicons glyphicons-gift',
             '车辆管理':'glyphicons glyphicons-cars',
@@ -384,101 +367,6 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
 
         return canvas;
     }
-    function editavatar(){
-        var $image = $('#avatar-img');
-        var $inputImage = $('#inputImage');
-        var result = $('#result');
-
-        var URL = window.URL || window.webkitURL;
-        var blobURL;
-        var croppable = false;
-        var cropper = $image.cropper({
-            aspectRatio: 1,
-            viewMode: 3,
-            autoCropArea: 0.5,
-            minContainerHeight :  240,
-            minContainerWidth : 240,
-            ready: function () {
-                croppable = true;
-            },
-            crop: function (e) {
-                var croppedCanvas;
-                var roundedCanvas;
-//                var roundedImage;
-                if (!croppable) {
-                    return;
-                }
-                // Crop
-                croppedCanvas = $image.cropper('getCroppedCanvas');
-                // Round
-                roundedCanvas = getRoundedCanvas(croppedCanvas);
-                // Show
-//                roundedImage = document.createElement('img');
-//                roundedImage.style.width = 100 + "px";
-//                roundedImage.style.height = 100 + "px";
-//                roundedImage.src = roundedCanvas.toDataURL();
-//                result.html(roundedImage);
-                result.html('<img src="' + roundedCanvas.toDataURL() + '">');
-
-                var data = roundedCanvas.toDataURL();
-                data=data.split(',')[1];
-                data=window.atob(data);
-                var ia = new Uint8Array(data.length);
-                for (var i = 0; i < data.length; i++) {
-                    ia[i] = data.charCodeAt(i);
-                };
-                var bd=new Blob([ia], {type:"image/png"});// canvas.toDataURL 返回的默认格式就是 image/png
-                var formData = new FormData();
-
-                formData.append('file', bd);
-
-                $.ajax({
-                    url: top.servicePath + '/sys/file/upload',
-                    method: "POST",
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        $("#avatar").val(obj2str(data.data));
-                        console.log('Upload success');
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-
-            }
-        });
-        if (URL) {
-            $inputImage.change(function () {
-                var files = this.files;
-                var file;
-
-                if (!$image.data('cropper')) {
-                    return;
-                }
-
-                if (files && files.length) {
-                    file = files[0];
-
-                    if (/^image\/\w+$/.test(file.type)) {
-                        blobURL = URL.createObjectURL(file);
-                        $image.one('built.cropper', function () {
-
-                            // Revoke when load complete
-                            URL.revokeObjectURL(blobURL);
-                        }).cropper('reset').cropper('replace', blobURL);
-                        $inputImage.val('');
-                    } else {
-                        window.alert('Please choose an image file.');
-                    }
-                }
-            });
-        } else {
-            $inputImage.prop('disabled', true).parent().addClass('disabled');
-        }
-    }
     //点击进入个人中心
     $('#user-center').on('click', function () {
         var param = {
@@ -534,22 +422,12 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                         });
                     });
                 }
-                // importing('datepicker',function(){
-                //     $("#birth").datepicker({format: 'yyyy-mm-dd'});
-                // });
                 $(".dict").dict();
                 $(".dict").dictSelect(data.post);
                 $("[dict-id='post'] #post").addClass("w260px");
                 $("#address").val(data.address);
                 $open('#edit-user-block', {width: 680, top: 80, title: '&nbsp用户个人中心'});
-                //importing(  '../plugin/daterangepicker/moment.js','../plugin/daterangepicker/datetimepicker.js', function () {
-                //    $("#birth").datetimepicker({
-                //        format: 'YYYY-MM-DD',
-                //        pickTime: false
-                //    });
-                //});
-//                editavatar();
-//                //上传图片
+                //上传图片
                 upclick({
                     dataname: "file",
                     element: "avatar-btn",
@@ -561,8 +439,6 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
                         if (r.flag == 1) {
                             $("#avatar").val(obj2str(r.data));
                             $("#avatar-img").attr('src', top.ftpServer + r.data.source);
-//                            $("#avatar-selectedImg").attr('href', top.ftpServer +  r.data.source)//r.data.p160_160
-//                            editavatar(r.data.source);
                         } else {
                             toast(r.msg, 600).err();
                             $(".progress-bar").css('width','0%');
@@ -668,26 +544,4 @@ importing('utility.js','main.js','fullscreen','socket', 'dict', function(){
     //默认载入首页
     $('.accordion-toggle')[0].click();
     $('a[direct$=html]')[0].click();
-
-
-    // //打开收件箱页面
-    // $('#msg-count-wrap').on('click',function(){
-    //     //如果已经打开过,并且没有被关闭清除, 那就直接选中现在这个
-    //     if(typeof window.msgTab=='object' && window.msgTab.children().length>0){
-    //         var html ='<em id="newsTitle">收件箱</em>';
-    //         window.msgTab=$openOnce(getViewPath('fstPage/newsMessage.html'), html);
-    //         $("#msg-left-content div.li:eq(0) .cc").trigger("click");
-    //     }else{
-    //         var html ='<em id="newsTitle">收件箱</em>';
-    //         window.msgTab=$open(getViewPath('fstPage/newsMessage.html'),html);
-    //     }
-    //
-    // });
-    
-    // $post(top.servicePath+'/sys/message/findReceivePageCount',{receiverId:top.userName,msgState:"0"},function (res) {
-    //     if(res.flag == 1){
-    //     	$("#msg-count").text(res.totalCount)
-    //     }
-    // },true);
-    
 });

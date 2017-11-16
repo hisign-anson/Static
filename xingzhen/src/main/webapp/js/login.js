@@ -98,7 +98,9 @@ $(document).ready(function () {
                     }
                     localData.set('isGeneralRole', isGeneralRole);
                     // //调用极光初始化接口
-                    // jchatGloabal.init();
+                    // var userId = localData.get('currentUser') ? localData.get('currentUser').userId:'';
+                    // var userPassword = "123456";
+                    // jchatGloabal.init(userId,userPassword);
                     location.replace(window.path + '/view/home.html?version=' + config.version);
                 }
             }

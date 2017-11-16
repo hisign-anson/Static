@@ -246,7 +246,9 @@
     opacity: 0;
     width: 30px;
 }
+.at-list{
 
+}
 .div-panel {
     display: none;
     position: absolute;
@@ -290,6 +292,7 @@ img.emoji {
     width: 100%;
     padding: 5px;
     outline: none;
+    overflow-y: auto;
 }
 
 .m-btn {
