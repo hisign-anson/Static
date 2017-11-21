@@ -61,7 +61,8 @@ define(['underscore',
                     if (
                         (param.startTime && param.endTime && value.taskCreateTime && isInTimeRange == false) ||
                         (param.taskStatus && value.taskStatus && param.taskStatus != value.taskStatus) ||
-                        (param.feedBackUserId && value.feedbackUser && param.feedBackUserId != value.feedbackUser) ||
+                        (param.feedbackUser && value.taskReceiveUserId && param.feedbackUser != value.taskReceiveUserId) ||
+                        // (param.feedbackUser && value.feedBackUserId && param.feedbackUser != value.feedBackUserId) ||
                         (param.sponsor && value.taskCreatorUserId && param.sponsor != value.taskCreatorUserId)
                     ) {
                         //不符合查询条件的节点数据

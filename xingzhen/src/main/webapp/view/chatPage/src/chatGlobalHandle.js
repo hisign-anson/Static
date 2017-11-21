@@ -140,6 +140,18 @@ var jchatGloabal = {
         });
 
     },
+    //更新个人信息
+    updateSelfInfo:function (avatar) {
+        JIM.updateSelfInfo({
+            'address' : avatar.source//头像字段
+        }).onSuccess(function(data) {
+            //data.code 返回码
+            //data.message 描述
+        }).onFail(function(data) {
+            //同上
+            toast(obj2str(data), 600).err();
+        });
+    },
     getGroupInfo: function (gid) {
         JIM.getGroupInfo({
             'gid': gid
