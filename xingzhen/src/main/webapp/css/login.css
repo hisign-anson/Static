@@ -335,6 +335,7 @@ body h1, body h2, body p {
 
 .login-content {
     background-color: #045daf;
+    position: relative;
 }
 
 .login-content .slick-container {
@@ -342,7 +343,6 @@ body h1, body h2, body p {
     height: 435px;
     overflow: hidden;
     margin: 0 auto;
-    position: relative;
 }
 
 .login-content .slick-container img {
@@ -379,7 +379,8 @@ body h1, body h2, body p {
 .login-content .slick-container .login-container {
     position: absolute;
     top: 62.5px;
-    left: 760px;
+    /*left: 760px;*/
+    right: 12%;
 }
 
 .login-content .slick-container .login-container .form-title {

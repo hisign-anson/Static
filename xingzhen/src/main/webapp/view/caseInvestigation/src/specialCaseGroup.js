@@ -22,15 +22,12 @@ define(['underscore',
     'text!/view/chatPage/tpl/chatPage.html',
     'text!/view/tpl_EmptyOrError/emptyDataPage.html',
     '../dat/specialCaseGroup.js',
-    '../../dictManage/src/dictOpener.js',
-    '../../userInfoManage/dat/userInfo.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl, broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl, caseInfoTpl,
+    '../../dictManage/src/dictOpener.js'], function (_, specialCaseGroupListTpl, specialCaseGroupListTrTpl, specialCaseGroupAddTpl, archivePageTpl, broadcastPageTpl, groupListTpl, caseListTpl, caseListTrTpl, caseInfoTpl,
                                                        userListTpl, userListTrTpl, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, chatPageTpl, emptyDataPage,
-                                                       specialCaseGroupAjax, dictOpener, userInfoAjax) {
+                                                       specialCaseGroupAjax, dictOpener) {
     return {
         showList: function () {
             _self = this;
-            // //关闭没有关闭的弹框
-            // dictOpener.closeOpenerDiv();
             $("#mainDiv").empty().html(_.template(specialCaseGroupListTpl, {ops: top.opsMap}));
 
             $("#chooseCreateName").on('click', function () {
@@ -47,7 +44,6 @@ define(['underscore',
                 $('#endTime').val(end.format('YYYY-MM-DD HH:mm:ss'));
             });
             $("#chooseStaff").on('click', function () {
-                // dictOpener.openChoosePort($(this),$post,"/group/getGroupPage",{},"groupname","groupnum");
                 dictOpener.openUserChoosePort($(this));
             });
             $("#chooseBelongUnit").on('click', function () {
@@ -339,7 +335,6 @@ define(['underscore',
                     if (groupinfo) {
                         _self.showBaseInfo(groupinfo);
                     } else {
-                        debugger;
                         _self.handleBaseInfo(pgroupid, pgroupname, grouptype);
                     }
                 } else if ($(this).attr("id") == "navRelationCase") {
@@ -389,7 +384,6 @@ define(['underscore',
             });
             if (checkbox.length > 0) {
                 //do something
-                debugger;
                 _self.showAdd(checkbox[0].groupid, checkbox[0].groupname, checkbox[0].grouptype);
             } else {
                 toast("请选择一个专案组！", 600).warn()
@@ -439,7 +433,9 @@ define(['underscore',
             });
             if (pgroupname) {
                 //显示父专案组名字
-                var html = '<div class="dict-opener"><input class="common-input" type="text" value="' + pgroupname + '" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
+                var html = '<div class="dict-opener">' +
+                    '<input class="common-input" type="text" value="' + pgroupname + '" id="pgroupname" title="' + pgroupname + '" disabled style="width: 50%; display: inline-block;">' +
+                    '<input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;" maxlength="20"></div>'
                 $("#groupname-span").next().remove();
                 $("#groupname-span").parents(".equal-col-4").append(html);
                 //显示专案组类别
@@ -450,10 +446,6 @@ define(['underscore',
                 $("#grouptypeName").val($('[dict-root="24"]').text());
                 $("#chooseGroupType").addClass("hide");//隐藏点击图标
             }
-            //显示父专案组名字
-            //var html = '<div class="dict-opener"><input class="common-input" type="text" value="'+pgroupname+'" id="pgroupname" disabled style="width: 50%; display: inline-block;"><input class="common-input field-valid" type="text" name="" id="groupname" data-options="required:true" placeholder="请输入专案组名称" style="width: 50%;display: inline-block;"></div>'
-            //$("#groupname-span").next().remove();
-            //$("#groupname-span").parents(".equal-col-4").append(html);
             $("#btnBaseInfo #saveBtn").on("click", function () {
                 _self.saveGroupInfo(pgroupid, pgroupname);
             });
@@ -467,7 +459,6 @@ define(['underscore',
             if ($('.validatebox-invalid').length > 0) {
                 return false;
             }
-            debugger
             var param = {
                 createname: top.trueName,
                 createtime: $("#createtime").val(),
@@ -705,7 +696,6 @@ define(['underscore',
             });
             //关联新案件
             $("#caseListDiv #saveLinkBtn").off("click").on('click', function () {
-                debugger
                 var checkbox = [];
                 $('#caseTable').find('tbody input:checkbox:checked').each(function (i, e) {
                     var caseInfo = {

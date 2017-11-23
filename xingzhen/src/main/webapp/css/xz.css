@@ -820,6 +820,16 @@ input[disabled], textarea[disabled], select[disabled] {
     cursor: pointer;
     z-index: 1;
 }
+.unread-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #cf5748;
+    display: inline-block;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 0 3px;
+}
 .conversation{
     position: absolute;
     right: 64px;

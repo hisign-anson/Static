@@ -62,10 +62,9 @@
 .choose-group {
     font-size: 12px;
     font-weight: 600;
-    line-height: 30px;
-    height: 30px;
+    padding: 0 10px 10px 5px;
     border-bottom: 1px solid #dddddd;
-    margin-bottom: 0;
+    margin: 0;
     cursor: pointer;
 }
 
@@ -84,8 +83,7 @@
 }
 
 .all-group-list ul li {
-    line-height: 40px;
-    height: 40px;
+    padding: 10px 0;
     border-bottom: 1px solid #dddddd;
 }
 

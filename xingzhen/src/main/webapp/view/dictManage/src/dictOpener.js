@@ -30,51 +30,6 @@ define(['underscore',
             opener.find("#resetBtnGroupType").off("click").on("click",function(){
                 opener.find("#groupType").val("");
             });
-            $("#add-dict-btn").off("click").on('click',function(){
-                $open('#addReason-block',{width:400,height:330,top:100, title:'新增'+title});
-                $(".addReason-container").empty().html(_.template(dictOpenerAddTpl));
-
-                var addReasonForm = $('#add-reason-form');
-                dictManageAjax.getDictListByParentKey({key:dictVal},function(r) {
-                    if (r.flag == 1) {
-                        addReasonForm.find("#value").val("");
-                        addReasonForm.find("#remarkReason").val("");
-                        addReasonForm.find("#key").val(r.data.length+1);
-                        if(dictVal == "YCSY"){
-                            addReasonForm.find("#sort").val(r.data.length);
-                        }else {
-                            addReasonForm.find("#sort").val(r.data.length+1);
-                        }
-                    }
-                });
-                $("#save-reason-btn").off("click").on('click',function(){
-                    addReasonForm.find('.validate').validatebox();
-                    if(addReasonForm.find('.validatebox-invalid').length>0){
-                        return false;
-                    }
-                    var param = addReasonForm.serializeObject();
-                    $.extend(param, {
-                        root: dictVal,
-                        parentKey: dictVal,
-                        remark: $.trim($("#remarkReason").val()),
-                        dicLevel:1
-                    });
-                    dictManageAjax.addDict(param, function (r) {
-                        if (r.flag == 1) {
-                            toast('保存成功！', 600, function () {
-                                $('#addReason-block').$close();
-                                _selfDict.getDictListByParentKey(dictVal);
-                            }).ok();
-                        } else {
-                            toast(r.msg, 600).err()
-                        }
-                    });
-                });
-
-                $("#cancel-reason-btn").off("click").on('click',function(){
-                    $('#addReason-block').$close();
-                });
-            });
         },
         getDictListByParentKey: function (key,value) {
             _selfDict = this;
@@ -88,44 +43,14 @@ define(['underscore',
                 jsonObj: param,
                 callback: function (r) {
                     var target = $("#dict-wrap-type");
-                    var tpl = '';
+                    var tpl = '<div><u><span val="">全部</span></div></u>';
                     $.each(r, function (i, o) {
                         tpl += '<div><u><span val="' + o.key + '">' + o.value + '</span>' +
-                            //'<a class="delete-for icon-remove-btn" style="float: right" id="'+o.id+'" dictValue="'+o.value+'"  title="删除"></a>' +
                         '</div></u>';
                     });
                     target.html(tpl);
                 }
             })
-            //dictManageAjax.getDictListByParentKey({key:key,value:value},function(r) {
-            //    if (r.flag == 1) {
-            //        var target = $("#dict-wrap-type");
-            //        var tpl='';
-            //        $.each(r.data, function (i, o) {
-            //            tpl+='<div><u><span val="'+o.key+'">'+o.value+'</span>' +
-            //            //'<a class="delete-for icon-remove-btn" style="float: right" id="'+o.id+'" dictValue="'+o.value+'"  title="删除"></a>' +
-            //            '</div></u>';
-            //        });
-            //        target.html(tpl);
-                    
-                    //$("#dict-wrap-type .delete-for").off("click").on('click',function(){
-                	//	var id=$(this).attr('id');
-                	//	var val=$(this).attr('dictValue');
-                	//	var parentkey = $("#dict-wrap-type").attr('dictVal');
-                	//	$confirm('确认删除【'+val+'】字典？',function(bol) {
-                	//		if(bol){
-                	//			dictManageAjax.delDictById(id,parentkey,function(r){
-                	//				 if (r.flag == 1) {
-                	//					 _selfDict.getDictListByParentKey($("#dict-wrap-type").attr('dictVal'));
-                	//				 }else{
-                	//					 toast(r.msg, 600).err()
-                	//				 }
-                	//			});
-                	//		}
-                	//	});
-                	//});
-        //        }
-        //    });
         },
         openUserChoosePort:function (obj) {//打开人员选择端口
             _selfDict = this;
@@ -146,7 +71,6 @@ define(['underscore',
                 if($("#jsrLxfs").length > 0){
                     $("#jsrLxfs").val($(this).find("span").attr("phone"));
                 }
-                debugger
                 opener.$close();
             });
             opener.find("#queryBtn").off("click").on("click",function(){
@@ -164,8 +88,9 @@ define(['underscore',
             userInfoAjax.getUserInfoListByOrgId({orgId: top.orgId,userName:userName,end:""},function (r) {
                 if (r.flag == 1) {
                     $.each(r.data, function (i, o) {
-                        //加三目去除当前人
-                        o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
+                        // // 加三目去除当前人
+                        // o.userId==top.currentUser.userInfo.userId?tpl+="":tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
+                        tpl+="<div class='item-value'><u><span paramattr='"+ obj2str(o) +"' val='"+o.userId+"' phone='"+o.phone+"'>"+o.userName+","+o.orgName+"</span></div></u>";
                     });
                     target.html(tpl);
                 }

@@ -15,69 +15,74 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="graphLayout.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/graph/src/graphLayout.js">
+      <file leaf-file-name="specialCaseGroup.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="1379" column="23" lean-forward="false" selection-start-line="1379" selection-start-column="23" selection-end-line="1379" selection-end-column="23" />
+            <state relative-caret-position="274">
+              <caret line="610" column="55" lean-forward="false" selection-start-line="610" selection-start-column="55" selection-end-line="610" selection-end-column="55" />
               <folding>
-                <element signature="e#2496#4736#0" expanded="false" />
-                <element signature="e#4754#25245#0" expanded="false" />
-                <element signature="e#5949#7591#0" expanded="false" />
-                <element signature="e#10668#10730#0" expanded="false" />
-                <element signature="e#10785#11667#0" expanded="false" />
-                <element signature="e#11775#11893#0" expanded="false" />
-                <element signature="e#21931#21995#0" expanded="false" />
-                <element signature="e#22050#23379#0" expanded="false" />
-                <element signature="e#25306#30922#0" expanded="false" />
-                <element signature="e#26043#26936#0" expanded="false" />
-                <element signature="e#26989#27070#0" expanded="false" />
-                <element signature="e#27162#27682#0" expanded="false" />
-                <element signature="e#27754#27873#0" expanded="false" />
-                <element signature="e#28597#29307#0" expanded="false" />
-                <element signature="e#29362#29845#0" expanded="false" />
-                <element signature="e#30975#31573#0" expanded="false" />
-                <element signature="e#31612#32354#0" expanded="false" />
-                <element signature="e#33585#34100#0" expanded="false" />
-                <element signature="e#35030#35433#0" expanded="false" />
-                <element signature="e#35474#35700#0" expanded="false" />
-                <element signature="e#35739#37045#0" expanded="false" />
-                <element signature="e#42293#43344#0" expanded="false" />
-                <element signature="e#43407#45049#0" expanded="false" />
-                <element signature="e#45091#46245#0" expanded="false" />
-                <element signature="e#46289#51800#0" expanded="false" />
-                <element signature="e#47486#49919#0" expanded="false" />
-                <element signature="e#50344#51106#0" expanded="false" />
-                <element signature="e#51838#52447#0" expanded="false" />
-                <element signature="e#52493#53021#0" expanded="false" />
-                <element signature="e#53084#59861#0" expanded="false" />
-                <element signature="e#54754#55119#0" expanded="false" />
-                <element signature="e#55536#56224#0" expanded="false" />
-                <element signature="e#56299#56498#0" expanded="false" />
-                <element signature="e#57892#58979#0" expanded="false" />
-                <element signature="e#59911#60166#0" expanded="false" />
-                <element signature="e#60926#64389#0" expanded="false" />
-                <element signature="e#63356#63873#0" expanded="false" />
-                <element signature="e#64569#67989#0" expanded="false" />
-                <element signature="e#70706#71142#0" expanded="false" />
-                <element signature="e#71273#72010#0" expanded="false" />
-                <element signature="e#74688#75143#0" expanded="false" />
-                <element signature="e#77178#77854#0" expanded="false" />
+                <element signature="e#3883#4426#0" expanded="false" />
+                <element signature="e#4480#8911#0" expanded="false" />
+                <element signature="e#7212#7455#0" expanded="false" />
+                <element signature="e#8968#10293#0" expanded="false" />
+                <element signature="e#9293#9643#0" expanded="false" />
+                <element signature="e#10345#11679#0" expanded="false" />
+                <element signature="e#10710#10856#0" expanded="false" />
+                <element signature="e#42873#44074#0" expanded="false" />
+                <marker date="1511417791821" expanded="true" signature="74:93" ph="[...]" />
+                <marker date="1511417791821" expanded="true" signature="22316:22350" ph="..." />
+                <marker date="1511417791821" expanded="true" signature="22511:22544" ph="..." />
+                <marker date="1511417791821" expanded="true" signature="22864:22883" ph="..." />
+                <marker date="1511417791821" expanded="true" signature="23177:23191" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/index.js">
+      <file leaf-file-name="chatGlobalHandleHome.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="235" column="18" lean-forward="false" selection-start-line="235" selection-start-column="18" selection-end-line="235" selection-end-column="18" />
+            <state relative-caret-position="322">
+              <caret line="418" column="66" lean-forward="false" selection-start-line="418" selection-start-column="66" selection-end-line="418" selection-end-column="66" />
               <folding>
-                <element signature="e#13158#14143#0" expanded="false" />
-                <element signature="e#14202#15015#0" expanded="false" />
-                <element signature="e#16919#17885#0" expanded="false" />
-                <element signature="e#17980#18080#0" expanded="false" />
+                <element signature="e#99#1879#0" expanded="false" />
+                <element signature="e#1910#2279#0" expanded="false" />
+                <element signature="e#2314#2771#0" expanded="false" />
+                <element signature="e#2809#3535#0" expanded="false" />
+                <element signature="e#3578#9679#0" expanded="false" />
+                <element signature="e#9766#12421#0" expanded="false" />
+                <element signature="e#12463#14048#0" expanded="false" />
+                <element signature="e#14082#14385#0" expanded="false" />
+                <element signature="e#14422#20558#0" expanded="false" />
+                <element signature="e#20596#20883#0" expanded="false" />
+                <element signature="e#20919#21061#0" expanded="false" />
+                <element signature="e#21102#21336#0" expanded="false" />
+                <element signature="e#21388#21829#0" expanded="false" />
+                <element signature="e#25755#26106#0" expanded="false" />
+                <element signature="e#26142#26486#0" expanded="false" />
+                <element signature="e#26521#36419#0" expanded="false" />
+                <element signature="e#27237#36088#0" expanded="false" />
+                <element signature="e#27826#30140#0" expanded="false" />
+                <element signature="e#36445#47643#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dictOpener.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/dictManage/src/dictOpener.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="93" column="23" lean-forward="true" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+              <folding>
+                <element signature="e#310#1596#0" expanded="false" />
+                <element signature="e#1651#2425#0" expanded="false" />
+                <element signature="e#4854#6182#0" expanded="false" />
+                <element signature="e#6227#6878#0" expanded="false" />
+                <element signature="e#6956#8875#0" expanded="false" />
+                <element signature="e#8932#9775#0" expanded="false" />
+                <element signature="e#9831#11819#0" expanded="false" />
+                <element signature="e#11900#13769#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -86,116 +91,67 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="216">
+              <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
               <folding>
-                <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="specialCaseGroup.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/specialCaseGroup.html">
+      <file leaf-file-name="login.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/login.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="369">
+              <caret line="346" column="0" lean-forward="true" selection-start-line="346" selection-start-column="0" selection-end-line="346" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatGlobal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
+      <file leaf-file-name="relationCase.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+            <state relative-caret-position="246">
+              <caret line="46" column="116" lean-forward="false" selection-start-line="46" selection-start-column="100" selection-end-line="46" selection-end-column="116" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatGlobalHandle.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js">
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="355" column="58" lean-forward="false" selection-start-line="355" selection-start-column="53" selection-end-line="355" selection-end-column="58" />
+            <state relative-caret-position="95">
+              <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
               <folding>
-                <element signature="e#2121#2947#0" expanded="false" />
-                <element signature="e#7031#8598#0" expanded="false" />
-                <element signature="e#8632#8929#0" expanded="false" />
-                <element signature="e#9465#9853#0" expanded="false" />
-                <element signature="e#9889#10270#0" expanded="false" />
-                <element signature="e#10539#10887#0" expanded="false" />
-                <element signature="e#10961#11044#0" expanded="false" />
-                <element signature="e#11669#14087#0" expanded="false" />
-                <element signature="e#11842#14061#0" expanded="false" />
-                <element signature="e#22559#22785#0" expanded="false" />
-                <element signature="e#26192#28222#0" expanded="false" />
-                <element signature="e#28263#31456#0" expanded="false" />
+                <element signature="e#727#1511#0" expanded="false" />
+                <element signature="e#1541#1809#0" expanded="false" />
+                <element signature="e#1838#1985#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatGlobalHandleHome.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js">
+      <file leaf-file-name="base-plus-xz.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/base-plus-xz.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="685" column="16" lean-forward="false" selection-start-line="685" selection-start-column="16" selection-end-line="685" selection-end-column="16" />
-              <folding>
-                <element signature="e#62#1892#0" expanded="false" />
-                <element signature="e#1923#2292#0" expanded="false" />
-                <element signature="e#2327#2784#0" expanded="false" />
-                <element signature="e#2822#3548#0" expanded="false" />
-                <element signature="e#3591#9692#0" expanded="false" />
-                <element signature="e#9779#12434#0" expanded="false" />
-                <element signature="e#12476#14061#0" expanded="false" />
-                <element signature="e#14095#14398#0" expanded="false" />
-                <element signature="e#14435#20571#0" expanded="false" />
-                <element signature="e#20609#20896#0" expanded="false" />
-                <element signature="e#20932#21074#0" expanded="false" />
-                <element signature="e#21115#21349#0" expanded="false" />
-                <element signature="e#21401#21842#0" expanded="false" />
-                <element signature="e#27143#35994#0" expanded="false" />
-                <element signature="e#27732#30046#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="task.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="684" column="16" lean-forward="false" selection-start-line="684" selection-start-column="16" selection-end-line="684" selection-end-column="16" />
-              <folding>
-                <element signature="e#5497#6657#0" expanded="false" />
-                <element signature="e#7843#9074#0" expanded="false" />
-                <element signature="e#36668#37104#0" expanded="false" />
-                <element signature="e#37235#37972#0" expanded="false" />
-                <element signature="e#40619#41074#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="taskAdd.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-995">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="133">
+              <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="taskEdit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskEdit.html">
+      <file leaf-file-name="specialCaseGroupList.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="89" column="75" lean-forward="true" selection-start-line="89" selection-start-column="75" selection-end-line="89" selection-end-column="75" />
-              <folding />
+            <state relative-caret-position="558">
+              <caret line="116" column="14" lean-forward="false" selection-start-line="116" selection-start-column="14" selection-end-line="116" selection-end-column="14" />
+              <folding>
+                <element signature="n#form#0;n#div#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -213,36 +169,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addTaskHandle</find>
+      <find>datet</find>
+      <find>slick</find>
+      <find>websocket</find>
+      <find>ws</find>
       <find>debugger</find>
-      <find>r.data.</find>
-      <find>-webkit-filter: drop-shadow(rgb(0, 204, 153) 80px 0px);filter: drop-shadow(rgb(0, 204, 153) 80px 0px);</find>
-      <find>onEventNotification_res</find>
-      <find>onEventNotification</find>
-      <find>getResourceMessage</find>
-      <find>groupInfo</find>
-      <find>emoji</find>
-      <find>☺</find>
-      <find>text</find>
-      <find>fileInfoArr</find>
-      <find>p</find>
-      <find>pa</find>
-      <find>pas</find>
-      <find>past</find>
-      <find>8088</find>
-      <find>ftpServer</find>
-      <find>getConversation</find>
-      <find>getSolveCaseInfo：</find>
-      <find>getSolveCaseInfo</find>
-      <find>getSolveCaseInfo:</find>
-      <find>paste</find>
-      <find>&quot;paste&quot;</find>
-      <find>:not</find>
-      <find>transferTask</find>
-      <find>showAllMsg</find>
-      <find>sendText</find>
-      <find>v</find>
-      <find>image</find>
+      <find>maxlength</find>
+      <find>请输入专案组名称</find>
+      <find>into-print</find>
+      <find>d3</find>
+      <find>localData</find>
+      <find>t</find>
+      <find>ta</find>
+      <find>tab</find>
+      <find>tabl</find>
+      <find>table</find>
+      <find>时间</find>
+      <find>GXSDM</find>
+      <find>openUserChoosePort</find>
+      <find>getDictListByParentKey</find>
+      <find>di</find>
+      <find>dict</find>
+      <find>dict-</find>
+      <find>dict-t</find>
+      <find>dict-ty</find>
+      <find>cha</find>
+      <find>chat</find>
+      <find>chat.</find>
+      <find>chat.j</find>
+      <find>chat.js</find>
+      <find>dictInLineSelect</find>
     </findStrings>
     <replaceStrings>
       <replace>qc-label-xl</replace>
@@ -269,25 +225,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/achievementInfoGroupMemberTr.html" />
-        <option value="$PROJECT_DIR$/view/fstPage/tpl/moreList/achievementInfoGroupMemberChildTr.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCaseTr.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupStaffTr.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/userListTr.html" />
-        <option value="$PROJECT_DIR$/view/fstPage/achievementMoreList.html" />
-        <option value="$PROJECT_DIR$/view/fstPage/fstPage.html" />
         <option value="$PROJECT_DIR$/view/fstPage/toolDownloadMoreList.html" />
         <option value="$PROJECT_DIR$/view/fstPage/newsMoreList.html" />
         <option value="$PROJECT_DIR$/view/graph/showGraph.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseListTr.html" />
         <option value="$PROJECT_DIR$/view/fstPage/src/fstPage-MoreClick.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/groupList.html" />
-        <option value="$PROJECT_DIR$/view/dictManage/src/dictOpener.js" />
         <option value="$PROJECT_DIR$/view/graph/showGraph.html" />
-        <option value="$PROJECT_DIR$/css/xz.css" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/tpl/commandPage.html" />
         <option value="$PROJECT_DIR$/view/commandCooperationManage/tpl/groupLi.html" />
-        <option value="$PROJECT_DIR$/view/commandCooperationManage/css/command.css" />
         <option value="$PROJECT_DIR$/view/graph/src/showGraph.js" />
         <option value="$PROJECT_DIR$/view/graph/src/graph.js" />
         <option value="$PROJECT_DIR$/view/graph/graph.js" />
@@ -297,8 +243,6 @@
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskListTr.html" />
         <option value="$PROJECT_DIR$/view/userInfoManage/tpl/userInfoEdit.html" />
         <option value="$PROJECT_DIR$/view/chatPage/testValueChange.html" />
-        <option value="$PROJECT_DIR$/view/commandCooperationManage/commandCooperation.html" />
-        <option value="$PROJECT_DIR$/view/commandCooperationManage/src/command.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/task.html" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html" />
         <option value="$PROJECT_DIR$/view/graph/huangshijinTest.json" />
@@ -309,17 +253,29 @@
         <option value="$PROJECT_DIR$/view/graph/d3graphView.html" />
         <option value="$PROJECT_DIR$/view/graph/css/graph.css" />
         <option value="$PROJECT_DIR$/view/chatPage/css/chartPage.css" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/view/home.html" />
-        <option value="$PROJECT_DIR$/js/login.js" />
         <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/specialCaseGroup.html" />
-        <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
-        <option value="$PROJECT_DIR$/view/graph/src/graphLayout.js" />
-        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js" />
-        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js" />
-        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
         <option value="$PROJECT_DIR$/view/caseInvestigation/src/task.js" />
+        <option value="$PROJECT_DIR$/view/graph/src/graphLayout.js" />
+        <option value="$PROJECT_DIR$/view/userInfoManage/src/userInfo.js" />
+        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js" />
+        <option value="$PROJECT_DIR$/view/home.html" />
+        <option value="$PROJECT_DIR$/view/commandCooperationManage/css/command.css" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html" />
+        <option value="$PROJECT_DIR$/css/xz.css" />
+        <option value="$PROJECT_DIR$/view/commandCooperationManage/src/command.js" />
+        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobal.js" />
+        <option value="$PROJECT_DIR$/view/orgManage/src/orgInfo.js" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupList.html" />
+        <option value="$PROJECT_DIR$/js/base.js" />
+        <option value="$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js" />
+        <option value="$PROJECT_DIR$/css/base-plus-xz.css" />
+        <option value="$PROJECT_DIR$/view/dictManage/src/dictOpener.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/login.js" />
+        <option value="$PROJECT_DIR$/css/login.css" />
+        <option value="$PROJECT_DIR$/view/commandCooperationManage/commandCooperation.html" />
+        <option value="$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js" />
       </list>
     </option>
   </component>
@@ -436,113 +392,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="userInfoManage" />
+              <option name="myItemId" value="orgManage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orgManage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tpl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orgManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commandCooperationManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -593,14 +487,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chatPage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -608,121 +494,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tpl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="task" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tpl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caseInvestigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../bigbang-git" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../一体化平台新版前端代码dist/dist" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\js" />
-      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\src" />
-      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\images" />
-      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\images\graph" />
       <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\plugin\date" />
       <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\src" />
       <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph" />
       <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\caseInvestigation\tpl\task" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\js" />
+      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\src" />
+      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view\graph\images" />
+      <recent name="E:\hisign\workcode\Static\xingzhen\src\main\webapp\view" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -836,17 +634,22 @@
       <workItem from="1510197160531" duration="60887000" />
       <workItem from="1510362276851" duration="84299000" />
       <workItem from="1510660149283" duration="51449000" />
+      <workItem from="1510888057392" duration="13991000" />
+      <workItem from="1511160465708" duration="18977000" />
+      <workItem from="1511317636113" duration="1401000" />
+      <workItem from="1511319056149" duration="10248000" />
+      <workItem from="1511408542803" duration="4925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="729734000" />
+    <option name="totallyTimeSpent" value="779276000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1725" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985657" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985657" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -872,367 +675,92 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="38" />
+      <option name="time" value="39" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/plugin/d3/d3.3.5.17.js">
+    <entry file="file://$PROJECT_DIR$/view/newsManage/news.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="290" column="42" lean-forward="false" selection-start-line="290" selection-start-column="33" selection-end-line="290" selection-end-column="42" />
+        <state relative-caret-position="247">
+          <caret line="13" column="62" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/testValueChange.html" />
-    <entry file="file://$PROJECT_DIR$/plugin/jmessage-sdk-web/jmessage-sdk-web.2.4.0.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="1" column="22336" lean-forward="false" selection-start-line="1" selection-start-column="22323" selection-end-line="1" selection-end-column="22336" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/commandCooperation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="33" column="6" lean-forward="true" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/src/command.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="142" column="62" lean-forward="false" selection-start-line="142" selection-start-column="62" selection-end-line="142" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/caseInfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" column="98" lean-forward="false" selection-start-line="27" selection-start-column="98" selection-end-line="27" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/src/graph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4874">
-          <caret line="1358" column="17" lean-forward="true" selection-start-line="1358" selection-start-column="17" selection-end-line="1358" selection-end-column="17" />
-          <folding>
-            <element signature="e#232#823#0" expanded="false" />
-            <element signature="e#2110#2416#0" expanded="false" />
-            <element signature="e#2482#2742#0" expanded="false" />
-            <element signature="e#2925#4593#0" expanded="false" />
-            <element signature="e#10765#11212#0" expanded="false" />
-            <element signature="e#11620#11898#0" expanded="false" />
-            <element signature="e#11992#13775#0" expanded="false" />
-            <element signature="e#21009#22127#0" expanded="false" />
-            <element signature="e#22179#22690#0" expanded="false" />
-            <element signature="e#22749#23506#0" expanded="false" />
-            <element signature="e#23559#23934#0" expanded="false" />
-            <element signature="e#23975#24195#0" expanded="false" />
-            <element signature="e#24244#25696#0" expanded="false" />
-            <element signature="e#25746#30655#0" expanded="false" />
-            <element signature="e#30693#31296#0" expanded="false" />
-            <element signature="e#31342#31886#0" expanded="false" />
-            <element signature="e#31919#37340#0" expanded="false" />
-            <element signature="e#32938#35580#0" expanded="false" />
-            <element signature="e#35760#37327#0" expanded="false" />
-            <element signature="e#37393#41976#0" expanded="false" />
-            <element signature="e#42014#53971#0" expanded="false" />
-            <element signature="e#54009#55356#0" expanded="false" />
-            <element signature="e#55390#56060#0" expanded="false" />
-            <element signature="e#56105#63100#0" expanded="false" />
-            <element signature="e#63153#63650#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/graph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/huangshijinTest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3477">
-          <caret line="585" column="17" lean-forward="false" selection-start-line="585" selection-start-column="15" selection-end-line="585" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="9307" column="12" lean-forward="false" selection-start-line="9307" selection-start-column="12" selection-end-line="9307" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/案件锤子-3830474.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/xkfoot.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/xkfinger.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/xkdna.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/person.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/case.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/ball.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/dna.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/finger.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="49" column="44" lean-forward="false" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="73" column="19" lean-forward="false" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1710">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/jmessage-sdk-web/emoji.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="23" />
-          <folding>
-            <element signature="e#11191#12150#0" expanded="false" />
-            <marker date="1510713884575" expanded="true" signature="13066:13087" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/task.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="63" column="94" lean-forward="true" selection-start-line="63" selection-start-column="94" selection-end-line="65" selection-end-column="91" />
-          <folding>
-            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#1;n#head#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/dat/task.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/base-plus-xz.css">
+    <entry file="file://$PROJECT_DIR$/view/fstPage/newsMoreList.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/src/graphAction.js">
+    <entry file="file://$PROJECT_DIR$/view/newsManage/tpl/rulesList.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="158" lean-forward="false" selection-start-line="19" selection-start-column="145" selection-end-line="19" selection-end-column="158" />
-          <folding>
-            <element signature="e#1472#2538#0" expanded="false" />
-            <element signature="e#2580#3081#0" expanded="false" />
-            <element signature="e#3122#3909#0" expanded="false" />
-            <element signature="e#3962#4352#0" expanded="false" />
-            <element signature="e#4393#4618#0" expanded="false" />
-            <element signature="e#4657#5962#0" expanded="false" />
-            <element signature="e#6002#11106#0" expanded="false" />
-            <element signature="e#6713#9248#0" expanded="false" />
-            <element signature="e#11205#12255#0" expanded="false" />
-            <element signature="e#12318#13958#0" expanded="false" />
-            <element signature="e#12957#13423#0" expanded="false" />
-            <element signature="e#14000#15152#0" expanded="false" />
-            <element signature="e#16382#18815#0" expanded="false" />
-            <element signature="e#19240#20002#0" expanded="false" />
-            <element signature="e#20548#21156#0" expanded="false" />
-            <element signature="e#21202#21729#0" expanded="false" />
-            <element signature="e#21782#28456#0" expanded="false" />
-            <element signature="e#26589#27676#0" expanded="false" />
-            <element signature="e#28506#28760#0" expanded="false" />
-            <element signature="e#28798#37037#0" expanded="false" />
-            <element signature="e#29509#32970#0" expanded="false" />
-            <element signature="e#33150#36601#0" expanded="false" />
-            <element signature="e#37075#38427#0" expanded="false" />
-            <element signature="e#38461#39136#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/require.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="2154" column="0" lean-forward="false" selection-start-line="2154" selection-start-column="0" selection-end-line="2154" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/js/dataTool.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-354">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/base-latest.js">
+    <entry file="file://$PROJECT_DIR$/view/newsManage/tpl/noticeListTr.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="9169" column="197" lean-forward="false" selection-start-line="9169" selection-start-column="197" selection-end-line="9169" selection-end-column="197" />
-          <folding />
+        <state relative-caret-position="444">
+          <caret line="42" column="40" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/images/foot.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/view/fstPage/tpl/tableMessageTr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="121" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="121" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/css/graph.css">
+    <entry file="file://$PROJECT_DIR$/view/userInfoManage/tpl/userInfoEdit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
+          <caret line="38" column="41" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="38" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/d3graphView.html">
+    <entry file="file://$PROJECT_DIR$/plugin/wangEditor-2/js/wangEditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="106" column="35" lean-forward="true" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="35" />
-          <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
+        <state relative-caret-position="38">
+          <caret line="224" column="42" lean-forward="true" selection-start-line="224" selection-start-column="42" selection-end-line="224" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/css/chartPage.css">
+    <entry file="file://$PROJECT_DIR$/view/newsManage/src/news.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="248" column="9" lean-forward="true" selection-start-line="248" selection-start-column="9" selection-end-line="248" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="122">
+          <caret line="705" column="20" lean-forward="false" selection-start-line="705" selection-start-column="20" selection-end-line="705" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="295" column="36" lean-forward="false" selection-start-line="294" selection-start-column="36" selection-end-line="295" selection-end-column="36" />
-          <folding>
-            <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="235" column="18" lean-forward="false" selection-start-line="235" selection-start-column="18" selection-end-line="235" selection-end-column="18" />
-          <folding>
-            <element signature="e#13158#14143#0" expanded="false" />
-            <element signature="e#14202#15015#0" expanded="false" />
-            <element signature="e#16919#17885#0" expanded="false" />
-            <element signature="e#17980#18080#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/fstPage/dat/fstPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="33" column="8" lean-forward="false" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/rangeUtil.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="205" column="28" lean-forward="false" selection-start-line="205" selection-start-column="28" selection-end-line="205" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="438" column="4" lean-forward="false" selection-start-line="438" selection-start-column="4" selection-end-line="438" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/view/graph/src/graphLayout.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
+          <caret line="674" column="26" lean-forward="true" selection-start-line="674" selection-start-column="26" selection-end-line="674" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/userInfoManage/dat/userInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="19" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/sys.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="89" column="44" lean-forward="false" selection-start-line="89" selection-start-column="44" selection-end-line="89" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskEdit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="171" column="37" lean-forward="false" selection-start-line="166" selection-start-column="32" selection-end-line="171" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1240,168 +768,394 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/userInfoManage/tpl/userInfoAdd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="950">
+          <caret line="50" column="17" lean-forward="false" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/login.js">
+    <entry file="file://$PROJECT_DIR$/view/fstPage/messageMoreList.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1861">
-          <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        <state relative-caret-position="1653">
+          <caret line="87" column="9" lean-forward="false" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/graph/src/graphLayout.js">
+    <entry file="file://$PROJECT_DIR$/view/userInfoManage/src/userInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="1379" column="23" lean-forward="false" selection-start-line="1379" selection-start-column="23" selection-end-line="1379" selection-end-column="23" />
+        <state relative-caret-position="1349">
+          <caret line="71" column="23" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
           <folding>
-            <element signature="e#2496#4736#0" expanded="false" />
-            <element signature="e#4754#25245#0" expanded="false" />
-            <element signature="e#5949#7591#0" expanded="false" />
-            <element signature="e#10668#10730#0" expanded="false" />
-            <element signature="e#10785#11667#0" expanded="false" />
-            <element signature="e#11775#11893#0" expanded="false" />
-            <element signature="e#21931#21995#0" expanded="false" />
-            <element signature="e#22050#23379#0" expanded="false" />
-            <element signature="e#25306#30922#0" expanded="false" />
-            <element signature="e#26043#26936#0" expanded="false" />
-            <element signature="e#26989#27070#0" expanded="false" />
-            <element signature="e#27162#27682#0" expanded="false" />
-            <element signature="e#27754#27873#0" expanded="false" />
-            <element signature="e#28597#29307#0" expanded="false" />
-            <element signature="e#29362#29845#0" expanded="false" />
-            <element signature="e#30975#31573#0" expanded="false" />
-            <element signature="e#31612#32354#0" expanded="false" />
-            <element signature="e#33585#34100#0" expanded="false" />
-            <element signature="e#35030#35433#0" expanded="false" />
-            <element signature="e#35474#35700#0" expanded="false" />
-            <element signature="e#35739#37045#0" expanded="false" />
-            <element signature="e#42293#43344#0" expanded="false" />
-            <element signature="e#43407#45049#0" expanded="false" />
-            <element signature="e#45091#46245#0" expanded="false" />
-            <element signature="e#46289#51800#0" expanded="false" />
-            <element signature="e#47486#49919#0" expanded="false" />
-            <element signature="e#50344#51106#0" expanded="false" />
-            <element signature="e#51838#52447#0" expanded="false" />
-            <element signature="e#52493#53021#0" expanded="false" />
-            <element signature="e#53084#59861#0" expanded="false" />
-            <element signature="e#54754#55119#0" expanded="false" />
-            <element signature="e#55536#56224#0" expanded="false" />
-            <element signature="e#56299#56498#0" expanded="false" />
-            <element signature="e#57892#58979#0" expanded="false" />
-            <element signature="e#59911#60166#0" expanded="false" />
-            <element signature="e#60926#64389#0" expanded="false" />
-            <element signature="e#63356#63873#0" expanded="false" />
-            <element signature="e#64569#67989#0" expanded="false" />
-            <element signature="e#70706#71142#0" expanded="false" />
-            <element signature="e#71273#72010#0" expanded="false" />
-            <element signature="e#74688#75143#0" expanded="false" />
-            <element signature="e#77178#77854#0" expanded="false" />
+            <element signature="e#4877#5600#0" expanded="false" />
+            <element signature="e#5646#7410#0" expanded="false" />
+            <element signature="e#7464#8973#0" expanded="false" />
+            <element signature="e#7618#8214#0" expanded="false" />
+            <element signature="e#9011#10176#0" expanded="false" />
+            <element signature="e#10209#12140#0" expanded="false" />
+            <element signature="e#12176#12972#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
+    <entry file="file://$PROJECT_DIR$/css/avatar-upload.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="157" column="24" lean-forward="false" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
-          <folding>
-            <element signature="e#7450#7693#0" expanded="false" />
-            <element signature="e#9206#10531#0" expanded="false" />
-            <element signature="e#9531#9881#0" expanded="false" />
-            <element signature="e#10583#11917#0" expanded="false" />
-            <element signature="e#10948#11094#0" expanded="false" />
-            <element signature="e#43632#44833#0" expanded="false" />
-            <marker date="1510818448252" expanded="true" signature="74:93" ph="[...]" />
-            <marker date="1510818448252" expanded="true" signature="22562:22596" ph="..." />
-            <marker date="1510818448252" expanded="true" signature="22732:22765" ph="..." />
-            <marker date="1510818448252" expanded="true" signature="23070:23089" ph="..." />
-            <marker date="1510818448252" expanded="true" signature="23383:23397" ph="{...}" />
-          </folding>
+        <state relative-caret-position="741">
+          <caret line="39" column="24" lean-forward="false" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js">
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="685" column="16" lean-forward="false" selection-start-line="685" selection-start-column="16" selection-end-line="685" selection-end-column="16" />
-          <folding>
-            <element signature="e#62#1892#0" expanded="false" />
-            <element signature="e#1923#2292#0" expanded="false" />
-            <element signature="e#2327#2784#0" expanded="false" />
-            <element signature="e#2822#3548#0" expanded="false" />
-            <element signature="e#3591#9692#0" expanded="false" />
-            <element signature="e#9779#12434#0" expanded="false" />
-            <element signature="e#12476#14061#0" expanded="false" />
-            <element signature="e#14095#14398#0" expanded="false" />
-            <element signature="e#14435#20571#0" expanded="false" />
-            <element signature="e#20609#20896#0" expanded="false" />
-            <element signature="e#20932#21074#0" expanded="false" />
-            <element signature="e#21115#21349#0" expanded="false" />
-            <element signature="e#21401#21842#0" expanded="false" />
-            <element signature="e#27143#35994#0" expanded="false" />
-            <element signature="e#27732#30046#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="11571">
+          <caret line="609" column="27" lean-forward="false" selection-start-line="609" selection-start-column="27" selection-end-line="609" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/jmessage-sdk-web/jmessage-sdk-web.2.4.0.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57">
+          <caret line="0" column="9768" lean-forward="false" selection-start-line="0" selection-start-column="9746" selection-end-line="0" selection-end-column="9768" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/task.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="69" column="41" lean-forward="false" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/css/command.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1596">
+          <caret line="84" column="23" lean-forward="false" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/system/sys-xtjsgl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="61" column="76" lean-forward="false" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupAdd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/baseInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/xz.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="830" column="19" lean-forward="false" selection-start-line="830" selection-start-column="19" selection-end-line="830" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/src/command.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="161" column="15" lean-forward="false" selection-start-line="161" selection-start-column="15" selection-end-line="161" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/chatPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="24" column="59" lean-forward="false" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/base-latest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="10708" column="24" lean-forward="false" selection-start-line="10708" selection-start-column="24" selection-end-line="10708" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobal.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="3" lean-forward="true" selection-start-line="18" selection-start-column="3" selection-end-line="30" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="297" column="22" lean-forward="true" selection-start-line="297" selection-start-column="22" selection-end-line="297" selection-end-column="22" />
+          <folding>
+            <element signature="n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="148" column="25" lean-forward="false" selection-start-line="148" selection-start-column="25" selection-end-line="148" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orgManage/orgInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orgManage/tpl/orgTree.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orgManage/tpl/orgInfoView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orgManage/src/orgInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="153" column="16" lean-forward="true" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
+          <folding>
+            <element signature="e#2895#3997#0" expanded="false" />
+            <element signature="e#4028#5207#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orgManage/src/orgTreeSelect.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+          <caret line="11" column="51" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="51" />
+          <folding>
+            <marker date="1508149762417" expanded="true" signature="239:364" ph="..." />
+            <marker date="1508149762417" expanded="true" signature="426:454" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/orgManage/orgInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/dictManage/src/dictManage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="117" column="32" lean-forward="false" selection-start-line="117" selection-start-column="25" selection-end-line="117" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="12666" column="0" lean-forward="false" selection-start-line="12666" selection-start-column="0" selection-end-line="12666" selection-end-column="0" />
+          <folding>
+            <marker date="1511409327348" expanded="true" signature="66579:66645" ph="..." />
+            <marker date="1511409327348" expanded="true" signature="97300:97312" ph="..." />
+            <marker date="1511409327348" expanded="true" signature="99113:99119" ph=" " />
+            <marker date="1511409327348" expanded="true" signature="99204:99210" ph=" " />
+            <marker date="1511409327348" expanded="true" signature="165262:165278" ph="..." />
+            <marker date="1511409327348" expanded="true" signature="166280:166291" ph="..." />
+            <marker date="1511409327348" expanded="true" signature="167222:167233" ph="..." />
+            <marker date="1511409327348" expanded="true" signature="168485:168496" ph="..." />
+            <marker date="1511409327348" expanded="true" signature="187718:187729" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/base-plus-xz.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/dictManage/src/dictOpener.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="93" column="23" lean-forward="true" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+          <folding>
+            <element signature="e#310#1596#0" expanded="false" />
+            <element signature="e#1651#2425#0" expanded="false" />
+            <element signature="e#4854#6182#0" expanded="false" />
+            <element signature="e#6227#6878#0" expanded="false" />
+            <element signature="e#6956#8875#0" expanded="false" />
+            <element signature="e#8932#9775#0" expanded="false" />
+            <element signature="e#9831#11819#0" expanded="false" />
+            <element signature="e#11900#13769#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding>
+            <element signature="e#727#1511#0" expanded="false" />
+            <element signature="e#1541#1809#0" expanded="false" />
+            <element signature="e#1838#1985#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="346" column="0" lean-forward="true" selection-start-line="346" selection-start-column="0" selection-end-line="346" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/relationCase.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="46" column="116" lean-forward="false" selection-start-line="46" selection-start-column="100" selection-end-line="46" selection-end-column="116" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/specialCaseGroup/specialCaseGroupList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="116" column="14" lean-forward="false" selection-start-line="116" selection-start-column="14" selection-end-line="116" selection-end-column="14" />
+          <folding>
+            <element signature="n#form#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/commandCooperationManage/commandCooperation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="355" column="58" lean-forward="false" selection-start-line="355" selection-start-column="53" selection-end-line="355" selection-end-column="58" />
+        <state relative-caret-position="122">
+          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="26" />
           <folding>
-            <element signature="e#2121#2947#0" expanded="false" />
-            <element signature="e#7031#8598#0" expanded="false" />
-            <element signature="e#8632#8929#0" expanded="false" />
-            <element signature="e#9465#9853#0" expanded="false" />
-            <element signature="e#9889#10270#0" expanded="false" />
-            <element signature="e#10539#10887#0" expanded="false" />
-            <element signature="e#10961#11044#0" expanded="false" />
-            <element signature="e#11669#14087#0" expanded="false" />
-            <element signature="e#11842#14061#0" expanded="false" />
-            <element signature="e#22559#22785#0" expanded="false" />
-            <element signature="e#26192#28222#0" expanded="false" />
-            <element signature="e#28263#31456#0" expanded="false" />
+            <element signature="e#1322#5364#0" expanded="false" />
+            <element signature="e#6619#7326#0" expanded="false" />
+            <element signature="e#7368#8935#0" expanded="false" />
+            <element signature="e#8969#9266#0" expanded="false" />
+            <element signature="e#9318#9755#0" expanded="false" />
+            <element signature="e#9802#10190#0" expanded="false" />
+            <element signature="e#10226#10607#0" expanded="false" />
+            <element signature="e#10876#11224#0" expanded="false" />
+            <element signature="e#12006#14424#0" expanded="false" />
+            <element signature="e#12179#14398#0" expanded="false" />
+            <element signature="e#22896#23122#0" expanded="false" />
+            <element signature="e#23164#26493#0" expanded="false" />
+            <element signature="e#26529#28559#0" expanded="false" />
+            <element signature="e#28600#31793#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskAdd.html">
+    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/specialCaseGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-995">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/tpl/task/taskEdit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="89" column="75" lean-forward="true" selection-start-line="89" selection-start-column="75" selection-end-line="89" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/caseInvestigation/src/task.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="684" column="16" lean-forward="false" selection-start-line="684" selection-start-column="16" selection-end-line="684" selection-end-column="16" />
+        <state relative-caret-position="274">
+          <caret line="610" column="55" lean-forward="false" selection-start-line="610" selection-start-column="55" selection-end-line="610" selection-end-column="55" />
           <folding>
-            <element signature="e#5497#6657#0" expanded="false" />
-            <element signature="e#7843#9074#0" expanded="false" />
-            <element signature="e#36668#37104#0" expanded="false" />
-            <element signature="e#37235#37972#0" expanded="false" />
-            <element signature="e#40619#41074#0" expanded="false" />
+            <element signature="e#3883#4426#0" expanded="false" />
+            <element signature="e#4480#8911#0" expanded="false" />
+            <element signature="e#7212#7455#0" expanded="false" />
+            <element signature="e#8968#10293#0" expanded="false" />
+            <element signature="e#9293#9643#0" expanded="false" />
+            <element signature="e#10345#11679#0" expanded="false" />
+            <element signature="e#10710#10856#0" expanded="false" />
+            <element signature="e#42873#44074#0" expanded="false" />
+            <marker date="1511417791821" expanded="true" signature="74:93" ph="[...]" />
+            <marker date="1511417791821" expanded="true" signature="22316:22350" ph="..." />
+            <marker date="1511417791821" expanded="true" signature="22511:22544" ph="..." />
+            <marker date="1511417791821" expanded="true" signature="22864:22883" ph="..." />
+            <marker date="1511417791821" expanded="true" signature="23177:23191" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/chatPage/src/chatGlobalHandleHome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="418" column="66" lean-forward="false" selection-start-line="418" selection-start-column="66" selection-end-line="418" selection-end-column="66" />
+          <folding>
+            <element signature="e#99#1879#0" expanded="false" />
+            <element signature="e#1910#2279#0" expanded="false" />
+            <element signature="e#2314#2771#0" expanded="false" />
+            <element signature="e#2809#3535#0" expanded="false" />
+            <element signature="e#3578#9679#0" expanded="false" />
+            <element signature="e#9766#12421#0" expanded="false" />
+            <element signature="e#12463#14048#0" expanded="false" />
+            <element signature="e#14082#14385#0" expanded="false" />
+            <element signature="e#14422#20558#0" expanded="false" />
+            <element signature="e#20596#20883#0" expanded="false" />
+            <element signature="e#20919#21061#0" expanded="false" />
+            <element signature="e#21102#21336#0" expanded="false" />
+            <element signature="e#21388#21829#0" expanded="false" />
+            <element signature="e#25755#26106#0" expanded="false" />
+            <element signature="e#26142#26486#0" expanded="false" />
+            <element signature="e#26521#36419#0" expanded="false" />
+            <element signature="e#27237#36088#0" expanded="false" />
+            <element signature="e#27826#30140#0" expanded="false" />
+            <element signature="e#36445#47643#0" expanded="false" />
           </folding>
         </state>
       </provider>

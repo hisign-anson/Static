@@ -3,7 +3,6 @@
  */
 importing('currentDate','fullscreen');
 define(['underscore',
-    'd3',
     'text!/view/commandCooperationManage/tpl/commandPage.html',
     'text!/view/commandCooperationManage/tpl/groupLi.html',
     'text!/view/caseInvestigation/tpl/task/taskList.html',
@@ -17,28 +16,31 @@ define(['underscore',
     '../../caseInvestigation/src/specialCaseGroup.js',
     '../../caseInvestigation/dat/task.js',
     '../../caseInvestigation/src/task.js',
-    '../../dictManage/src/dictOpener.js',
-    '../../chatPage/src/chat.js'], function (_, d3, commandPage,groupLiTpl, taskListTpl,taskListTrTpl, relationCaseTpl, relationCaseTrTpl,caseListTpl,chatPageTpl,
-                                             commandAjax,specialCaseGroupAjax,specialCaseGroup,taskAjax,task,dictOpener,chat) {
+    '../../dictManage/src/dictOpener.js'], function (_, commandPage,groupLiTpl, taskListTpl,taskListTrTpl, relationCaseTpl, relationCaseTrTpl,caseListTpl,chatPageTpl,
+                                             commandAjax,specialCaseGroupAjax,specialCaseGroup,taskAjax,task,dictOpener) {
     return {
         showList: function () {
             _selfCommand = this;
             $("#mainDiv").empty().html(_.template(commandPage));
+            //所有专案组
             specialCaseGroupAjax.getGroupPage({userId: top.userId},function (r) {
                 if(r.data && r.data.length > 0) {
                     $("#mainDiv .all-group-list ul").empty().html(_.template(groupLiTpl,{data:r.data}));
+                    var groupinfo;
                     $(".all-group-list ul li").click(function () {
                         var $this = $(this);
-                        var groupinfo  = $(this).attr("groupinfo");
+                        groupinfo  = $(this).attr("groupinfo");
                         $(".common-group-ul li.active").removeClass("active");
                         $this.parents("ul").slideToggle();
                         //选中专案组并进行操作
                         _selfCommand.handleGroup($this,groupinfo);
                     });
+
                 } else {
                     $("#mainDiv .all-group-list ul").empty().html(_.template("没有专案组，请先创建专案组。"));
                 }
             });
+            //常用专案组
             $.ajax({
                 url: top.servicePath_xz + '/xzlog/getCommonGroupList',
                 type: "post",
@@ -47,9 +49,10 @@ define(['underscore',
                 success: function (r) {
                     if(r.data && r.data.length > 0) {
                         $("#mainDiv .common-group-list ul").empty().html(_.template(groupLiTpl,{data:r.data}));
+                        var groupinfo;
                         $(".common-group-ul li").on("click", function () {
                             var $this = $(this);
-                            var groupinfo  = $(this).attr("groupinfo");
+                            groupinfo  = $(this).attr("groupinfo");
                             $this.addClass("active").siblings(".active").removeClass("active");
                             //选中专案组并进行操作
                             _selfCommand.handleGroup($this,groupinfo);
@@ -77,6 +80,41 @@ define(['underscore',
             fullPanelUtils.fullPanel(clickDiv, clickDiv.parents(".map-list"));
             $(".map-content,#mapSvgFrame").on("contextmenu", function (e) {
                 e.preventDefault();
+            });
+        },
+        handleGroupClick:function (groupinfo) {
+            _selfCommand = this;
+            //进入专案组讨论
+            $(".group-content .into-communication,.full-actived .into-communication").on("click", function () {
+                if(groupinfo){
+                    _selfCommand.intoCommunication(groupinfo);
+                } else {
+                    toast("请先选择专案组！").warn();
+                }
+            });
+            //打印
+            $(".group-content .into-print,.full-actived .into-print").on("click", function () {
+                if(groupinfo){
+                    $("#mapSvgFrame").contents().find("svg").jqprint();
+                } else {
+                    toast("请先选择专案组！").warn();
+                }
+            });
+            //跳转到任务清单
+            $(".group-content .into-taskList,.full-actived .into-taskList").on("click", function () {
+                if(groupinfo){
+                    _selfCommand.intoTaskList(groupinfo);
+                } else {
+                    toast("请先选择专案组！").warn();
+                }
+            });
+            //跳转到涉及案件
+            $(".group-content .into-relationCase,.full-actived .into-relationCase").on("click", function () {
+                if(groupinfo){
+                    _selfCommand.intoRelatedCase(groupinfo);
+                } else {
+                    toast("请先选择专案组！").warn();
+                }
             });
         },
         handleGroup: function (obj,groupinfo) {
@@ -122,10 +160,6 @@ define(['underscore',
                     toast("请先选择专案组！").warn();
                 }
             });
-            // //生成案件侦办过程报告
-            // $(".group-content .into-report").on("click", function () {
-            //
-            // });
         },
         intoCommunication: function (groupinfo) {
             var groupinfo = str2obj(groupinfo);

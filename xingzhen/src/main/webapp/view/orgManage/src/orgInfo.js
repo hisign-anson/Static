@@ -16,7 +16,6 @@ define(['underscore',
             },600);
 		},
 		initOrgTreeData:function(isFirst,delPid,editName){
-
 			orgInfoAjax.getOrgTreeList({},function(res){
                 var nodes = [];
                 orgInfo = res.data;
@@ -27,7 +26,7 @@ define(['underscore',
                         nodes.push({id:orgInfo[i].orgId,pid:orgInfo[i].superId,name:orgInfo[i].orgName,sort:i});
                     }
                 }
-                
+
 
                 //新api, 发动和获得树对象一步完成,调用逻辑更清晰
                 treeObj =$('#org-tree').ztree({
