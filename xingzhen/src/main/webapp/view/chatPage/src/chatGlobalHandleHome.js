@@ -413,9 +413,9 @@ var jchatGloabalHome = {
                 //只展示群会话
                 if (value.type == 4) {//单聊3群聊4
                     groupUnreadCount = groupUnreadCount + value.unread_msg_count;
-                    li += '<li class="conversations-li" jmgid="' +
-                        value.gid + '"><img class="jim-avatar" src="../../img/pc-avatar.png" />' +
-                        '<div class="text-wrap conversations-body"><span class="unread-msg">' + value.unread_msg_count + '</span><div class="name" title="' + value.name + '">' + value.name + '</div>' +
+                    var unreadCount = value.unread_msg_count == 0 ? '' : value.unread_msg_count;
+                    li += '<li class="conversations-li" jmgid="' + value.gid + '"><img class="jim-avatar" src="../../img/pc-avatar.png" />' +
+                    '<div class="text-wrap conversations-body"><span class="unread-msg">' + unreadCount + '</span><div class="name" title="' + value.name + '">' + value.name + '</div>' +
                         // '<div class="text-describe">' + obj2str(value.extras) + '</div>' +
                         '</div></li>'
                 }
@@ -688,9 +688,9 @@ var clickHandleHome = {
         $messageContent.find("div").remove();//去掉空的div
 
         var textContent;
-        if($messageContent.find(".emoji").hasClass("emoji")){
+        if ($messageContent.find(".emoji").hasClass("emoji")) {
             textContent = $messageContent.find(".emoji").attr("code");
-        }else {
+        } else {
             //去掉粘贴过来的文本样式
             var text = $messageContent.html().replace(/<[^>]+>/g, "");
             $messageContent.html(text);
@@ -852,8 +852,9 @@ var clickHandleHome = {
 };
 
 $(function () {
-    $(".unread-count").html(groupUnreadCount);
-    JIM.onMutiUnreadMsgUpdate(function(data) {
+    //会话未读数为0时，不显示数字
+    $(".unread-count").html(groupUnreadCount == 0 ? "" : groupUnreadCount);
+    JIM.onMutiUnreadMsgUpdate(function (data) {
         debugger
         // data.type 会话类型
         // data.gid 群 id
