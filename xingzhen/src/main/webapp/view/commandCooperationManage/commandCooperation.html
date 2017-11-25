@@ -25,23 +25,86 @@
 <div class="body-agent pd20 pr" id="mainDiv">
 
 </div>
+<!--查询条件 所属专案组-->
+<div id="groupBlock" class="p15 hide">
+    <div class="query-block-row">
+        <div class="pr search-opener">
+            <input type="text" class="common-input opener-search-input" id="groupName" placeholder="输入汉字，回车搜索"/>
+            <i class="icon-search" id="queryGroup"></i>
+            <i class="icon-remove-sign ico-error" id="resetBtnGroup"></i>
+        </div>
+    </div>
+    <div class="openerResult" id="groupOpenerResult">
 
-<div id="dict-block" class="hide">
-    <div class="dict-container">
-        <div class="date-select" id="dict-wrap"> </div>
+    </div>
+</div>
+<!--查询条件 选择下发人-->
+<div id="creatorBlock" class="p15 hide">
+    <div class="query-block-row">
+        <div class="pr search-opener">
+            <input type="text" class="common-input opener-search-input" id="creator" placeholder="输入汉字，回车搜索"/>
+            <i class="icon-search" id="queryBtnCreator"></i>
+            <i class="icon-remove-sign ico-error" id="resetBtnCreator"></i>
+        </div>
+    </div>
+    <div class="openerResult" id="creOpenerResult">
+
+    </div>
+</div>
+<!--查询条件 选择接收人-->
+<div id="recipientBlock" class="p15 hide">
+    <div class="query-block-row">
+        <div class="pr search-opener">
+            <input type="text" class="common-input opener-search-input" id="recipient" placeholder="输入汉字，回车搜索"/>
+            <i class="icon-search" id="queryBtnRecipient"></i>
+            <i class="icon-remove-sign ico-error" id="resetBtnRecipient" ></i>
+        </div>
+    </div>
+    <div class="openerResult" id="recOpenerResult">
+
+    </div>
+</div>
+<!--查询条件 选择所属单位-->
+<div id="orgBlock" class="p15 hide">
+    <div class="query-block-row">
+        <div class="pr search-opener">
+            <input type="text" class="common-input opener-search-input" id="orgName" placeholder="输入汉字，回车搜索"/>
+            <i class="icon-search" id="queryBtnOrgName"></i>
+            <i class="icon-remove-sign ico-error" id="resetBtnOrgName"></i>
+        </div>
+    </div>
+    <div class="openerResult" id="orgOpenerResult">
+
+    </div>
+</div>
+<!--查询条件 选择案别-->
+<div id="caseTypeBlock" class="p15 hide">
+    <div class="query-block-row">
+        <div class="pr search-opener">
+            <input type="text" class="common-input opener-search-input" name="groupType" id="groupType" placeholder="输入汉字，回车搜索"/>
+            <i class="icon-search" id="queryBtnGroupType"></i>
+            <i class="icon-remove-sign ico-error" id="resetBtnGroupType" ></i>
+        </div>
+    </div>
+    <div class="openerResult" id="caseTypeOpenerResult">
+
     </div>
 </div>
 
-<div id="addReason-block" class="hide">
-    <div class="addReason-container"> </div>
+<!--聊天窗口-->
+<div id="chatBlock" class="hide">
+    <div class="panel-container">
+    </div>
 </div>
 
+<!--任务清单-->
 <div id="taskListDiv" class="hide">
     <div class="panel-container">
     </div>
 </div>
 
-<div id="chatBlock" class="hide">
+<!--涉及案件-->
+<div id="caseListDiv" class="hide">
     <div class="panel-container">
     </div>
 </div>

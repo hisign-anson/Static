@@ -112,19 +112,19 @@ var jchatGloabal = {
 
         }).onFail(function (data) {
             console.info(obj2str(data));
-            toast("极光登录失败！", 600).err();
-            $post(top.servicePath + "/sys/logout", null, function (res) {
-                if (res && res.flag == 1) {
-                    localData.set('token', '');
-                    localData.set('limits', '');
-                    localData.set('username', '');
-                    localData.set('password', '');
-                    localData.set('login-password', '');
-                    localData.get('currentUser', '');
-                    location.replace(window.path + '/index.html?version=' + config.version);
-                }
-            });
-            JIM.loginOut();//极光退出登录
+            console.info("极光登录失败！", 600);
+            // $post(top.servicePath + "/sys/logout", null, function (res) {
+            //     if (res && res.flag == 1) {
+            //         localData.set('token', '');
+            //         localData.set('limits', '');
+            //         localData.set('username', '');
+            //         localData.set('password', '');
+            //         localData.set('login-password', '');
+            //         localData.get('currentUser', '');
+            //         location.replace(window.path + '/index.html?version=' + config.version);
+            //     }
+            // });
+            // JIM.loginOut();//极光退出登录
         }).onTimeout(function (data) {
             toast('timeout:' + obj2str(data));
         });
@@ -134,7 +134,7 @@ var jchatGloabal = {
             'username': top.userId
         }).onSuccess(function (data) {
             var nickname = str2obj(data).user_info.nickname;
-            $("#main-frame").contents().find(".group-name").empty().append('用户' + nickname + '进入：');
+            $("#main-frame").contents().find(".group-name").empty().append(nickname + '进入：');
         }).onFail(function (data) {
             toast(obj2str(data), 600).err();
         });
@@ -171,7 +171,7 @@ var jchatGloabal = {
                 $.each(data.member_list, function (index, value) {
                     var avatar = '../../img/pc-avatar.png';
                     li += '<li class="">' +
-                    '<img class="member-avatar" src="' + avatar + '"/>' +
+                    '<div class="avatar-wrapper"><img class="member-avatar" src="' + avatar + '"/></div>' +
                     '<span class="member">' + value.nickName + '</span>' +
                     '</li>'
                 });
@@ -263,6 +263,7 @@ var jchatGloabal = {
             $("#main-frame").contents().find(".message-list").empty();
             var data = msgAll;
             if (data && data.length > 0) {
+                //时间戳转换
                 for (var i = 0; i < data.length; i++) {
                     var year = clickHandle.getLocalYear(data[i].create_time);
                     if (year < 2000) {
@@ -320,8 +321,6 @@ var jchatGloabal = {
                                     break;
                             }
                         } else if (message_list_content.from_platform == "web" || message_list_content.from_platform == "a") {
-                            // content_text = message_list_content.msg_body.text;
-                            // time = clickHandle.getLocalTime(message_list_content.create_time);
                             var msgBody = str2obj(message_list_content.msg_body);
                             content_text = msgBody.text;
                             time = clickHandle.getLocalTime(message_list_content.create_time);
@@ -343,7 +342,7 @@ var jchatGloabal = {
                                 '</span></a>';
 
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                             '<div class="text-wrap">' +
                             '<div class="from-name">' + nameHtml + '</div>' +
                             '<div class="text">' + fileDiv + '</div>' +
@@ -357,7 +356,7 @@ var jchatGloabal = {
                                 '</span></a>';
 
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                             '<div class="text-wrap">' +
                             '<div class="from-name">' + nameHtml + '</div>' +
                             '<div class="text">' + fileDiv + '</div>' +
@@ -368,7 +367,7 @@ var jchatGloabal = {
                                 '<img class="message-image" alt="" src="" />' +
                                 '</a>';
                             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                            '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                             '<div class="text-wrap">' +
                             '<div class="from-name">' + nameHtml + '</div>' +
                             '<div class="text">' + fileDiv + '</div>' +
@@ -381,7 +380,7 @@ var jchatGloabal = {
                         } else {
                             if (message_list_content.at_list && message_list_content.at_list.length == 0) {
                                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                                 '<div class="text-wrap">' +
                                 '<div class="from-name">' + nameHtml + '</div>' +
                                 '<div class="text"> @所有人 ' + content_text + '</div>' +
@@ -390,7 +389,7 @@ var jchatGloabal = {
                             } else if(message_list_content.at_list && message_list_content.at_list.length > 0){
                                 //@成员的消息
                                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                    '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                    '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                                     '<div class="text-wrap">' +
                                     '<div class="from-name">' + nameHtml + '</div>' +
                                     '<div class="text at-list">' + content_text + '</div>' +
@@ -398,7 +397,7 @@ var jchatGloabal = {
                                     '</div>';
                             } else {
                                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                                '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                                 '<div class="text-wrap">' +
                                 '<div class="from-name">' + nameHtml + '</div>' +
                                 '<div class="text word">' + content_text + '</div>' +
@@ -497,7 +496,7 @@ var clickHandle = {
                 '</span></a>';
 
             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+            '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
             '<div class="text-wrap">' +
             '<div class="from-name">' + nameHtml + '</div>' +
             '<div class="text">' + fileDiv + '</div>' +
@@ -508,7 +507,7 @@ var clickHandle = {
                 '<img class="message-image" alt="" src="" />' +
                 '</a>';
             msgContetHtml = '<div class="main ' + selfHtml + '">' +
-            '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+            '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
             '<div class="text-wrap">' +
             '<div class="from-name">' + nameHtml + '</div>' +
             '<div class="text">' + fileDiv + '</div>' +
@@ -518,7 +517,7 @@ var clickHandle = {
             //群聊文字消息
             if (message.content.at_list && message.content.at_list.length == 0) {
                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                 '<div class="text-wrap">' +
                 '<div class="from-name">' + nameHtml + '</div>' +
                 '<div class="text"> @所有人 ' + content_text + '</div>' +
@@ -527,7 +526,7 @@ var clickHandle = {
 
             } else {
                 msgContetHtml = '<div class="main ' + selfHtml + '">' +
-                '<img class="member-avatar" src="../../img/pc-avatar.png" />' +
+                '<div class="avatar-wrapper"><img class="member-avatar" src="../../img/pc-avatar.png" /></div>' +
                 '<div class="text-wrap">' +
                 '<div class="from-name">' + nameHtml + '</div>' +
                 '<div class="text self-word">' + content_text + '</div>' +

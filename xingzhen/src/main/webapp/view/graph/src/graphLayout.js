@@ -1,5 +1,5 @@
 importing('currentDate');
-//画板大小
+//画板大小,固定值,不能自适应
 var width = 1200,
     height = 900;
 //节点图片大小
@@ -26,7 +26,7 @@ define(['underscore',
     '../../caseInvestigation/dat/task.js',
     '../../caseInvestigation/src/task.js',
     '../../dictManage/src/dictOpener.js',
-    '../src/graphAction.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl,userListTrTpl, taskAddTpl, taskEditTpl, taskInfoTpl, feedBackInfoTpl,
+    '../src/graphAction.js'], function (_, baseInfoTpl, relationCaseTpl, relationCaseTrTpl, groupStaffTpl, groupStaffTrTpl, userListTpl, userListTrTpl, taskAddTpl, taskEditTpl, taskInfoTpl, feedBackInfoTpl,
                                         specialCaseGroupAjax, specialCaseGroup, taskAjax, task, dictOpener, graphAction) {
 
     return {
@@ -34,24 +34,25 @@ define(['underscore',
             _selfGraphLayout = this;
             var jsonInitUrl = "/graph/getGraph?limitLevel=20&maxNode=50&detail=false&startNodeValue=" + groupid + "&startNodeType=" + type;
             //根据链接更新
-            _selfGraphLayout.updateGraphURL(jsonInitUrl,type);
+            _selfGraphLayout.updateGraphURL(jsonInitUrl, type);
 
             //显示脉络图查询条件
             _selfGraphLayout.showCondition(groupid, type);
         },
-        updateGraphURL: function (jsonInitUrl,graphType) {
+        updateGraphURL: function (jsonInitUrl, graphType) {
             _selfGraphLayout = this;
             d3.json(jsonInitUrl, function (error, json) {
                 if (error) {
                     return console.log(error);
                 }
                 //画图
-                _selfGraphLayout.updateGraphJSON(json,graphType);
+                _selfGraphLayout.updateGraphJSON(json, graphType);
             });
         },
         //根据json更新
-        updateGraphJSON: function (json,graphType, param) {
+        updateGraphJSON: function (json, graphType, param) {
             _selfGraphLayout = this;
+
             jsonContext = json;
             //查询
             if (param) {
@@ -114,18 +115,23 @@ define(['underscore',
                         },
                         //菜单节点被点击的事件回调函数
                         onClick: function (event, treeId, treeNode, clickFlag) {
-                            _selfGraphLayout.menuHanle(event, treeId, treeNode,graphType);
+                            _selfGraphLayout.menuHanle(event, treeId, treeNode, graphType);
                             return (treeNode.click != false);
                         }
                     }
                 };
-
+                //鼠标缩放
+                // var zoom = d3.behavior.zoom()
+                //     .scaleExtent([0.1, 3])
+                //     .on("zoom", function(){
+                //         svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                //     });
                 //清除原有的画板
                 d3.select("svg").remove();
                 //定义svg画板
                 var svg = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height);
+                    .attr("width", '100%')
+                    .attr("height", "100vh");//vh css3单位属性,相对于视窗高度
 
                 var tick = function () {
                     //限制结点的边界
@@ -581,22 +587,13 @@ define(['underscore',
                 return false;
             });
 
-            $("#closeBtn").on("click", function () {
-                conditionDiv.add(conditionDiv.children()).addClass("hide");
-                conditionDiv.addClass("hide");
-                $(this).parents(".form-btn-block").siblings("form").find("select,input").val("");
-                $(this).parents(".form-btn-block").siblings("form").find("span.option").each(function () {
-                    $(this).children("u").removeClass("active").eq(0).addClass("active");
-                });
-                return false;
-            });
+            //点击确定按钮
             $("#okBtn").on("click", function () {
                 var $form = $(this).parents(".form-btn-block").siblings("form");
                 var param = {
                     smallGroup: $form.find("#smallGroup option:selected").attr("val"),
                     sponsor: $form.find("#sponsor option:selected").attr("val"),
                     feedbackUser: $form.find("#feedbackUser option:selected").attr("val"),
-                    // yesOrNo:$form.find("#yesOrNo").val(),
                     startTime: $form.find("#startTime").val(),
                     endTime: $form.find("#endTime").val(),
                     taskStatus: $form.find("#taskStatus").val()
@@ -606,9 +603,18 @@ define(['underscore',
                     //选择小组
                     _selfGraphLayout.showList(groupid, "groupid");
                 } else {
-                    _selfGraphLayout.updateGraphJSON(jsonContext,type, param);
+                    _selfGraphLayout.updateGraphJSON(jsonContext, type, param);
 
                 }
+                return false;
+            });
+            $("#closeBtn").on("click", function () {
+                conditionDiv.add(conditionDiv.children()).addClass("hide");
+                conditionDiv.addClass("hide");
+                $(this).parents(".form-btn-block").siblings("form").find("select,input").val("");
+                $(this).parents(".form-btn-block").siblings("form").find("span.option").each(function () {
+                    $(this).children("u").removeClass("active").eq(0).addClass("active");
+                });
                 return false;
             });
         },
@@ -651,7 +657,7 @@ define(['underscore',
         },
 
 
-        menuHanle: function (event, treeId, treeNode,graphType) {
+        menuHanle: function (event, treeId, treeNode, graphType) {
             _selfGraphLayout = this;
             var $target = $(event.currentTarget).find("#" + treeNode.tId).find("#" + treeNode.tId + "_span>span");
             var className = $target.attr("class");
@@ -663,23 +669,23 @@ define(['underscore',
             switch (className) {
                 case "groupHandle":
                     //专案组右键菜单处理
-                    _selfGraphLayout.groupHandle(id, val,graphType);
+                    _selfGraphLayout.groupHandle(id, val, graphType);
                     break;
                 case "taskHandle":
                     //任务右键菜单处理
-                    _selfGraphLayout.taskHandle(id, val,graphType);
+                    _selfGraphLayout.taskHandle(id, val, graphType);
                     break;
                 case "feedbackHandle":
                     //反馈右键菜单处理
-                    _selfGraphLayout.feedbackHandle(id, val, taskid,graphType);
+                    _selfGraphLayout.feedbackHandle(id, val, taskid, graphType);
                     break;
                 case "caseHandle":
                     //案件右键菜单处理
-                    _selfGraphLayout.caseHandle(id, val,graphType);
+                    _selfGraphLayout.caseHandle(id, val, graphType);
                     break;
             }
         },
-        groupHandle: function (id, val,graphType) {
+        groupHandle: function (id, val, graphType) {
             _selfGraphLayout = this;
             switch (val) {
                 case "1":
@@ -692,16 +698,16 @@ define(['underscore',
                     break;
                 case "3":
                     //在专案组上新增任务
-                    _selfGraphLayout.addTask(id,graphType);
+                    _selfGraphLayout.addTask(id, graphType);
                     break;
             }
         },
-        taskHandle: function (id, val,graphType) {
+        taskHandle: function (id, val, graphType) {
             _selfGraphLayout = this;
             switch (val) {
                 case "1":
                     //接收人在任务上反馈任务
-                    _selfGraphLayout.feedbackTask(id,graphType);
+                    _selfGraphLayout.feedbackTask(id, graphType);
                     break;
                 case "2":
                     //接收人移交任务
@@ -709,7 +715,7 @@ define(['underscore',
                     break;
                 case "3":
                     //接收人在任务上补充任务
-                    _selfGraphLayout.addTaskHandle(id, "补充任务","",graphType);
+                    _selfGraphLayout.addTaskHandle(id, "补充任务", "", graphType);
                     break;
                 case "4":
                     //下发人催办任务
@@ -721,12 +727,12 @@ define(['underscore',
                     break;
             }
         },
-        feedbackHandle: function (id, val, taskid,graphType) {
+        feedbackHandle: function (id, val, taskid, graphType) {
             _selfGraphLayout = this;
             switch (val) {
                 case "1":
                     //下发人在反馈上追加任务
-                    _selfGraphLayout.addTaskHandle(id, "追加任务", taskid,graphType);
+                    _selfGraphLayout.addTaskHandle(id, "追加任务", taskid, graphType);
                     break;
                 case "2":
                     //查看反馈信息
@@ -752,8 +758,10 @@ define(['underscore',
                 success: function (r) {
                     if (r.data) {
                         var groupInfo = r.data;
-                        $open('#userListDiv', {width: 800, title: '&nbsp专案组基本信息'});
-                        var openerDiv = $("#userListDiv");
+                        //弹框id
+                        var openerId = "#groupInfoDiv";
+                        $open(openerId, {width: 800, title: '&nbsp专案组基本信息'});
+                        var openerDiv = $(openerId);
                         openerDiv.find(".panel-container").empty().html(_.template(baseInfoTpl));
 
                         $("#grouptype").siblings("i#chooseGroupType").remove();
@@ -778,83 +786,61 @@ define(['underscore',
                 success: function (r) {
                     if (r.data) {
                         var groupInfo = r.data;
-                        $open('#userListDiv', {width: 800, title: '&nbsp查看专案组成员'});
-                        var openerDiv = $("#userListDiv");
-                        openerDiv.find(".panel-container").css({"margin-top":"0","background": "#ffffff"}).empty().html(_.template(groupStaffTpl));
-                        openerDiv.on('click', "#chooseUint", function () {
-                            var obj = $(this);
-                            var title = obj.attr("title");
-                            window.newwin = $open('#dict-block-unit', {
-                                width: 400,
-                                height: 300,
-                                top: 100,
-                                title: '选择' + title
-                            });
-                            $post(top.servicePath + '/sys/org/getOrgTreeList', {orgName: "", end: ""}, function (r) {
-                                if (r.flag == 1) {
-                                    var target = $("#dict-wrap-unit");
-                                    var tpl = '';
-                                    $.each(r.data, function (i, o) {
-                                        tpl += "<div class='item-value'><u><span paramattr='" + obj2str(o) + "' val='" + o.orgId + "'>" + o.orgName + "</span></div></u>";
-                                    });
-                                    target.html(tpl);
-                                }
-                            }, true);
-
-                            var opener = $(".panel #dict-block-unit");
-                            $(".panel #dict-block-unit .query-block-row input").val("");
-                            opener.find("#dict-wrap-unit").off("click").on("click", ".item-value", function () {
-                                // var input = obj.prev();//页面上需要填入的input
-                                var input = obj.siblings("input[type='text']");//页面上需要填入的input
-                                input.val($(this).find("span").text());
-                                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
-                                inputHidden.val($(this).find("span").attr("val"));
-
-                                var paramAttr = $(this).find("span").attr("paramattr");
-                                input.attr("paramattr", paramAttr);
-                                opener.$close();
-                            });
-                            opener.find("#queryBtnOrgName").off("click").on("click", function () {
-                                var orgName = $.trim(opener.find('#orgName').val());
-                                _selfDict.getUnitPortList(orgName);
-                            });
-                            opener.find("#resetBtnOrgName").off("click").on("click", function () {
-                                opener.find('#orgName').val("");
-                            })
-
+                        //弹框id
+                        var openerId = "#userListDiv";
+                        $open(openerId, {width: 800, title: '&nbsp查看专案组成员'});
+                        var $openerDiv = $(openerId);
+                        $openerDiv.find(".panel-container").empty().html(_.template(groupStaffTpl));
+                        $openerDiv.find("#chooseUint").on('click', function () {
+                            dictOpener.openOrg($(this));
                         });
-                        openerDiv.on("click", "#resetBtn", function () {
+                        $openerDiv.find("#resetBtn").on("click", function () {
                             selectUtils.clearQueryValue();
                             return false;
                         });
-                        openerDiv.on("click", "#queryBtn", function () {
-                            _selfGraphLayout.queryAddedStaffList(groupInfo, openerDiv);
+                        $openerDiv.find("#queryBtn").on("click", function () {
+                            _selfGraphLayout.queryAddedStaffList(groupInfo, $openerDiv);
                             return false;
                         });
                         //加载已添加的成员
-                        _selfGraphLayout.queryAddedStaffList(groupInfo, openerDiv);
+                        _selfGraphLayout.queryAddedStaffList(groupInfo, $openerDiv);
 
                         //成员添加
-                        $("#addStaff").on("click", function () {
-                            $open('#userAllListDiv', {width: 800, title: '&nbsp用户列表'});
-                            $("#userAllListDiv .panel-container").empty().html(_.template(userListTpl, {
+                        $openerDiv.find("#addStaff").on("click", function () {
+                            //弹框id
+                            var openerIdAdd = "#userAllListDiv";
+                            $open(openerIdAdd, {width: 800, title: '&nbsp用户列表'});
+                            var $openerAddDiv = $(openerIdAdd);
+                            $openerAddDiv.find(".panel-container").empty().html(_.template(userListTpl, {
                                 checkboxMulti: true,
                                 groupInfo: groupInfo
                             }));
-                            $("#userAllListDiv").on('click', "#chooseUint", function () {
-                                dictOpener.openUnitChoosePort($(this));
+                            $openerAddDiv.find("#chooseUint").on('click' , function () {
+                                dictOpener.openOrg($(this));
                             });
-                            $("#userAllListDiv").on("click", "#resetBtn", function () {
-                                selectUtils.clearQueryValue();
+                            $openerAddDiv.find("#resetBtn").on("click" , function () {
+                                selectUtils.clearQueryValueByEle($(this).parents("form"));
                                 return false;
                             });
-                            $("#userAllListDiv").on("click", "#queryBtn", function () {
+                            $openerAddDiv.find("#queryBtn").on("click", function () {
                                 _selfGraphLayout.queryUserList(true, groupInfo);
                                 return false;
                             });
 
                             //加载用户列表
                             _selfGraphLayout.queryUserList(true, groupInfo);
+
+                            $openerAddDiv.find("#selectAll").on('click', function () {
+                                $('#userTable').find('tbody input:checkbox').prop('checked', this.checked);
+                            });
+                            $openerAddDiv.find("#saveStaffBtn").on('click', function () {
+                                //专案组添加成员
+                                _selfGraphLayout.saveStaff(groupInfo,$openerAddDiv);
+
+                            });
+                            $openerAddDiv.find("#cancelBtn").on('click', function () {
+                                $openerAddDiv.$close();
+                            });
                         });
                     }
                 }
@@ -866,8 +852,8 @@ define(['underscore',
             var param = {
                 isInGroup: true,
                 groupId: groupInfo.id,
-                orgId: $.trim($("#orgId").val()),
-                policeId: $.trim($("#policeId").val()),
+                orgId: $.trim(ele.find("#orgId").val()),
+                policeId: $.trim(ele.find("#policeId").val()),
                 userName: $.trim(ele.find("#userName").val())
             };
             $('#groupStaffResult').pagingList({
@@ -890,17 +876,19 @@ define(['underscore',
         },
         queryUserList: function (isCheckboxMulti, groupInfo) {
             _selfGraphLayout = this;
-            var orgParam = str2obj($("#userAllListDiv #orgName").attr("paramattr"));
+            //弹框id
+            var openerIdAdd = "#userAllListDiv";
+            var $openerAddDiv = $(openerIdAdd);
             var param = {
                 excludeGroupId: groupInfo.pgroupid ? groupInfo.id : "",
                 groupId: groupInfo.pgroupid ? groupInfo.pgroupid : groupInfo.id,
                 isInGroup: groupInfo.pgroupid ? true : false,
-                orgId: orgParam ? orgParam.orgId : "",
-                userName: $.trim($("#userAllListDiv #userName").val()),
-                policeId: $.trim($("#userAllListDiv #policeId").val())
+                orgId: $.trim($openerAddDiv.find("#orgId").val()),
+                userName: $.trim($openerAddDiv.find("#userName").val()),
+                policeId: $.trim($openerAddDiv.find("#policeId").val())
             };
 
-            $('#userAllListDiv #userTableResult').pagingList({
+            $openerAddDiv.find('#userTableResult').pagingList({
                 action: top.servicePath_xz + '/usergroup/getUsergroupPage',
                 jsonObj: param,
                 callback: function (data) {
@@ -912,19 +900,8 @@ define(['underscore',
                     $('.span').span();
                 }
             });
-            $("#userAllListDiv #selectAll").on('click', function () {
-                $('#userTable').find('tbody input:checkbox').prop('checked', this.checked);
-            });
-            $("#userAllListDiv #saveStaffBtn").off("click").on('click', function () {
-                //专案组添加成员
-                _selfGraphLayout.saveStaff(groupInfo);
-                return false;
-            });
-            $("#userAllListDiv #cancelBtn").on('click', function () {
-                $('#userAllListDiv').$close();
-            });
         },
-        saveStaff: function (groupInfo) {
+        saveStaff: function (groupInfo,$openerAddDiv) {
             _selfGraphLayout = this;
             var checkbox = [];
             $('#userTable').find('tbody input:checkbox:checked').each(function (i, e) {
@@ -942,8 +919,8 @@ define(['underscore',
                 specialCaseGroupAjax.addUserGroupList(checkbox, function (r) {
                     if (r.flag == 1) {
                         toast('添加成功！', 600, function () {
-                            $('#userAllListDiv').$close();
-                            _selfGraphLayout.queryAddedStaffList(groupInfo,$("#userListDiv"));
+                            $openerAddDiv.$close();
+                            _selfGraphLayout.queryAddedStaffList(groupInfo, $("#userListDiv"));
                         }).ok()
                     } else {
                         toast(r.msg, 600).err();
@@ -954,13 +931,14 @@ define(['underscore',
             }
         },
 
-        addTask: function (id,graphType) {
+        addTask: function (id, graphType) {
             _selfGraphLayout = this;
+            //弹框id
+            var openerId = "#taskAddDiv";
             var text = "";
-            var bcrwid, fkid;
-            $open('#userListDiv', {width: 800, title: '&nbsp下发任务'});
-            var openerDiv = $("#userListDiv");
-            openerDiv.find(".panel-container").empty().html(_.template(taskAddTpl, {text: text}));
+            $open(openerId, {width: 800, title: '&nbsp下发任务'});
+            var $openerDiv = $(openerId);
+            $openerDiv.find(".panel-container").empty().html(_.template(taskAddTpl, {text: text}));
             $("#fkjzTime").datetimepicker({
                 format: "yyyy-mm-dd hh:ii:ss",
                 autoclose: true,
@@ -983,48 +961,53 @@ define(['underscore',
                 }
             });
             //选择接收人
-            $("#chooseReceive").on('click', function () {
+            $openerDiv.find('#chooseReceive').on('click',function () {
                 if ($("#groupid").val()) {
-                    var param = {groupId: id, isInGroup: true};
-                    var obj = $(this);
-                    var title = obj.attr("title");
-                    $open('#dict-block', {width: 400, height: 300, top: 100, title: '选择' + title});
-                    $("#dict-block .dict-container").find(".query-block-row").empty();
-                    $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
-                        if (r.flag == 1) {
-                            var target = $("#dict-wrap");
-                            var tpl = '';
-                            $.each(r.data, function (i, o) {
-                                o.userId == top.currentUser.userInfo.userId ? tpl += "" : tpl += "<div class='item-value'><u><span paramattr='" + obj2str(o) + "' val='" + o.userId + "' phone='" + o.phone + "'>" + o.userName + ',' + o.orgName + "</span></div></u>";
-                            });
-                            target.html(tpl);
-                            var opener = $(".panel #dict-block");
-                            $(".query-block-row input").val("");
-                            opener.find("#dict-wrap").off("click").on("click", "div:not(.disabled)", function () {
-                                toast("不能选择自己！", 600).warn();
-                            });
-                            opener.find("#dict-wrap").off("click").on("click", "div:not(.disabled)", function () {
-                                var input = obj.siblings("input[type='text']");//页面上需要填入的input
-                                input.val($(this).find("span").text());
-                                var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
-                                inputHidden.val($(this).find("span").attr("val"));
+                    var param = {
+                        groupId: id,
+                        isInGroup: true
+                    };
+                    dictOpener.openGroupRecipient($(this),param);
 
-                                var paramAttr = $(this).find("span").attr("paramattr");
-                                input.attr("paramattr", paramAttr);
-                                if ($("#jsrLxfs").length > 0) {
-                                    $("#jsrLxfs").val($(this).find("span").attr("phone"));
-                                }
-                                opener.$close();
-                            });
-                        }
-                    }, true);
+                    // var obj = $(this);
+                    // var title = obj.attr("title");
+                    // $open('#dict-block', {width: 400, height: 300, top: 100, title: '选择' + title});
+                    // $("#dict-block .dict-container").find(".query-block-row").empty();
+                    // $post(top.servicePath_xz + '/usergroup/getUsergroupPage', param, function (r) {
+                    //     if (r.flag == 1) {
+                    //         var target = $("#dict-wrap");
+                    //         var tpl = '';
+                    //         $.each(r.data, function (i, o) {
+                    //             o.userId == top.currentUser.userInfo.userId ? tpl += "" : tpl += "<div class='item-value'><u><span paramattr='" + obj2str(o) + "' val='" + o.userId + "' phone='" + o.phone + "'>" + o.userName + ',' + o.orgName + "</span></div></u>";
+                    //         });
+                    //         target.html(tpl);
+                    //         var opener = $(".panel #dict-block");
+                    //         $(".query-block-row input").val("");
+                    //         opener.find("#dict-wrap").off("click").on("click", "div:not(.disabled)", function () {
+                    //             toast("不能选择自己！", 600).warn();
+                    //         });
+                    //         opener.find("#dict-wrap").off("click").on("click", "div:not(.disabled)", function () {
+                    //             var input = obj.siblings("input[type='text']");//页面上需要填入的input
+                    //             input.val($(this).find("span").text());
+                    //             var inputHidden = obj.siblings("input[type='hidden']");//页面上需要填入的input
+                    //             inputHidden.val($(this).find("span").attr("val"));
+                    //
+                    //             var paramAttr = $(this).find("span").attr("paramattr");
+                    //             input.attr("paramattr", paramAttr);
+                    //             if ($("#jsrLxfs").length > 0) {
+                    //                 $("#jsrLxfs").val($(this).find("span").attr("phone"));
+                    //             }
+                    //             opener.$close();
+                    //         });
+                    //     }
+                    // }, true);
 
 
                 } else {
                     toast("请先选择专案组！", 600).warn();
                 }
             });
-            $("#saveBtn").on("click", function () {
+            $openerDiv.find('#saveBtn').on('click', function () {
                 $('.task-valid').validatebox();
                 if ($('.validatebox-invalid').length > 0) {
                     return false;
@@ -1037,8 +1020,8 @@ define(['underscore',
                     fqrname: top.trueName,
                     fqrDeptCode: top.orgCode,
                     fqrDeptName: top.orgName,
-                    bcrwid: bcrwid ? bcrwid : "",
-                    fkid: fkid ? fkid : "",
+                    bcrwid: "",
+                    fkid: "",
                     taskName: $.trim($("#taskName").val()),
                     groupid: groupParam.id,
                     jsr: jsrParam.userId,
@@ -1052,9 +1035,8 @@ define(['underscore',
                 taskAjax.addTask(param, function (r) {
                     if (r.flag == 1) {
                         toast('保存成功！', 600, function () {
-                            openerDiv.$close();
-                            //重新加载框架
-                            // $("#mapSvgFrame").location.reload();
+                            $openerDiv.$close();
+                            //重新画图
                             _selfGraphLayout.showList(groupParam.id, graphType);
                         }).ok();
                     } else {
@@ -1063,8 +1045,8 @@ define(['underscore',
                 });
             });
             //绑定返回事件
-            $("#cancelBtn").on("click", function () {
-                openerDiv.$close();
+            $openerDiv.find("#cancelBtn").on("click", function () {
+                $openerDiv.$close();
             });
 
         },
@@ -1072,14 +1054,16 @@ define(['underscore',
             _selfGraphLayout = this;
             taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
                 if (r.flag == 1) {
-                    $open('#userListDiv', {width: 800, title: '&nbsp任务详情'});
-                    $("#userListDiv .panel-container").empty().html(_.template(taskInfoTpl, {
+                    //弹框id
+                    var openerId = "#taskInfoDiv";
+                    $open(openerId, {width: 800, title: '&nbsp任务详情'});
+                    var $openerDiv = $(openerId);
+                    $openerDiv.find(".panel-container").empty().html(_.template(taskInfoTpl, {
                         data: r.data,
                         isOperation: true
                     }));
-
-                    $("#cancelBtn").on("click", function () {
-                        $("#userListDiv").$close();
+                    $openerDiv.find("#cancelBtn").on("click",function () {
+                        $openerDiv.$close();
                     });
                 }
             });
@@ -1088,16 +1072,19 @@ define(['underscore',
             _selfGraphLayout = this;
             taskAjax.taskDetail({id: taskid, userId: top.userId}, function (r) {
                 if (r.flag == 1) {
-                    $open('#userListDiv', {width: 800, title: '&nbsp反馈详情'});
-                    $("#userListDiv .panel-container").empty().html(_.template(feedBackInfoTpl, {data: r.data}));
+                    //弹框id
+                    var openerId = "#userListDiv";
+                    $open(openerId, {width: 800, title: '&nbsp反馈详情'});
+                    var $openerDiv = $(openerId);
+                    $openerDiv.find(".panel-container").empty().html(_.template(feedBackInfoTpl, {data: r.data}));
 
-                    $("#cancelBtn").on("click", function () {
-                        $("#userListDiv").$close();
+                    $openerDiv.find("#cancelBtn").on("click", function () {
+                        $openerDiv.$close();
                     });
                 }
             });
         },
-        addTaskHandle: function (id, text, taskid,graphType) {
+        addTaskHandle: function (id, text, taskid, graphType) {
             _selfGraphLayout = this;
             var bcrwid, fkid;
             var paramId;
@@ -1127,9 +1114,11 @@ define(['underscore',
                         success: function (r) {
                             if (r.data) {
                                 var groupinfo = r.data;
-                                $open('#userListDiv', {width: 800, title: '&nbsp' + text});
-                                var openerDiv = $("#userListDiv");
-                                openerDiv.find(".panel-container").empty().html(_.template(taskAddTpl, {
+                                //弹框id
+                                var openerId = "#taskAddDiv";
+                                $open(openerId, {width: 800, title: '&nbsp' + text});
+                                var $openerDiv = $(openerId);
+                                $openerDiv.find(".panel-container").empty().html(_.template(taskAddTpl, {
                                     taskInfo: taskinfo,
                                     text: text
                                 }));
@@ -1140,27 +1129,33 @@ define(['underscore',
                                     minuteStep: 10,
                                     language: 'zh-CN'
                                 });
-                                $("#chooseReceive").attr("groupinfo", groupinfo.id).attr("taskinfo", taskinfo.groupid);
-                                $("#chooseGroup").on('click', function () {
+                                $openerDiv.find("#chooseReceive").attr("groupinfoid", groupinfo.id).attr("taskinfoid", taskinfo.groupid);
+                                $openerDiv.find("#chooseGroup").on('click', function () {
                                     dictOpener.openChoosePort($(this), null, null, {userId: top.userId});
                                 });
-                                $("#chooseReceive").on('click', function () {
+                                $openerDiv.find("#chooseReceive").on('click', function () {
                                     if ($("#groupid").val()) {
-                                        var groupinfo = $(this).attr("groupinfo");
-                                        var taskinfo = $(this).attr("taskinfo");
-                                        dictOpener.getUserByGroupIdPortList($(this), {
-                                            groupId: text ? taskinfo : groupinfo,
+                                        var groupInfoId = $(this).attr("groupinfoid");
+                                        var taskInfoId = $(this).attr("taskinfoid");
+                                        var param = {
+                                            groupId: text ? taskInfoId : groupInfoId,
                                             isInGroup: true
-                                        })
+                                        };
+                                        dictOpener.openGroupRecipient($(this),param);
+
+                                        // dictOpener.getUserByGroupIdPortList($(this), {
+                                        //     groupId: text ? taskInfoId : groupInfoId,
+                                        //     isInGroup: true
+                                        // })
                                     } else {
                                         toast("请先选择专案组！", 600).warn();
                                     }
                                 });
-                                $("#cancelBtn").on("click", function () {
-                                    $("#chooseReceive").attr("groupinfo", "").attr("taskinfo", "");
-                                    $("#userListDiv").$close();
+                                $openerDiv.find("#cancelBtn").on("click", function () {
+                                    $openerDiv.find("#chooseReceive").attr("groupinfo", "").attr("taskinfo", "");
+                                    $openerDiv.$close();
                                 });
-                                $("#saveBtn").on("click", function () {
+                                $openerDiv.find("#saveBtn").on("click", function () {
                                     $('.task-valid').validatebox();
                                     if ($('.validatebox-invalid').length > 0) {
                                         return false;
@@ -1202,7 +1197,7 @@ define(['underscore',
                                         if (r.flag == 1) {
                                             toast('保存成功！', 600, function () {
                                                 //关闭弹框（在图上新增节点：需要刷新图的数据，重调接口）
-                                                $("#userListDiv").$close();
+                                                $openerDiv.$close();
                                                 _selfGraphLayout.showList(r.data.groupid, graphType);
                                             }).ok();
                                         } else {
@@ -1225,12 +1220,15 @@ define(['underscore',
 
             return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
         },
-        feedbackTask: function (id,graphType) {
+        feedbackTask: function (id, graphType) {
             _selfGraphLayout = this;
             taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
                 if (r.flag == 1) {
-                    $open('#userListDiv', {width: 800, title: '&nbsp反馈任务'});
-                    $("#userListDiv .panel-container").empty().html(_.template(taskEditTpl, {
+                    //弹框id
+                    var openerId = "#userListDiv";
+                    $open(openerId, {width: 800, title: '&nbsp反馈任务'});
+                    var $openerDiv = $(openerId);
+                    $openerDiv.find(".panel-container").empty().html(_.template(taskEditTpl, {
                         data: r.data,
                         isOperation: true,
                         replenishTaskBtnOper: false
@@ -1380,11 +1378,11 @@ define(['underscore',
                         }
                     });
 
-                    $("#feedbackBtn").on("click", function () {
+                    $openerDiv.find("#feedbackBtn").on("click", function () {
                         _selfGraphLayout.saveFeedback(id, filesArr, graphType);
                     });
-                    $("#cancelBtn").on("click", function () {
-                        $("#userListDiv").$close();
+                    $openerDiv.find("#cancelBtn").on("click", function () {
+                        $openerDiv.$close();
                     });
                 }
 
@@ -1456,11 +1454,8 @@ define(['underscore',
                                                 }
                                                 return arr;
                                             }
-
-                                            debugger
                                             fileInfoArr = uniqeByKeys(fileInfoArr, ['fileName']);
                                             taskFkFiles = fileInfoArr;
-                                            debugger
                                             console.info(taskFkFiles);
                                             var param = {
                                                 bz: $.trim($("#bz").val()),
@@ -1475,7 +1470,6 @@ define(['underscore',
                                                 taskid: taskId
                                             };
                                             taskAjax.addTaskFk(param, function (r) {
-                                                debugger
                                                 if (r.flag == 1) {
                                                     toast('反馈成功！', 600, function () {
                                                         if ($("#userListDiv")) {//如果是从指挥协作的图右键打开还要关闭
@@ -1534,17 +1528,21 @@ define(['underscore',
             _selfGraphLayout = this;
             taskAjax.taskDetail({id: id, userId: top.userId}, function (r) {
                 if (r.flag == 1) {
-                    $open('#userListDiv', {width: 800, title: '&nbsp用户列表'});
-                    $("#userListDiv .panel-container").empty().html(_.template(userListTpl, {checkboxMulti: false}));
                     var taskInfo = r.data;
-                    $("#userListDiv").on('click', "#chooseUint", function () {
-                        dictOpener.openUnitChoosePort($(this));
+                    //弹框id
+                    var openerId = "#userListDiv";
+                    $open(openerId, {width: 800, title: '&nbsp用户列表'});
+                    var $openerDiv = $(openerId);
+                    $openerDiv.find(".panel-container").empty().html(_.template(userListTpl, {checkboxMulti: false}));
+                    $openerDiv.find("#chooseUint").on('click',  function () {
+                        // dictOpener.openUnitChoosePort($(this));
+                        dictOpener.openOrg($(this));
                     });
-                    $("#userListDiv").on("click", "#resetBtn", function () {
+                    $openerDiv.find("#resetBtn").on("click" , function () {
                         selectUtils.clearQueryValue();
                         return false;
                     });
-                    $("#userListDiv").on("click", "#queryBtn", function () {
+                    $openerDiv.find("#queryBtn").on("click" , function () {
                         task.queryUserList(false, id, taskInfo);
                         return false;
                     });
@@ -1553,9 +1551,8 @@ define(['underscore',
                     task.queryUserList(false, id, taskInfo);
                     //任务移交给用户
                     task.saveTransfer(id);
-                    $("#userListDiv").on('click', "#cancelBtn", function () {
-                        $('#userListDiv').$close();
-                        return false;
+                    $openerDiv.find("#cancelBtn").on('click' , function () {
+                        $openerDiv.$close();
                     });
                 }
             });

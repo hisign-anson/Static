@@ -7,4 +7,5 @@
 @import "common.css";
 /*@import "fixTable.css";*/
 @import "xz.css";
-@import "../view/chatPage/css/chartPage.css";
+/*@import "../view/chatPage/css/chartPage.css";*/
+@import "../view/chatPage/css/chat.css";

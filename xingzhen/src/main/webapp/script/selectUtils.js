@@ -61,5 +61,16 @@ var selectUtils = {
         $("span.date-select").each(function () {
             $(this).children("u").removeClass("active").eq(0).addClass("active");
         });
+    },
+    clearQueryValueByEle:function ($obj) {
+        $obj.find("input").each(function () {
+            $(this).val("");
+        });
+        $obj.find("span.option").each(function () {
+            $(this).children("u").removeClass("active").eq(0).addClass("active");
+        });
+        $obj.find("span.date-select").each(function () {
+            $(this).children("u").removeClass("active").eq(0).addClass("active");
+        });
     }
 };
